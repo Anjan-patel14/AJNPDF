@@ -1,0 +1,74 @@
+{
+  "extName": {
+    "message": "AJN PDF Quick Tools"
+  },
+  "extDescription": {
+    "message": "Local image quick tools plus fast search across 100+ AJN PDF workflows. No page or browsing-history access."
+  },
+  "actionTitle": {
+    "message": "Open AJN PDF Quick Tools"
+  },
+  "quickTools": {
+    "message": "Quick Tools"
+  },
+  "localActions": {
+    "message": "Local quick actions"
+  },
+  "workSmarter": {
+    "message": "Work smarter from Chrome"
+  },
+  "noPageAccess": {
+    "message": "No page access"
+  },
+  "imageToPdf": {
+    "message": "Image to PDF"
+  },
+  "imageToPdfSub": {
+    "message": "Combine images into a PDF"
+  },
+  "reduceImage": {
+    "message": "Reduce Image"
+  },
+  "reduceImageSub": {
+    "message": "Make an image smaller"
+  },
+  "resizeImage": {
+    "message": "Resize Image"
+  },
+  "resizeImageSub": {
+    "message": "Change image dimensions"
+  },
+  "convertImage": {
+    "message": "Convert Image"
+  },
+  "convertImageSub": {
+    "message": "PNG, JPG or WEBP"
+  },
+  "allWorkflows": {
+    "message": "AJN PDF workflows"
+  },
+  "toolsLabel": {
+    "message": "tools"
+  },
+  "clear": {
+    "message": "Clear"
+  },
+  "searchPlaceholder": {
+    "message": "Search 100+ tools..."
+  },
+  "recent": {
+    "message": "Recent"
+  },
+  "openAllTools": {
+    "message": "Open all AJN PDF tools"
+  },
+  "localPrivacy": {
+    "message": "Selected images are processed inside the extension."
+  },
+  "privacy": {
+    "message": "Privacy"
+  },
+  "noResults": {
+    "message": "No matching tools found."
+  }
+}

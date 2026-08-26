@@ -1,0 +1,13 @@
+"use client";
+
+import { FormEvent, useState } from 'react';
+import Link from 'next/link';
+import { Loader2, Mail } from 'lucide-react';
+import { Navbar } from '@/components/landing/navbar';
+import { useAuth } from '@/lib/auth-context';
+
+export default function ForgotPasswordPage(){
+  const auth=useAuth(); const[email,setEmail]=useState('');const[busy,setBusy]=useState(false);const[message,setMessage]=useState('');const[done,setDone]=useState(false);
+  async function submit(e:FormEvent){e.preventDefault();setBusy(true);setMessage('');try{await auth.resetPassword(email);setDone(true);}catch(error){setMessage(error instanceof Error?error.message:'Password reset failed.');}finally{setBusy(false);}}
+  return <div className="min-h-screen bg-slate-50"><Navbar/><main className="mx-auto max-w-lg px-4 pb-20 pt-[120px]"><div className="rounded-[1.6rem] border border-slate-200 bg-white p-6 shadow-[0_24px_65px_rgba(15,23,42,.08)] sm:p-8"><p className="text-[10px] font-black uppercase tracking-[.24em] text-violet-700">AJN Account</p><h1 className="mt-3 text-3xl font-black tracking-[-.04em] text-slate-950">Reset your password</h1><p className="mt-3 text-sm font-medium leading-6 text-slate-600">Firebase will send a password-reset email to the address on your account.</p>{!auth.configured?<p className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs font-semibold leading-5 text-amber-950">Firebase Authentication is not configured on this deployment.</p>:done?<div className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm font-semibold leading-6 text-emerald-900">Reset email sent if the account is eligible. Check your inbox and spam folder.</div>:<form onSubmit={submit} className="mt-6 space-y-4"><label className="block"><span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Email</span><span className="mt-2 flex min-h-12 items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3"><Mail className="h-4 w-4 text-slate-400"/><input required type="email" autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)} className="w-full bg-transparent text-sm font-semibold outline-none"/></span></label>{message?<p className="rounded-xl border border-red-100 bg-red-50 p-3 text-xs font-semibold text-red-700">{message}</p>:null}<button disabled={busy} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-violet-700 text-xs font-black text-white hover:bg-violet-800 disabled:opacity-50">{busy?<Loader2 className="h-4 w-4 animate-spin"/>:null}Send reset email</button></form>}<Link href="/login" className="mt-5 inline-block text-xs font-black text-violet-700 hover:underline">Back to sign in</Link></div></main></div>
+}

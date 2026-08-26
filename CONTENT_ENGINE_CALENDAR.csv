@@ -1,0 +1,10 @@
+priority,cluster,intent,working_title,primary_keyword,primary_tool,status
+1,conversion,transactional-support,PDF to Word: what formatting can be preserved?,pdf to word formatting,pdf-to-docx,planned
+3,pdf,transactional-support,How to compress a PDF without ruining readability,compress pdf without losing quality,compress-pdf,planned
+4,image,informational,Prepare JPG and PNG files before creating a PDF,image to pdf preparation,jpg-to-pdf,planned
+5,security,informational,"PDF user passwords, owner passwords and permissions",pdf password permissions,protect-pdf,planned
+6,conversion,troubleshooting,Why PDF tables change when converted to Excel,pdf to excel table issues,pdf-to-xlsx,planned
+8,image,transactional-support,Choose DPI and image quality when exporting PDF pages,pdf to image dpi,pdf-to-png,planned
+9,pdf,informational,"Merge, organize or split: which PDF tool should you use?",merge organize split pdf,merge-pdf,planned
+10,conversion,informational,Convert email files to PDF: EML and MSG explained,email to pdf,eml-to-pdf,planned
+11,conversion,troubleshooting,Why office-file conversion needs LibreOffice,libreoffice document conversion,docx-to-pdf,planned

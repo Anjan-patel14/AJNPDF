@@ -1,0 +1,5 @@
+{
+  "name": "@ajn/junction-deprecated",
+  "private": true,
+  "description": "DEPRECATED: This nested package file has been removed to prevent dependency hoisting conflicts. All tools now use the root package.json for version management."
+}

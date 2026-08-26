@@ -1,0 +1,74 @@
+{
+  "extName": {
+    "message": "AJN PDF க்விக் டூல்ஸ்"
+  },
+  "extDescription": {
+    "message": "லோகல் இமேஜ் க்விக் டூல்ஸ் மற்றும் 100+ AJN PDF வேலைப்போக்குகளில் வேகமான தேடல். பக்கம் அல்லது உலாவல் வரலாறு அணுகல் இல்லை."
+  },
+  "actionTitle": {
+    "message": "AJN PDF க்விக் டூல்ஸை திறக்கவும்"
+  },
+  "quickTools": {
+    "message": "க்விக் டூல்ஸ்"
+  },
+  "localActions": {
+    "message": "லோகல் க்விக் செயல்கள்"
+  },
+  "workSmarter": {
+    "message": "Chrome-இலிருந்து ஸ்மார்டாக வேலை செய்யுங்கள்"
+  },
+  "noPageAccess": {
+    "message": "பக்க அணுகல் இல்லை"
+  },
+  "imageToPdf": {
+    "message": "இமேஜ் முதல் PDF"
+  },
+  "imageToPdfSub": {
+    "message": "இமேஜ்களை ஒரு PDF ஆக இணைக்கவும்"
+  },
+  "reduceImage": {
+    "message": "இமேஜ் குறைக்கவும்"
+  },
+  "reduceImageSub": {
+    "message": "இமேஜ் கோப்பு அளவை குறைக்கவும்"
+  },
+  "resizeImage": {
+    "message": "இமேஜ் ரிசைஸ்"
+  },
+  "resizeImageSub": {
+    "message": "இமேஜ் பரிமாணங்களை மாற்றவும்"
+  },
+  "convertImage": {
+    "message": "இமேஜ் கன்வர்ட்"
+  },
+  "convertImageSub": {
+    "message": "PNG, JPG அல்லது WEBP"
+  },
+  "allWorkflows": {
+    "message": "AJN PDF வேலைப்போக்குகள்"
+  },
+  "toolsLabel": {
+    "message": "டூல்ஸ்"
+  },
+  "clear": {
+    "message": "அழிக்கவும்"
+  },
+  "searchPlaceholder": {
+    "message": "100+ டூல்ஸ் தேடுங்கள்..."
+  },
+  "recent": {
+    "message": "சமீபத்தியவை"
+  },
+  "openAllTools": {
+    "message": "அனைத்து AJN PDF டூல்ஸையும் திறக்கவும்"
+  },
+  "localPrivacy": {
+    "message": "தேர்ந்தெடுத்த இமேஜ்கள் எக்ஸ்டென்ஷனுக்குள் செயலாக்கப்படுகின்றன."
+  },
+  "privacy": {
+    "message": "தனியுரிமை"
+  },
+  "noResults": {
+    "message": "பொருந்தும் டூல்கள் இல்லை."
+  }
+}

@@ -1,0 +1,217 @@
+.shell {
+  width: min(1180px, calc(100% - 32px));
+  min-height: 72vh;
+  margin: 0 auto;
+  padding: 18px 0 56px;
+  color: #111827;
+}
+
+.header {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  width: 122px;
+  height: 32px;
+  border-radius: 10px;
+  background: #e9edf3;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 260px;
+  justify-content: flex-end;
+}
+
+.hero,
+.toolIntro {
+  padding-top: clamp(36px, 8vw, 92px);
+  display: grid;
+  gap: 16px;
+}
+
+.hero {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  justify-items: center;
+}
+
+.heroTitle,
+.titleLine {
+  height: clamp(42px, 7vw, 68px);
+  border-radius: 16px;
+  background: #e9edf3;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.heroTitle {
+  width: min(680px, 94%);
+}
+
+.titleLine {
+  width: min(620px, 92%);
+}
+
+.line {
+  display: block;
+  height: 13px;
+  max-width: 100%;
+  border-radius: 999px;
+  background: #edf0f4;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.heroActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.button,
+.secondaryButton {
+  width: 148px;
+  height: 46px;
+  border-radius: 12px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.button {
+  background: #d9e4ff;
+}
+
+.secondaryButton {
+  background: #edf0f4;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: clamp(46px, 7vw, 82px);
+  content-visibility: auto;
+  contain-intrinsic-size: 480px;
+}
+
+.card,
+.uploadPanel,
+.steps {
+  border: 1px solid #e7eaf0;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.04);
+}
+
+.card {
+  min-height: 170px;
+  border-radius: 18px;
+  padding: 20px;
+  display: grid;
+  align-content: start;
+  gap: 15px;
+}
+
+.icon,
+.uploadIcon {
+  border-radius: 13px;
+  background: #e9edf3;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.icon {
+  width: 44px;
+  height: 44px;
+}
+
+.toolLayout {
+  width: min(940px, 100%);
+  margin: 0 auto;
+}
+
+.uploadPanel {
+  margin-top: 34px;
+  min-height: 290px;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 16px;
+  padding: 34px;
+}
+
+.uploadIcon {
+  width: 64px;
+  height: 64px;
+}
+
+.uploadTitle {
+  width: min(360px, 80%);
+  height: 27px;
+  border-radius: 9px;
+  background: #e9edf3;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.steps {
+  margin-top: 20px;
+  border-radius: 18px;
+  padding: 22px;
+  display: grid;
+  gap: 14px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 620px) {
+  .shell { width: min(100% - 24px, 1180px); }
+  .nav { display: none; }
+  .grid { grid-template-columns: 1fr; }
+  .heroActions { width: 100%; }
+  .button, .secondaryButton { width: 50%; }
+  .uploadPanel { min-height: 250px; padding: 24px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand,
+  .heroTitle,
+  .titleLine,
+  .line,
+  .button,
+  .secondaryButton,
+  .icon,
+  .uploadIcon,
+  .uploadTitle {
+    animation: none;
+  }
+}
+
+/* AJN PDF light loading surfaces */
+.brand,.heroTitle,.titleLine,.icon,.uploadIcon,.uploadTitle { background:linear-gradient(110deg,#efedff,#e7efff,#efedff); background-size:220% 100%; }
+.line,.secondaryButton { background:#f0eff8; }
+.button { background:linear-gradient(110deg,#ddd8ff,#cfe0ff); }
+.card,.uploadPanel,.steps { border-color:rgba(115,103,255,.12); border-radius:22px; box-shadow:0 12px 34px rgba(47,43,91,.05); }

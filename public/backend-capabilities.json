@@ -1,0 +1,978 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-16T17:00:41.181580Z",
+  "backendVersion": "3.1.0",
+  "toolCount": 68,
+  "availableCount": 68,
+  "unavailableCount": 0,
+  "capabilityFingerprint": "20b6b4546a842eb984c00152827a490aa272ec05dcbb277af4ff431fffc96eb8",
+  "tools": [
+    {
+      "id": "azw3-to-pdf",
+      "name": "AZW3 to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".azw3"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires Calibre ebook-convert.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "bmp-to-pdf",
+      "name": "BMP to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".bmp"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "csv-to-pdf",
+      "name": "CSV to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".csv"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "doc-to-pdf",
+      "name": "DOC to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".doc"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice for legacy DOC conversion.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "docx-to-pdf",
+      "name": "DOCX to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".docx"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Complex fonts and advanced layouts may render differently.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "eml-to-pdf",
+      "name": "EML to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".eml"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Attachments are listed but are not embedded automatically.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "epub-to-pdf",
+      "name": "EPUB to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".epub"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Creates a printable layout from reflowable eBook content.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "excel-to-pdf",
+      "name": "Excel to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".xls",
+        ".xlsx"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice; print areas and charts may render differently.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "gif-to-pdf",
+      "name": "GIF to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".gif"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Animated image formats are converted as individual still frames.",
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "heic-to-pdf",
+      "name": "HEIC to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".heic",
+        ".heif"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "html-to-pdf",
+      "name": "HTML to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".html",
+        ".htm"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "External scripts and complex browser-only CSS are not executed.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "image-to-pdf",
+      "name": "Image to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".webp",
+        ".tif",
+        ".tiff",
+        ".bmp",
+        ".gif",
+        ".svg",
+        ".heic",
+        ".heif"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "jpeg-to-pdf",
+      "name": "JPEG to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".jpeg"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "jpg-to-pdf",
+      "name": "JPG to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".jpg"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "json-to-pdf",
+      "name": "JSON to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".json"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "markdown-to-pdf",
+      "name": "Markdown to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".md",
+        ".markdown"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "mobi-to-pdf",
+      "name": "MOBI to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".mobi"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires Calibre ebook-convert.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "msg-to-pdf",
+      "name": "MSG to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".msg"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Attachments are listed but are not embedded automatically.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "odp-to-pdf",
+      "name": "ODP to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".odp"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice; animations and transitions are not included.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "ods-to-pdf",
+      "name": "ODS to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".ods"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice; print areas and charts may render differently.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "odt-to-pdf",
+      "name": "ODT to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".odt"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-pages-to-zip",
+      "name": "PDF Pages to ZIP",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-avif",
+      "name": "PDF to AVIF",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "AVIF encoding availability depends on the installed Pillow build.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-azw3",
+      "name": "PDF to AZW3",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".azw3",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires Calibre ebook-convert and creates a text-focused eBook.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-bmp",
+      "name": "PDF to BMP",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-csv",
+      "name": "PDF to CSV",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".csv",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Rows are created from extracted text lines; this is not advanced table recognition.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-docx",
+      "name": "PDF to DOCX",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".docx",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Creates an editable text-focused document; complex layout may change.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-epub",
+      "name": "PDF to EPUB",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".epub",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Creates a reflowable text-focused eBook; complex page design may change.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-excel",
+      "name": "PDF to Excel",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".xlsx",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Rows are created from extracted text lines; complex tables may require correction.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-gif",
+      "name": "PDF to GIF",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".gif",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Multiple pages are returned as an animated GIF.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-heic",
+      "name": "PDF to HEIC",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "HEIC encoding availability depends on the installed HEIF encoder.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-html",
+      "name": "PDF to HTML",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".html",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Creates readable HTML from extracted text; advanced PDF positioning may change.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-image",
+      "name": "PDF to Image",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-jpeg",
+      "name": "PDF to JPEG",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-jpg",
+      "name": "PDF to JPG",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-json",
+      "name": "PDF to JSON",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".json",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-markdown",
+      "name": "PDF to Markdown",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".md",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Headings and tables are inferred from extracted text and may require editing.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-mobi",
+      "name": "PDF to MOBI",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".mobi",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires Calibre ebook-convert and creates a text-focused eBook.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-odt",
+      "name": "PDF to ODT",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".odt",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Creates an editable text-focused document; complex layout may change.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-png",
+      "name": "PDF to PNG",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-powerpoint",
+      "name": "PDF to PowerPoint",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".pptx",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Each PDF page is placed as a slide image to preserve appearance.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-pptx",
+      "name": "PDF to PPTX",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".pptx",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Each PDF page is placed as a slide image to preserve appearance.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-rtf",
+      "name": "PDF to RTF",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".rtf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Preserves text content rather than exact page design.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-svg",
+      "name": "PDF to SVG",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Text and vector fidelity depends on the PDF page content.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-tiff",
+      "name": "PDF to TIFF",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".tiff",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-txt",
+      "name": "PDF to TXT",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".txt",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-webp",
+      "name": "PDF to WEBP",
+      "category": "pdf-to-image",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".zip",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-word",
+      "name": "PDF to Word",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".docx",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Creates an editable text-focused document; complex layout may change.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-xlsx",
+      "name": "PDF to XLSX",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".xlsx",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Rows are created from extracted text lines; complex tables may require correction.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pdf-to-xml",
+      "name": "PDF to XML",
+      "category": "pdf-to-document",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".xml",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "png-to-pdf",
+      "name": "PNG to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".png"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "powerpoint-to-pdf",
+      "name": "PowerPoint to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".ppt",
+        ".pptx"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice; animations and transitions are not included.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "ppt-to-pdf",
+      "name": "PPT to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".ppt"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "pptx-to-pdf",
+      "name": "PPTX to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".pptx"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice; animations and transitions are not included.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "protect-pdf",
+      "name": "Protect PDF",
+      "category": "pdf-security",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Applies AES-256 encryption. Keep the password securely; AJN PDF cannot recover it.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "repair-pdf",
+      "name": "Repair PDF",
+      "category": "pdf-security",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Attempts structural recovery of readable PDF content; severe corruption may be unrecoverable.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "rtf-to-pdf",
+      "name": "RTF to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".rtf"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Rich formatting is simplified for a consistent PDF output.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "svg-to-pdf",
+      "name": "SVG to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".svg"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "tiff-to-pdf",
+      "name": "TIFF to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".tif",
+        ".tiff"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "txt-to-pdf",
+      "name": "TXT to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".txt"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "unlock-pdf",
+      "name": "Unlock PDF",
+      "category": "pdf-security",
+      "inputExtensions": [
+        ".pdf"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires the current valid PDF password and user authorization.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "url-to-pdf",
+      "name": "URL to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Creates a readable snapshot; JavaScript-heavy pages may not match the browser exactly.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "webp-to-pdf",
+      "name": "WEBP to PDF",
+      "category": "image-to-pdf",
+      "inputExtensions": [
+        ".webp"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": true,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "word-to-pdf",
+      "name": "Word to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".doc",
+        ".docx"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Complex fonts, macros and advanced layouts may render differently.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "xls-to-pdf",
+      "name": "XLS to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".xls"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "xlsx-to-pdf",
+      "name": "XLSX to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".xlsx"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Requires LibreOffice; print areas and charts may render differently.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "xml-to-pdf",
+      "name": "XML to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".xml"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": null,
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    },
+    {
+      "id": "xps-to-pdf",
+      "name": "XPS to PDF",
+      "category": "document-to-pdf",
+      "inputExtensions": [
+        ".xps"
+      ],
+      "outputExtension": ".pdf",
+      "available": true,
+      "unavailableReason": null,
+      "limitation": "Converts standard XPS documents to PDF; complex effects and embedded fonts may render differently.",
+      "multiFile": false,
+      "processingMode": "temporary-server"
+    }
+  ]
+}

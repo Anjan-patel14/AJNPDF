@@ -1,0 +1,26 @@
+{
+  "name": "AJN PDF — Online PDF, & Conversion Tools",
+  "short_name": "AJN PDF",
+  "description": "PDF, image, and document conversion tools with browser and temporary server processing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#5b63f3",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/favicon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

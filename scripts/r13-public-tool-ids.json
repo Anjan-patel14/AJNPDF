@@ -1,0 +1,22 @@
+[
+  "merge-pdf",
+  "split-pdf",
+  "compress-pdf",
+  "rotate-pdf",
+  "delete-pdf-pages",
+  "organize-pdf",
+  "crop-pdf",
+  "watermark-pdf",
+  "page-number",
+  "flatten-pdf",
+  "protect-pdf",
+  "unlock-pdf",
+  "repair-pdf",
+  "compare-pdf",
+  "add-text",
+  "add-image-to-pdf",
+  "pdf-metadata",
+  "extract-images",
+  "sign-pdf",
+  "pdf-zip-extract"
+]

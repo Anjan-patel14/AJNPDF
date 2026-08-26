@@ -1,0 +1,1284 @@
+{
+  "generatedAt": "2026-08-20T19:23:32.554Z",
+  "publicRouteCount": 97,
+  "canonicalProcessorCount": 96,
+  "policyLegacyAliasesHidden": [
+    "excel-pdf",
+    "heic-pdf",
+    "html-pdf",
+    "jpg-pdf",
+    "json-pdf",
+    "pdf-excel",
+    "pdf-jpg",
+    "pdf-word",
+    "ppt-pdf",
+    "txt-pdf",
+    "word-pdf",
+    "xml-pdf"
+  ],
+  "publicWorkspaceAliases": [
+    {
+      "alias": "pdf-text",
+      "canonicalId": "pdf-to-txt"
+    }
+  ],
+  "publicRoutes": [
+    {
+      "id": "add-image-to-pdf",
+      "route": "/add-image-to-pdf",
+      "canonicalId": "add-image-to-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "add-text",
+      "route": "/add-text",
+      "canonicalId": "add-text",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "azw3-to-pdf",
+      "route": "/azw3-to-pdf",
+      "canonicalId": "azw3-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "bmp-to-pdf",
+      "route": "/bmp-to-pdf",
+      "canonicalId": "bmp-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "compare-pdf",
+      "route": "/compare-pdf",
+      "canonicalId": "compare-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "compress-pdf",
+      "route": "/compress-pdf",
+      "canonicalId": "compress-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "convert-image",
+      "route": "/convert-image",
+      "canonicalId": "convert-image",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "crop-image",
+      "route": "/crop-image",
+      "canonicalId": "crop-image",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "crop-pdf",
+      "route": "/crop-pdf",
+      "canonicalId": "crop-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "csv-to-pdf",
+      "route": "/csv-to-pdf",
+      "canonicalId": "csv-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "delete-pdf-pages",
+      "route": "/delete-pdf-pages",
+      "canonicalId": "delete-pdf-pages",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "doc-to-pdf",
+      "route": "/doc-to-pdf",
+      "canonicalId": "doc-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "docx-to-pdf",
+      "route": "/docx-to-pdf",
+      "canonicalId": "docx-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "eml-to-pdf",
+      "route": "/eml-to-pdf",
+      "canonicalId": "eml-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "epub-to-pdf",
+      "route": "/epub-to-pdf",
+      "canonicalId": "epub-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "excel-to-pdf",
+      "route": "/excel-to-pdf",
+      "canonicalId": "excel-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "extract-images",
+      "route": "/extract-images",
+      "canonicalId": "extract-images",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "flatten-pdf",
+      "route": "/flatten-pdf",
+      "canonicalId": "flatten-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "flip-image",
+      "route": "/flip-image",
+      "canonicalId": "flip-image",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "gif-to-pdf",
+      "route": "/gif-to-pdf",
+      "canonicalId": "gif-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "heic-to-pdf",
+      "route": "/heic-to-pdf",
+      "canonicalId": "heic-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "html-to-pdf",
+      "route": "/html-to-pdf",
+      "canonicalId": "html-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "image-reducer",
+      "route": "/image-reducer",
+      "canonicalId": "image-reducer",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "image-resizer",
+      "route": "/image-resizer",
+      "canonicalId": "image-resizer",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "image-to-pdf",
+      "route": "/image-to-pdf",
+      "canonicalId": "image-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "jpeg-to-pdf",
+      "route": "/jpeg-to-pdf",
+      "canonicalId": "jpeg-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "jpg-to-pdf",
+      "route": "/jpg-to-pdf",
+      "canonicalId": "jpg-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "json-to-pdf",
+      "route": "/json-to-pdf",
+      "canonicalId": "json-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "markdown-to-pdf",
+      "route": "/markdown-to-pdf",
+      "canonicalId": "markdown-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "meme-generator",
+      "route": "/meme-generator",
+      "canonicalId": "meme-generator",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "merge-pdf",
+      "route": "/merge-pdf",
+      "canonicalId": "merge-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "mobi-to-pdf",
+      "route": "/mobi-to-pdf",
+      "canonicalId": "mobi-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "msg-to-pdf",
+      "route": "/msg-to-pdf",
+      "canonicalId": "msg-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "odp-to-pdf",
+      "route": "/odp-to-pdf",
+      "canonicalId": "odp-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "ods-to-pdf",
+      "route": "/ods-to-pdf",
+      "canonicalId": "ods-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "odt-to-pdf",
+      "route": "/odt-to-pdf",
+      "canonicalId": "odt-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "organize-pdf",
+      "route": "/organize-pdf",
+      "canonicalId": "organize-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "page-number",
+      "route": "/page-number",
+      "canonicalId": "page-number",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "pdf-metadata",
+      "route": "/pdf-metadata",
+      "canonicalId": "pdf-metadata",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "pdf-pages-to-zip",
+      "route": "/pdf-pages-to-zip",
+      "canonicalId": "pdf-pages-to-zip",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-text",
+      "route": "/pdf-text",
+      "canonicalId": "pdf-to-txt",
+      "alias": true,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-avif",
+      "route": "/pdf-to-avif",
+      "canonicalId": "pdf-to-avif",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-azw3",
+      "route": "/pdf-to-azw3",
+      "canonicalId": "pdf-to-azw3",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-bmp",
+      "route": "/pdf-to-bmp",
+      "canonicalId": "pdf-to-bmp",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-csv",
+      "route": "/pdf-to-csv",
+      "canonicalId": "pdf-to-csv",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-docx",
+      "route": "/pdf-to-docx",
+      "canonicalId": "pdf-to-docx",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-epub",
+      "route": "/pdf-to-epub",
+      "canonicalId": "pdf-to-epub",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-excel",
+      "route": "/pdf-to-excel",
+      "canonicalId": "pdf-to-excel",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-gif",
+      "route": "/pdf-to-gif",
+      "canonicalId": "pdf-to-gif",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-heic",
+      "route": "/pdf-to-heic",
+      "canonicalId": "pdf-to-heic",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-html",
+      "route": "/pdf-to-html",
+      "canonicalId": "pdf-to-html",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-image",
+      "route": "/pdf-to-image",
+      "canonicalId": "pdf-to-image",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-jpeg",
+      "route": "/pdf-to-jpeg",
+      "canonicalId": "pdf-to-jpeg",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-jpg",
+      "route": "/pdf-to-jpg",
+      "canonicalId": "pdf-to-jpg",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-json",
+      "route": "/pdf-to-json",
+      "canonicalId": "pdf-to-json",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-markdown",
+      "route": "/pdf-to-markdown",
+      "canonicalId": "pdf-to-markdown",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-mobi",
+      "route": "/pdf-to-mobi",
+      "canonicalId": "pdf-to-mobi",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-odt",
+      "route": "/pdf-to-odt",
+      "canonicalId": "pdf-to-odt",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-png",
+      "route": "/pdf-to-png",
+      "canonicalId": "pdf-to-png",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-powerpoint",
+      "route": "/pdf-to-powerpoint",
+      "canonicalId": "pdf-to-powerpoint",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-pptx",
+      "route": "/pdf-to-pptx",
+      "canonicalId": "pdf-to-pptx",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-rtf",
+      "route": "/pdf-to-rtf",
+      "canonicalId": "pdf-to-rtf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-svg",
+      "route": "/pdf-to-svg",
+      "canonicalId": "pdf-to-svg",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-tiff",
+      "route": "/pdf-to-tiff",
+      "canonicalId": "pdf-to-tiff",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-txt",
+      "route": "/pdf-to-txt",
+      "canonicalId": "pdf-to-txt",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-webp",
+      "route": "/pdf-to-webp",
+      "canonicalId": "pdf-to-webp",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-word",
+      "route": "/pdf-to-word",
+      "canonicalId": "pdf-to-word",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-xlsx",
+      "route": "/pdf-to-xlsx",
+      "canonicalId": "pdf-to-xlsx",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-to-xml",
+      "route": "/pdf-to-xml",
+      "canonicalId": "pdf-to-xml",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pdf-zip-extract",
+      "route": "/pdf-zip-extract",
+      "canonicalId": "pdf-zip-extract",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "photo-editor",
+      "route": "/photo-editor",
+      "canonicalId": "photo-editor",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "png-to-pdf",
+      "route": "/png-to-pdf",
+      "canonicalId": "png-to-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "powerpoint-to-pdf",
+      "route": "/powerpoint-to-pdf",
+      "canonicalId": "powerpoint-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "ppt-to-pdf",
+      "route": "/ppt-to-pdf",
+      "canonicalId": "ppt-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "pptx-to-pdf",
+      "route": "/pptx-to-pdf",
+      "canonicalId": "pptx-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "protect-pdf",
+      "route": "/protect-pdf",
+      "canonicalId": "protect-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "repair-pdf",
+      "route": "/repair-pdf",
+      "canonicalId": "repair-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "rotate-image",
+      "route": "/rotate-image",
+      "canonicalId": "rotate-image",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "rotate-pdf",
+      "route": "/rotate-pdf",
+      "canonicalId": "rotate-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "rtf-to-pdf",
+      "route": "/rtf-to-pdf",
+      "canonicalId": "rtf-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "sign-pdf",
+      "route": "/sign-pdf",
+      "canonicalId": "sign-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "split-pdf",
+      "route": "/split-pdf",
+      "canonicalId": "split-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "subtitle-generator",
+      "route": "/subtitle-generator",
+      "canonicalId": "subtitle-generator",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "svg-to-pdf",
+      "route": "/svg-to-pdf",
+      "canonicalId": "svg-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "tiff-to-pdf",
+      "route": "/tiff-to-pdf",
+      "canonicalId": "tiff-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "txt-to-pdf",
+      "route": "/txt-to-pdf",
+      "canonicalId": "txt-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "unlock-pdf",
+      "route": "/unlock-pdf",
+      "canonicalId": "unlock-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "url-to-pdf",
+      "route": "/url-to-pdf",
+      "canonicalId": "url-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "watermark-image",
+      "route": "/watermark-image",
+      "canonicalId": "watermark-image",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "watermark-pdf",
+      "route": "/watermark-pdf",
+      "canonicalId": "watermark-pdf",
+      "alias": false,
+      "processing": "browser"
+    },
+    {
+      "id": "webp-to-pdf",
+      "route": "/webp-to-pdf",
+      "canonicalId": "webp-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "word-to-pdf",
+      "route": "/word-to-pdf",
+      "canonicalId": "word-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "xls-to-pdf",
+      "route": "/xls-to-pdf",
+      "canonicalId": "xls-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "xlsx-to-pdf",
+      "route": "/xlsx-to-pdf",
+      "canonicalId": "xlsx-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "xml-to-pdf",
+      "route": "/xml-to-pdf",
+      "canonicalId": "xml-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "xps-to-pdf",
+      "route": "/xps-to-pdf",
+      "canonicalId": "xps-to-pdf",
+      "alias": false,
+      "processing": "temporary-server"
+    },
+    {
+      "id": "zip-extractor",
+      "route": "/zip-extractor",
+      "canonicalId": "zip-extractor",
+      "alias": false,
+      "processing": "browser"
+    }
+  ],
+  "canonicalTools": [
+    {
+      "id": "add-image-to-pdf",
+      "route": "/add-image-to-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "add-text",
+      "route": "/add-text",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "azw3-to-pdf",
+      "route": "/azw3-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "bmp-to-pdf",
+      "route": "/bmp-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "compare-pdf",
+      "route": "/compare-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "compress-pdf",
+      "route": "/compress-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "convert-image",
+      "route": "/convert-image",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "crop-image",
+      "route": "/crop-image",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "crop-pdf",
+      "route": "/crop-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "csv-to-pdf",
+      "route": "/csv-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "delete-pdf-pages",
+      "route": "/delete-pdf-pages",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "doc-to-pdf",
+      "route": "/doc-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "docx-to-pdf",
+      "route": "/docx-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "eml-to-pdf",
+      "route": "/eml-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "epub-to-pdf",
+      "route": "/epub-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "excel-to-pdf",
+      "route": "/excel-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "extract-images",
+      "route": "/extract-images",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "flatten-pdf",
+      "route": "/flatten-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "flip-image",
+      "route": "/flip-image",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "gif-to-pdf",
+      "route": "/gif-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "heic-to-pdf",
+      "route": "/heic-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "html-to-pdf",
+      "route": "/html-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "image-reducer",
+      "route": "/image-reducer",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "image-resizer",
+      "route": "/image-resizer",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "image-to-pdf",
+      "route": "/image-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "jpeg-to-pdf",
+      "route": "/jpeg-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "jpg-to-pdf",
+      "route": "/jpg-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "json-to-pdf",
+      "route": "/json-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "markdown-to-pdf",
+      "route": "/markdown-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "meme-generator",
+      "route": "/meme-generator",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "merge-pdf",
+      "route": "/merge-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "mobi-to-pdf",
+      "route": "/mobi-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "msg-to-pdf",
+      "route": "/msg-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "odp-to-pdf",
+      "route": "/odp-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "ods-to-pdf",
+      "route": "/ods-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "odt-to-pdf",
+      "route": "/odt-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "organize-pdf",
+      "route": "/organize-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "page-number",
+      "route": "/page-number",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "pdf-metadata",
+      "route": "/pdf-metadata",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "pdf-pages-to-zip",
+      "route": "/pdf-pages-to-zip",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-avif",
+      "route": "/pdf-to-avif",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-azw3",
+      "route": "/pdf-to-azw3",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-bmp",
+      "route": "/pdf-to-bmp",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-csv",
+      "route": "/pdf-to-csv",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-docx",
+      "route": "/pdf-to-docx",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-epub",
+      "route": "/pdf-to-epub",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-excel",
+      "route": "/pdf-to-excel",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-gif",
+      "route": "/pdf-to-gif",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-heic",
+      "route": "/pdf-to-heic",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-html",
+      "route": "/pdf-to-html",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-image",
+      "route": "/pdf-to-image",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-jpeg",
+      "route": "/pdf-to-jpeg",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-jpg",
+      "route": "/pdf-to-jpg",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-json",
+      "route": "/pdf-to-json",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-markdown",
+      "route": "/pdf-to-markdown",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-mobi",
+      "route": "/pdf-to-mobi",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-odt",
+      "route": "/pdf-to-odt",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-png",
+      "route": "/pdf-to-png",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-powerpoint",
+      "route": "/pdf-to-powerpoint",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-pptx",
+      "route": "/pdf-to-pptx",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-rtf",
+      "route": "/pdf-to-rtf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-svg",
+      "route": "/pdf-to-svg",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-tiff",
+      "route": "/pdf-to-tiff",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-txt",
+      "route": "/pdf-to-txt",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-webp",
+      "route": "/pdf-to-webp",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-word",
+      "route": "/pdf-to-word",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-xlsx",
+      "route": "/pdf-to-xlsx",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-to-xml",
+      "route": "/pdf-to-xml",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pdf-zip-extract",
+      "route": "/pdf-zip-extract",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "photo-editor",
+      "route": "/photo-editor",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "png-to-pdf",
+      "route": "/png-to-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "powerpoint-to-pdf",
+      "route": "/powerpoint-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "ppt-to-pdf",
+      "route": "/ppt-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "pptx-to-pdf",
+      "route": "/pptx-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "protect-pdf",
+      "route": "/protect-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "security"
+    },
+    {
+      "id": "repair-pdf",
+      "route": "/repair-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "security"
+    },
+    {
+      "id": "rotate-image",
+      "route": "/rotate-image",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "rotate-pdf",
+      "route": "/rotate-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "rtf-to-pdf",
+      "route": "/rtf-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "sign-pdf",
+      "route": "/sign-pdf",
+      "processing": "browser",
+      "releaseClass": "signature"
+    },
+    {
+      "id": "split-pdf",
+      "route": "/split-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "subtitle-generator",
+      "route": "/subtitle-generator",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "svg-to-pdf",
+      "route": "/svg-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "tiff-to-pdf",
+      "route": "/tiff-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "txt-to-pdf",
+      "route": "/txt-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "unlock-pdf",
+      "route": "/unlock-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "security"
+    },
+    {
+      "id": "url-to-pdf",
+      "route": "/url-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "watermark-image",
+      "route": "/watermark-image",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "watermark-pdf",
+      "route": "/watermark-pdf",
+      "processing": "browser",
+      "releaseClass": "utility"
+    },
+    {
+      "id": "webp-to-pdf",
+      "route": "/webp-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "word-to-pdf",
+      "route": "/word-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "xls-to-pdf",
+      "route": "/xls-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "xlsx-to-pdf",
+      "route": "/xlsx-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "xml-to-pdf",
+      "route": "/xml-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "xps-to-pdf",
+      "route": "/xps-to-pdf",
+      "processing": "temporary-server",
+      "releaseClass": "conversion"
+    },
+    {
+      "id": "zip-extractor",
+      "route": "/zip-extractor",
+      "processing": "browser",
+      "releaseClass": "utility"
+    }
+  ]
+}

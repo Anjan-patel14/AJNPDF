@@ -1,0 +1,74 @@
+{
+  "extName": {
+    "message": "AJN PDF ಕ್ವಿಕ್ ಟೂಲ್ಸ್"
+  },
+  "extDescription": {
+    "message": "ಲೋಕಲ್ ಇಮೇಜ್ ಕ್ವಿಕ್ ಟೂಲ್ಸ್ ಮತ್ತು 100+ AJN PDF ವರ್ಕ್‌ಫ್ಲೋಗಳಲ್ಲಿ ವೇಗದ ಹುಡುಕಾಟ. ಪುಟ ಅಥವಾ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸ ಪ್ರವೇಶ ಇಲ್ಲ."
+  },
+  "actionTitle": {
+    "message": "AJN PDF ಕ್ವಿಕ್ ಟೂಲ್ಸ್ ತೆರೆಯಿರಿ"
+  },
+  "quickTools": {
+    "message": "ಕ್ವಿಕ್ ಟೂಲ್ಸ್"
+  },
+  "localActions": {
+    "message": "ಲೋಕಲ್ ಕ್ವಿಕ್ ಆಕ್ಷನ್‌ಗಳು"
+  },
+  "workSmarter": {
+    "message": "Chrome ನಿಂದಲೇ ಸ್ಮಾರ್ಟ್ ಆಗಿ ಕೆಲಸ ಮಾಡಿ"
+  },
+  "noPageAccess": {
+    "message": "ಪುಟ ಪ್ರವೇಶ ಇಲ್ಲ"
+  },
+  "imageToPdf": {
+    "message": "ಇಮೇಜ್‌ನಿಂದ PDF"
+  },
+  "imageToPdfSub": {
+    "message": "ಇಮೇಜ್‌ಗಳನ್ನು ಒಂದು PDFಗೆ ಸೇರಿಸಿ"
+  },
+  "reduceImage": {
+    "message": "ಇಮೇಜ್ ಕಡಿಮೆ ಮಾಡಿ"
+  },
+  "reduceImageSub": {
+    "message": "ಇಮೇಜ್ ಫೈಲ್ ಗಾತ್ರ ಕಡಿಮೆ ಮಾಡಿ"
+  },
+  "resizeImage": {
+    "message": "ಇಮೇಜ್ ರಿಸೈಸ್"
+  },
+  "resizeImageSub": {
+    "message": "ಇಮೇಜ್ ಅಳತೆಗಳನ್ನು ಬದಲಿಸಿ"
+  },
+  "convertImage": {
+    "message": "ಇಮೇಜ್ ಕನ್ವರ್ಟ್"
+  },
+  "convertImageSub": {
+    "message": "PNG, JPG ಅಥವಾ WEBP"
+  },
+  "allWorkflows": {
+    "message": "AJN PDF ವರ್ಕ್‌ಫ್ಲೋಗಳು"
+  },
+  "toolsLabel": {
+    "message": "ಟೂಲ್ಸ್"
+  },
+  "clear": {
+    "message": "ಕ್ಲಿಯರ್"
+  },
+  "searchPlaceholder": {
+    "message": "100+ ಟೂಲ್ಸ್ ಹುಡುಕಿ..."
+  },
+  "recent": {
+    "message": "ಇತ್ತೀಚಿನವು"
+  },
+  "openAllTools": {
+    "message": "ಎಲ್ಲಾ AJN PDF ಟೂಲ್ಸ್ ತೆರೆಯಿರಿ"
+  },
+  "localPrivacy": {
+    "message": "ಆಯ್ಕೆ ಮಾಡಿದ ಇಮೇಜ್‌ಗಳು ಎಕ್ಸ್ಟೆನ್ಶನ್‌ನಲ್ಲೇ ಪ್ರಕ್ರಿಯೆಯಾಗುತ್ತವೆ."
+  },
+  "privacy": {
+    "message": "ಗೌಪ್ಯತೆ"
+  },
+  "noResults": {
+    "message": "ಹೊಂದುವ ಟೂಲ್ಸ್ ಕಂಡುಬಂದಿಲ್ಲ."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "extName": {
+    "message": "AJN PDF క్విక్ టూల్స్"
+  },
+  "extDescription": {
+    "message": "లోకల్ ఇమేజ్ క్విక్ టూల్స్ మరియు 100+ AJN PDF వర్క్‌ఫ్లోలలో వేగవంతమైన సెర్చ్. పేజ్ లేదా బ్రౌజింగ్ హిస్టరీ యాక్సెస్ లేదు."
+  },
+  "actionTitle": {
+    "message": "AJN PDF క్విక్ టూల్స్ తెరవండి"
+  },
+  "quickTools": {
+    "message": "క్విక్ టూల్స్"
+  },
+  "localActions": {
+    "message": "లోకల్ క్విక్ యాక్షన్స్"
+  },
+  "workSmarter": {
+    "message": "Chrome నుంచే స్మార్ట్‌గా పని చేయండి"
+  },
+  "noPageAccess": {
+    "message": "పేజ్ యాక్సెస్ లేదు"
+  },
+  "imageToPdf": {
+    "message": "ఇమేజ్ నుంచి PDF"
+  },
+  "imageToPdfSub": {
+    "message": "ఇమేజ్‌లను ఒక PDFగా కలపండి"
+  },
+  "reduceImage": {
+    "message": "ఇమేజ్ తగ్గించండి"
+  },
+  "reduceImageSub": {
+    "message": "ఇమేజ్ ఫైల్ సైజు తగ్గించండి"
+  },
+  "resizeImage": {
+    "message": "ఇమేజ్ రీసైజ్"
+  },
+  "resizeImageSub": {
+    "message": "ఇమేజ్ కొలతలు మార్చండి"
+  },
+  "convertImage": {
+    "message": "ఇమేజ్ కన్వర్ట్"
+  },
+  "convertImageSub": {
+    "message": "PNG, JPG లేదా WEBP"
+  },
+  "allWorkflows": {
+    "message": "AJN PDF వర్క్‌ఫ్లోలు"
+  },
+  "toolsLabel": {
+    "message": "టూల్స్"
+  },
+  "clear": {
+    "message": "క్లియర్"
+  },
+  "searchPlaceholder": {
+    "message": "100+ టూల్స్ సెర్చ్ చేయండి..."
+  },
+  "recent": {
+    "message": "ఇటీవలి"
+  },
+  "openAllTools": {
+    "message": "అన్ని AJN PDF టూల్స్ తెరవండి"
+  },
+  "localPrivacy": {
+    "message": "ఎంచుకున్న ఇమేజ్‌లు ఎక్స్‌టెన్షన్‌లోనే ప్రాసెస్ అవుతాయి."
+  },
+  "privacy": {
+    "message": "ప్రైవసీ"
+  },
+  "noResults": {
+    "message": "సరిపోలే టూల్స్ కనిపించలేదు."
+  }
+}

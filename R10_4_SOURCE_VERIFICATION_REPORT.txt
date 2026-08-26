@@ -1,0 +1,34 @@
+AJN PDF 3.1.0 R10.4 - SOURCE VERIFICATION REPORT
+Generated: 2026-08-12
+
+Trigger from live Windows log:
+- ESLint zero-warning gate found 9 warnings.
+- 8 warnings were unused Lucide imports in src/app/admin/analytics/page.tsx.
+- 1 warning was unused badge destructuring in src/components/junction/ImageToPdfTool.tsx.
+
+R10.4 corrections:
+PASS - BarChart3 unused import removed.
+PASS - Clock3 unused import removed.
+PASS - Database unused import removed.
+PASS - Download unused import removed.
+PASS - MousePointerClick unused import removed.
+PASS - ImageIcon unused import removed.
+PASS - Search unused import removed.
+PASS - Sparkles unused import removed.
+PASS - ImageToPdfTool no longer destructures unused badge; Props compatibility retained.
+PASS - R10.4 targeted zero-warning source verifier added.
+PASS - Retained R10 Chrome Extension source audit passed.
+PASS - Retained R9 consistency/logic/SEO source audit passed.
+PASS - Packaged backend frozen check passed: 18 protected source files unchanged.
+PASS - TS/TSX syntax transpile passed: 260 files, 0 syntax errors.
+PASS - Chrome extension JavaScript syntax check passed.
+PASS - PowerShell updater is ASCII-only with CRLF line endings.
+PASS - No unsafe ordinary $Variable: parser patterns detected in updater.
+
+NOT RUN IN THE PACKAGE CONTAINER:
+- Repository ESLint with installed project dependencies.
+- Full TypeScript project typecheck with live node_modules.
+- Optimized Next.js production build.
+- Git commit/push.
+
+Those are intentionally executed by APPLY_TEST_PUSH_FRONTEND.ps1 in the real AJN PDF Git repository after all source/provenance gates pass.

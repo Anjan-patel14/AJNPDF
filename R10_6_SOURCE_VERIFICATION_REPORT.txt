@@ -1,0 +1,25 @@
+AJN PDF 3.1.0 R10.6 SOURCE VERIFICATION REPORT
+
+PASS: User R10.5 log reached the live capability verifier with 76/78 backend tools available.
+PASS: Zero-warning ESLint completed.
+PASS: TypeScript check completed.
+PASS: Next.js 15.5.23 optimized production build completed.
+PASS: 146/146 static pages generated.
+PASS: Final backend byte-integrity check passed for 23 protected source files.
+ROOT CAUSE: staging stopped because .gitignore contains *.zip and the public Chrome extension ZIP was added without -f.
+FIX: Add-ReleaseOwnedFile force-adds ONLY public/downloads/AJN-PDF-CHROME-EXTENSION-1.0.0.zip.
+PASS: No wildcard or general ignored-file force-add was introduced.
+PASS: Protected backend/package/capability-manifest staging rules remain intact.
+PASS: PowerShell updater is ASCII-only and CRLF normalized.
+
+Remaining external checks after a successful push:
+- rendered browser/mobile QA
+- loading the exact extension package in Chrome
+- Chrome Web Store review/approval
+
+PASS: Simulated Git repository with `*.zip` ignore rule rejected ordinary add and accepted only the exact `git add -f` extension package path.
+PASS: Retained R10 Chrome extension audit passed.
+PASS: Retained R10.4 zero-warning source audit passed.
+PASS: Retained R10.5 TypeScript hotfix source audit passed.
+PASS: Retained R9 production source audit passed.
+PASS: Packaged backend frozen audit passed for 18 protected source files.

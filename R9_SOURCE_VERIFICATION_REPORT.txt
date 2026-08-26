@@ -1,0 +1,64 @@
+AJN PDF 3.1.0 R9 FINAL CONSISTENCY / LOGIC / SEO
+SOURCE VERIFICATION REPORT
+
+STATUS: SOURCE AUDIT PASS
+
+Validated in the packaged source:
+- 107 unique public production tool IDs retained.
+- 34 dedicated action-tool icon concepts retained; conversion icons remain format-aware.
+- Plain-white icon/card surfaces retained.
+- Decorative wave, radial glow, large circle/blob and dead dark-theme branches removed from public UI source.
+- Mobile horizontal cards remain the default; desktop Comfortable / Compact / List layouts remain available and persisted.
+- Ranked task search, aliases, typo tolerance and /Edit/Organize/Security intent filters remain wired.
+- Homepage is focused: hero -> directory -> workflow -> one visual showcase -> safeguards -> FAQ -> footer.
+- Hero copy uses Work Smarter + clear file-workflow positioning + 100+ tools positioning.
+- Homepage workflow, processing overlay, result sharing, safeguards and FAQ use the five-language UI translation system.
+- 484 shared UI translation keys are structurally aligned across English, Hindi, Telugu, Tamil and Kannada.
+- Full-page processing uses real lifecycle state; no seconds counter and no elapsed-time fake phases.
+- Engine and server cancellation are supported when a real cancellable job/request exists.
+- Server cancellation is distinguished from an actual timeout.
+- Real percentage is shown only when measurable; otherwise the progress rail is indeterminate.
+- Merge, Split, Compress and other direct workflows use the shared processing lifecycle.
+- Crop PDF uses one real crop path and real PDF page dimensions; the obsolete split-PDF pre-call and hard-coded page ratios are removed.
+- SmartRead, MemeMaker, Resize Image and Reduce Image no longer use simulated timer progress.
+- Result UX supports Download / Share file / copied tool-link fallback / Process another with clearer feedback.
+- Unfilled AdSense units collapse after an unfilled status is reported.
+- SEO source keeps descriptive metadata, canonical URLs, robots, sitemap/image sitemap, WebSite / SoftwareApplication / Breadcrumb structured data, Search Console verification wiring and Web Vitals analytics.
+- Unsupported popularity/security/ranking claims are not added.
+- Unused legacy architecture/product visual assets with outdated processing wording were removed.
+- 1200x630 social preview updated to current AJN PDF Work Smarter / 100+ positioning.
+- Backend source provenance check PASS: 18 protected packaged backend source files unchanged.
+- Release does not ship a fabricated/stale backend capability manifest. The updater preserves the target repository's live manifests and verifies them before build.
+- 23 static production/source verification scripts PASS.
+- 257 TypeScript/TSX files transpile without syntax errors.
+- Release-owned verification scripts pass Node syntax checks.
+
+Windows updater safety:
+- Frontend-only apply.
+- Does not copy or stage backend/, package.json, package-lock.json, src/generated/backend-capabilities.json or public/backend-capabilities.json.
+- Captures the current tracked backend baseline before frontend copy and verifies it after copy and after production build.
+- Aborts if protected backend/manifests/package files are staged.
+- Creates a timestamped frontend safety patch, status file and src/public/scripts archive when pre-existing frontend changes exist.
+- Stages release-owned frontend files rather than using git add -A across src.
+- Applies deliberate dead-file/legacy-asset deletions explicitly.
+- ASCII-only CRLF PowerShell updater for Windows PowerShell 5.1 compatibility.
+
+Live gates intentionally executed on the user's actual repository by APPLY_TEST_PUSH_FRONTEND.ps1:
+- target capability manifest verification
+- ESLint with zero warnings
+- TypeScript noEmit typecheck
+- optimized Next.js production build
+- final backend byte-integrity verification
+- exact frontend staging safety verification
+- Git commit and push
+
+Manual launch QA still required after the automated Windows gates:
+- Chrome and Edge desktop
+- Android Chrome and 360px viewport
+- 200% zoom
+- keyboard and screen-reader smoke test
+- valid/large/invalid/damaged/encrypted files
+- timeout/offline/cancel/retry
+- real download/share/copy-link flows
+- unfilled/no-consent ad behavior
+- Search Console URL inspection, sitemap submission and indexing/Core Web Vitals monitoring after deployment

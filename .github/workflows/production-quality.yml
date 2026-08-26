@@ -1,0 +1,90 @@
+name: AJN PDF production quality
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ajn-production-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-and-frontend-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+      - run: npm run verify:dependency-policy
+      - run: npm run verify:secrets
+      - run: npm run verify:r18-production
+      - run: npm run verify:r17-trust-seo
+      - run: node scripts/verify-r20-focused-seo.mjs
+      - run: node scripts/verify-r21-product-ecosystem.mjs
+      - run: npm run verify:r16-consistency
+      - run: npm run verify:tool-ux
+      - run: npm run verify:final-ui
+      - run: npm run verify:mobile-first
+      - run: npm run verify:i18n
+      - run: npm run verify:accessibility
+      - run: npm run verify:capabilities
+      - run: npm run verify:backend-workflow
+      - run: node scripts/verify-r20-conversion-accuracy.mjs
+      - run: npm run verify:r19-release
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run verify:r13-browser-pdf
+      - run: npm run build
+      - run: npm run verify:r13-runtime
+      - name: Compile current backend Python sources
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import py_compile
+
+          files = sorted(Path('backend').rglob('*.py'))
+          if not files:
+              raise SystemExit('No backend Python files found.')
+
+          for file in files:
+              py_compile.compile(str(file), doraise=True)
+
+          print(f'PASS: compiled {len(files)} current backend Python files.')
+          PY
+
+  backend-container-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build production backend image and run embedded public acceptance
+        run: docker build --pull --progress=plain -t ajn-pdf-backend-ci ./backend
+
+  package-r21-source:
+    needs: [source-and-frontend-gates, backend-container-gate]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create clean R21 source ZIP
+        run: |
+          zip -rq AJN-PDF-R21-PRODUCT-ECOSYSTEM.zip . \
+            -x '.git/*' 'node_modules/*' '.next/*' 'mobile-android/.gradle/*' 'mobile-android/build/*' '*.log'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AJN-PDF-R21-source
+          path: AJN-PDF-R21-PRODUCT-ECOSYSTEM.zip
+          if-no-files-found: error
+          retention-days: 14

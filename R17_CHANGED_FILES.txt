@@ -1,0 +1,15 @@
+package.json
+R17_CHANGED_FILES.txt
+R17_TRUST_SEO_RELEASE_NOTES.md
+R17_TRUST_SEO_SETUP_AND_DEPLOY.ps1
+scripts/verify-r17-trust-seo.mjs
+src/app/about/page.tsx
+src/app/discover/guides/page.tsx
+src/app/file-processing-policy/page.tsx
+src/app/security/page.tsx
+src/components/discover/guide-library.tsx
+src/components/junction/tool-editorial-content.tsx
+src/components/trust/processing-model-card.tsx
+src/lib/processing-disclosure.ts
+.gitignore
+.env.example
