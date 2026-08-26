@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AJN PDF Quick Tool</title>
+  <link rel="stylesheet" href="workspace.css" />
+</head>
+<body>
+  <header class="workspace-nav">
+    <a class="brand-link" href="popup.html" aria-label="AJN PDF Quick Tools">
+      <img src="icons/icon-48.png" width="38" height="38" alt="" />
+      <span>AJN <b>PDF</b><small>Chrome Quick Tools</small></span>
+    </a>
+    <div class="nav-actions">
+      <button id="switchTool" type="button">Choose quick tool</button>
+      <button id="openWeb" type="button" class="primary-link">100+ web tools ↗</button>
+    </div>
+  </header>
+
+  <main class="workspace-main">
+    <section class="intro">
+      <p class="eyebrow">Local quick action</p>
+      <h1 id="toolTitle">Image to PDF</h1>
+      <p id="toolDescription">Combine images into one PDF directly in the extension.</p>
+      <div class="trust-row"><span>✓ No page access</span><span>✓ No browsing-history access</span><span>✓ Selected images stay in this extension tool</span></div>
+    </section>
+
+    <section class="workspace-card">
+      <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-describedby="fileHelp">
+        <input id="fileInput" type="file" accept="image/*" hidden />
+        <div class="upload-icon" aria-hidden="true">↑</div>
+        <strong id="dropTitle">Choose an image</strong>
+        <span id="fileHelp">or drag and drop here</span>
+        <small id="fileRule">JPG, PNG, WEBP and browser-supported images</small>
+      </div>
+
+      <div id="selection" class="selection" hidden>
+        <div class="selection-head"><div><p class="mini-label">Selected</p><strong id="selectionSummary"></strong></div><button id="changeFiles" type="button">Change</button></div>
+        <div id="fileList" class="file-list"></div>
+      </div>
+
+      <div id="options" class="options"></div>
+
+      <div id="errorBox" class="message error" role="alert" hidden></div>
+      <div id="workingBox" class="message working" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><span id="workingText">Processing your file…</span></div>
+
+      <button id="processButton" class="process-button" type="button" disabled><span id="processLabel">Create PDF</span><span aria-hidden="true">→</span></button>
+    </section>
+
+    <section id="resultCard" class="result-card" hidden aria-live="polite">
+      <div class="result-icon">✓</div>
+      <div class="result-copy"><p class="mini-label">Ready</p><h2 id="resultTitle">Your file is ready</h2><p id="resultMeta"></p></div>
+      <div class="result-actions"><button id="downloadButton" class="download-button" type="button">Download</button><button id="processAnother" type="button">Process another</button></div>
+    </section>
+
+    <section class="other-tools">
+      <div class="other-head"><div><p class="eyebrow">More local quick actions</p><h2>Keep working without leaving the extension</h2></div></div>
+      <div id="nativeToolGrid" class="native-grid"></div>
+    </section>
+  </main>
+
+  <footer class="workspace-footer"><span>AJN PDF Quick Tools 1.0.0</span><button id="privacy" type="button">Extension privacy</button></footer>
+  <script src="pdf-builder.js"></script>
+  <script src="workspace.js"></script>
+</body>
+</html>

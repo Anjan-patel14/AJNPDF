@@ -1,0 +1,74 @@
+{
+  "extName": {
+    "message": "AJN PDF क्विक टूल्स"
+  },
+  "extDescription": {
+    "message": "लोकल इमेज क्विक टूल्स और 100+ AJN PDF वर्कफ़्लो में तेज़ खोज। पेज या ब्राउज़िंग हिस्ट्री एक्सेस नहीं।"
+  },
+  "actionTitle": {
+    "message": "AJN PDF क्विक टूल्स खोलें"
+  },
+  "quickTools": {
+    "message": "क्विक टूल्स"
+  },
+  "localActions": {
+    "message": "लोकल क्विक एक्शन"
+  },
+  "workSmarter": {
+    "message": "Chrome से स्मार्ट तरीके से काम करें"
+  },
+  "noPageAccess": {
+    "message": "पेज एक्सेस नहीं"
+  },
+  "imageToPdf": {
+    "message": "इमेज से PDF"
+  },
+  "imageToPdfSub": {
+    "message": "इमेज को एक PDF में जोड़ें"
+  },
+  "reduceImage": {
+    "message": "इमेज कम करें"
+  },
+  "reduceImageSub": {
+    "message": "इमेज फ़ाइल छोटी करें"
+  },
+  "resizeImage": {
+    "message": "इमेज रिसाइज़"
+  },
+  "resizeImageSub": {
+    "message": "इमेज के आयाम बदलें"
+  },
+  "convertImage": {
+    "message": "इमेज कन्वर्ट"
+  },
+  "convertImageSub": {
+    "message": "PNG, JPG या WEBP"
+  },
+  "allWorkflows": {
+    "message": "AJN PDF वर्कफ़्लो"
+  },
+  "toolsLabel": {
+    "message": "टूल्स"
+  },
+  "clear": {
+    "message": "साफ़ करें"
+  },
+  "searchPlaceholder": {
+    "message": "100+ टूल्स खोजें..."
+  },
+  "recent": {
+    "message": "हाल के"
+  },
+  "openAllTools": {
+    "message": "सभी AJN PDF टूल्स खोलें"
+  },
+  "localPrivacy": {
+    "message": "चुनी गई इमेज एक्सटेंशन के अंदर प्रोसेस होती हैं।"
+  },
+  "privacy": {
+    "message": "प्राइवेसी"
+  },
+  "noResults": {
+    "message": "कोई मिलते-जुलते टूल नहीं मिले।"
+  }
+}
