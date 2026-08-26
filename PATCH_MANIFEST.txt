@@ -1,0 +1,32 @@
+AJN PDF Cloud Run Backend Production R2 patch
+Overlay target: C:\Users\ANJAN PATEL\Desktop\AJN-PDF-GITHUB
+
+Files changed/added:
+- DEPLOY_CLOUD_RUN_BACKEND.ps1
+- TEST_CLOUD_RUN_BACKEND.ps1
+- CLOUD_RUN_BACKEND_PRODUCTION_R2.md
+- CLOUD_RUN_VERCEL_ENV_TEMPLATE.txt
+- backend/Dockerfile
+- backend/.dockerignore
+- backend/test-fixtures/sample.pdf
+- backend/test-fixtures/.png
+- backend/test-fixtures/sample.docx
+- backend/test-fixtures/sample.xlsx
+- backend/test-fixtures/sample.pptx
+- backend/test-fixtures/sample.epub
+- src/lib/pdf-backend.ts
+- src/lib/tool-policy.ts
+- src/components/junction/ServerConversionTool.tsx
+- src/components/junction/ProtectPdf.tsx
+- src/components/junction/UnlockPdf.tsx
+- src/components/junction/RepairPdf.tsx
+
+Not included / intentionally untouched:
+- package.json
+- package-lock.json
+- vercel.json
+- Next.js framework setting
+- signing/domain/AdSense configuration
+
+Expected dependency-gated capability:
+- XPS -> PDF (until an approved MuPDF/Ghostscript-compatible engine is configured)

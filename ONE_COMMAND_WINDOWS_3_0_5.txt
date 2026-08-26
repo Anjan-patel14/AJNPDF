@@ -1,0 +1,7 @@
+AJN PDF 3.0.5 - ONE WINDOWS POWERSHELL COMMAND
+
+Place AJN-PDF-3.0.5-MOBILE-FIRST-FULL-PRODUCTION.zip in Downloads, open PowerShell, then run:
+
+$ErrorActionPreference="Stop"; $Z=Get-ChildItem "$env:USERPROFILE\Downloads" -Filter "AJN-PDF-3.0.5-MOBILE-FIRST-FULL-PRODUCTION*.zip" -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if(-not $Z){throw "AJN PDF 3.0.5 ZIP was not found in Downloads."}; $D=Join-Path "$env:USERPROFILE\Desktop" ("AJN-PDF-3.0.5-PRODUCTION-"+(Get-Date -Format "yyyyMMdd_HHmmss")); New-Item -ItemType Directory -Path $D -Force | Out-Null; Expand-Archive -LiteralPath $Z.FullName -DestinationPath $D -Force; Set-Location -LiteralPath $D; Set-ExecutionPolicy -Scope Process Bypass -Force; Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.ProcessName -in @("soffice","soffice.bin") } | Stop-Process -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2; .\SETUP_FULL_PRODUCTION.ps1
+
+Success gate: AJN PDF PRODUCTION SETUP PASSED

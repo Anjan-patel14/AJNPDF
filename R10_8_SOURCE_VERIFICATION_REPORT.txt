@@ -1,0 +1,63 @@
+AJN PDF 3.1.0 R10.8 SOURCE VERIFICATION REPORT
+================================================
+Release: R10.8 STABILITY / MOBILE PERFORMANCE / TRUST
+Generated: 2026-08-12
+
+PACKAGE-SIDE RESULT: PASS
+
+Verified in the release source package:
+- 25 package-side source verifier scripts completed successfully.
+- R10.8 dedicated verifier: 27 stability/mobile/trust source gates PASS.
+- 107 unique production tool IDs retained.
+- 74 conversion/ tools registered.
+- Conversion artwork: 74 live icons / 75 catalog icons / 5 source sheets.
+- Five UI locales have identical 510-key structures.
+- 265 TS/TSX source files syntax-transpiled with 0 syntax errors using TypeScript 5.8.3.
+- Chrome-extension and release JavaScript/MJS syntax checks PASS.
+- Backend directory is byte-for-byte identical to the R10.7.3 release baseline.
+- package.json and package-lock.json are byte-for-byte identical to the R10.7.3 release baseline.
+- No source-owned obsolete size-adjust metadata string remains.
+- The removed old AJN PDF secondary hero tagline is absent from packaged active source.
+
+R10.8 production changes verified by source gates:
+- one responsive homepage hero source path;
+- one primary homepage search source path;
+- deterministic light root HTML without a pre-hydration theme mutation script;
+- progressive 18-at-a-time tool-card rendering while search still evaluates the full registry;
+- content-visibility for off-screen tool cards;
+- visible per-tool processing mode and concrete limits;
+- server tool facts read live /ready values where available;
+- /status auto-refreshes its live readiness check every 30 seconds;
+- /limits and / pages exist and are linked;
+- CSP/HSTS/nosniff/referrer/permissions/COOP header configuration exists;
+- product footer does not present personal social handles as AJN PDF brand channels;
+- tool SEO descriptions use tool-specific name/use-case/benefit inputs;
+- ad zones reserve layout and suppress scroll anchoring;
+- updater contains a built-production SSR/header smoke gate before commit.
+
+INTENTIONALLY LIVE-REPOSITORY-ONLY:
+- verify:capabilities. R10.8 does not replace src/generated/backend-capabilities.json or public/backend-capabilities.json. The updater runs verify:capabilities against the actual repository manifest before build/commit/push.
+
+MANDATORY UPDATER GATES ON THE USER REPOSITORY:
+- all retained production/source gates;
+- live capability manifest verification;
+- ESLint with zero warnings allowed;
+- TypeScript tsc --noEmit;
+- optimized Next.js production build;
+- built-production SSR/header smoke (one raw-HTML hero, one raw-HTML search, /limits, /, /status and required headers);
+- final backend byte-integrity verification;
+- release-owned staging only;
+- commit and push only after the gates above succeed.
+
+ENVIRONMENT NOTE:
+A full npm dependency install did not complete in the packaging sandbox, so package-side ESLint, semantic TypeScript typecheck and Next.js build are not claimed here. They are deliberately mandatory inside APPLY_TEST_PUSH_FRONTEND.ps1 on the user's real repository, which has the actual dependency install and live capability manifests.
+
+MANUAL QA STILL REQUIRED AFTER APPLYING:
+- Chrome mobile/desktop console: confirm no React hydration error.
+- Real-device PageSpeed/Core Web Vitals with consent and ads in realistic conditions.
+- CSP compatibility with AdSense/Analytics/consent flows.
+- Representative real-file PDF/image//Office/security workflows.
+- Chrome extension exact-package QA before Web Store submission.
+R10.8.1 integration-verifier hotfix:
+- The stability verifier no longer requires package-only APPLY_TEST_PUSH_FRONTEND.ps1 when executed from the installed Git repository.
+- The package context still checks runtime verifier ordering before commit.

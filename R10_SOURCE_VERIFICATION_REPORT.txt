@@ -1,0 +1,56 @@
+AJN PDF 3.1.0 R10 - SOURCE VERIFICATION REPORT
+Generated: 2026-08-12
+Release: Chrome Extension + Production Polish
+
+IMPLEMENTED
+- Chrome Manifest V3 extension: AJN PDF Quick Tools 1.0.0.
+- Four extension-native, user-initiated local quick actions:
+  Image to PDF, Reduce Image, Resize Image, Convert Image.
+- 107 audited AJN PDF workflow search entries; unavailable pdf-to-avif and xps-to-pdf are excluded.
+- No required Chrome permissions, host permissions, optional permissions, content scripts or background worker.
+- No remotely hosted executable JavaScript in the extension runtime.
+- Five extension locales: English, Hindi, Telugu, Tamil, Kannada.
+- Extension workload guards: 50 MB per image, 200 MB per job, 60 MP per image, maximum 20 images for Image to PDF.
+- Extension processing exposes an ARIA busy state and uses truthful indeterminate activity instead of fake percentages.
+- Website integration: /chrome-extension, /chrome-extension/privacy, homepage promo, primary/mobile nav, footer and sitemap.
+- Public test extension ZIP is included at public/downloads/AJN-PDF-CHROME-EXTENSION-1.0.0.zip.
+- R9 UI/UX, processing, SEO, i18n and backend-preservation work is retained.
+- R10 updater refuses a pre-existing Git staging area, backs up pre-existing frontend changes, protects backend/package/lock/live capability manifests, stages release-owned files, runs gates, commits and pushes only after successful checks.
+
+PACKAGE-SIDE CHECKS PASSED
+- R10 Chrome extension verifier: PASS.
+- Retained R9 final-production verifier: PASS.
+- Backend-frozen verifier: PASS (18 protected backend source files unchanged in the release package).
+- SEO/ads, phase1, production, trust UI, links, final UI, conversions, growth SEO, theme/analytics, brand/media/theme, final production, accessibility, mobile-first, i18n, tool UX, dependency policy, code quality and backend-workflow source verifiers: PASS.
+- Secret/runtime-artifact scan: PASS.
+- Total source gates in the batch: 22 PASS.
+- Website locales: 492 shared keys across English, Hindi, Telugu, Tamil and Kannada.
+- TS/TSX syntax transpilation: 260 files, 0 syntax errors.
+- Extension JavaScript syntax checks: PASS.
+- Extension Store ZIP integrity: PASS; manifest.json is at ZIP root.
+- Local Image-to-PDF smoke test: PASS; generated 2-page PDF 1.4, A4 landscape, no JavaScript, not encrypted.
+- PowerShell updater encoding: ASCII only, CRLF line endings.
+
+INTENTIONALLY TARGET-REPOSITORY-ONLY GATE
+- verify-capability-manifest is NOT declared passed against this portable release folder.
+- The release does not replace src/generated/backend-capabilities.json or public/backend-capabilities.json.
+- APPLY_TEST_PUSH_FRONTEND.ps1 runs verify:capabilities against the user's existing live repository manifest after the frontend/extension copy.
+
+TARGET-REPOSITORY GATES RUN BY THE ONE-COMMAND UPDATER
+- R10 source verifier and retained R9 verifier.
+- Backend frozen/provenance checks before and after copy/build.
+- All production npm verification gates, including live capability verification.
+- ESLint with zero warnings.
+- TypeScript typecheck.
+- Optimized Next.js production build.
+- Exact protected-file/staging checks.
+- Git commit and push only after every gate succeeds.
+
+REMAINING MANUAL RELEASE QA
+- Load the exact AJN-PDF-CHROME-EXTENSION-1.0.0.zip contents with Chrome Developer mode / Load unpacked.
+- Test all four local actions with normal, large, transparent, invalid and unsupported images.
+- Test popup search, filters, recent tools, keyboard navigation and external workflow links.
+- Test website desktop Chrome/Edge and Android Chrome after deployment.
+- Capture at least one actual screenshot from the loaded extension for the final Chrome Web Store listing.
+- Chrome Web Store review/approval is external and cannot be guaranteed by source verification.
+- Search ranking position is external and cannot be guaranteed; technical SEO is implemented and still requires indexing/content/authority work over time.

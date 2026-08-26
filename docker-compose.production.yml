@@ -1,0 +1,32 @@
+services:
+  ajn-pdf-api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file:
+      - ./backend/.env.production
+    environment:
+      AJN_ANALYTICS_DB: /app/data/ajn_analytics.sqlite3
+      AJN_PUBLIC_MEDIA_DB: /app/data/ajn_public_media.sqlite3
+      AJN_PUBLIC_MEDIA_ROOT: /app/data/public_media
+    volumes:
+      - ajn_pdf_data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 3G
+        reservations:
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s
+
+volumes:
+  ajn_pdf_data:

@@ -1,0 +1,38 @@
+AJN PDF 3.1.0 R10.9 SEARCH / IMAGE LICENSING / ADMIN DIAGNOSTICS
+SOURCE VERIFICATION REPORT
+
+R10.9 dedicated source gates: 30 PASS
+R10.8 retained stability/mobile/trust gates: 27 PASS
+Chrome extension source audit: PASS
+R10.4 ESLint hotfix source audit: PASS
+R10.5 TypeScript hotfix source audit: PASS
+R10.7 conversion icon audit: PASS (74 live / 75 catalog / 5 sheets)
+R9 final production source audit: PASS
+Backend frozen source audit: PASS
+Brand/media source audit: PASS
+Five-language i18n audit: PASS (511 shared keys)
+Internal route/link audit: PASS (39 routes)
+Trust/UI audit: PASS
+Mobile-first/progressive-rendering audit: PASS
+SEO/ads source audit: PASS
+Secret scan: PASS
+Code-quality source audit: PASS
+Final-production source audit: PASS
+Growth SEO source audit: PASS
+Theme/analytics source audit: PASS
+TS/TSX syntax parse: 267 files checked, 0 syntax errors
+Backend vs R10.8.1 package: byte-for-byte unchanged
+package.json vs R10.8.1: unchanged
+package-lock.json vs R10.8.1: unchanged
+
+Implemented R10.9 scope:
+- ImageObject creditText, copyrightNotice, license and acquireLicensePage on collection + detail schema
+- /image-licensing page, sitemap/footer/discover/contact integration
+- analytics/media admin runtime diagnostics
+- safe local admin-token configuration helper
+- 511-key five-language footer integration
+- retained R10.8 one-hero/one-search/mobile/trust work
+
+The full semantic TypeScript gate, zero-warning ESLint, optimized Next.js production build, built-production SSR/security-header runtime smoke, live capability-manifest gate, backend byte-integrity gate, Git staging safety, commit and push are executed by APPLY_TEST_PUSH_FRONTEND.ps1 against the user's actual Git repository. These are not claimed as package-side runtime results here.
+
+External/provider checks remain external: production secret configuration/redeploy, Search Console recrawl/validation, real-browser hydration console, Core Web Vitals, real-file workflow QA, AdSense/CSP browser compatibility and Chrome Web Store review.

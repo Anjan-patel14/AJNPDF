@@ -1,0 +1,49 @@
+AJN PDF 3.1.0 R10.3 LIVE MANIFEST VERIFIER HOTFIX - SOURCE VERIFICATION REPORT
+Generated: 2026-08-12
+
+USER-LOG DIAGNOSIS
+PASS  R10 Chrome extension source audit completed.
+PASS  Retained R9 source audit completed in the downloadable release bundle.
+PASS  Release backend provenance check completed.
+PASS  Target repository was found and frontend/extension copy started.
+PASS  Safety backups were created for pre-existing frontend changes.
+PASS  Backend session baseline captured 23 Git-tracked backend files.
+STOP  Target-side retained R9 verifier rejected the live backend capability manifests.
+
+ROOT CAUSE
+The R9 verifier had one rule for two different contexts:
+- release bundle: generated backend capability manifests must not be shipped;
+- installed Git repository: the real generated capability manifests must remain present.
+R10.2 correctly preserved the live manifests but then the retained verifier incorrectly treated their presence in the installed repository as a release-package failure.
+
+R10.3 FIX
+PASS  verify-r9-final-production.mjs is now context-aware.
+PASS  Release-bundle mode still rejects packaged capability manifests.
+PASS  Installed-Git-repository mode requires both live capability manifests to remain present.
+PASS  Manifest contents are NOT trusted by this source audit; npm run verify:capabilities remains the authoritative live validation gate for generatedAt, backendVersion, 78+ tool entries, counts, IDs, required capabilities, conversion coverage and matching source/public fingerprints.
+PASS  Updater still excludes src/generated/backend-capabilities.json and public/backend-capabilities.json from copy/staging.
+PASS  package.json, package-lock.json and backend/** remain protected.
+PASS  Interrupted R10.1/R10.2 hotfix metadata is cleaned from the target when present.
+PASS  Windows updater remains ASCII-only and CRLF-formatted for Windows PowerShell 5.1.
+
+PACKAGE-SIDE VERIFICATION
+PASS  22 source/verifier gates completed successfully.
+PASS  R10 Chrome extension / website integration verifier.
+PASS  R9 consistency / logic / SEO verifier in release mode.
+PASS  Backend frozen check: 18 protected backend source files unchanged.
+PASS  SEO/ads, phase1, production, trust UI, links, final UI, conversions, growth SEO.
+PASS  Theme/analytics, brand/media/theme, final production, accessibility, mobile-first.
+PASS  Five-language i18n, tool UX, dependency policy, secret scan, code quality, backend workflow.
+PASS  Chrome extension JavaScript syntax checks.
+PASS  260 TS/TSX source files syntax-transpiled with 0 syntax errors.
+PASS  Target-mode simulation with .git + both live capability manifests: retained R9 verifier PASS.
+
+LIVE-REPOSITORY GATES STILL REQUIRED
+PENDING  npm run verify:capabilities against the user's actual generated capability manifests.
+PENDING  ESLint zero-warning gate.
+PENDING  TypeScript project typecheck.
+PENDING  Optimized Next.js production build.
+PENDING  Final backend byte-integrity check after build.
+PENDING  Exact release-owned staging audit, commit and GitHub push.
+
+R10.3 is designed to continue safely from the interrupted R10.2 working tree. Do not use git reset --hard and do not delete backend changes.

@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function owns(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function safeProfileKeys() {
+      return request.resource.data.keys().hasOnly([
+        'displayName', 'photoURL', 'locale', 'createdAt', 'updatedAt',
+        'marketingOptIn', 'defaultToolPreferences'
+      ]);
+    }
+
+    match /users/{uid} {
+      allow read: if owns(uid);
+      allow create, update: if owns(uid) && safeProfileKeys();
+      allow delete: if owns(uid);
+    }
+
+    // Entitlements and billing records are written only by trusted server/billing code.
+    match /subscriptions/{uid} {
+      allow read: if owns(uid);
+      allow write: if false;
+    }
+
+    match /usage/{uid}/{document=**} {
+      allow read: if owns(uid);
+      allow write: if false;
+    }
+
+    match /apiKeys/{uid}/{document=**} {
+      allow read: if owns(uid);
+      allow write: if false;
+    }
+
+    match /devices/{uid}/{deviceId} {
+      allow read: if owns(uid);
+      allow create, update, delete: if owns(uid)
+        && request.resource.data.keys().hasOnly(['label', 'platform', 'lastSeenAt', 'createdAt']);
+    }
+
+    match /plans/{planId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Admin analytics are served by the server-side protected proxy, never by direct Firestore access.
+    match /admin/{document=**} {
+      allow read, write: if false;
+    }
+
+    // PDF/image/document contents must not be stored by the account database by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
