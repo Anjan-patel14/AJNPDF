@@ -1,0 +1,17 @@
+AJN PDF 3.1.0 SOURCE VERIFICATION
+Date: 2026-08-09
+
+PASS: Python backend source compilation.
+PASS: SEO/ads, Phase 1, production, trust UI, links, final UI, conversions/, SEO growth, theme/analytics, brand/media, final production, accessibility, mobile-first, five-language i18n, tool UX, zero-warning code-quality, backend-workflow and secret/runtime-artifact source guards.
+PASS: Backend workflow guard covers streaming uploads, format validation, process isolation, timeout termination, disk/workload limits, request references, /ready fail-closed behavior, explicit live capability gating and live HTTP acceptance wiring.
+PASS: English/Hindi/Telugu/Tamil/Kannada dictionaries keep the same required key structure.
+
+NOT CLAIMED IN THIS CONTAINER:
+- Native Windows pikepdf/LibreOffice//Calibre conversion execution.
+- Live FastAPI HTTP acceptance against Windows runtime.
+- npm dependency install, semantic TypeScript, strict ESLint and Next optimized build after machine capability export.
+
+Those are mandatory gates inside SETUP_FULL_PRODUCTION.ps1 on the target Windows machine.
+
+EXTERNAL AFTER LOCAL PASS:
+Public deployment/DNS/TLS/CORS, persistent storage/restore drill, monitoring, physical device/browser/screen-reader QA, genuine MSG/XPS fixtures, public URL-to-PDF network acceptance, Search Console/Core Web Vitals, CMP and AdSense review.

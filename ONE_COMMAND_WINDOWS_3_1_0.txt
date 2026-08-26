@@ -1,0 +1,8 @@
+AJN PDF 3.1.0 — ONE WINDOWS COMMAND
+
+Place AJN-PDF-3.1.0-BACKEND-HARDENED-FULL-PRODUCTION.zip in Downloads, then run:
+
+$ErrorActionPreference="Stop"; $Z=Get-ChildItem "$env:USERPROFILE\Downloads" -Filter "AJN-PDF-3.1.0-BACKEND-HARDENED-FULL-PRODUCTION*.zip" -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if(-not $Z){throw "AJN PDF 3.1.0 ZIP was not found in Downloads."}; $D=Join-Path "$env:USERPROFILE\Desktop" ("AJN-PDF-3.1.0-PRODUCTION-"+(Get-Date -Format "yyyyMMdd_HHmmss")); New-Item -ItemType Directory -Path $D -Force | Out-Null; Expand-Archive -LiteralPath $Z.FullName -DestinationPath $D -Force; Set-Location -LiteralPath $D; Set-ExecutionPolicy -Scope Process Bypass -Force; Get-Process soffice* -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Start-Sleep -Seconds 2; .\SETUP_FULL_PRODUCTION.ps1
+
+Required final line:
+AJN PDF PRODUCTION SETUP PASSED

@@ -1,0 +1,3 @@
+# Paste/update in Vercel after Cloud Run deployment
+NEXT_PUBLIC_PDF_BACKEND_URL=https://YOUR-CLOUD-RUN-SERVICE.run.app
+NEXT_PUBLIC_APP_URL=https://ajn-delta.vercel.app

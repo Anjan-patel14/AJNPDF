@@ -1,0 +1,23 @@
+AJN PDF 3.1.0 R9.7 SAFE DIRECTORY STAGING HOTFIX - SOURCE VERIFICATION
+
+Reason for hotfix
+- R9.6 passed source audits, secret scan, ESLint, TypeScript, optimized Next.js build (144/144 static pages) and final backend byte-integrity.
+- It stopped only while staging public/tool-icons because the directory was already absent/untracked and Git rejected the direct pathspec.
+
+R9.7 change
+- public/tool-icons now uses Stage-TrackedDeletion, the same guarded Git-index-aware cleanup path used for deleted frontend files.
+- If tracked legacy icon files exist, deletions are staged with git add -u.
+- If no tracked entries exist, the cleanup path is skipped without failure.
+
+Validation completed in release source
+PASS: R9 final source audit
+PASS: R9.5 TypeScript hotfix source audit
+PASS: R9.6 safe deletion staging source audit
+PASS: R9.7 safe directory staging source audit
+PASS: release backend frozen check (18 protected source files)
+PASS: release source secret/runtime-artifact scan
+PASS: simulated Git directory deletion: tracked public/tool-icons/a.txt is staged as a deletion
+PASS: updater is ASCII only and CRLF line-ended
+
+Not claimed here
+- Windows PowerShell execution, repository build, commit and GitHub push must be confirmed by the user's R9.7 run.

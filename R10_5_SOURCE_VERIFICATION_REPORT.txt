@@ -1,0 +1,57 @@
+AJN PDF 3.1.0 R10.5 TYPESCRIPT GATE HOTFIX - SOURCE VERIFICATION REPORT
+Generated: 2026-08-12
+
+1) R10 Chrome extension source audit
+AJN PDF R10 CHROME EXTENSION / PRODUCTION POLISH: PASS
+- Manifest V3; zero required/host permissions; no content scripts/background worker.
+- Four extension-native local image tools; not a link-only launcher.
+- 107 audited AJN PDF workflows searchable from the extension.
+- Five extension locales and matching website localization keys.
+- Chrome product/privacy pages, homepage promo, navigation/footer and sitemap integrated.
+- File/image workload guards, ARIA busy state and safer Git staging verified.
+- Store icon/promo/listing visual dimensions verified.
+
+2) R10.4 zero-warning regression audit
+PASS: admin analytics does not import unused BarChart3
+PASS: admin analytics does not import unused Clock3
+PASS: admin analytics does not import unused Database
+PASS: admin analytics does not import unused Download
+PASS: admin analytics does not import unused MousePointerClick
+PASS: admin analytics does not import unused ImageIcon
+PASS: admin analytics does not import unused Search
+PASS: admin analytics does not import unused Sparkles
+PASS: ImageToPdfTool preserves badge compatibility without unused destructuring
+AJN PDF R10.4 ESLINT ZERO-WARNING HOTFIX SOURCE AUDIT: PASS
+
+3) R10.5 TypeScript hotfix regression audit
+PASS: MetricCard provides a typed Activity fallback when callers omit icon
+PASS: Crop PDF converts pdf-lib bytes to an ArrayBuffer-backed BlobPart
+PASS: ImageToPdfTool badge compatibility prop is optional for JPG/PNG callers
+PASS: src/components/junction/JpgToPdf.tsx continues to use the shared ImageToPdfTool
+PASS: src/components/junction/PngToPdf.tsx continues to use the shared ImageToPdfTool
+AJN PDF R10.5 TYPESCRIPT GATE HOTFIX SOURCE AUDIT: PASS
+
+4) Retained R9 source audit
+PASS: 107 unique production tool ids retained
+PASS: 34 dedicated action icons retained
+PASS: Legacy raster card icon artwork removed
+PASS: Adaptive Comfortable / Compact / List directory and ranked search source present
+PASS: Homepage is shorter and keeps focused discovery, workflow, trust and FAQ sections
+PASS: Hero no longer mounts wave/blob background shapes
+PASS: Decorative wave/circle/radial background layers are removed from public surfaces
+PASS: Unused legacy promotional/architecture visual assets are removed
+PASS: Light-only public source and dead theme/layout code are cleaned
+PASS: Processing overlay uses localized truthful stages, determinate progress when available, and supported cancellation
+PASS: Core direct tools and Crop PDF use the R9 processing/logic model
+PASS: Result sharing distinguishes file share from copied tool link
+PASS: Legacy giant 2.5–4rem tool surface radii removed
+PASS: Primary public tool copy avoids the audited developer-style phrases
+PASS: SEO source keeps unique metadata, canonicals, sitemap/robots and accurate structured data
+PASS: Unfilled ad slots can collapse after AdSense reports no inventory
+PASS: R9 preserves the target repository capability manifest as source of truth
+AJN PDF R9 FINAL CONSISTENCY / LOGIC / SEO SOURCE AUDIT: PASS
+
+5) Backend frozen release provenance
+AJN PDF BACKEND FROZEN CHECK: PASS (18 protected source files unchanged; runtime artifacts ignored)
+
+Package-side source checks above passed. Live repository still must run verify:capabilities, zero-warning ESLint, TypeScript, Next.js production build, final backend integrity, staging safety, commit and push.
