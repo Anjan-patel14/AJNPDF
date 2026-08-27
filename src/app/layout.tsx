@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESCRIPTION, images: ["/og-image.jpg"] },
   verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined },
-  other: { "google-adsense-account": ADSENSE_PUBLISHER, "ajn-release": "3.2.0-r21" },
+  other: { "google-adsense-account": ADSENSE_PUBLISHER, 'ajn-release': '3.2.0-r21' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
