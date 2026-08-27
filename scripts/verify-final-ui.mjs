@@ -1,30 +1,173 @@
-import fs from 'node:fs';
-import path from 'node:path';
-const root=process.cwd(); const read=(f)=>fs.readFileSync(path.join(root,f),'utf8'); let failed=false;
-const pass=(m)=>console.log(`PASS: ${m}`); const fail=(m)=>{failed=true;console.error(`FAIL: ${m}`)};
-const home=read('src/app/page.tsx'),hero=read('src/components/landing/hero.tsx'),mobile=read('src/components/landing/mobile-home-hero.tsx'),grid=read('src/components/landing/services-grid.tsx'),navbar=read('src/components/landing/navbar.tsx'),menu=read('src/components/landing/all-tools-menu.tsx'),footer=read('src/components/landing/main-footer.tsx'),css=read('src/app/globals.css'),logic=read('src/lib/all-tools-logic.ts'),pkg=JSON.parse(read('package.json'));
+import fs from "node:fs";
+import path from "node:path";
 
-for(const id of ['all','edit','organize','security']) home.includes(`id: '${id}'`)?pass(`R21 category/intent ${id} wired`):fail(`R21 category/intent ${id} missing`);
-for(const retired of ['image','pdf','conversion']) !home.includes(`id: '${retired}'`)?pass(`Retired homepage category ${retired} absent`):fail(`Retired homepage category ${retired} remains`);
-hero.includes('Free Online')&&hero.includes('PDF Tools')&&hero.includes('Merge, split, compress, edit, organize, sign and protect PDF files online.')?pass('R21 focused PDF-only hero present'):fail('R21 focused hero copy missing');
-hero.includes('Choose a PDF tool')&&hero.includes('Start with Merge PDF')?pass('Hero exposes direct PDF-tool actions'):fail('Hero PDF-tool actions missing');
-!/temporary processing|server mode/i.test(hero)?pass('Hero avoids internal processing architecture language'):fail('Hero exposes internal processing architecture');
-const responsive=css+'\n'+hero+'\n'+mobile+'\n'+grid;
-for(const marker of ['clamp(','@media (max-width:430px)','prefers-reduced-motion','overflow-x: hidden']) responsive.includes(marker)?pass(`Responsive marker ${marker}`):fail(`Missing ${marker}`);
-for(const cls of ['ajn-tool-card','ajn-white-icon-tile']) css.includes(`.${cls}`)?pass(`Component .${cls}`):fail(`Missing .${cls}`);
-for(const label of ['Popular PDF Tools','Organize PDF','Edit & Sign PDF','PDF Security & Recovery']) grid.includes(label)?pass(`R21 tool group ${label}`):fail(`R21 tool group ${label} missing`);
-!grid.includes('Image Tools')?pass('Image tool group removed from AJN PDF grid'):fail('Image tool group remains in AJN PDF grid');
-grid.includes('SEARCH_EXPANSIONS')&&grid.includes('distanceAtMostTwo')?pass('Search aliases and typo tolerance present'):fail('Smart search ranking missing');
-for(const id of ['merge-pdf','split-pdf','compress-pdf','add-text','sign-pdf']) navbar.includes(`id: '${id}'`)?pass(`Header quick tool ${id}`):fail(`Header quick tool missing ${id}`);
-!navbar.includes('ConvertMenu')&&!navbar.includes('/conversion-tools')&&!navbar.includes('/image-tools')?pass('Retired converter/image-directory navigation removed'):fail('Retired converter/image-directory navigation remains');
-navbar.includes('<AllToolsMenu')?pass('Header All Tools launcher present'):fail('Header All Tools launcher missing');
-for(const label of ['PDF Tools','Pricing','Products','AJN Desktop','AJN Mobile','AJN Sign','AJN API','AJN IMG']) navbar.includes(label)?pass(`Header/product surface ${label}`):fail(`Header/product surface missing ${label}`);
-navbar.includes("href=\"/login\"")&&navbar.includes("href=\"/signup\"")&&navbar.includes("href=\"/account\"")?pass('Header account/login/signup surfaces present'):fail('Header account surfaces incomplete');
-navbar.includes("label:'All PDF Tools'")?pass('Mobile navigation exposes All PDF Tools'):fail('Mobile All PDF Tools entry missing');
-menu.includes('BUILD_PUBLIC_TOOLS.length')&&menu.includes('Popular')&&menu.includes('Organize PDF')&&menu.includes('Edit & Sign')&&menu.includes('Security & Recovery')&&menu.includes('More PDF Tools')&&!menu.includes('Image Tools')?pass('All Tools menu matches R21 PDF-only inventory'):fail('All Tools menu grouping is stale');
-!footer.includes('/conversion-tools')&&!footer.includes('/image-tools')?pass('Footer retired conversion/image directories removed'):fail('Footer still links retired conversion/image directory');
-logic.includes('const selectedLevel: CompressionLevel')&&logic.includes('level: selectedLevel')?pass('Compression typing fixed'):fail('Compression typing missing');
-for(const prohibited of [/100%\s*(private|local|secure)/i,/trusted by (millions|thousands)/i,/99\.9%\s*uptime/i,/free forever/i,/no limits/i,/90\+\s*tools/i]) prohibited.test([home,hero,mobile,grid,navbar,menu,footer].join('\n'))?fail(`Unsupported/stale claim ${prohibited}`):pass(`Avoids ${prohibited}`);
-!hero.includes('PremiumBackground')&&!mobile.includes('PremiumBackground')?pass('Hero decorative wave/blob layer removed'):fail('Hero decorative shape layer remains');
-pkg.scripts?.check?.includes('verify:final-ui')?pass('Final UI verifier remains in production check'):fail('Final UI verifier missing from check');
-if(failed)process.exit(1); console.log('AJN PDF R21 PDF-only UI verification completed successfully.');
+const root = process.cwd();
+const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
+let failed = false;
+
+const pass = (message) => console.log(`PASS: ${message}`);
+const fail = (message) => {
+  failed = true;
+  console.error(`FAIL: ${message}`);
+};
+
+const home = read("src/app/page.tsx");
+const hero = read("src/components/landing/hero.tsx");
+const grid = read("src/components/landing/services-grid.tsx");
+const navbar = read("src/components/landing/navbar.tsx");
+const menu = read("src/components/landing/all-tools-menu.tsx");
+const footer = read("src/components/landing/main-footer.tsx");
+const css = read("src/app/globals.css");
+const policy = read("src/lib/tool-policy.ts");
+const pkg = JSON.parse(read("package.json"));
+
+hero.includes("Free Online PDF Tools")
+  ? pass("V9 hero heading is exact")
+  : fail("V9 hero heading is missing or changed");
+
+const heroDescriptionOk =
+  hero.includes("Merge, compress, split, organize, edit, sign and protect PDF files") &&
+  hero.includes("all in one simple workspace.");
+
+heroDescriptionOk
+  ? pass("V9 hero description is correct")
+  : fail("V9 hero description is missing or changed");
+
+for (const forbidden of [
+  "Choose a PDF tool",
+  "Start with Merge PDF",
+  "Workspace preview",
+  "Report.pdf",
+  "Proposal.pdf",
+  "Statement.pdf",
+]) {
+  !hero.includes(forbidden)
+    ? pass(`Hero excludes retired content: ${forbidden}`)
+    : fail(`Hero still contains retired content: ${forbidden}`);
+}
+
+for (const id of ["all", "edit", "organize", "security"]) {
+  new RegExp(`id:\\s*["']${id}["']`).test(home)
+    ? pass(`Homepage category ${id} wired`)
+    : fail(`Homepage category ${id} missing`);
+}
+
+for (const retired of ["image", "pdf", "conversion"]) {
+  !new RegExp(`id:\\s*["']${retired}["']`).test(home)
+    ? pass(`Retired homepage category ${retired} absent`)
+    : fail(`Retired homepage category ${retired} remains`);
+}
+
+for (const label of [
+  "Popular PDF Tools",
+  "Organize PDF",
+  "Edit & Sign PDF",
+  "Protect & Repair",
+]) {
+  grid.includes(label)
+    ? pass(`PDF group present: ${label}`)
+    : fail(`PDF group missing: ${label}`);
+}
+
+!grid.includes("Image Tools")
+  ? pass("Image tool group is absent")
+  : fail("Image tool group remains");
+
+grid.includes("SEARCH_EXPANSIONS") && grid.includes("distanceAtMostTwo")
+  ? pass("Search aliases and typo tolerance present")
+  : fail("Search aliases / typo tolerance missing");
+
+for (const id of [
+  "merge-pdf",
+  "compress-pdf",
+  "split-pdf",
+  "add-text",
+  "sign-pdf",
+]) {
+  new RegExp(`id:\\s*["']${id}["']`).test(navbar)
+    ? pass(`Header quick tool ${id}`)
+    : fail(`Header quick tool missing ${id}`);
+}
+
+for (const route of ["/pdf-tools", "/pricing", "/login", "/account"]) {
+  navbar.includes(`href="${route}"`) || navbar.includes(`href='${route}'`)
+    ? pass(`Header route present: ${route}`)
+    : fail(`Header route missing: ${route}`);
+}
+
+navbar.includes("<AllToolsMenu")
+  ? pass("All Tools launcher present")
+  : fail("All Tools launcher missing");
+
+navbar.includes("All PDF Tools")
+  ? pass("Mobile All PDF Tools entry present")
+  : fail("Mobile All PDF Tools entry missing");
+
+!navbar.includes("/conversion-tools") && !navbar.includes("/image-tools")
+  ? pass("Retired converter/image navigation absent")
+  : fail("Retired converter/image navigation remains");
+
+menu.includes("BUILD_PUBLIC_TOOLS.length") &&
+menu.includes("Popular") &&
+menu.includes("Organize PDF") &&
+menu.includes("Edit & Sign") &&
+menu.includes("Security & Recovery") &&
+menu.includes("More PDF Tools") &&
+!menu.includes("Image Tools")
+  ? pass("All Tools menu matches focused PDF inventory")
+  : fail("All Tools menu grouping is stale");
+
+!footer.includes("/conversion-tools") && !footer.includes("/image-tools")
+  ? pass("Footer excludes retired conversion/image directories")
+  : fail("Footer still links retired conversion/image directory");
+
+for (const marker of [
+  "prefers-reduced-motion",
+  "overflow-x: hidden",
+  "#0a101d",
+  "#111827",
+  "#b6c0d0",
+]) {
+  css.includes(marker)
+    ? pass(`Theme/responsive marker ${marker}`)
+    : fail(`Missing theme/responsive marker ${marker}`);
+}
+
+css.includes(".ajn-tool-card") || css.includes(".ajn-premium-tool-card")
+  ? pass("Focused tool-card styling exists")
+  : fail("Focused tool-card styling missing");
+
+!/linear-gradient|radial-gradient/.test(css)
+  ? pass("Public globals use no CSS gradients")
+  : fail("CSS gradient remains in globals.css");
+
+const publicBlock =
+  policy.match(/PRODUCTION_PUBLIC_TOOL_IDS\s*=\s*new Set\(\[([\s\S]*?)\]\)/)?.[1] ||
+  "";
+const ids = [...publicBlock.matchAll(/["']([^"']+)["']/g)].map(
+  (match) => match[1],
+);
+
+ids.length === 20 && new Set(ids).size === 20
+  ? pass("Exactly 20 public PDF tools")
+  : fail(`Expected exactly 20 public PDF tools; found ${ids.length}`);
+
+for (const prohibited of [
+  /100%\s*(private|local|secure)/i,
+  /trusted by (millions|thousands)/i,
+  /99\.9%\s*uptime/i,
+  /free forever/i,
+  /no limits/i,
+  /90\+\s*tools/i,
+]) {
+  prohibited.test([home, hero, grid, navbar, menu, footer].join("\n"))
+    ? fail(`Unsupported claim ${prohibited}`)
+    : pass(`Avoids ${prohibited}`);
+}
+
+pkg.scripts?.check?.includes("verify:final-ui")
+  ? pass("Final UI verifier remains in production check")
+  : fail("Final UI verifier missing from production check");
+
+if (failed) process.exit(1);
+console.log("AJN PDF V9 FINAL UI VERIFICATION: PASS");

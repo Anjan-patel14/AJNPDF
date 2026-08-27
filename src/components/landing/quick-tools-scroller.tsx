@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ToolArtwork } from "@/components/ajn/tool-artwork";
 import { toolPath } from "@/lib/tool-routes";
 
@@ -15,69 +14,104 @@ const quickTools = [
   { id: "organize-pdf", name: "Organize PDF", tone: "blue" },
 ] as const;
 
-const toneClass = {
-  blue: "ajn-icon-blue",
-  red: "ajn-icon-red",
-  green: "ajn-icon-green",
+const toneClasses = {
+  blue: {
+    icon: "ajn-icon-blue",
+    bar: "bg-[#1a56db] dark:bg-[#3b82f6]",
+    hover:
+      "hover:border-blue-200 dark:hover:border-blue-400/30",
+  },
+  red: {
+    icon: "ajn-icon-red",
+    bar: "bg-[#d92d20] dark:bg-[#ef4444]",
+    hover:
+      "hover:border-red-200 dark:hover:border-red-400/30",
+  },
+  green: {
+    icon: "ajn-icon-green",
+    bar: "bg-[#0e9f6e] dark:bg-[#10b981]",
+    hover:
+      "hover:border-emerald-200 dark:hover:border-emerald-400/30",
+  },
 } as const;
 
 export function QuickToolsScroller() {
-  const scroller = useRef<HTMLDivElement | null>(null);
-
-  const move = (direction: -1 | 1) => {
-    scroller.current?.scrollBy({
-      left: direction * Math.min(560, Math.max(280, scroller.current.clientWidth * 0.68)),
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-    });
-  };
-
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 md:px-8" aria-label="Quick PDF tools">
-      <div className="rounded-[20px] border border-[#e3e9f4] bg-white/90 p-3 shadow-[0_14px_44px_rgba(14,27,44,.07)] dark:border-white/10 dark:bg-[#111827]/90 dark:shadow-[0_20px_60px_rgba(0,0,0,.36)]">
-        <div className="mb-2 flex items-center justify-between gap-3 px-1">
-          <p className="text-[10px] font-black uppercase tracking-[.14em] text-[#5b6b80] dark:text-[#8b96ab]">
-            Quick access
-          </p>
+    <section
+      className="mx-auto w-full max-w-6xl px-4 md:px-8"
+      aria-labelledby="ajn-quick-tools-title"
+    >
+      <div className="rounded-[20px] border border-[#e3e9f4] bg-white/95 p-4 shadow-[0_12px_36px_rgba(14,27,44,.06)] dark:border-white/10 dark:bg-[#111827]/95 dark:shadow-[0_18px_48px_rgba(0,0,0,.28)]">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[.14em] text-[#1a56db] dark:text-blue-300">
+              Quick access
+            </p>
 
-          <div className="hidden items-center gap-1 sm:flex">
-            <button
-              type="button"
-              onClick={() => move(-1)}
-              aria-label="Scroll quick PDF tools left"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#e3e9f4] bg-white text-[#5b6b80] transition hover:border-blue-200 hover:text-[#1a56db] dark:border-white/10 dark:bg-[#0c1220] dark:text-[#8b96ab] dark:hover:border-blue-400/30 dark:hover:text-blue-300"
+            <h2
+              id="ajn-quick-tools-title"
+              className="mt-1 text-base font-black tracking-[-.025em] text-[#0e1b2c] dark:text-[#eef2f9]"
             >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => move(1)}
-              aria-label="Scroll quick PDF tools right"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#e3e9f4] bg-white text-[#5b6b80] transition hover:border-blue-200 hover:text-[#1a56db] dark:border-white/10 dark:bg-[#0c1220] dark:text-[#8b96ab] dark:hover:border-blue-400/30 dark:hover:text-blue-300"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
+              Popular PDF tools
+            </h2>
+
+            <p className="mt-1 text-[11px] font-semibold text-[#64748b] dark:text-[#8b96ab]">
+              Start with the PDF actions you use most.
+            </p>
           </div>
+
+          <Link
+            href="/pdf-tools"
+            className="hidden min-h-9 items-center gap-1.5 rounded-lg px-2.5 text-[11px] font-black text-[#1a56db] transition hover:bg-[#e1effe] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:hover:bg-blue-400/10 sm:inline-flex"
+          >
+            View all 20
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </Link>
         </div>
 
-        <div
-          ref={scroller}
-          className="ajn-scrollbar-hide flex snap-x snap-proximity gap-3 overflow-x-auto pb-1"
-        >
-          {quickTools.map((tool) => (
-            <Link
-              key={tool.id}
-              href={toolPath(tool.id)}
-              prefetch={false}
-              data-ajn-quick-tool-card="true"
-              className="group flex min-w-[158px] snap-start items-center gap-3 border px-3 py-3 transition duration-200 sm:min-w-[180px]"
-            >
-              <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] border ${toneClass[tool.tone]}`}>
-                <ToolArtwork toolId={tool.id} toolName={tool.name} className="h-9 w-9" />
-              </span>
-              <span className="text-xs font-black text-[#0e1b2c] dark:text-[#eef2f9]">{tool.name}</span>
-            </Link>
-          ))}
+        <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+          {quickTools.map((tool) => {
+            const tone = toneClasses[tool.tone];
+
+            return (
+              <Link
+                key={tool.id}
+                href={toolPath(tool.id)}
+                prefetch={false}
+                data-ajn-quick-tool-card="true"
+                aria-label={`Open ${tool.name}`}
+                className={`group relative flex min-h-[96px] min-w-0 flex-col overflow-hidden rounded-[16px] border border-[#e3e9f4] bg-[#f8fafc] p-3 transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_10px_26px_rgba(14,27,44,.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:border-white/10 dark:bg-[#0c1220] dark:hover:bg-[#151e2e] ${tone.hover}`}
+              >
+                <span
+                  className={`absolute inset-x-0 top-0 h-[3px] ${tone.bar}`}
+                  aria-hidden="true"
+                />
+
+                <span
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${tone.icon}`}
+                >
+                  <ToolArtwork
+                    toolId={tool.id}
+                    toolName={tool.name}
+                    className="h-8 w-8"
+                  />
+                </span>
+
+                <span className="mt-auto pt-3 text-[11.5px] font-black leading-4 tracking-[-.01em] text-[#0e1b2c] dark:text-[#eef2f9]">
+                  {tool.name}
+                </span>
+              </Link>
+            );
+          })}
         </div>
+
+        <Link
+          href="/pdf-tools"
+          className="mt-3 flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[#e3e9f4] bg-[#f8fafc] text-[11px] font-black text-[#1a56db] transition hover:border-blue-200 hover:bg-[#e1effe] dark:border-white/10 dark:bg-[#0c1220] dark:text-blue-300 dark:hover:border-blue-400/30 dark:hover:bg-blue-400/10 sm:hidden"
+        >
+          View all PDF tools
+          <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+        </Link>
       </div>
     </section>
   );

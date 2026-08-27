@@ -922,3 +922,99 @@ html.dark .ajn-recommended-card li {
     box-shadow: none !important;
   }
 }
+
+/* === AJN PDF V9 MOBILE NAVIGATION === */
+.ajn-mobile-bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 120;
+  padding: 0 .65rem calc(.55rem + env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.ajn-mobile-bottom-nav-inner {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .2rem;
+  width: min(100%, 32rem);
+  margin: 0 auto;
+  border: 1px solid var(--ajn-stroke);
+  border-radius: 1.35rem;
+  background: color-mix(in srgb, var(--ajn-surface) 94%, transparent);
+  box-shadow: 0 16px 42px rgba(14, 27, 44, .14);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  backdrop-filter: blur(22px) saturate(145%);
+  padding: .38rem;
+  pointer-events: auto;
+}
+
+.dark .ajn-mobile-bottom-nav-inner {
+  background: color-mix(in srgb, #111827 94%, transparent);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .42);
+}
+
+.ajn-mobile-nav-item {
+  display: flex;
+  min-width: 0;
+  min-height: 52px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .18rem;
+  border-radius: 1rem;
+  color: var(--ajn-text-muted);
+  font-size: .58rem;
+  line-height: 1;
+  font-weight: 850;
+  transition: background-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.ajn-mobile-nav-item:active { transform: scale(.97); }
+
+.ajn-mobile-nav-icon {
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.65rem;
+  border-radius: .65rem;
+}
+
+.ajn-mobile-nav-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.ajn-mobile-nav-item.is-active {
+  color: #1a56db;
+  background: #e1effe;
+}
+
+.ajn-mobile-nav-item.is-active .ajn-mobile-nav-icon {
+  color: #ffffff;
+  background: #1a56db;
+  box-shadow: 0 7px 18px rgba(26, 86, 219, .22);
+}
+
+.dark .ajn-mobile-nav-item.is-active {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, .14);
+}
+
+.dark .ajn-mobile-nav-item.is-active .ajn-mobile-nav-icon {
+  color: #ffffff;
+  background: #3b82f6;
+}
+
+@media (max-width: 767px) {
+  .ajn-page-shell {
+    padding-bottom: calc(5.35rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ajn-mobile-nav-item { transition: none !important; }
+  .ajn-mobile-nav-item:active { transform: none !important; }
+}
+/* === AJN PDF V9 MOBILE NAVIGATION END === */
