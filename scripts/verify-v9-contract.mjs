@@ -27,6 +27,19 @@ for (const required of ["Target PDF size","Compress to target size","TARGET_FLOO
   if (!compress.includes(required)) fail(`Compress PDF missing ${required}`);
 }
 pass("Compress PDF is target-size-only");
+const toolsData = read("src/lib/tools-data.ts");
+if (toolsData.includes("presets or an approximate target size")) {
+  fail("Compress PDF directory copy still advertises retired presets");
+} else {
+  pass("Compress PDF directory copy matches target-size workflow");
+}
+
+const toolArtwork = read("src/components/ajn/tool-artwork.tsx");
+if (!toolArtwork.includes("specialIcons[toolId] ? null : getConversion(toolId)")) {
+  fail("dedicated tool icons do not take precedence over generic conversion parsing");
+} else {
+  pass("dedicated tool icons take precedence over generic conversion parsing");
+}
 
 const pricing = read("src/app/pricing/page.tsx");
 if (!pricing.includes('49') || !pricing.includes('399')) fail("pricing fallbacks must be ₹49 / ₹399");

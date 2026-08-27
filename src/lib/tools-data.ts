@@ -38,7 +38,7 @@ export const ALL_TOOLS: ServiceTool[] = [
     keywords: ["extract", "separate", "cut", "divide", "break", "range", "pages"]
   },
   {
-    id: 'compress-pdf', name: 'Compress PDF', desc: 'Reduce PDF size with presets or an approximate target size in KB.',
+    id: 'compress-pdf', name: 'Compress PDF', desc: 'Compress a PDF toward the file size you need.',
     icon: Shrink, tag: 'compress', cat: 'pdf', mode: 'PDF', badge: 'Popular', color: 'text-emerald-500', perfIndex: 'Small',
     benefits: ["Save storage", "Clear quality"],
     useCases: ["Smaller resumes"],

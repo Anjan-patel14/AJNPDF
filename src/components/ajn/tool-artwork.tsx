@@ -173,7 +173,7 @@ function ConversionGlyph({ from, to, tone }: { from: string; to: string; tone: T
 export function ToolArtwork({ toolId, toolName, className, priority = false }: ToolArtworkProps) {
   const tone = toneFor(toolId);
   const colors = toneClasses[tone];
-  const conversion = getConversion(toolId);
+  const conversion = specialIcons[toolId] ? null : getConversion(toolId);
   const conversionAsset = CONVERSION_ICON_ASSETS[toolId];
   const Icon = specialIcons[toolId] ?? FileImage;
 
