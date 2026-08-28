@@ -311,11 +311,11 @@ def _init_analytics() -> None:
         migrations = {'element_id': 'TEXT', 'category': 'TEXT', 'query_length_bucket': 'TEXT', 'referrer_group': 'TEXT', 'device_type': 'TEXT', 'viewport_bucket': 'TEXT', 'connection_type': 'TEXT', 'theme': 'TEXT'}
         for column, column_type in migrations.items():
             if column not in existing:
-                db.execute(f'ALTER TABLE site_events ADD COLUMN{column}{column_type}')
+                db.execute(f'ALTER TABLE site_events ADD COLUMN {column} {column_type}')
         db.execute('CREATE INDEX IF NOT EXISTS idx_site_event_created ON site_events(event_name, created_at)')
         db.execute('CREATE INDEX IF NOT EXISTS idx_site_path_created ON site_events(path, created_at)')
         db.execute('CREATE INDEX IF NOT EXISTS idx_site_tool_created ON site_events(tool_id, created_at)')
-        retention = f'-{ANALYTICS_RETENTION_DAYS}days'
+        retention = f'-{ANALYTICS_RETENTION_DAYS} days'
         db.execute("DELETE FROM site_events WHERE created_at < datetime('now', ?)", (retention,))
         db.execute("DELETE FROM conversion_events WHERE created_at < datetime('now', ?)", (retention,))
         db.commit()
@@ -425,7 +425,7 @@ async def analytics_event(event: AnalyticsEvent):
     allowed_events = {'page_view', 'tool_open', 'tool_start', 'tool_complete', 'tool_error', 'download', 'web_vital', 'interaction', 'search', 'category_filter', 'theme_change', 'consent_update', 'outbound_click', 'tool_reset', 'tool_retry', 'upload_selected', 'media_view', 'media_open', 'admin_media_publish', 'admin_media_delete'}
     if event.event_name not in allowed_events:
         raise HTTPException(status_code=400, detail='Unsupported analytics event.')
-    if not event.path.startswith('/') or '' in event.path or '' in event.path:
+    if not event.path.startswith('/'):
         raise HTTPException(status_code=400, detail='Invalid analytics path.')
     await _record_site_event(event)
     return None
@@ -436,7 +436,7 @@ def admin_analytics(x_ajn_admin_token: Annotated[str | None, Header()]=None, win
         raise HTTPException(status_code=404, detail='Anonymous analytics are disabled.')
     if not ANALYTICS_ADMIN_TOKEN or not secrets.compare_digest(x_ajn_admin_token or '', ANALYTICS_ADMIN_TOKEN):
         raise HTTPException(status_code=401, detail='A valid admin token is required.')
-    modifier = f'-{window_days}days'
+    modifier = f'-{window_days} days'
     with sqlite3.connect(ANALYTICS_DB) as db:
         db.row_factory = sqlite3.Row
         summary = db.execute("SELECT COUNT(*) AS total, SUM(CASE WHEN status='success' THEN 1 ELSE 0 END) AS success, SUM(CASE WHEN status='failed' THEN 1 ELSE 0 END) AS failed, AVG(duration_ms) AS avg_duration_ms, SUM(input_bytes) AS input_bytes, SUM(output_bytes) AS output_bytes FROM conversion_events WHERE created_at >= datetime('now', ?)", (modifier,)).fetchone()

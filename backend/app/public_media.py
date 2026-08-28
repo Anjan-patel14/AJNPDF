@@ -32,7 +32,7 @@ def init_media_store() -> None:
         cols = _columns(db)
         for name, ddl in [('image_hash', 'TEXT'), ('scheduled_at', 'TEXT')]:
             if name not in cols:
-                db.execute(f'ALTER TABLE public_posts ADD COLUMN{name}{ddl}')
+                db.execute(f'ALTER TABLE public_posts ADD COLUMN {name} {ddl}')
         db.execute('CREATE INDEX IF NOT EXISTS idx_public_posts_published ON public_posts(published, published_at DESC)')
         db.execute('CREATE INDEX IF NOT EXISTS idx_public_posts_hash ON public_posts(image_hash)')
         db.commit()
@@ -47,15 +47,15 @@ def _slugify(value: str) -> str:
     return slug or f'ajn-image-{secrets.token_hex(4)}'
 
 def _clean_text(value: str, minimum: int, maximum: int, label: str) -> str:
-    cleaned = re.sub('\\s+', '', value).strip()
+    cleaned = re.sub(r'\s+', ' ', value).strip()
     if len(cleaned) < minimum:
-        raise HTTPException(status_code=400, detail=f'{label}is too short.')
+        raise HTTPException(status_code=400, detail=f'{label} is too short.')
     return cleaned[:maximum]
 
 def _clean_tags(value: str) -> list[str]:
     tags = []
     for part in value.split(','):
-        tag = re.sub('\\s+', '', part).strip()[:40]
+        tag = re.sub(r'\s+', ' ', part).strip()[:40]
         if tag and tag.lower() not in {item.lower() for item in tags}:
             tags.append(tag)
         if len(tags) >= 12:
@@ -120,15 +120,15 @@ def _public_time_filter() -> str:
 def public_posts(limit: Annotated[int, Query(ge=1, le=100)]=24, offset: Annotated[int, Query(ge=0, le=10000)]=0):
     with sqlite3.connect(MEDIA_DB) as db:
         db.row_factory = sqlite3.Row
-        rows = db.execute(f'SELECT * FROM public_posts WHERE{_public_time_filter()}ORDER BY published_at DESC,id DESC LIMIT ? OFFSET ?', (limit, offset)).fetchall()
-        total = db.execute(f'SELECT COUNT(*) FROM public_posts WHERE{_public_time_filter()}').fetchone()[0]
+        rows = db.execute(f'SELECT * FROM public_posts WHERE {_public_time_filter()} ORDER BY published_at DESC, id DESC LIMIT ? OFFSET ?', (limit, offset)).fetchall()
+        total = db.execute(f'SELECT COUNT(*) FROM public_posts WHERE {_public_time_filter()}').fetchone()[0]
     return {'posts': [_row_to_post(row) for row in rows], 'total': total, 'offset': offset, 'limit': limit}
 
 @router.get('/api/public/posts/{slug}')
 def public_post(slug: str):
     with sqlite3.connect(MEDIA_DB) as db:
         db.row_factory = sqlite3.Row
-        row = db.execute(f'SELECT * FROM public_posts WHERE slug=? AND{_public_time_filter()}', (slug[:100],)).fetchone()
+        row = db.execute(f'SELECT * FROM public_posts WHERE slug=? AND {_public_time_filter()}', (slug[:100],)).fetchone()
     if not row:
         raise HTTPException(status_code=404, detail='The public image post was not found.')
     return _row_to_post(row)
@@ -213,5 +213,3 @@ def delete_post(post_id: int, x_ajn_admin_token: Annotated[str | None, Header()]
     (MEDIA_ROOT / row['image_filename']).unlink(missing_ok=True)
     (MEDIA_ROOT / row['thumbnail_filename']).unlink(missing_ok=True)
     return {'deleted': True, 'id': post_id}
-from .platform_routes import router as platform_router
-router.include_router(platform_router)
