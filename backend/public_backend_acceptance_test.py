@@ -65,6 +65,17 @@ def main() -> None:
         ready = json.loads(response.read())
     assert ready.get('ready') is True or ready.get('status') in {'ok', 'ready'}
 
+    with urllib.request.urlopen(f'{BASE_URL}/api/tools', timeout=10) as response:
+        tool_payload = json.loads(response.read())
+    tool_records = tool_payload.get('tools') if isinstance(tool_payload, dict) else None
+    assert isinstance(tool_records, list)
+    for security_id in ('protect-pdf', 'unlock-pdf', 'repair-pdf'):
+        matches = [tool for tool in tool_records if tool.get('id') == security_id]
+        assert len(matches) == 1, f'{security_id} must appear exactly once in /api/tools'
+        assert matches[0].get('available') is True, f'{security_id} must be available'
+        assert matches[0].get('processingMode') == 'temporary-server'
+
+
 
     origin = 'https://ajnpdff.vercel.app'
     preflight = urllib.request.Request(

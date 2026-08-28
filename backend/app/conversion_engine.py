@@ -191,7 +191,44 @@ def list_tools() -> list[dict[str, Any]]:
 def list_backend_tools() -> list[dict[str, Any]]:
     """Return every backend-dependent public capability used by the frontend build. Protect, Unlock and Repair are intentionally separate API endpoints rather than ConversionSpec entries, so they must be exported here as first-class capabilities. Without these records the dependency-aware frontend build would incorrectly hide those tools even when the backend is healthy."""
     tools = list_tools()
-    tools.extend([])
+    tools.extend([
+        {
+            'id': 'protect-pdf',
+            'name': 'Protect PDF',
+            'category': 'pdf-security',
+            'inputExtensions': ['.pdf'],
+            'outputExtension': '.pdf',
+            'available': True,
+            'unavailableReason': None,
+            'limitation': 'Applies AES-256 password encryption and selected PDF permission controls.',
+            'multiFile': False,
+            'processingMode': 'temporary-server',
+        },
+        {
+            'id': 'unlock-pdf',
+            'name': 'Unlock PDF',
+            'category': 'pdf-security',
+            'inputExtensions': ['.pdf'],
+            'outputExtension': '.pdf',
+            'available': True,
+            'unavailableReason': None,
+            'limitation': 'Requires the current valid password and explicit authorization; it does not guess or bypass passwords.',
+            'multiFile': False,
+            'processingMode': 'temporary-server',
+        },
+        {
+            'id': 'repair-pdf',
+            'name': 'Repair PDF',
+            'category': 'pdf-utility',
+            'inputExtensions': ['.pdf'],
+            'outputExtension': '.pdf',
+            'available': True,
+            'unavailableReason': None,
+            'limitation': 'Attempts safe structural recovery; severely damaged files may remain unrecoverable.',
+            'multiFile': False,
+            'processingMode': 'temporary-server',
+        },
+    ])
     return tools
 
 def validate_extensions(spec: ConversionSpec, files: list[Path]) -> None:

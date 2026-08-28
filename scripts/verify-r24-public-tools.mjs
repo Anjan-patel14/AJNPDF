@@ -58,6 +58,17 @@ check('Cloud Run has scoped AJN PDF Vercel CORS regex', backend.includes('AJN_AL
 check('frontend fallback is canonical Cloud Run URL', read('src/lib/backend-service-url.ts').includes('ajn-pdf-api-580158856470.asia-south1.run.app'));
 check('backend acceptance verifies Vercel preflight', read('backend/public_backend_acceptance_test.py').includes("Origin': origin") && read('backend/public_backend_acceptance_test.py').includes("origin = 'https://ajnpdff.vercel.app'"));
 
+const backendEngine = read('backend/app/conversion_engine.py');
+check('backend manifest no longer has an empty security-capability extension', !backendEngine.includes('tools.extend([])'));
+for (const id of ['protect-pdf','unlock-pdf','repair-pdf']) {
+  check(`backend /api/tools source advertises ${id}`, backendEngine.includes(`'id': '${id}'`));
+}
+const backendAcceptance = read('backend/public_backend_acceptance_test.py');
+check('backend container acceptance requires all three security manifest records',
+  backendAcceptance.includes("security_id in ('protect-pdf', 'unlock-pdf', 'repair-pdf')")
+  && backendAcceptance.includes("processingMode') == 'temporary-server'"));
+
+
 const utils = read('src/components/junction/_pdfUtils.ts');
 check('metadata fields can be cleared', utils.includes('doc.setTitle(title || "")') && utils.includes('doc.setKeywords(keywords.trim() ?'));
 const metadata = read('src/components/junction/PdfMetadata.tsx');
