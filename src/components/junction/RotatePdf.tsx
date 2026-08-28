@@ -17,6 +17,7 @@ import { engine } from '../../lib/engine';
 import { cn } from '../../lib/utils';
 import { ToolWorkspace, dl, fmtBytes, getFilesFromEvent, shareResult} from './_shared';
 import { initPdfWorker } from "@/lib/pdfjs-worker";
+import { validatePdfFile } from "@/lib/file-validation";
 
 interface PageItem {
   id: string;
@@ -38,6 +39,11 @@ export default function RotatePdf() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processFile = async (f: File) => {
+    const validation = await validatePdfFile(f, 50);
+    if (validation) {
+      toast({ title: "Invalid PDF", description: validation, variant: "destructive" });
+      return;
+    }
     setFile(f);
     setPhase('configure');
     setStatus("Generating previews...");
@@ -74,7 +80,7 @@ export default function RotatePdf() {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>) => {
     const f = getFilesFromEvent(e)?.[0];
-    if (f && f.type === 'application/pdf') processFile(f);
+    if (f) void processFile(f);
   };
 
   const rotateSingle = (id: string, deg: number) => {
@@ -95,13 +101,14 @@ export default function RotatePdf() {
         setProgress(p.pct);
       });
 
-      if (res.success && res.blob) {
-        setResultBlob(res.blob);
-        setPhase('done');
+      if (!res.success || !res.blob) {
+        throw new Error(res.error || res.message || 'The PDF could not be rotated.');
       }
-    } catch {
+      setResultBlob(res.blob);
+      setPhase('done');
+    } catch (error) {
       setPhase('configure');
-      toast({ title: "Process Error", variant: "destructive" });
+      toast({ title: "Process Error", description: error instanceof Error ? error.message : "The PDF could not be rotated.", variant: "destructive" });
     }
   };
 

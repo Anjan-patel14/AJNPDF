@@ -10,7 +10,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
-import { Progress } from '../ui/progress';
 import { Label } from '../ui/label';
 
 import { Input } from '../ui/input';
@@ -18,13 +17,13 @@ import { useToast } from '../../hooks/use-toast';
 import { cn } from '../../lib/utils';
 import { ToolWorkspace, dl, fmtBytes, getFilesFromEvent, shareResult, beginToolProcessing, completeToolProcessing, failToolProcessing} from './_shared';
 import { initPdfWorker } from "@/lib/pdfjs-worker";
+import { validatePdfFile } from "@/lib/file-validation";
 
 export default function FlattenPdf() {
   const { toast } = useToast();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string>("");
   const [phase, setPhase] = useState<'upload' | 'configure' | 'processing' | 'done'>('upload');
-  const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState("");
   const [outputName, setOutputName] = useState("");
   const [resultBlob, setResultBlob] = useState<Blob | null>(null);
@@ -34,6 +33,11 @@ export default function FlattenPdf() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processFile = async (f: File) => {
+    const validation = await validatePdfFile(f, 50);
+    if (validation) {
+      toast({ title: "Invalid PDF", description: validation, variant: "destructive" });
+      return;
+    }
     setFile(f);
     setPhase('configure');
     setStatus("Analyzing layers...");
@@ -53,7 +57,6 @@ export default function FlattenPdf() {
       await page.render({ canvasContext: ctx, viewport: viewport }).promise;
       setPreview(canvas.toDataURL('image/jpeg', 0.8));
     } catch {
-      failToolProcessing();
       toast({ title: "Analysis failed", variant: "destructive" });
       setPhase('upload');
     }
@@ -61,15 +64,14 @@ export default function FlattenPdf() {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>) => {
     const f = getFilesFromEvent(e)?.[0];
-    if (f && f.type === 'application/pdf') processFile(f);
+    if (f) void processFile(f);
   };
 
   const executeFlatten = async () => {
     if (!file) return;
     beginToolProcessing("FlattenPdf");
     setPhase('processing');
-    setProgress(0);
-    setStatus("Collapsing interactive elements...");
+    setStatus("Flattening supported form fields...");
 
     try {
       const buffer = await file.arrayBuffer();
@@ -79,16 +81,13 @@ export default function FlattenPdf() {
       try {
         form.flatten();
       } catch {
-      failToolProcessing();
-        console.warn("No interactive form fields found to flatten.");
+        // A PDF without supported AcroForm fields is still a valid input.
       }
 
-      setProgress(80);
-      setStatus("Finalizing the flattened PDF…");
+      setStatus("Finalizing the flattened PDF...");
 
       const finalBytes = await pdfDoc.save({ useObjectStreams: false });
       setResultBlob(new Blob([finalBytes.buffer as ArrayBuffer], { type: 'application/pdf' }));
-      setProgress(100);
       setPhase('done');
       completeToolProcessing();
     } catch {
@@ -98,7 +97,7 @@ export default function FlattenPdf() {
     }
   };
 
-  const reset = () => { setFile(null); setPreview(""); setPhase('upload'); setResultBlob(null); setProgress(0); };
+  const reset = () => { setFile(null); setPreview(""); setPhase('upload'); setResultBlob(null); };
 
   return (
     <ToolWorkspace title="Flatten PDF" description="Flatten form fields into a fixed PDF" accent="#6B7280">
@@ -169,7 +168,7 @@ export default function FlattenPdf() {
                       </div>
                       <div className="p-4 bg-primary/5 rounded-2xl border border-primary/10">
                         <p className="text-[9px] font-bold text-slate-500 uppercase leading-relaxed text-center">
-                          Flattening merges multiple layers—such as text, images, annotations, and form fields—into a single, static layer.
+                          Flattening converts supported interactive form fields into fixed page content. Other annotations and arbitrary PDF layers are left unchanged.
                         </p>
                       </div>
                     </Card>
@@ -189,9 +188,9 @@ export default function FlattenPdf() {
                 <Loader2 className="w-16 h-16 text-primary animate-spin" />
                 <Activity className="absolute inset-0 m-auto w-8 h-8 text-primary animate-pulse" />
               </div>
-              <div className="w-full max-w-sm space-y-4 mx-auto">
-                <div className="flex justify-between items-center px-2"><span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">{status}</span><span className="text-xl font-black text-primary tracking-tighter">{progress}%</span></div>
-                <Progress value={progress} className="h-1.5 bg-black/5" />
+              <div className="w-full max-w-sm space-y-3 mx-auto" role="status" aria-live="polite">
+                <p className="text-sm font-semibold text-primary">{status || "Flattening supported form fields..."}</p>
+                <div className="h-2 overflow-hidden rounded-md bg-primary/10"><div className="h-full w-1/2 animate-pulse rounded-md bg-primary" /></div>
               </div>
             </motion.div>
           )}

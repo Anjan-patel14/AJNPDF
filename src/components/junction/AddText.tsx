@@ -18,6 +18,7 @@ import { useToast } from '../../hooks/use-toast';
 import { cn } from '../../lib/utils';
 import { ToolWorkspace, dl, fmtBytes, getFilesFromEvent, shareResult, beginToolProcessing, completeToolProcessing, failToolProcessing} from './_shared';
 import { initPdfWorker } from "@/lib/pdfjs-worker";
+import { validatePdfFile } from "@/lib/file-validation";
 import { VisualPositionOverlay } from "./visual-position-overlay";
 
 export default function AddText() {
@@ -45,6 +46,11 @@ export default function AddText() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processFile = async (f: File) => {
+    const validation = await validatePdfFile(f, 50);
+    if (validation) {
+      toast({ title: "Invalid PDF", description: validation, variant: "destructive" });
+      return;
+    }
     setFile(f);
     setPhase('configure');
     setStatus("Analyzing layers...");
@@ -66,7 +72,6 @@ export default function AddText() {
       await page.render({ canvasContext: ctx, viewport }).promise;
       setPreview(canvas.toDataURL('image/jpeg', 0.8));
     } catch {
-      failToolProcessing();
       toast({ title: "Analysis failed", variant: "destructive" });
       setPhase('upload');
     }
@@ -74,7 +79,7 @@ export default function AddText() {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>) => {
     const f = getFilesFromEvent(e)?.[0];
-    if (f && f.type === 'application/pdf') processFile(f);
+    if (f) void processFile(f);
   };
 
   useEffect(() => {
@@ -100,7 +105,6 @@ export default function AddText() {
           setPreview(canvas.toDataURL('image/jpeg', 0.8));
         }
       } catch {
-      failToolProcessing();
         // Keep the current preview; processing will surface a clear error if needed.
       }
     };

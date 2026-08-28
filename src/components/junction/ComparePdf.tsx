@@ -32,7 +32,7 @@ interface PageDiff {
 /**
  * AJN Professional PDF Comparison Unit - Production v8.0
  * Specialized in Visual & Textual Revision Auditing.
- * Features: Side-by-Side Rendering, Neural Text Diffing, and High-Fidelity Highlighting.
+ * Features: side-by-side rendering and deterministic PDF.js text-item comparison.
  */
 export default function ComparePdf() {
   const { toast } = useToast();
@@ -157,7 +157,7 @@ export default function ComparePdf() {
   };
 
   return (
-    <ToolWorkspace title="Compare PDF" description="See the differences between two versions of a PDF." accent="#4F46E5">
+    <ToolWorkspace title="Compare PDF" description="Compare two PDF versions side by side and review text-item differences." accent="#4F46E5">
       <div className="w-full">
         <AnimatePresence mode="wait">
           {phase === 'upload' && (

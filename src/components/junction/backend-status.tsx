@@ -7,7 +7,7 @@ import { useLanguage } from '@/lib/i18n/language-context';
 
 const INITIAL_HEALTH: PdfBackendHealth = {
   status: 'offline',
-  message: 'Checking online tools…',
+  message: 'Checking online tools...',
   messageKey: 'backend.checking',
 };
 

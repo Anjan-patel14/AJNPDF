@@ -15,6 +15,7 @@ import { useToast } from '../../hooks/use-toast';
 import { cn } from '../../lib/utils';
 import { ToolWorkspace, dl, safeOutputName, getFilesFromEvent, shareResult, beginToolProcessing, completeToolProcessing, failToolProcessing} from './_shared';
 import { initPdfWorker } from "@/lib/pdfjs-worker";
+import { validatePdfFile } from "@/lib/file-validation";
 import { VisualPositionOverlay } from "./visual-position-overlay";
 
 /**
@@ -47,6 +48,11 @@ export default function AddImageToPdf() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processPdf = async (f: File) => {
+    const validation = await validatePdfFile(f, 50);
+    if (validation) {
+      toast({ title: "Invalid PDF", description: validation, variant: "destructive" });
+      return;
+    }
     setPdfFile(f);
     setOutputName(f.name.replace(/\.pdf$/i, "") + "_with_image");
     setStatus("Reading file…");
@@ -67,7 +73,6 @@ export default function AddImageToPdf() {
       setPreview(canvas.toDataURL('image/jpeg', 0.8));
       if (imageFile) setPhase('configure');
     } catch {
-      failToolProcessing();
       toast({ title: "Analysis failed", variant: "destructive" });
     }
   };
@@ -104,7 +109,8 @@ export default function AddImageToPdf() {
         await page.render({ canvasContext: ctx, viewport }).promise;
         if (!cancelled) { setPageSize({ width: baseViewport.width, height: baseViewport.height }); setPreview(canvas.toDataURL('image/jpeg', 0.8)); }
       } catch {
-      failToolProcessing();}
+        // Keep the current preview; processing will report a real failure if execution fails.
+      }
     };
     void renderSelectedPage();
     return () => { cancelled = true; };

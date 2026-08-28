@@ -20,6 +20,7 @@ import { useToast } from '../../hooks/use-toast';
 import { cn } from '../../lib/utils';
 import { ToolWorkspace, dl, fmtBytes, getFilesFromEvent, shareResult, beginToolProcessing, completeToolProcessing, failToolProcessing} from './_shared';
 import { initPdfWorker } from "@/lib/pdfjs-worker";
+import { validatePdfFile } from "@/lib/file-validation";
 
 export default function AddNumbers() {
   const { toast } = useToast();
@@ -44,6 +45,11 @@ export default function AddNumbers() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processFile = async (f: File) => {
+    const validation = await validatePdfFile(f, 50);
+    if (validation) {
+      toast({ title: "Invalid PDF", description: validation, variant: "destructive" });
+      return;
+    }
     setFile(f);
     setPhase('configure');
     setStatus("Indexing segments...");
@@ -63,7 +69,6 @@ export default function AddNumbers() {
       await page.render({ canvasContext: ctx, viewport: viewport }).promise;
       setPreview(canvas.toDataURL('image/jpeg', 0.8));
     } catch {
-      failToolProcessing();
       toast({ title: "Analysis failed", variant: "destructive" });
       setPhase('upload');
     }
@@ -71,7 +76,7 @@ export default function AddNumbers() {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>) => {
     const f = getFilesFromEvent(e)?.[0];
-    if (f && f.type === 'application/pdf') processFile(f);
+    if (f) void processFile(f);
   };
 
   const executePagination = async () => {

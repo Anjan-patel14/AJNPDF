@@ -35,6 +35,7 @@ jobs:
       - run: node scripts/verify-r20-focused-seo.mjs
       - run: node scripts/verify-r21-product-ecosystem.mjs
       - run: npm run verify:r16-consistency
+      - run: npm run verify:r24-public-tools
       - run: npm run verify:tool-ux
       - run: npm run verify:final-ui
       - run: npm run verify:mobile-first

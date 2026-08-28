@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "verify:seo-ads": "node scripts/verify-seo-ads.mjs",
     "verify:phase1": "node scripts/verify-phase1.mjs",
-    "check": "npm run verify:dependency-policy && npm run verify:secrets && npm run verify:r18-production && npm run verify:r17-trust-seo && npm run verify:r20-seo && npm run verify:r21-product && npm run verify:r16-consistency && npm run verify:tool-ux && npm run verify:final-ui && npm run verify:mobile-first && npm run verify:i18n && npm run verify:accessibility && npm run verify:capabilities && npm run verify:backend-workflow && npm run verify:r20-conversion-accuracy && npm run verify:r19-release && npm run lint && npm run typecheck && npm run verify:r13-browser-pdf && npm run build && npm run verify:r13-runtime",
+    "check": "npm run verify:dependency-policy && npm run verify:secrets && npm run verify:r18-production && npm run verify:r17-trust-seo && npm run verify:r20-seo && npm run verify:r21-product && npm run verify:r16-consistency && npm run verify:r24-public-tools && npm run verify:tool-ux && npm run verify:final-ui && npm run verify:mobile-first && npm run verify:i18n && npm run verify:accessibility && npm run verify:capabilities && npm run verify:backend-workflow && npm run verify:r20-conversion-accuracy && npm run verify:r19-release && npm run lint && npm run typecheck && npm run verify:r13-browser-pdf && npm run build && npm run verify:r13-runtime",
     "preview": "next start -p 3000",
     "verify:production": "node scripts/verify-production.mjs",
     "verify:trust-ui": "node scripts/verify-trust-ui.mjs",
@@ -33,7 +33,7 @@
     "verify:code-quality": "node scripts/verify-code-quality.mjs",
     "verify:backend-workflow": "node scripts/verify-backend-workflow.mjs",
     "verify:premium-ui": "node scripts/verify-premium-liquid-ui.mjs",
-    "check:frontend": "npm run verify:dependency-policy && npm run verify:secrets && npm run verify:r18-production && npm run verify:r17-trust-seo && npm run verify:r20-seo && npm run verify:r21-product && npm run verify:r16-consistency && npm run verify:tool-ux && npm run verify:final-ui && npm run verify:mobile-first && npm run verify:i18n && npm run verify:accessibility && npm run verify:capabilities && npm run verify:r20-conversion-accuracy && npm run lint && npm run typecheck && npm run verify:r13-browser-pdf && npm run build",
+    "check:frontend": "npm run verify:dependency-policy && npm run verify:secrets && npm run verify:r18-production && npm run verify:r17-trust-seo && npm run verify:r20-seo && npm run verify:r21-product && npm run verify:r16-consistency && npm run verify:r24-public-tools && npm run verify:tool-ux && npm run verify:final-ui && npm run verify:mobile-first && npm run verify:i18n && npm run verify:accessibility && npm run verify:capabilities && npm run verify:r20-conversion-accuracy && npm run lint && npm run typecheck && npm run verify:r13-browser-pdf && npm run build",
     "verify:backend-frozen": "node scripts/verify-backend-frozen.mjs",
     "verify:r12": "node scripts/verify-r12-root-routes-nav.mjs",
     "verify:r12-runtime": "node scripts/verify-r12-runtime.mjs",
@@ -53,7 +53,9 @@
     "verify:r19-release": "node scripts/generate-r19-release-inventory.mjs && node scripts/verify-r19-release.mjs",
     "verify:r20-seo": "node scripts/verify-r20-focused-seo.mjs",
     "verify:r20-conversion-accuracy": "node scripts/verify-r20-conversion-accuracy.mjs",
-    "verify:r21-product": "node scripts/verify-r21-product-ecosystem.mjs"
+    "verify:r21-product": "node scripts/verify-r21-product-ecosystem.mjs",
+    "verify:r24-public-tools": "node scripts/verify-r24-public-tools.mjs",
+    "verify:r24-live-smoke": "node scripts/verify-r24-live-smoke.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

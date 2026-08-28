@@ -18,6 +18,7 @@ import { engine } from '../../lib/engine';
 import { cn } from '../../lib/utils';
 import { ToolWorkspace, dl, fmtBytes, getFilesFromEvent, shareResult} from './_shared';
 import { initPdfWorker } from "@/lib/pdfjs-worker";
+import { validatePdfFile } from "@/lib/file-validation";
 
 interface PageItem {
   id: string;
@@ -41,6 +42,11 @@ export default function OrganizePdf() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processFile = async (file: File) => {
+    const validation = await validatePdfFile(file, 50);
+    if (validation) {
+      toast({ title: "Invalid PDF", description: validation, variant: "destructive" });
+      return;
+    }
     try {
       initPdfWorker();
       const buffer = await file.arrayBuffer();
@@ -77,7 +83,7 @@ export default function OrganizePdf() {
 
   const handleFiles = (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>) => {
     const files = Array.from(getFilesFromEvent(e) || []);
-    files.filter(f => f.type === 'application/pdf').forEach(processFile);
+    files.forEach(file => { void processFile(file); });
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -104,9 +110,10 @@ export default function OrganizePdf() {
     setStatus("Building the new page order…");
 
     try {
-      const uniqueFilesMap = new Map<string, File>();
-      items.forEach(item => uniqueFilesMap.set(item.sourceFileName, item.file));
-      const sourceFiles = Array.from(uniqueFilesMap.values());
+      const sourceFiles: File[] = [];
+      for (const item of items) {
+        if (!sourceFiles.includes(item.file)) sourceFiles.push(item.file);
+      }
 
       const pageMap = items.map(item => ({
         sourceIdx: sourceFiles.findIndex(f => f === item.file),
@@ -118,13 +125,14 @@ export default function OrganizePdf() {
         setProgress(p.pct);
       });
 
-      if (res.success && res.blob) {
-        setResultBlob(res.blob);
-        setPhase('done');
+      if (!res.success || !res.blob) {
+        throw new Error(res.error || res.message || 'The organized PDF could not be created.');
       }
-    } catch {
+      setResultBlob(res.blob);
+      setPhase('done');
+    } catch (error) {
       setPhase('configure');
-      toast({ title: "Assembly Error", variant: "destructive" });
+      toast({ title: "Assembly Error", description: error instanceof Error ? error.message : "The organized PDF could not be created.", variant: "destructive" });
     }
   };
 

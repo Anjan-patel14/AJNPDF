@@ -30,6 +30,19 @@ export async function hasPdfHeader(file: File): Promise<boolean> {
   return new TextDecoder().decode(bytes) === '%PDF-';
 }
 
+export function isPdfCandidate(file: File): boolean {
+  const mime = String(file.type || '').toLowerCase();
+  return mime === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+}
+
+export async function validatePdfFile(file: File, maxSizeMb = 50): Promise<string | null> {
+  if (!isPdfCandidate(file)) return `${file.name} is not a PDF file.`;
+  const basic = validateFiles([file], { minFiles: 1, maxFiles: 1, maxSizeMb });
+  if (basic) return basic;
+  if (!(await hasPdfHeader(file))) return `${file.name} is not a readable PDF file.`;
+  return null;
+}
+
 export function safeOutputName(value: string, fallback: string, extension: string): string {
   const cleaned = value.trim().replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').replace(/\s+/g, ' ').slice(0, 120);
   const base = cleaned || fallback;

@@ -14,6 +14,7 @@ import { useToast } from '../../hooks/use-toast';
 import { cn } from '../../lib/utils';
 import { ToolWorkspace, dl, fmtBytes, getFilesFromEvent, shareResult, beginToolProcessing, completeToolProcessing, failToolProcessing} from './_shared';
 import { loadPdf, editMetadata } from "./_pdfUtils";
+import { validatePdfFile } from "@/lib/file-validation";
 
 /**
  * AJN PDF metadata editor
@@ -37,8 +38,13 @@ export default function PdfMetadata() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processFile = async (f: File) => {
+    const validation = await validatePdfFile(f, 50);
+    if (validation) {
+      toast({ title: "Invalid PDF", description: validation, variant: "destructive" });
+      return;
+    }
     setFile(f);
-    setStatus("Scrubbing current properties...");
+    setStatus("Reading current document properties...");
     try {
       const doc = await loadPdf(f);
       const kw = doc.getKeywords();
@@ -50,14 +56,13 @@ export default function PdfMetadata() {
       });
       setPhase('configure');
     } catch {
-      failToolProcessing();
       toast({ title: "Read failed", variant: "destructive" });
     }
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>) => {
     const f = getFilesFromEvent(e)?.[0];
-    if (f && f.type === 'application/pdf') processFile(f);
+    if (f) void processFile(f);
   };
 
   const executeSave = async () => {
@@ -194,10 +199,10 @@ export default function PdfMetadata() {
               </div>
 
               <div className="w-full max-w-sm flex flex-col gap-4 mx-auto pt-4 pb-32">
-                <Button onClick={() => dl(resultBlob, "Scrubbed_Document.pdf")} className="h-16 bg-emerald-500 text-white font-black text-sm uppercase tracking-widest rounded-2xl shadow-xl hover:bg-emerald-600 transition-all gap-3 border-2 border-white/20 active:scale-95">
+                <Button onClick={() => dl(resultBlob, "metadata-updated.pdf")} className="h-16 bg-emerald-500 text-white font-black text-sm uppercase tracking-widest rounded-2xl shadow-xl hover:bg-emerald-600 transition-all gap-3 border-2 border-white/20 active:scale-95">
                   <Download className="w-4 h-4" /> Download PDF
                 </Button>
-                <Button variant="outline" onClick={() => void shareResult(resultBlob, "Scrubbed_Document.pdf")} className="h-12 border-slate-200 bg-white text-slate-700 font-black text-xs rounded-xl shadow-sm hover:border-blue-200 hover:bg-blue-50/60 gap-2">
+                <Button variant="outline" onClick={() => void shareResult(resultBlob, "metadata-updated.pdf")} className="h-12 border-slate-200 bg-white text-slate-700 font-black text-xs rounded-xl shadow-sm hover:border-blue-200 hover:bg-blue-50/60 gap-2">
                   <Share2 className="w-4 h-4" /> Share result
                 </Button>
                 <button onClick={reset} className="h-12 rounded-xl font-black text-[10px] uppercase text-slate-400 gap-2 flex items-center justify-center hover:bg-black/5 transition-all">

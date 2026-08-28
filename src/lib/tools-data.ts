@@ -94,11 +94,11 @@ export const ALL_TOOLS: ServiceTool[] = [
     keywords: ["pagination", "index", "footer", "header", "numbers", "numbering"]
   },
   {
-    id: 'flatten-pdf', name: 'Flatten PDF', desc: 'Flatten supported form content and layers into a simpler PDF.',
+    id: 'flatten-pdf', name: 'Flatten PDF', desc: 'Flatten supported interactive form fields into fixed page content.',
     icon: Layers, tag: 'edit', cat: 'pdf', mode: 'PDF', color: 'text-slate-700', perfIndex: 'Permanent',
-    benefits: ["Locks Content", "Collapses Forms"],
-    useCases: ["Secure Forms"],
-    instructions: ["Upload PDF", "Flatten", "Save Static PDF"],
+    benefits: ["Fix supported form values", "Simpler form output"],
+    useCases: ["Preparing completed forms"],
+    instructions: ["Upload PDF", "Flatten supported form fields", "Download"],
     keywords: ["static", "layer", "forms", "merge layers", "lock"]
   },
   {
@@ -126,7 +126,7 @@ export const ALL_TOOLS: ServiceTool[] = [
     keywords: ["fix", "corrupted", "broken", "recover", "damaged", "restore"]
   },
   {
-    id: 'compare-pdf', name: 'Compare PDF', desc: 'Compare two PDF versions and review visible differences.',
+    id: 'compare-pdf', name: 'Compare PDF', desc: 'Compare two PDF versions side by side and review text-item differences.',
     icon: Diff, tag: 'utility', cat: 'pdf', mode: 'PDF', color: 'text-indigo-600', perfIndex: 'Audit',
     benefits: ["Revision tracking", "Highlight changes"],
     useCases: ["Legal reviewing"],

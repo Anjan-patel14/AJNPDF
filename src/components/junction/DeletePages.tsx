@@ -18,6 +18,7 @@ import { engine } from '../../lib/engine';
 import { cn } from '../../lib/utils';
 import { ToolWorkspace, dl, fmtBytes, getFilesFromEvent, shareResult} from './_shared';
 import { initPdfWorker } from "@/lib/pdfjs-worker";
+import { validatePdfFile } from "@/lib/file-validation";
 
 interface PageItem {
   id: string;
@@ -39,6 +40,11 @@ export default function DeletePages() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processFile = async (f: File) => {
+    const validation = await validatePdfFile(f, 50);
+    if (validation) {
+      toast({ title: "Invalid PDF", description: validation, variant: "destructive" });
+      return;
+    }
     setFile(f);
     setPhase('configure');
     setStatus("Analyzing pages...");
@@ -75,7 +81,7 @@ export default function DeletePages() {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>) => {
     const f = getFilesFromEvent(e)?.[0];
-    if (f && f.type === 'application/pdf') processFile(f);
+    if (f) void processFile(f);
   };
 
   const executeDelete = async () => {
@@ -93,13 +99,14 @@ export default function DeletePages() {
         setProgress(p.pct);
       });
 
-      if (res.success && res.blob) {
-        setResultBlob(res.blob);
-        setPhase('done');
+      if (!res.success || !res.blob) {
+        throw new Error(res.error || res.message || 'The selected pages could not be removed.');
       }
-    } catch {
+      setResultBlob(res.blob);
+      setPhase('done');
+    } catch (error) {
       setPhase('configure');
-      toast({ title: "Process Error", variant: "destructive" });
+      toast({ title: "Process Error", description: error instanceof Error ? error.message : "The selected pages could not be removed.", variant: "destructive" });
     }
   };
 

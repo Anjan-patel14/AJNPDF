@@ -65,6 +65,22 @@ def main() -> None:
         ready = json.loads(response.read())
     assert ready.get('ready') is True or ready.get('status') in {'ok', 'ready'}
 
+
+    origin = 'https://ajnpdff.vercel.app'
+    preflight = urllib.request.Request(
+        f'{BASE_URL}/api/pdf/protect',
+        method='OPTIONS',
+        headers={
+            'Origin': origin,
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'content-type',
+        },
+    )
+    with urllib.request.urlopen(preflight, timeout=10) as response:
+        assert response.status == 200
+        assert response.headers.get('Access-Control-Allow-Origin') == origin
+        assert 'POST' in (response.headers.get('Access-Control-Allow-Methods') or '')
+
     with tempfile.TemporaryDirectory(prefix='ajn-public-backend-') as directory:
         root = Path(directory)
         source = root / 'source.pdf'

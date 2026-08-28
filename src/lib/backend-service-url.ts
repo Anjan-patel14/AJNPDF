@@ -1,4 +1,4 @@
-export const DEFAULT_PDF_BACKEND_URL = 'https://ajn-pdf-api-rswf5f4f3q-el.a.run.app';
+export const DEFAULT_PDF_BACKEND_URL = 'https://ajn-pdf-api-580158856470.asia-south1.run.app';
 
 export function normalizePdfBackendUrl(value: string | undefined, production = false): string {
   const trimmed = (value || '').trim().replace(/\/+$/, '');

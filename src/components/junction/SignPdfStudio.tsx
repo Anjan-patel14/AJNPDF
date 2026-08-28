@@ -11,6 +11,7 @@ import { Label } from '../ui/label';
 import { VisualPositionOverlay } from './visual-position-overlay';
 import { ToolWorkspace, beginToolProcessing, completeToolProcessing, dl, failToolProcessing, safeOutputName } from './_shared';
 import { initPdfWorker } from '@/lib/pdfjs-worker';
+import { validatePdfFile } from "@/lib/file-validation";
 import { SignatureDrawingEngine, type SignMode } from '@/lib/pdf-sign';
 import { createElectronicSignature, type ElectronicSignatureEvidence, type SignaturePlacementInput, type SignatureSource } from '@/lib/e-signature';
 import { cn } from '@/lib/utils';
@@ -168,9 +169,10 @@ export default function SignPdfStudio() {
     return signature;
   }, [source,typed,font,ink,opacity,signature]);
 
-  const choosePdf = (selected?: File) => {
+  const choosePdf = async (selected?: File) => {
     if (!selected) return;
-    if (!selected.name.toLowerCase().endsWith('.pdf')) { setError('Choose a PDF document.'); return; }
+    const validation = await validatePdfFile(selected, 50);
+    if (validation) { setError(validation); return; }
     setFile(selected);
     setPage(1);
     setMarks([]);
@@ -249,7 +251,7 @@ export default function SignPdfStudio() {
       <div className="space-y-5">
         {!file ? (
           <label className="flex min-h-52 cursor-pointer flex-col items-center justify-center rounded-3xl border border-dashed border-violet-200 bg-violet-50/50 p-8">
-            <input type="file" accept=".pdf,application/pdf" className="sr-only" onChange={event => choosePdf(event.target.files?.[0])} />
+            <input type="file" accept=".pdf,application/pdf" className="sr-only" onChange={event => { void choosePdf(event.target.files?.[0]); }} />
             <PenTool className="h-9 w-9 text-violet-600" />
             <span className="mt-3 font-black">Choose PDF to sign</span>
           </label>

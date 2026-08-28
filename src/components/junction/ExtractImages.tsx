@@ -11,6 +11,7 @@ import {Progress} from "@/components/ui/progress";
 import {ToolWorkspace,beginToolProcessing,completeToolProcessing,dl,failToolProcessing,fmtBytes,getFilesFromEvent} from "./_shared";
 import {initPdfWorker} from "@/lib/pdfjs-worker";
 import {useToast} from "@/hooks/use-toast";
+import { validatePdfFile } from "@/lib/file-validation";
 
 const MAX_IMAGES=500;
 const MAX_IMAGE_PIXELS=50_000_000;
@@ -94,10 +95,8 @@ export default function ExtractImages(){
   const reset=()=>{setFile(null);setPreview("");setResult(null);setCount(0);setProgress(0);setPhase("upload");};
 
   const load=async(f:File)=>{
-    if(f.type!=="application/pdf"&&!f.name.toLowerCase().endsWith(".pdf")){
-      toast({title:"Choose a PDF",description:"Extract Images accepts PDF files only.",variant:"destructive"});return;
-    }
-    if(!f.size){toast({title:"Empty file",description:"Choose a non-empty PDF.",variant:"destructive"});return;}
+    const validation=await validatePdfFile(f,40);
+    if(validation){toast({title:"Choose a valid PDF",description:validation,variant:"destructive"});return;}
     try{
       initPdfWorker();
       const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise;

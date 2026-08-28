@@ -394,10 +394,10 @@ export async function editMetadata(
   file: File, title: string, author: string, subject: string, keywords: string
 ): Promise<Blob> {
   const doc = await loadPdf(file);
-  if (title) doc.setTitle(title);
-  if (author) doc.setAuthor(author);
-  if (subject) doc.setSubject(subject);
-  if (keywords) doc.setKeywords(keywords.split(",").map(s => s.trim()));
+  doc.setTitle(title || "");
+  doc.setAuthor(author || "");
+  doc.setSubject(subject || "");
+  doc.setKeywords(keywords.trim() ? keywords.split(",").map(s => s.trim()).filter(Boolean) : []);
   return bytesToBlob(await doc.save());
 }
 
