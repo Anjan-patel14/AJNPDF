@@ -26,3 +26,7 @@ jobs:
           AJN_LIVE_BASE_URL: https://ajnpdff.vercel.app
           AJN_BACKEND_URL: https://ajn-pdf-api-580158856470.asia-south1.run.app
         run: node scripts/verify-r24-live-smoke.mjs
+      - name: Verify exact backend capability parity
+        env:
+          AJN_BACKEND_URL: https://ajn-pdf-api-580158856470.asia-south1.run.app
+        run: node scripts/verify-live-backend-contract.mjs

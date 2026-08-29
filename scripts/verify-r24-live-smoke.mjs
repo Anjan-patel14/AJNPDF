@@ -38,8 +38,42 @@ await mapLimit(ids, 5, async (id) => {
   try {
     const response = await request(`${frontend}/${id}`);
     if (response.status !== 200) return fail(`/${id} returned ${response.status}`);
+
     const text = await response.text();
-    if (!/<html/i.test(text) || /404[^<]{0,40}not found/i.test(text)) return fail(`/${id} did not return a valid tool page`);
+    const contentType = response.headers.get('content-type') || '';
+    const matchedPath = response.headers.get('x-matched-path') || '';
+    const head = /<head\b[\s\S]*?<\/head>/i.exec(text)?.[0] || '';
+    const expectedCanonical = `https://www.ajnpdf.com/${id}`;
+    const hasCanonical =
+      head.includes('rel="canonical"') &&
+      head.includes(`href="${expectedCanonical}"`);
+    const hasAjnTitle = /<title>[^<]*AJN PDF<\/title>/i.test(head);
+
+    /*
+     * Most AJN PDF tools use a client-side workspace boundary, so their initial
+     * Next.js HTML contains BAILOUT_TO_CLIENT_SIDE_RENDERING instead of the
+     * final jn-workspace DOM. Merge PDF currently renders its workspace on the
+     * server, which is why the previous check passed only for Merge.
+     *
+     * A legitimate tool route is identified by Vercel's matched path or the
+     * route-specific schema marker, together with exact canonical metadata.
+     */
+    const hasRouteMarker =
+      matchedPath === `/${id}` ||
+      text.includes(`tool-schema-${id}`);
+
+    if (
+      !contentType.toLowerCase().includes('text/html') ||
+      !/<html/i.test(text) ||
+      !head ||
+      !hasCanonical ||
+      !hasAjnTitle ||
+      !hasRouteMarker
+    ) {
+      return fail(
+        `/${id} route identity failed: matched=${matchedPath || '(missing)'}, canonical=${hasCanonical}, title=${hasAjnTitle}, marker=${hasRouteMarker}`
+      );
+    }
     pass(`/${id}`);
   } catch (error) { fail(`/${id}: ${error}`); }
 });

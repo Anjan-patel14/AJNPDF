@@ -77,6 +77,16 @@ check('metadata result is not mislabeled as scrubbed', !metadata.includes('Scrub
 const compare = read('src/components/junction/ComparePdf.tsx');
 check('Compare makes no neural-diff claim', !/Neural Text Diffing/i.test(compare));
 
+
+const liveSmoke = read('scripts/verify-r24-live-smoke.mjs');
+check('live smoke validates canonical route identity across server/client rendered workspaces',
+  liveSmoke.includes('expectedCanonical')
+  && liveSmoke.includes('x-matched-path')
+  && liveSmoke.includes('hasRouteMarker')
+  && liveSmoke.includes('tool-schema-${id}')
+  && !liveSmoke.includes('hasWorkspaceMarker')
+  && !liveSmoke.includes('404[^<]{0,40}not found'));
+
 check('continuous live smoke script exists', exists('scripts/verify-r24-live-smoke.mjs'));
 check('continuous live smoke workflow exists', exists('.github/workflows/live-smoke.yml'));
 if (exists('.github/workflows/live-smoke.yml')) {
