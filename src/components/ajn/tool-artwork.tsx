@@ -18,37 +18,37 @@ type Tone = 'violet' | 'blue' | 'emerald' | 'orange' | 'rose' | 'cyan';
 
 const toneClasses: Record<Tone, { shell: string; icon: string; badge: string; arrow: string }> = {
   violet: {
-    shell: 'border-slate-200 bg-white',
+    shell: 'border-0 bg-transparent',
     icon: 'text-violet-600',
     badge: 'border-slate-200 bg-white text-slate-700',
     arrow: 'text-violet-400',
   },
   blue: {
-    shell: 'border-slate-200 bg-white',
+    shell: 'border-0 bg-transparent',
     icon: 'text-blue-600',
     badge: 'border-slate-200 bg-white text-slate-700',
     arrow: 'text-blue-400',
   },
   emerald: {
-    shell: 'border-slate-200 bg-white',
+    shell: 'border-0 bg-transparent',
     icon: 'text-emerald-600',
     badge: 'border-slate-200 bg-white text-slate-700',
     arrow: 'text-emerald-400',
   },
   orange: {
-    shell: 'border-slate-200 bg-white',
+    shell: 'border-0 bg-transparent',
     icon: 'text-orange-600',
     badge: 'border-slate-200 bg-white text-slate-700',
     arrow: 'text-orange-400',
   },
   rose: {
-    shell: 'border-slate-200 bg-white',
+    shell: 'border-0 bg-transparent',
     icon: 'text-rose-600',
     badge: 'border-slate-200 bg-white text-slate-700',
     arrow: 'text-rose-400',
   },
   cyan: {
-    shell: 'border-slate-200 bg-white',
+    shell: 'border-0 bg-transparent',
     icon: 'text-cyan-600',
     badge: 'border-slate-200 bg-white text-slate-700',
     arrow: 'text-cyan-400',
@@ -179,7 +179,7 @@ export function ToolArtwork({ toolId, toolName, className, priority = false }: T
 
   return (
     <span
-      className={cn('ajn-tool-artwork ajn-simple-tool-icon relative flex shrink-0 items-center justify-center overflow-hidden', colors.shell, className)}
+      className={cn('ajn-tool-artwork ajn-simple-tool-icon relative flex shrink-0 items-center justify-center overflow-hidden rounded-[10px]', colors.shell, className)}
       title={toolName}
       aria-hidden="true"
       data-tool-icon={toolId}
