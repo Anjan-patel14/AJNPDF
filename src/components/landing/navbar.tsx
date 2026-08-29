@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Crown, Menu, Moon, Search, Sun, UserRound, X } from "lucide-react";
+import { Crown, Menu, Search, UserRound, X } from "lucide-react";
 import { LogoAnimation } from "./logo-animation";
 import { Button } from "../ui/button";
 import { SearchModal } from "../search-modal";
@@ -13,7 +13,7 @@ import { toolPath } from "@/lib/tool-routes";
 import { cn } from "@/lib/utils";
 import { AllToolsMenu } from "./all-tools-menu";
 import { useAuth } from "@/lib/auth-context";
-import { useTheme } from "@/components/theme/theme-provider";
+
 
 const quickTools = [
   { id: "merge-pdf", fallback: "Merge" },
@@ -31,7 +31,7 @@ export function Navbar() {
   const { t, tool: localizeTool } = useLanguage();
   const auth = useAuth();
   const premium = Boolean(auth.session && auth.plan !== "free");
-  const { theme, mounted, toggleTheme } = useTheme();
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 18);
@@ -111,17 +111,6 @@ export function Navbar() {
               <Search className="h-[18px] w-[18px]" />
             </Button>
 
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              aria-label={mounted ? `Switch to ${theme === "dark" ? "light" : "dark"} theme` : "Switch theme"}
-              title={mounted ? `Switch to ${theme === "dark" ? "light" : "dark"} theme` : "Switch theme"}
-              onClick={toggleTheme}
-              className="h-10 w-10 rounded-xl border border-[#e3e9f4] bg-white text-[#5b6b80] shadow-sm hover:border-blue-200 hover:bg-[#e1effe] hover:text-[#1a56db] dark:border-white/10 dark:bg-[#111827] dark:text-[#8b96ab] dark:hover:border-blue-400/30 dark:hover:bg-blue-400/10 dark:hover:text-blue-300"
-            >
-              {mounted && theme === "dark" ? <Sun className="h-[17px] w-[17px]" /> : <Moon className="h-[17px] w-[17px]" />}
-            </Button>
 
             <LanguageSwitcher compact className="hidden xl:inline-flex" />
 

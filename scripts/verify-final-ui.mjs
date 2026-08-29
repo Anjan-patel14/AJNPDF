@@ -18,6 +18,9 @@ const navbar = read("src/components/landing/navbar.tsx");
 const menu = read("src/components/landing/all-tools-menu.tsx");
 const footer = read("src/components/landing/main-footer.tsx");
 const css = read("src/app/globals.css");
+const ambient = read("src/app/ambient-light.css");
+const layout = read("src/app/layout.tsx");
+const themeProvider = read("src/components/theme/theme-provider.tsx");
 const policy = read("src/lib/tool-policy.ts");
 const pkg = JSON.parse(read("package.json"));
 
@@ -124,22 +127,53 @@ menu.includes("More PDF Tools") &&
 for (const marker of [
   "prefers-reduced-motion",
   "overflow-x: hidden",
-  "#0a101d",
-  "#111827",
-  "#b6c0d0",
 ]) {
   css.includes(marker)
-    ? pass(`Theme/responsive marker ${marker}`)
-    : fail(`Missing theme/responsive marker ${marker}`);
+    ? pass(`Responsive/accessibility marker ${marker}`)
+    : fail(`Missing responsive/accessibility marker ${marker}`);
 }
+
+for (const marker of [
+  ".ajn-ambient-root",
+  ".ajn-ambient-canvas",
+  ".ajn-ambient-ribbons",
+  ".ajn-ambient-sheen",
+  "radial-gradient",
+  "linear-gradient",
+  "prefers-reduced-motion",
+  "forced-colors",
+]) {
+  ambient.includes(marker)
+    ? pass(`Ambient production marker ${marker}`)
+    : fail(`Missing ambient production marker ${marker}`);
+}
+
+layout.includes('data-theme="light"') &&
+layout.includes("classList.remove('dark')") &&
+!layout.includes("prefers-color-scheme: dark")
+  ? pass("Root layout is permanently light-only")
+  : fail("Root layout still permits dark-mode boot behavior");
+
+themeProvider.includes('theme: "light"') &&
+themeProvider.includes('classList.remove("dark")') &&
+!themeProvider.includes("matchMedia")
+  ? pass("Theme provider is a light-only compatibility provider")
+  : fail("Theme provider can still activate dark mode");
+
+!navbar.includes("toggleTheme") &&
+!navbar.includes("useTheme") &&
+!navbar.includes("Moon") &&
+!navbar.includes("Sun")
+  ? pass("Theme switch control is removed from navigation")
+  : fail("Theme switch control remains in navigation");
 
 css.includes(".ajn-tool-card") || css.includes(".ajn-premium-tool-card")
   ? pass("Focused tool-card styling exists")
   : fail("Focused tool-card styling missing");
 
-!/linear-gradient|radial-gradient/.test(css)
-  ? pass("Public globals use no CSS gradients")
-  : fail("CSS gradient remains in globals.css");
+/linear-gradient|radial-gradient/.test(ambient)
+  ? pass("Approved ambient gradients are isolated in the production background layer")
+  : fail("Approved ambient gradient layer is missing");
 
 const publicBlock =
   policy.match(/PRODUCTION_PUBLIC_TOOL_IDS\s*=\s*new Set\(\[([\s\S]*?)\]\)/)?.[1] ||

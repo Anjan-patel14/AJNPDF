@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./ambient-light.css";
 import { Inter, JetBrains_Mono, Manrope } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "../components/ui/toaster";
@@ -12,6 +13,7 @@ import { ADSENSE_PUBLISHER } from "../lib/ad-slots";
 import { GoogleAnalytics } from "../components/analytics/google-analytics";
 import { SiteAnalytics } from "../components/analytics/site-analytics";
 import { ThemeProvider } from "../components/theme/theme-provider";
+import { AmbientBackground } from "../components/theme/ambient-background";
 import { ProcessingActivityProvider } from "../components/ajnpdf/processing-activity-provider";
 import { MobileBottomNav } from "../components/landing/mobile-bottom-nav";
 import { AJN_BRAND, AJN_CONFIRMED_SOCIAL_LINKS, AJN_PRODUCT_ALTERNATE_NAMES, AJN_STUDIO_ALTERNATE_NAMES } from "../lib/brand";
@@ -63,22 +65,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   const themeBoot = `
     try {
-      var saved = localStorage.getItem('ajn_theme');
-      var theme = saved === 'dark' || saved === 'light'
-        ? saved
-        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.classList.toggle('dark', theme === 'dark');
-      document.documentElement.dataset.theme = theme;
-      document.documentElement.style.colorScheme = theme;
+      document.documentElement.classList.remove('dark');
+      document.documentElement.dataset.theme = 'light';
+      document.documentElement.style.colorScheme = 'light';
+      localStorage.removeItem('ajn_theme');
     } catch (e) {}
   `;
 
   return (
-    <html lang="en" suppressHydrationWarning className={`${manrope.variable} ${inter.variable} ${jetBrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning data-theme="light" style={{ colorScheme: "light" }} className={`${manrope.variable} ${inter.variable} ${jetBrainsMono.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
       </head>
-      <body className="font-sans antialiased">
+      <body className="ajn-light-only font-sans antialiased">
+        <AmbientBackground />
         <Script id="json-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} strategy="afterInteractive" />
         <ThemeProvider>
           <LanguageProvider>

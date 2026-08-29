@@ -12,55 +12,39 @@ type ThemeContextValue = {
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
-const STORAGE_KEY = "ajn_theme";
 
-function applyTheme(theme: Theme) {
+function enforceLightTheme() {
   const root = document.documentElement;
-  root.classList.toggle("dark", theme === "dark");
-  root.dataset.theme = theme;
-  root.style.colorScheme = theme;
-}
+  root.classList.remove("dark");
+  root.dataset.theme = "light";
+  root.style.colorScheme = "light";
 
-function getInitialTheme(): Theme {
   try {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (saved === "light" || saved === "dark") return saved;
+    window.localStorage.removeItem("ajn_theme");
   } catch {
-    // Storage may be unavailable; fall back to the OS preference.
+    // Storage can be unavailable. The light-only runtime still remains active.
   }
-
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const initial = getInitialTheme();
-    setThemeState(initial);
-    applyTheme(initial);
+    enforceLightTheme();
     setMounted(true);
   }, []);
 
-  const setTheme = useCallback((next: Theme) => {
-    setThemeState(next);
-    applyTheme(next);
-
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      // Theme still applies for the current session.
-    }
+  const setTheme = useCallback((_requestedTheme: Theme) => {
+    enforceLightTheme();
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  }, [setTheme, theme]);
+    enforceLightTheme();
+  }, []);
 
   const value = useMemo<ThemeContextValue>(
-    () => ({ theme, mounted, setTheme, toggleTheme }),
-    [theme, mounted, setTheme, toggleTheme],
+    () => ({ theme: "light", mounted, setTheme, toggleTheme }),
+    [mounted, setTheme, toggleTheme],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
