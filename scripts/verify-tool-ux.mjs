@@ -9,6 +9,8 @@ const allJunction = fs.readdirSync(path.join(root,'src/components/junction')).fi
 const shared = read('src/components/junction/_shared.tsx');
 check('Shared uploader reads input.files and dataTransfer.files', shared.includes('dataTransfer') && shared.includes('getFilesFromEvent'));
 check('Shared uploader exposes keyboard button semantics', shared.includes('role="button"') && shared.includes('tabIndex={0}') && shared.includes('e.key === \"Enter\"') && shared.includes('e.key === \" \"'));
+check('Processed PDF results expose a safe Preview PDF action beside Download', shared.includes('canPreviewPdf') && shared.includes('element_id: "preview_pdf"') && shared.includes('opener.target = "_blank"') && shared.includes('opener.rel = "noopener noreferrer"') && shared.includes('{canPreviewPdf && <Btn variant="secondary" onClick={previewPdf}>'));
+check('PDF preview object URLs are revoked after the viewer has time to load', shared.includes('URL.revokeObjectURL(previewUrl)') && shared.includes('5 * 60 * 1000'));
 check('No legacy drag event is cast into an input event', !/onDrop[^\n]*as any/.test(allJunction));
 
 const zip = read('src/components/junction/ZipExtractor.tsx');

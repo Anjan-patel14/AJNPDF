@@ -1,7 +1,7 @@
 "use client";
 import React, { useCallback, useId, useRef, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { AlertTriangle, Download, FileCheck2, Loader2, RefreshCcw, Share2, UploadCloud, X } from "lucide-react";
+import { AlertTriangle, Download, Eye, FileCheck2, Loader2, RefreshCcw, Share2, UploadCloud, X } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { sendAjnAnalytics } from "../analytics/site-analytics";
 import { useLanguage } from "@/lib/i18n/language-context";
@@ -251,12 +251,47 @@ export function Done({ msg, onDownload, dlLabel, onReset, shareFile }: { msg?:st
       window.setTimeout(() => setShareState("idle"), 1800);
     }
   };
+  const canPreviewPdf = Boolean(
+    shareFile &&
+    (
+      shareFile.blob.type.toLowerCase().startsWith("application/pdf") ||
+      shareFile.name.toLowerCase().endsWith(".pdf")
+    )
+  );
+  const previewPdf = () => {
+    if (!shareFile || !canPreviewPdf || typeof window === "undefined") return;
+
+    const previewBlob = shareFile.blob.type.toLowerCase().startsWith("application/pdf")
+      ? shareFile.blob
+      : new Blob([shareFile.blob], { type: "application/pdf" });
+    const previewUrl = URL.createObjectURL(previewBlob);
+    const opener = document.createElement("a");
+    opener.href = previewUrl;
+    opener.target = "_blank";
+    opener.rel = "noopener noreferrer";
+    opener.style.display = "none";
+    opener.setAttribute("aria-label", `${t("common.preview")} PDF`);
+    document.body.appendChild(opener);
+    opener.click();
+    opener.remove();
+
+    const toolId = toolIdFromPathname(window.location.pathname);
+    sendAjnAnalytics({
+      event_name: "interaction",
+      path: window.location.pathname,
+      tool_id: toolId,
+      element_id: "preview_pdf",
+    });
+
+    window.setTimeout(() => URL.revokeObjectURL(previewUrl), 5 * 60 * 1000);
+  };
   return <div className="animate-in fade-in slide-in-from-bottom-2 py-4 text-center duration-300" role="status" aria-live="polite">
     <div className="jn-success-draw mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-300"><FileCheck2 className="h-6 w-6"/></div>
     <h3 className="text-xl font-black text-[#0e1b2c] dark:text-[#eef2f9]">{msg || t("result.ready")}</h3>
     <p className="mx-auto mt-1 max-w-md text-xs font-medium leading-5 text-[#64748b] dark:text-[#8b96ab]">{t("result.shareHelp")}</p>
     <div className="mt-5 flex flex-wrap justify-center gap-2">
       {onDownload && <Btn onClick={onDownload} style={{background:"#0f172a"}}><Download size={16}/>{dlLabel || t("common.download")}</Btn>}
+      {canPreviewPdf && <Btn variant="secondary" onClick={previewPdf}><Eye size={15}/>{t("common.preview")} PDF</Btn>}
       {shareFile && <Btn variant="secondary" onClick={() => void share()}><Share2 size={15}/>{shareState === "copied-link" ? t("result.toolLinkCopied") : shareState === "unavailable" ? t("result.shareUnavailable") : t("result.shareFile")}</Btn>}
       {shareFile && <GoogleDriveExportAction blob={shareFile.blob} name={shareFile.name} />}
       <Btn variant="secondary" onClick={()=>{if(typeof window!=="undefined"){const toolId=toolIdFromPathname(window.location.pathname);sendAjnAnalytics({event_name:"tool_reset",path:window.location.pathname,tool_id:toolId});}onReset();}}><RefreshCcw size={15}/>{t("common.processAnother")}</Btn>

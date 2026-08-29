@@ -17,6 +17,7 @@ const pdfToolsLayout = read('src/app/pdf-tools/layout.tsx');
 const pdfToolsPage = read('src/app/pdf-tools/page.tsx');
 const toolPage = read('src/app/(tool-pages)/[id]/page.tsx');
 const adsLoader = read('src/components/adsense-script-loader.tsx');
+const adUnit = read('src/components/adsense-unit.tsx');
 
 const allowlist = policy.match(/PRODUCTION_PUBLIC_TOOL_IDS = new Set\(\[([\s\S]*?)\]\);/)?.[1] || '';
 const publicIds = [...allowlist.matchAll(/'([^']+)'/g)].map((match) => match[1]);
@@ -38,6 +39,7 @@ check('PDF tools metadata is PDF-only', pdfToolsLayout.includes('Free Online PDF
 check('PDF tools directory remains server-renderable for crawlers', !pdfToolsPage.includes('useSearchParams') && pdfToolsPage.includes('Choose the right PDF task before you start.'));
 check('tool breadcrumbs use the canonical PDF directory', toolPage.includes("const categoryPath = '/pdf-tools';") && !toolPage.includes('/pdf-utilities'));
 check('AdSense is restricted to substantial publisher-content pages', publicIds.every((id) => adsLoader.includes(`'/${id}'`)) && adsLoader.includes("normalized === '/'") && !adsLoader.includes('EXCLUDED_PREFIXES') && !adsLoader.includes("'/pdf-tools'"));
+check('AdSense placements use responsive sizing without clipping', homepage.includes('slot={ADSENSE_SLOTS.homePrimary}') && homepage.includes('slot={ADSENSE_SLOTS.homeSecondary}') && homepage.includes('responsive') && toolPage.includes('slot={ADSENSE_SLOTS.toolContent} responsive') && adUnit.includes("'data-ad-format': 'auto'") && adUnit.includes("'data-full-width-responsive': 'true'") && !adUnit.includes('overflow-hidden flex'));
 check('legacy /tools pages cannot fall through to dead root routes', next.includes('publicToolLegacyRedirects') && next.includes("source: '/tools/:id'") && next.includes("destination: '/pdf-tools'"));
 
 if (failures.length) {

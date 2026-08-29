@@ -206,9 +206,8 @@ export default function HomePage() {
 
         <AdSenseUnit
           slot={ADSENSE_SLOTS.homePrimary}
-          width={400}
-          height={80}
-          className="ajn-ad-zone my-7 min-h-[80px] md:my-9"
+          responsive
+          className="ajn-ad-zone my-7 min-h-[100px] md:my-9"
           label={t("common.advertisement")}
         />
 
@@ -217,9 +216,8 @@ export default function HomePage() {
 
         <AdSenseUnit
           slot={ADSENSE_SLOTS.homeSecondary}
-          width={300}
-          height={150}
-          className="ajn-ad-zone my-7 min-h-[150px] md:my-9"
+          responsive
+          className="ajn-ad-zone my-7 min-h-[120px] md:my-9"
           label={t("common.advertisement")}
         />
 

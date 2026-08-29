@@ -94,7 +94,7 @@ export function AdSenseUnit({
     : { display: 'inline-block', width: width || 300, height: height || 250, maxWidth: '100%' };
 
   return (
-    <aside aria-label={accessibleLabel} className={`w-full overflow-hidden flex flex-col items-center justify-center ${className}`}>
+    <aside aria-label={accessibleLabel} className={`w-full min-w-0 flex flex-col items-center justify-center ${className}`}>
       <span className="mb-2 text-[8px] font-black uppercase tracking-[0.18em] text-slate-400">{t('common.advertisement')}</span>
       <ins
         ref={adRef}

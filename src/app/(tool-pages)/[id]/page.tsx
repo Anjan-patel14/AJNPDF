@@ -82,7 +82,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
       <ToolEditorialContent tool={tool} />
       <div className="relative z-10 mx-auto max-w-5xl px-4 pb-12">
         <div className="border-t border-black/5 pt-10">
-          <AdSenseUnit slot={ADSENSE_SLOTS.toolContent} width={200} height={300} className="min-h-[300px]" />
+          <AdSenseUnit slot={ADSENSE_SLOTS.toolContent} responsive className="min-h-[120px] sm:min-h-[180px]" />
         </div>
       </div>
       <MainFooter />
