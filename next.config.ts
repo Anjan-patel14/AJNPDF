@@ -19,20 +19,47 @@ const contentSecurityPolicy = [
   `connect-src ${connectSources.join(' ')}`, "frame-src 'self' https://*.firebaseapp.com https://accounts.google.com https://api.razorpay.com https://*.razorpay.com https://*.googlesyndication.com https://*.doubleclick.net",
   "worker-src 'self' blob:", "media-src 'self' blob:", isProduction ? 'upgrade-insecure-requests' : ''].filter(Boolean).join('; ');
 
-const imageToolIds = ['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image'];
+const imageToolIds = ['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image','meme-generator','photo-editor','upscale-image','remove-bg','blur-face'];
 const imageToolRedirects = imageToolIds.flatMap((id) => [
   { source: `/${id}`, destination: '/img', permanent: true },
   { source: `/tools/${id}`, destination: '/img', permanent: true },
 ]);
 
 const retiredToolAliases = [
-  'word-pdf','pdf-word','excel-pdf','pdf-excel','ppt-pdf','jpg-pdf','pdf-jpg','heic-pdf','html-pdf','xml-pdf','json-pdf','txt-pdf',
-  'smart-read','pdf-ppt','psd-pdf',
+  'azw3-to-pdf', 'bmp-to-pdf', 'csv-to-pdf', 'doc-to-pdf', 'docx-to-pdf',
+  'eml-to-pdf', 'epub-to-pdf', 'excel-pdf', 'excel-to-pdf', 'gif-to-pdf',
+  'heic-pdf', 'heic-to-pdf', 'html-pdf', 'html-to-pdf', 'image-to-pdf',
+  'jpeg-to-pdf', 'jpg-pdf', 'jpg-to-pdf', 'json-pdf', 'json-to-pdf',
+  'markdown-to-pdf', 'mobi-to-pdf', 'msg-to-pdf', 'ocr-advanced', 'ocr-scanner',
+  'odp-to-pdf', 'ods-to-pdf', 'odt-to-pdf', 'pdf-a', 'pdf-excel',
+  'pdf-jpg', 'pdf-ocr', 'pdf-pages-to-zip', 'pdf-ppt', 'pdf-to-avif',
+  'pdf-to-azw3', 'pdf-to-bmp', 'pdf-to-csv', 'pdf-to-docx', 'pdf-to-epub',
+  'pdf-to-excel', 'pdf-to-gif', 'pdf-to-heic', 'pdf-to-html', 'pdf-to-image',
+  'pdf-to-jpeg', 'pdf-to-jpg', 'pdf-to-json', 'pdf-to-markdown', 'pdf-to-mobi',
+  'pdf-to-odt', 'pdf-to-png', 'pdf-to-powerpoint', 'pdf-to-pptx', 'pdf-to-rtf',
+  'pdf-to-svg', 'pdf-to-tiff', 'pdf-to-txt', 'pdf-to-webp', 'pdf-to-word',
+  'pdf-to-xlsx', 'pdf-to-xml', 'pdf-ua', 'pdf-word', 'powerpoint-to-pdf',
+  'ppt-pdf', 'ppt-to-pdf', 'pptx-to-pdf', 'psd-pdf', 'rtf-to-pdf',
+  'scan-text', 'smart-read', 'svg-to-pdf', 'tiff-to-pdf', 'txt-pdf',
+  'txt-to-pdf', 'url-to-pdf', 'webp-to-pdf', 'word-pdf', 'word-to-pdf',
+  'xls-to-pdf', 'xlsx-to-pdf', 'xml-pdf', 'xml-to-pdf', 'xps-to-pdf',
 ];
 const retiredToolRedirects = retiredToolAliases.flatMap((source) => [
   { source: `/${source}`, destination: source === 'psd-pdf' ? '/img' : '/pdf-tools', permanent: true },
   { source: `/tools/${source}`, destination: source === 'psd-pdf' ? '/img' : '/pdf-tools', permanent: true },
 ]);
+
+const publicToolIds = [
+  'add-image-to-pdf', 'add-text', 'compare-pdf', 'compress-pdf', 'crop-pdf',
+  'delete-pdf-pages', 'extract-images', 'flatten-pdf', 'merge-pdf', 'organize-pdf',
+  'page-number', 'pdf-metadata', 'pdf-zip-extract', 'protect-pdf', 'repair-pdf',
+  'rotate-pdf', 'sign-pdf', 'split-pdf', 'unlock-pdf', 'watermark-pdf',
+];
+const publicToolLegacyRedirects = publicToolIds.map((id) => ({
+  source: `/tools/${id}`,
+  destination: `/${id}`,
+  permanent: true,
+}));
 
 const nextConfig: NextConfig = {
   poweredByHeader: false, compress: true, outputFileTracingRoot: process.cwd(), output: 'standalone',
@@ -42,6 +69,7 @@ const nextConfig: NextConfig = {
     return [
       ...imageToolRedirects,
       ...retiredToolRedirects,
+      ...publicToolLegacyRedirects,
       { source: '/image-tools', destination: '/img', permanent: true },
       { source: '/:path*', has: [{ type: 'host', value: 'ajnpdf.com' }], destination: 'https://www.ajnpdf.com/:path*', permanent: true },
       { source: '/guides', destination: '/blog', permanent: true }, { source: '/ajn', destination: '/ajn-studio', permanent: true },
@@ -51,7 +79,7 @@ const nextConfig: NextConfig = {
       { source: '/help/terms', destination: '/terms', permanent: true },
       { source: '/junction', destination: '/pdf-tools', permanent: true }, { source: '/junction/:path*', destination: '/pdf-tools', permanent: true },
       { source: '/view/:path*', destination: '/pdf-tools', permanent: true }, { source: '/tools', destination: '/pdf-tools', permanent: true },
-      { source: '/tools/:id', destination: '/:id', permanent: true }];
+      { source: '/tools/:id', destination: '/pdf-tools', permanent: true }];
   },
   async headers() {
     return [

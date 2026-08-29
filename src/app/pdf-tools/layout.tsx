@@ -1,13 +1,22 @@
 import type { Metadata } from 'next';
 
+const PDF_TOOLS_DESCRIPTION =
+  'Browse focused PDF tools to merge, split, compress, organize, edit, sign, protect, unlock and repair PDF files online.';
+
 export const metadata: Metadata = {
-  title: 'All Free PDF & Image Tools',
-  description: 'Browse AJN PDF tools for PDF editing, file conversion, image processing and document utilities.',
+  title: 'Free Online PDF Tools - Merge, Split, Compress & Sign',
+  description: PDF_TOOLS_DESCRIPTION,
   alternates: { canonical: '/pdf-tools' },
   openGraph: {
-    title: 'All Free PDF & Image Tools | AJN PDF',
-    description: 'Browse online PDF, image and conversion tools from AJN PDF.',
+    title: 'Free Online PDF Tools - Merge, Split, Compress & Sign | AJN PDF',
+    description: PDF_TOOLS_DESCRIPTION,
     url: '/pdf-tools',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Online PDF Tools - Merge, Split, Compress & Sign | AJN PDF',
+    description: PDF_TOOLS_DESCRIPTION,
   },
 };
 

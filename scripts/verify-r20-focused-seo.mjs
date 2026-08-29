@@ -13,6 +13,10 @@ const hero = read('src/components/landing/hero.tsx');
 const allTools = read('src/components/landing/all-tools-menu.tsx');
 const navbar = read('src/components/landing/navbar.tsx');
 const next = read('next.config.ts');
+const pdfToolsLayout = read('src/app/pdf-tools/layout.tsx');
+const pdfToolsPage = read('src/app/pdf-tools/page.tsx');
+const toolPage = read('src/app/(tool-pages)/[id]/page.tsx');
+const adsLoader = read('src/components/adsense-script-loader.tsx');
 
 const allowlist = policy.match(/PRODUCTION_PUBLIC_TOOL_IDS = new Set\(\[([\s\S]*?)\]\);/)?.[1] || '';
 const publicIds = [...allowlist.matchAll(/'([^']+)'/g)].map((match) => match[1]);
@@ -30,6 +34,11 @@ check('homepage exposes no conversion or image category filter', !homepage.inclu
 check('desktop navigation exposes no old image directory or converter menu', !navbar.includes('/image-tools') && !navbar.includes('/conversion-tools') && !navbar.includes('ConvertMenu'));
 check('All Tools search suggestions stay PDF-only', !/Word to PDF|PDF to Word|scan text|image to text|crop or image|Image Tools/i.test(allTools));
 check('moved image routes redirect to AJN IMG handoff', next.includes('imageToolRedirects') && next.includes("destination: '/img'"));
+check('PDF tools metadata is PDF-only', pdfToolsLayout.includes('Free Online PDF Tools') && !/PDF & Image|image processing|file conversion/i.test(pdfToolsLayout));
+check('PDF tools directory remains server-renderable for crawlers', !pdfToolsPage.includes('useSearchParams') && pdfToolsPage.includes('Choose the right PDF task before you start.'));
+check('tool breadcrumbs use the canonical PDF directory', toolPage.includes("const categoryPath = '/pdf-tools';") && !toolPage.includes('/pdf-utilities'));
+check('AdSense is restricted to substantial publisher-content pages', publicIds.every((id) => adsLoader.includes(`'/${id}'`)) && adsLoader.includes("normalized === '/'") && !adsLoader.includes('EXCLUDED_PREFIXES') && !adsLoader.includes("'/pdf-tools'"));
+check('legacy /tools pages cannot fall through to dead root routes', next.includes('publicToolLegacyRedirects') && next.includes("source: '/tools/:id'") && next.includes("destination: '/pdf-tools'"));
 
 if (failures.length) {
   console.error('AJN PDF R21 FOCUSED SEO: FAIL');

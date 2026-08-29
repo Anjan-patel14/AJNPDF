@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import { ToolWorkspaceClient } from '@/components/junction/tool-workspace-client';
-import { ALL_TOOLS, getPublicToolCategory } from '@/lib/tools-data';
+import { ALL_TOOLS } from '@/lib/tools-data';
 import { isToolPublic } from '@/lib/tool-policy';
 import { BUILD_PUBLIC_TOOLS } from '@/lib/build-public-tools';
 import { buildToolMetadata, SITE_NAME, SITE_URL } from '@/lib/seo-config';
@@ -37,9 +37,8 @@ export default async function ToolPage({ params }: ToolPageProps) {
   const tool = BUILD_PUBLIC_TOOLS.find((item) => item.id === id);
   if (!tool) notFound();
 
-  const category = getPublicToolCategory(tool);
-  const categoryPath = category === 'image' ? '/image-tools' : '/pdf-utilities';
-  const categoryLabel = category === 'image' ? 'Image Tools' : 'PDF Tools';
+  const categoryPath = '/pdf-tools';
+  const categoryLabel = 'PDF Tools';
   const seo = getToolSeoProfile(tool);
 
   const jsonLd = {

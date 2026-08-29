@@ -15,7 +15,7 @@ const manifest = read('src/generated/sitemap-lastmod.ts');
 const generator = read('scripts/generate-sitemap-lastmod.mjs');
 const ids = JSON.parse(read('scripts/r13-public-tool-ids.json'));
 
-const core = [...sitemap.matchAll(/\{\s*path:\s*'([^']+)'/g)].map((match) => match[1]);
+const core = [...sitemap.matchAll(/\{\s*path:\s*["']([^"']+)["']/g)].map((match) => match[1]);
 const manifestPaths = new Set(
   [...manifest.matchAll(/^\s*"([^"]+)":\s*"/gm)].map((match) => match[1]),
 );
@@ -27,10 +27,11 @@ check('canonical SITE_URL is www', seo.includes("export const SITE_URL = 'https:
 check('sitemap deterministic/no live media fetch', !sitemap.includes('fetchPublicMediaPosts') && !sitemap.includes('mediaPosts'));
 check('sitemap uses content lastmod', sitemap.includes('getSitemapLastModified'));
 check('no legacy /tools sitemap URL', !sitemap.includes('/tools/'));
+check('static sitemap paths are detected', core.length >= 20);
 check('static paths unique', core.length === new Set(core).size);
 check('robots publishes sitemap', robots.includes('sitemap.xml'));
 check('backend CSP resolver is centralized', next.includes('configuredPdfBackendCandidates'));
-check('generic legacy redirect remains', next.includes("source: '/tools/:id'") && next.includes("destination: '/:id'"));
+check('generic retired /tools redirect remains safe', next.includes('publicToolLegacyRedirects') && next.includes("source: '/tools/:id'") && next.includes("destination: '/pdf-tools'"));
 check('lastmod generator exists', exists('scripts/generate-sitemap-lastmod.mjs'));
 check(
   'lastmod generator backfills routes when git history is unavailable',

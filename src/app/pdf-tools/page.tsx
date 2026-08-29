@@ -1,7 +1,8 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { Search, X } from "lucide-react";
 import { Navbar } from "@/components/landing/navbar";
 import { MainFooter } from "@/components/landing/main-footer";
@@ -31,19 +32,15 @@ function queryBucket(value: string): string {
 function PDFToolsContent() {
   const router = useRouter();
   const pathname = usePathname();
-  const params = useSearchParams();
-
-  const initialCategory = params.get("category");
-  const [search, setSearch] = useState(params.get("q") || "");
-  const [activeCategory, setActiveCategory] = useState<DirectoryCategory>(
-    isDirectoryCategory(initialCategory) ? initialCategory : "all",
-  );
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState<DirectoryCategory>("all");
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
     setSearch(params.get("q") || "");
     const value = params.get("category");
     setActiveCategory(isDirectoryCategory(value) ? value : "all");
-  }, [params]);
+  }, []);
 
   const updateUrl = (nextSearch: string, nextCategory: DirectoryCategory, replace = false) => {
     const next = new URLSearchParams();
@@ -95,10 +92,10 @@ function PDFToolsContent() {
 
             <p className="text-[10px] font-black uppercase tracking-[.15em] text-[#1a56db] dark:text-blue-300">AJN PDF</p>
             <h1 className="mt-2 text-2xl font-black tracking-[-.035em] text-[#0e1b2c] dark:text-[#eef2f9] sm:text-3xl">
-              All PDF tools.
+              Free online PDF tools for everyday document work.
             </h1>
-            <p className="mt-2 max-w-xl text-sm font-medium leading-6 text-[#5b6b80] dark:text-[#8b96ab]">
-              Search or choose a category.
+            <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-[#5b6b80] dark:text-[#8b96ab]">
+              Merge, split, compress, organize, edit, sign, protect, unlock and repair PDFs with clear workflow and file-handling details.
             </p>
 
             <div className="mt-5 grid gap-3 lg:grid-cols-[1fr_auto] lg:items-center">
@@ -150,6 +147,69 @@ function PDFToolsContent() {
           <div className="mt-6">
             <ServicesGrid query={search} category={activeCategory} />
           </div>
+
+          <section className="mt-10 rounded-[1.35rem] border border-[#e3e9f4] bg-white/92 p-5 shadow-[0_14px_40px_rgba(14,27,44,.06)] sm:p-7" aria-labelledby="pdf-workflow-guide">
+            <p className="text-[10px] font-black uppercase tracking-[.15em] text-[#1a56db]">PDF workflow guide</p>
+            <h2 id="pdf-workflow-guide" className="mt-2 text-2xl font-black tracking-[-.035em] text-[#0e1b2c] sm:text-3xl">
+              Choose the right PDF task before you start.
+            </h2>
+            <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-[#5b6b80]">
+              Similar PDF jobs can produce very different results. Pick the workflow that matches what you actually need, keep the original file until you verify the download, and review important documents in an independent PDF viewer before sharing them.
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <article className="rounded-2xl border border-blue-100 bg-blue-50/55 p-5">
+                <h3 className="text-base font-black text-[#0e1b2c]">Merge, split or organize?</h3>
+                <p className="mt-2 text-sm font-medium leading-6 text-[#5b6b80]">
+                  Merge PDF combines separate files into one document. Split PDF extracts a range or separates pages into smaller files. Organize PDF is the better choice when the pages are already in one PDF and you mainly need to reorder them. Remove Pages and Crop PDF are more precise when only selected pages need changing.
+                </p>
+              </article>
+
+              <article className="rounded-2xl border border-emerald-100 bg-emerald-50/55 p-5">
+                <h3 className="text-base font-black text-[#0e1b2c]">Compress without guessing.</h3>
+                <p className="mt-2 text-sm font-medium leading-6 text-[#5b6b80]">
+                  PDF compression is a trade-off between file size and fidelity. Image-heavy documents usually offer more room for reduction than text-only PDFs. Very aggressive target sizes can reduce image clarity and may change searchable text, forms, links or accessibility features, so keep the source and inspect the result.
+                </p>
+              </article>
+
+              <article className="rounded-2xl border border-violet-100 bg-violet-50/55 p-5">
+                <h3 className="text-base font-black text-[#0e1b2c]">Edit, sign and inspect with the right tool.</h3>
+                <p className="mt-2 text-sm font-medium leading-6 text-[#5b6b80]">
+                  Add Text, Add Image and Watermark PDF place visible content on pages without pretending to be a full desktop publishing editor. Sign PDF places a visual electronic signature; it is not a certificate-backed digital signature. Edit Metadata changes document properties, while Compare PDF helps review visible differences between two versions.
+                </p>
+              </article>
+
+              <article className="rounded-2xl border border-amber-100 bg-amber-50/55 p-5">
+                <h3 className="text-base font-black text-[#0e1b2c]">Protect, unlock and repair responsibly.</h3>
+                <p className="mt-2 text-sm font-medium leading-6 text-[#5b6b80]">
+                  Protect PDF applies password-based security to a document. Unlock PDF requires the current valid password and should only be used when you own the file or have permission to remove protection. Repair PDF attempts recovery of damaged PDF structure but cannot guarantee that every corrupted object or missing page can be restored.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section className="mt-6 rounded-[1.35rem] border border-[#e3e9f4] bg-[#f8fafc] p-5 sm:p-7" aria-labelledby="pdf-processing-guide">
+            <h2 id="pdf-processing-guide" className="text-xl font-black tracking-[-.03em] text-[#0e1b2c]">
+              Understand how your PDF is processed.
+            </h2>
+            <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-[#5b6b80]">
+              AJN PDF uses different processing models depending on the task. Supported browser workflows can operate within the active session, while security, recovery or other advanced operations may use a temporary online request. Each public tool explains its current processing mode and important limits instead of making one privacy claim for every workflow.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link href="/transparency" className="rounded-xl border border-[#dbe4f0] bg-white px-4 py-2.5 text-xs font-black text-[#1a56db] hover:bg-blue-50">
+                File handling details
+              </Link>
+              <Link href="/security" className="rounded-xl border border-[#dbe4f0] bg-white px-4 py-2.5 text-xs font-black text-[#1a56db] hover:bg-blue-50">
+                Security practices
+              </Link>
+              <Link href="/limits" className="rounded-xl border border-[#dbe4f0] bg-white px-4 py-2.5 text-xs font-black text-[#1a56db] hover:bg-blue-50">
+                Processing limits
+              </Link>
+              <Link href="/blog" className="rounded-xl border border-[#dbe4f0] bg-white px-4 py-2.5 text-xs font-black text-[#1a56db] hover:bg-blue-50">
+                PDF guides
+              </Link>
+            </div>
+          </section>
         </section>
       </main>
 
@@ -159,15 +219,5 @@ function PDFToolsContent() {
 }
 
 export default function PDFToolsPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="ajn-page-shell flex min-h-screen items-center justify-center px-4 text-center">
-          <p className="text-sm font-bold text-[#5b6b80] dark:text-[#8b96ab]">Loading PDF tools…</p>
-        </div>
-      }
-    >
-      <PDFToolsContent />
-    </Suspense>
-  );
+  return <PDFToolsContent />;
 }

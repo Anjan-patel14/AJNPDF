@@ -195,8 +195,9 @@ check(
 
 check(
   'R16 canonical migration remains intact',
+  nextConfig.includes('publicToolLegacyRedirects') &&
   nextConfig.includes(
-    "{ source: '/tools/:id', destination: '/:id', permanent: true }"
+    "{ source: '/tools/:id', destination: '/pdf-tools', permanent: true }"
   ) &&
   nextConfig.includes(
     "value: 'ajnpdf.com'"

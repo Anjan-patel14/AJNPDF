@@ -20,7 +20,7 @@ const git = (args) => {
 };
 
 const src = fs.readFileSync(sitemapFile, 'utf8');
-const staticPaths = [...src.matchAll(/\{\s*path:\s*'([^']+)'/g)].map((match) => match[1]);
+const staticPaths = [...src.matchAll(/\{\s*path:\s*["']([^"']+)["']/g)].map((match) => match[1]);
 const ids = JSON.parse(fs.readFileSync(idsFile, 'utf8'));
 const normalize = (value) => (!value || value === '/' ? '/' : `/${value.replace(/^\/+|\/+$/g, '')}`);
 
