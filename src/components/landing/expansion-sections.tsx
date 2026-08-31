@@ -53,6 +53,15 @@ const confidenceItems = [
   "Clear file-processing information",
 ] as const;
 
+const buzzTools = [
+  { title: "Compress Image", text: "Reduce image file size." },
+  { title: "Resize Image", text: "Set custom image dimensions." },
+  { title: "Crop Image", text: "Frame exactly what you need." },
+  { title: "Convert Image", text: "Switch common image formats." },
+  { title: "Photo Editor", text: "Make quick visual adjustments." },
+  { title: "Meme Maker", text: "Create shareable image content." },
+] as const;
+
 export default function ExpansionSections() {
   return (
     <>
@@ -148,11 +157,22 @@ export default function ExpansionSections() {
               Continue to AJN Buzz for image compression, resize, crop, conversion and quick image editing tools.
             </p>
 
-            <div className="mt-5 grid grid-cols-3 gap-2">
-              {["Compress","Resize","Edit"].map((label) => (
-                <div key={label} className="rounded-2xl border border-emerald-100 bg-white px-3 py-4 text-center text-[10px] font-black text-[#334155] shadow-sm dark:border-emerald-400/10 dark:bg-[#111827] dark:text-[#cbd5e1]">
-                  {label}
-                </div>
+            <div className="mt-5 grid gap-2 sm:grid-cols-2">
+              {buzzTools.map((item) => (
+                <a
+                  key={item.title}
+                  href="https://ajn.buzz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${item.title} on AJN Buzz`}
+                  className="group flex min-h-[78px] items-center justify-between gap-3 rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-left shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-[0_12px_26px_rgba(14,159,110,.10)] dark:border-emerald-400/10 dark:bg-[#111827] dark:hover:border-emerald-400/25"
+                >
+                  <span>
+                    <span className="block text-[11px] font-black text-[#0e1b2c] dark:text-[#eef2f9]">{item.title}</span>
+                    <span className="mt-1 block text-[10px] font-semibold leading-4 text-[#64748b] dark:text-[#94a3b8]">{item.text}</span>
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 shrink-0 text-[#0e9f6e] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 dark:text-emerald-300" />
+                </a>
               ))}
             </div>
 

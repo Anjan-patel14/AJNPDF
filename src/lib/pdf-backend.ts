@@ -90,26 +90,86 @@ export async function checkPdfBackendHealth(signal?: AbortSignal): Promise<PdfBa
   return { status: 'offline', message: 'Online tools are temporarily unavailable.', messageKey: 'backend.offline' };
 }
 
-async function postPdf(path: string, form: FormData): Promise<Blob> {
-  if (!isPdfBackendConfigured) throw new PdfBackendError('This tool is temporarily unavailable.', 'SERVICE_UNAVAILABLE');
-  const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), 190_000);
-  try {
-    const response = await fetch(`${currentServiceUrl()}${path}`, { method: 'POST', body: form, signal: controller.signal });
-    if (!response.ok) {
-      const payload = await response.json().catch(() => ({}));
-      throw new PdfBackendError(payload.error || `Could not complete this request (${response.status}).`, payload.code || 'PROCESSING_FAILED', response.status, response.headers.get('x-request-id') || payload.request_id);
-    }
-    return await response.blob();
-  } catch (error) {
-    if (error instanceof DOMException && error.name === 'AbortError') throw new PdfBackendError('This request took too long. Try a smaller file or try again.', 'TIMEOUT');
-    if (error instanceof TypeError) throw new PdfBackendError('This tool is temporarily unavailable. Please try again.', 'SERVICE_UNAVAILABLE');
-    throw error;
-  } finally {
-    window.clearTimeout(timeout);
-  }
+const SECURITY_RETRY_STATUSES = new Set([502, 503, 504]);
+
+function securityRetryDelay(ms: number): Promise<void> {
+  return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
+async function postPdf(path: string, form: FormData): Promise<Blob> {
+  if (!isPdfBackendConfigured) {
+    throw new PdfBackendError('The secure processing service is not configured.', 'SERVICE_UNAVAILABLE');
+  }
+
+  const candidates = [...new Set([currentServiceUrl(), ...SERVICE_CANDIDATES].filter(Boolean))];
+  let lastError: PdfBackendError | null = null;
+
+  for (const candidate of candidates) {
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 190_000);
+      try {
+        const response = await fetch(`${candidate}${path}`, {
+          method: 'POST',
+          body: form,
+          signal: controller.signal,
+        });
+
+        if (response.ok) {
+          activeServiceUrl = candidate;
+          return await response.blob();
+        }
+
+        const payload = await response.json().catch(() => ({}));
+        const requestError = new PdfBackendError(
+          payload.error || `Could not complete this request (${response.status}).`,
+          payload.code || 'PROCESSING_FAILED',
+          response.status,
+          response.headers.get('x-request-id') || payload.request_id,
+        );
+        lastError = requestError;
+
+        // Validation, password, authorization, format and rate-limit failures are
+        // definitive responses and must never be hidden behind a retry.
+        if (!SECURITY_RETRY_STATUSES.has(response.status)) {
+          throw requestError;
+        }
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          throw new PdfBackendError(
+            'This request took too long. Try a smaller file or try again.',
+            'TIMEOUT',
+          );
+        }
+
+        if (error instanceof TypeError) {
+          lastError = new PdfBackendError(
+            'The secure processor could not be reached. Please try again.',
+            'SERVICE_UNAVAILABLE',
+          );
+        } else if (error instanceof PdfBackendError) {
+          lastError = error;
+          if (!SECURITY_RETRY_STATUSES.has(error.status || 0)) {
+            throw error;
+          }
+        } else {
+          throw error;
+        }
+      } finally {
+        window.clearTimeout(timeout);
+      }
+
+      if (attempt === 0) {
+        await securityRetryDelay(1200);
+      }
+    }
+  }
+
+  throw lastError || new PdfBackendError(
+    'The secure processor could not be reached. Please try again.',
+    'SERVICE_UNAVAILABLE',
+  );
+}
 export async function protectPdfOnServer(args: { file: File; userPassword: string; ownerPassword?: string; outputName: string; allowPrinting: boolean; allowCopying: boolean; allowEditing: boolean; allowAnnotations: boolean; allowFormFilling: boolean; }): Promise<Blob> {
   const form = new FormData();
   form.set('file', args.file); form.set('user_password', args.userPassword); form.set('owner_password', args.ownerPassword || '');

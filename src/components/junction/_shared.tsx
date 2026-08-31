@@ -1,14 +1,13 @@
 "use client";
 import React, { useCallback, useId, useRef, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
-import { AlertTriangle, Download, Eye, FileCheck2, Loader2, RefreshCcw, Share2, UploadCloud, X } from "lucide-react";
+import { Download, Eye, FileCheck2, RefreshCcw, Share2, UploadCloud, X } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { sendAjnAnalytics } from "../analytics/site-analytics";
 import { useLanguage } from "@/lib/i18n/language-context";
 import { ToolArtwork } from "@/components/ajn/tool-artwork";
 import { toolIdFromPathname } from "@/lib/tool-routes";
 import { getToolLimitProfile } from "@/lib/tool-limits";
-import { usePdfBackendStatus } from "./backend-status";
 import { CloudImportActions, GoogleDriveExportAction } from "./CloudFileActions";
 import { PrivacyBadge } from "@/components/workspace/PrivacyBadge";
 import { RecoveryError } from "@/components/workspace/RecoveryError";
@@ -148,8 +147,6 @@ export function ToolWorkspace({ title, description, accent = T.blue, children }:
   const localized = localizeTool(toolId, title, description, []);
   const limitProfile = getToolLimitProfile(toolId);
   const serverMode = limitProfile.executionMode === "server";
-  const { checking, online, refresh } = usePdfBackendStatus(serverMode ? 30000 : 0, serverMode);
-  const serviceBlocked = serverMode && (checking || !online);
 
   return (
     <div className="jn-workspace relative min-h-screen overflow-hidden" style={{ "--jn-accent": accent, background: "transparent", WebkitFontSmoothing: "antialiased" } as React.CSSProperties}>
@@ -162,16 +159,16 @@ export function ToolWorkspace({ title, description, accent = T.blue, children }:
             <PrivacyBadge toolId={toolId} className="mt-2" />
           </div>
         </div>
-        <section className="jn-card ajn-product-canvas rounded-[1.25rem] border border-[#e3e9f4] bg-white p-4 shadow-[0_14px_44px_rgba(14,27,44,.07)] dark:border-white/10 dark:bg-[#111827] dark:shadow-[0_20px_60px_rgba(0,0,0,.32)] sm:p-6">{serverMode && serviceBlocked && (
-            <div role="status" aria-live="polite" className="mb-4 flex items-start justify-between gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-950">
-              <div className="flex min-w-0 gap-2.5">
-                {checking ? <Loader2 className="mt-0.5 h-4 w-4 shrink-0 animate-spin" /> : <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />}
-                <div><p className="text-xs font-black">{checking ? "Checking availability..." : "Temporarily unavailable"}</p><p className="mt-1 text-[11px] font-semibold leading-5 opacity-80">{checking ? "AJN PDF is confirming live availability before accepting the selected file." : "This tool is temporarily unavailable. On-device AJN PDF tools remain available."}</p></div>
+        <section className="jn-card ajn-product-canvas rounded-[1.25rem] border border-[#e3e9f4] bg-white p-4 shadow-[0_14px_44px_rgba(14,27,44,.07)] dark:border-white/10 dark:bg-[#111827] dark:shadow-[0_20px_60px_rgba(0,0,0,.32)] sm:p-6">{serverMode && (
+            <div role="status" className="mb-4 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-950 dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-100">
+              <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,.12)]" aria-hidden="true" />
+              <div>
+                <p className="text-xs font-black">Secure server processing</p>
+                <p className="mt-1 text-[11px] font-semibold leading-5 opacity-80">The secure processor connects when you start. A cold start will no longer disable this tool; real processing errors are shown here if the request cannot complete.</p>
               </div>
-              {!checking && <button type="button" onClick={() => void refresh()} className="shrink-0 rounded-lg border border-amber-300 bg-white px-3 py-2 text-[10px] font-black text-amber-900">Retry</button>}
             </div>
           )}
-          <fieldset disabled={serviceBlocked} aria-disabled={serviceBlocked || undefined} className="m-0 min-w-0 border-0 p-0 disabled:cursor-not-allowed disabled:opacity-70">
+          <fieldset className="m-0 min-w-0 border-0 p-0">
             {children}
           </fieldset>
         </section>
