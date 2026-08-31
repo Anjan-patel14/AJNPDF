@@ -21,7 +21,7 @@ export default function StatusPage() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-2 text-[11px] font-extrabold text-blue-700"><Activity className="h-4 w-4" /> Live availability</span>
             <h1 className="mt-6 text-balance text-[clamp(2.25rem,7vw,4.4rem)] font-black leading-[1.02] tracking-[-.045em] text-foreground">AJN PDF live status</h1>
-            <p className="mx-auto mt-5 max-w-2xl text-sm font-medium leading-7 text-muted-foreground md:text-lg md:leading-8">See current website and online-tool availability. Checks refresh automatically so unavailable workflows can be blocked before file selection.</p>
+            <p className="mx-auto mt-5 max-w-2xl text-sm font-medium leading-7 text-muted-foreground md:text-lg md:leading-8">See current website and online-tool availability. Readiness is checked when this page opens and can be refreshed manually.</p>
           </div>
 
           <div className="mt-10 grid gap-4 md:mt-12 md:grid-cols-3 md:gap-5">
@@ -39,9 +39,9 @@ export default function StatusPage() {
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-3">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white"><Activity className="h-5 w-5" /></span>
-                  <div><h2 className="text-2xl font-black tracking-tight">Online tool availability</h2><p className="mt-1 text-sm font-medium text-muted-foreground">Live readiness and available workflow counts refresh every 30 seconds.</p></div>
+                  <div><h2 className="text-2xl font-black tracking-tight">Online tool availability</h2><p className="mt-1 text-sm font-medium text-muted-foreground">Readiness is checked when this page opens. Use refresh to check again.</p></div>
                 </div>
-                <div className="mt-6"><BackendStatus autoRefreshMs={30000} /></div>
+                <div className="mt-6"><BackendStatus autoRefreshMs={0} /></div>
               </div>
               <Link href="/transparency" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-extrabold text-white shadow-lg shadow-blue-100 transition-colors duration-150 hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2">File handling <ArrowRight className="h-4 w-4" /></Link>
             </div>

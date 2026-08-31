@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { ToolWorkspace, Drop, Btn, Done, Err, F, G2, IS, Info, ToolFile, dl } from "./_shared";
-import { protectPdfOnServer, checkPdfBackendHealth } from "@/lib/pdf-backend";
+import { protectPdfOnServer } from "@/lib/pdf-backend";
 import { safeOutputName, validateFiles } from "@/lib/file-validation";
 
 import { useLanguage } from "@/lib/i18n/language-context";
@@ -22,9 +22,7 @@ export default function ProtectPdf() {
   const [error, setError] = useState("");
 
   const run = async () => {
-    const latestHealth = await checkPdfBackendHealth();
-    if (latestHealth.status !== "online") { setError("This tool is temporarily unavailable. Check live status and try again."); return; }
-    const latestLimits = resolveBackendLimits(latestHealth);
+    const latestLimits = resolveBackendLimits();
     const effectiveMaxMb = Math.min(latestLimits.maxFileSizeMb, latestLimits.maxTotalSizeMb);
     const validation = validateFiles(files.map(item => item.file), { extensions: [".pdf"], minFiles: 1, maxFiles: 1, maxSizeMb: effectiveMaxMb });
     if (validation) { setError(validation); return; }

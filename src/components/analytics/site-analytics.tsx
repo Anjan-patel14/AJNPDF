@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useReportWebVitals } from 'next/web-vitals';
-import { PDF_BACKEND_URL } from '@/lib/pdf-backend';
 import { toolIdFromPathname } from '@/lib/tool-routes';
 
 const CONSENT_KEY = 'ajn_cookie_consent';
@@ -151,22 +150,6 @@ export function sendAjnAnalytics(event: SiteEvent) {
     });
   }
 
-  if (!PDF_BACKEND_URL) return;
-  const body = JSON.stringify(payload);
-  const endpoint = `${PDF_BACKEND_URL}/api/analytics/event`;
-
-  if (navigator.sendBeacon) {
-    const blob = new Blob([body], { type: 'application/json' });
-    navigator.sendBeacon(endpoint, blob);
-    return;
-  }
-
-  void fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body,
-    keepalive: true,
-  }).catch(() => undefined);
 }
 
 function analyticsId(target: HTMLElement): string | undefined {
