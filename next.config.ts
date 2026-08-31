@@ -9,14 +9,13 @@ const backendOrigins = [...new Set(configuredPdfBackendCandidates(isProduction).
 const connectSources = [
   "'self'", ...backendOrigins,
   'https://identitytoolkit.googleapis.com', 'https://securetoken.googleapis.com', 'https://www.googleapis.com', 'https://apis.google.com', 'https://accounts.google.com', 'https://*.firebaseapp.com',
-  'https://api.razorpay.com', 'https://*.razorpay.com',
   'https://www.google-analytics.com', 'https://region1.google-analytics.com', 'https://*.google-analytics.com',
   'https://pagead2.googlesyndication.com', 'https://*.googlesyndication.com', 'https://*.doubleclick.net'];
 const contentSecurityPolicy = [
   "default-src 'self'", "base-uri 'self'", "object-src 'none'", "frame-ancestors 'self'", "form-action 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com https://checkout.razorpay.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://*.googlesyndication.com",
+  "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://*.googlesyndication.com",
   "style-src 'self' 'unsafe-inline'", "img-src 'self' data: blob: https:", "font-src 'self' data:",
-  `connect-src ${connectSources.join(' ')}`, "frame-src 'self' https://*.firebaseapp.com https://accounts.google.com https://api.razorpay.com https://*.razorpay.com https://*.googlesyndication.com https://*.doubleclick.net",
+  `connect-src ${connectSources.join(' ')}`, "frame-src 'self' https://*.firebaseapp.com https://accounts.google.com https://*.googlesyndication.com https://*.doubleclick.net",
   "worker-src 'self' blob:", "media-src 'self' blob:", isProduction ? 'upgrade-insecure-requests' : ''].filter(Boolean).join('; ');
 
 const imageToolIds = ['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image','meme-generator','photo-editor','upscale-image','remove-bg','blur-face'];
@@ -70,11 +69,17 @@ const nextConfig: NextConfig = {
       ...imageToolRedirects,
       ...retiredToolRedirects,
       ...publicToolLegacyRedirects,
-      { source: '/image-tools', destination: '/img', permanent: true },
+      { source: '/login', destination: '/pdf-tools', permanent: true },
+      { source: '/signup', destination: '/pdf-tools', permanent: true },
+      { source: '/forgot-password', destination: '/pdf-tools', permanent: true },
+      { source: '/account/:path*', destination: '/pdf-tools', permanent: true },
+      { source: '/pricing', destination: '/pdf-tools', permanent: true },
+      { source: '/workspace/:path*', destination: '/pdf-tools', permanent: true },
+      { source: '/ajn-studio/:path*', destination: '/pdf-tools', permanent: true },      { source: '/image-tools', destination: '/img', permanent: true },
       { source: '/:path*', has: [{ type: 'host', value: 'ajnpdf.com' }], destination: 'https://www.ajnpdf.com/:path*', permanent: true },
-      { source: '/guides', destination: '/blog', permanent: true }, { source: '/ajn', destination: '/ajn-studio', permanent: true },
+      { source: '/guides', destination: '/blog', permanent: true }, { source: '/ajn', destination: '/pdf-tools', permanent: true },
       { source: '/story', destination: '/about', permanent: true }, { source: '/services', destination: '/pdf-tools', permanent: true },
-      { source: '/compare', destination: '/compare-pdf', permanent: true }, { source: '/dashboard', destination: '/account', permanent: true },
+      { source: '/compare', destination: '/compare-pdf', permanent: true }, { source: '/dashboard', destination: '/pdf-tools', permanent: true },
       { source: '/promo', destination: '/', permanent: true }, { source: '/whatsapp', destination: '/contact', permanent: true },
       { source: '/help/terms', destination: '/terms', permanent: true },
       { source: '/junction', destination: '/pdf-tools', permanent: true }, { source: '/junction/:path*', destination: '/pdf-tools', permanent: true },
@@ -84,14 +89,10 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: '/admin/:path*', headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0' }, { key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/account/:path*', headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0' }, { key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
-      { source: '/login', headers: [{ key: 'X-Robots-Tag', value: 'noindex, follow' }] },
-      { source: '/signup', headers: [{ key: 'X-Robots-Tag', value: 'noindex, follow' }] },
-      { source: '/forgot-password', headers: [{ key: 'X-Robots-Tag', value: 'noindex, follow' }] },
       { source: '/(.*)', headers: [
         { key: 'Content-Security-Policy', value: contentSecurityPolicy }, { key: 'X-Content-Type-Options', value: 'nosniff' },
         { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' }, { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-        { key: 'Permissions-Policy', value: 'camera=(self), microphone=(), geolocation=(), payment=(self), usb=()' },
+        { key: 'Permissions-Policy', value: 'camera=(self), microphone=(), geolocation=(), payment=(), usb=()' },
         { key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' }, { key: 'Cross-Origin-Resource-Policy', value: 'same-site' },
         { key: 'X-DNS-Prefetch-Control', value: 'on' },
         ...(enableHsts ? [{ key: 'Strict-Transport-Security', value: `max-age=63072000; includeSubDomains${enableHstsPreload ? '; preload' : ''}` }] : [])] }];

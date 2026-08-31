@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Crown, Menu, Search, UserRound, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { LogoAnimation } from "./logo-animation";
 import { Button } from "../ui/button";
 import { SearchModal } from "../search-modal";
@@ -12,8 +12,6 @@ import { useLanguage } from "@/lib/i18n/language-context";
 import { toolPath } from "@/lib/tool-routes";
 import { cn } from "@/lib/utils";
 import { AllToolsMenu } from "./all-tools-menu";
-import { useAuth } from "@/lib/auth-context";
-
 
 const quickTools = [
   { id: "merge-pdf", fallback: "Merge" },
@@ -29,9 +27,6 @@ export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const reduceMotion = useReducedMotion();
   const { t, tool: localizeTool } = useLanguage();
-  const auth = useAuth();
-  const premium = Boolean(auth.session && auth.plan !== "free");
-
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 18);
@@ -90,10 +85,10 @@ export function Navbar() {
             })}
 
             <Link
-              href="/pricing"
-              className="inline-flex h-10 items-center rounded-xl px-2.5 text-[11px] font-extrabold text-[#5b6b80] transition hover:bg-[#fff7df] hover:text-[#a16207] dark:text-[#8b96ab] dark:hover:bg-amber-400/10 dark:hover:text-amber-300"
+              href="/status"
+              className="inline-flex h-10 items-center rounded-xl px-2.5 text-[11px] font-extrabold text-[#5b6b80] transition hover:bg-slate-100 hover:text-[#0e1b2c] dark:text-[#8b96ab] dark:hover:bg-white/5 dark:hover:text-white"
             >
-              Premium
+              Status
             </Link>
           </nav>
 
@@ -111,39 +106,14 @@ export function Navbar() {
               <Search className="h-[18px] w-[18px]" />
             </Button>
 
-
             <LanguageSwitcher compact className="hidden xl:inline-flex" />
 
-            {auth.session ? (
-              <Link
-                href="/account"
-                className={cn(
-                  "hidden min-h-10 items-center gap-2 rounded-xl border px-3 text-[11px] font-black shadow-sm transition sm:inline-flex",
-                  premium
-                    ? "border-amber-200 bg-[#fff7df] text-amber-900 hover:bg-amber-100 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-300"
-                    : "border-[#e3e9f4] bg-white text-[#0e1b2c] hover:border-blue-200 hover:bg-[#e1effe] dark:border-white/10 dark:bg-[#111827] dark:text-[#eef2f9] dark:hover:border-blue-400/30 dark:hover:bg-blue-400/10",
-                )}
-              >
-                {premium ? <Crown className="h-4 w-4 text-[#f59e0b]" /> : <UserRound className="h-4 w-4 text-[#1a56db] dark:text-[#3b82f6]" />}
-                {premium ? "Premium" : "Account"}
-              </Link>
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="hidden min-h-10 items-center rounded-xl px-3 text-[11px] font-black text-[#5b6b80] transition hover:bg-slate-100 hover:text-[#0e1b2c] dark:text-[#8b96ab] dark:hover:bg-white/5 dark:hover:text-white sm:inline-flex"
-                >
-                  Sign in
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="hidden min-h-10 items-center gap-1.5 rounded-xl bg-[#1a56db] px-3.5 text-[11px] font-black text-white shadow-[0_7px_18px_rgba(26,86,219,.18)] transition hover:bg-[#123fa8] md:inline-flex"
-                >
-                  <Crown className="h-3.5 w-3.5 text-amber-300" />
-                  Premium
-                </Link>
-              </>
-            )}
+            <Link
+              href="/pdf-tools"
+              className="hidden min-h-10 items-center rounded-xl bg-[#1a56db] px-3.5 text-[11px] font-black text-white shadow-[0_7px_18px_rgba(26,86,219,.18)] transition hover:bg-[#123fa8] md:inline-flex"
+            >
+              All PDF Tools
+            </Link>
 
             <AllToolsMenu iconOnly className="sm:hidden" />
 
@@ -191,7 +161,8 @@ export function Navbar() {
 
                 {[
                   { label: "All PDF Tools", href: "/pdf-tools" },
-                  { label: "Premium", href: "/pricing" },
+                  { label: "Service Status", href: "/status" },
+                  { label: "Security", href: "/security" },
                 ].map((item) => (
                   <Link
                     key={item.href}
@@ -204,14 +175,12 @@ export function Navbar() {
                   </Link>
                 ))}
 
-                <div className="my-2 border-t border-[#e3e9f4] dark:border-white/10" />
-
                 <Link
-                  href={auth.session ? "/account" : "/login"}
+                  href="/pdf-tools"
                   onClick={() => setMobileOpen(false)}
-                  className="flex min-h-11 items-center rounded-xl bg-[#e1effe] px-3 text-sm font-black text-[#1a56db] dark:bg-blue-400/10 dark:text-blue-300"
+                  className="mt-2 flex min-h-11 items-center justify-center rounded-xl bg-[#1a56db] px-3 text-sm font-black text-white"
                 >
-                  {auth.session ? (premium ? "Premium account" : "Account") : "Sign in"}
+                  Open PDF Tools
                 </Link>
 
                 <div className="mt-2 flex items-center justify-between rounded-xl border border-[#e3e9f4] bg-[#f8fafc] px-3 py-2 dark:border-white/10 dark:bg-[#111827] xl:hidden">

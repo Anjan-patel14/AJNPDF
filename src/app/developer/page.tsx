@@ -59,7 +59,7 @@ export default function DeveloperPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/pdf-tools" className="ajn-primary-button">Explore AJN PDF <ArrowRight className="h-4 w-4" /></Link>
               <Link href="/discover" className="ajn-secondary-button">Public image feed</Link>
-              <Link href="/ajn-studio" className="ajn-secondary-button">About AJN Studio</Link>
+              <Link href="/pdf-tools" className="ajn-secondary-button">About AJN Studio</Link>
             </div>
             <div className="mt-7 flex flex-wrap gap-2" aria-label="Anjan public links">
               <a className="ajn-icon-link" href={AJN_BRAND.social.instagram} target="_blank" rel="me noreferrer" aria-label="Anjan Kumar on Instagram"><Instagram className="h-4 w-4" /></a>

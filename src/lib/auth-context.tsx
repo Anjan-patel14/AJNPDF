@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   FirebaseSession,
   firebaseAuthConfigured,
@@ -11,10 +11,10 @@ import {
   signInWithGoogleProvider,
   signOutFirebaseCompat,
   signUpWithEmail,
-} from './firebase-rest';
+} from "./firebase-rest";
 
-const STORAGE_KEY = 'ajn.firebase.session.v1';
-type Plan = 'free' | 'premium' | 'business';
+const STORAGE_KEY = "ajn.firebase.session.v1";
+type Plan = "free" | "premium" | "business";
 
 type AuthContextValue = {
   configured: boolean;
@@ -43,24 +43,12 @@ function persist(value: FirebaseSession | null) {
   }
 }
 
-function normalizePlan(value: unknown, premium: unknown): Plan {
-  if (value === 'business') return 'business';
-  if (value === 'premium' || premium === true) return 'premium';
-  return 'free';
-}
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<FirebaseSession | null>(null);
   const [loading, setLoading] = useState(true);
-  const [billingPlan, setBillingPlan] = useState<Plan | null>(null);
-  const [planValidUntil, setPlanValidUntil] = useState<string | null>(null);
 
   const setAndPersist = useCallback((value: FirebaseSession | null) => {
     setSession(value);
-    if (!value) {
-      setBillingPlan(null);
-      setPlanValidUntil(null);
-    }
     persist(value);
   }, []);
 
@@ -99,33 +87,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [session, setAndPersist]);
 
-  const refreshPlan = useCallback(async () => {
-    const token = await getIdToken();
-    if (!token) {
-      setBillingPlan(null);
-      setPlanValidUntil(null);
-      return;
-    }
-    try {
-      const response = await fetch('/api/billing/account', {
-        headers: { Authorization: `Bearer ${token}` },
-        cache: 'no-store',
-      });
-      if (!response.ok) return;
-      const payload = await response.json();
-      const nextPlan = normalizePlan(payload?.plan, payload?.plan === 'premium');
-      setBillingPlan(nextPlan);
-      setPlanValidUntil(typeof payload?.valid_until === 'string' ? payload.valid_until : null);
-    } catch {
-      // Billing can be disabled while core Firebase authentication remains available.
-    }
-  }, [getIdToken]);
-
-  useEffect(() => {
-    if (!session) return;
-    void refreshPlan();
-  }, [session, refreshPlan]);
-
   const signIn = useCallback(async (email: string, password: string) => {
     setAndPersist(await signInWithEmail(email, password));
   }, [setAndPersist]);
@@ -144,16 +105,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [setAndPersist]);
 
   const claims = useMemo(() => session ? parseFirebaseClaims(session.idToken) : {}, [session]);
-  const claimPlan = normalizePlan(claims.plan, claims.premium);
-  const plan = billingPlan && billingPlan !== 'free' ? billingPlan : claimPlan;
+  const refreshPlan = useCallback(async () => {}, []);
 
   const value = useMemo<AuthContextValue>(() => ({
     configured: firebaseAuthConfigured,
     loading,
     session,
     claims,
-    plan,
-    planValidUntil,
+    plan: "free",
+    planValidUntil: null,
     signIn,
     signUp,
     signInWithGoogle,
@@ -161,13 +121,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signOut,
     getIdToken,
     refreshPlan,
-  }), [loading, session, claims, plan, planValidUntil, signIn, signUp, signInWithGoogle, signOut, getIdToken, refreshPlan]);
+  }), [loading, session, claims, signIn, signUp, signInWithGoogle, signOut, getIdToken, refreshPlan]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
   const value = useContext(AuthContext);
-  if (!value) throw new Error('useAuth must be used inside AuthProvider.');
+  if (!value) throw new Error("useAuth must be used inside AuthProvider.");
   return value;
 }
