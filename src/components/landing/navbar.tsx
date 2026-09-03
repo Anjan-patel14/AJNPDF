@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Menu, Search, X } from "lucide-react";
+import { ImageIcon, Menu, Search, X } from "lucide-react";
 import { LogoAnimation } from "./logo-animation";
 import { Button } from "../ui/button";
 import { SearchModal } from "../search-modal";
@@ -93,6 +93,27 @@ export function Navbar() {
           </nav>
 
           <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-1.5">
+            <a
+              href="https://ajn.buzz"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open AJN Buzz Image Tools"
+              className="hidden min-h-10 items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-3 text-[11px] font-black text-emerald-800 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-100 lg:inline-flex"
+            >
+              <ImageIcon className="h-4 w-4" />
+              Image Tools
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a
+              href="https://ajn.buzz"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open AJN Buzz Image Tools"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-700 transition hover:bg-emerald-100 lg:hidden"
+            >
+              <ImageIcon className="h-[18px] w-[18px]" />
+            </a>
+
             <AllToolsMenu className="hidden sm:inline-flex" />
 
             <Button
@@ -156,6 +177,17 @@ export function Navbar() {
                     );
                   })}
                 </div>
+
+                <a
+                  href="https://ajn.buzz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex min-h-11 items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50 px-3 text-sm font-black text-emerald-800"
+                >
+                  <span className="inline-flex items-center gap-2"><ImageIcon className="h-4 w-4" /> AJN Buzz Image Tools</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
 
                 <div className="my-2 border-t border-[#e3e9f4] dark:border-white/10" />
 

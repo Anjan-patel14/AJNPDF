@@ -47,7 +47,7 @@ const toneClasses = {
 } as const;
 
 const confidenceItems = [
-  "20 focused public PDF tools",
+  "25 focused public PDF tools",
   "No public login required",
   "Responsive desktop and mobile UI",
   "Clear file-processing information",

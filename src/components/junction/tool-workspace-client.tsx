@@ -11,6 +11,14 @@ import MergePdf from './MergePdf';
 import { notFound } from 'next/navigation';
 
 /** AJN Universal Tool Connector — one production processor per capability. */
+const BROWSER_IMAGE_TO_PDF_IDS = new Set([
+  'image-to-pdf',
+  'jpg-to-pdf',
+  'jpeg-to-pdf',
+  'png-to-pdf',
+  'webp-to-pdf',
+]);
+
 const SERVER_CONVERSION_IDS = new Set([...CONVERSION_TOOLS.map((tool) => tool.id), 'png-to-pdf']);
 
 // Old AJN URLs stay useful, but execute the same canonical backend processor.
@@ -51,6 +59,13 @@ const TOOL_COMPONENTS: Record<string, any> = {
   'add-text': dynamic(() => import('./AddText'), { ssr: false }),
   'add-image-to-pdf': dynamic(() => import('./AddImageToPdf'), { ssr: false }),
 
+  // Browser-only image -> PDF conversions. These routes never require Cloud Run.
+  'image-to-pdf': dynamic(() => import('./ImagesToPdf'), { ssr: false }),
+  'jpg-to-pdf': dynamic(() => import('./ImagesToPdf'), { ssr: false }),
+  'jpeg-to-pdf': dynamic(() => import('./ImagesToPdf'), { ssr: false }),
+  'png-to-pdf': dynamic(() => import('./ImagesToPdf'), { ssr: false }),
+  'webp-to-pdf': dynamic(() => import('./ImagesToPdf'), { ssr: false }),
+
   // Formats without a proven production processor remain unavailable rather than faked.
   'ppt-word': dynamic(() => import('./UnavailableTool'), { ssr: false }),
   'psd-pdf': dynamic(() => import('./UnavailableTool'), { ssr: false }),
@@ -88,7 +103,7 @@ export function ToolWorkspaceClient({ id }: ToolWorkspaceClientProps) {
   const toolData = BUILD_PUBLIC_TOOLS.find(t => t.id === id);
   if (!toolData) notFound();
 
-  const serverToolId = SERVER_ALIASES[id] || (SERVER_CONVERSION_IDS.has(id) ? id : null);
+  const serverToolId = BROWSER_IMAGE_TO_PDF_IDS.has(id) ? null : (SERVER_ALIASES[id] || (SERVER_CONVERSION_IDS.has(id) ? id : null));
   const r19FidelityIds = new Set([
     'word-to-pdf','doc-to-pdf','docx-to-pdf','excel-to-pdf','xls-to-pdf','xlsx-to-pdf',
     'powerpoint-to-pdf','ppt-to-pdf','pptx-to-pdf','odt-to-pdf','ods-to-pdf','odp-to-pdf',

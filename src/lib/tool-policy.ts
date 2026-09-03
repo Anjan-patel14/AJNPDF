@@ -12,9 +12,8 @@ export interface ToolPolicy {
   limitation?: string;
 }
 
-// R21 production allowlist: AJN PDF is deliberately PDF-only. Image utilities
-// remain in source for migration to the AJN image/Buzz product but are not
-// public AJN PDF routes, navigation items or sitemap entries.
+// Production allowlist: AJN PDF remains PDF-focused and now includes five browser-only
+// image-to-PDF creation workflows. General image editing stays on AJN Buzz.
 export const PRODUCTION_PUBLIC_TOOL_IDS = new Set([
   'add-image-to-pdf',
   'add-text',
@@ -23,6 +22,11 @@ export const PRODUCTION_PUBLIC_TOOL_IDS = new Set([
   'crop-pdf',
   'delete-pdf-pages',
   'extract-images',
+  'image-to-pdf',
+  'jpg-to-pdf',
+  'jpeg-to-pdf',
+  'png-to-pdf',
+  'webp-to-pdf',
   'flatten-pdf',
   'merge-pdf',
   'organize-pdf',
@@ -38,10 +42,15 @@ export const PRODUCTION_PUBLIC_TOOL_IDS = new Set([
   'watermark-pdf',
 ]);
 
+const browserImageToPdfIds = new Set([
+  'image-to-pdf', 'jpg-to-pdf', 'jpeg-to-pdf', 'png-to-pdf', 'webp-to-pdf',
+]);
+
 const stableBrowserIds = new Set([
   'merge-pdf', 'split-pdf', 'rotate-pdf', 'delete-pdf-pages', 'organize-pdf',
   'crop-pdf', 'watermark-pdf', 'page-number', 'flatten-pdf', 'compare-pdf',
   'add-text', 'add-image-to-pdf', 'pdf-metadata', 'pdf-zip-extract', 'sign-pdf',
+  ...browserImageToPdfIds,
   // Source-only image processors retained for AJN IMG/Buzz migration.
   'image-reducer', 'image-resizer', 'crop-image', 'rotate-image', 'watermark-image',
   'flip-image', 'convert-image', 'meme-generator', 'photo-editor',
@@ -90,8 +99,10 @@ export function getToolPolicy(id: string): ToolPolicy {
   }
   if (stableBrowserIds.has(id)) {
     return {
-      maturity: 'stable', processingMode: 'browser', maxFiles: id === 'merge-pdf' ? MERGE_PDF_LIMITS.maxFiles : 1,
-      maxFileSizeMb: id === 'merge-pdf' ? MERGE_PDF_LIMITS.maxFileSizeMb : 50, publicByDefault: true,
+      maturity: 'stable', processingMode: 'browser',
+      maxFiles: browserImageToPdfIds.has(id) ? 30 : id === 'merge-pdf' ? MERGE_PDF_LIMITS.maxFiles : 1,
+      maxFileSizeMb: browserImageToPdfIds.has(id) ? 15 : id === 'merge-pdf' ? MERGE_PDF_LIMITS.maxFileSizeMb : 50,
+      publicByDefault: true,
     };
   }
   if (id in limitedBrowser) {

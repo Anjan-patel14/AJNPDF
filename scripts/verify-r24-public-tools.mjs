@@ -9,11 +9,12 @@ const check = (label, ok) => ok ? console.log(`PASS: ${label}`) : failures.push(
 
 const expected = [
   'add-image-to-pdf','add-text','compare-pdf','compress-pdf','crop-pdf','delete-pdf-pages',
-  'extract-images','flatten-pdf','merge-pdf','organize-pdf','page-number','pdf-metadata',
-  'pdf-zip-extract','protect-pdf','repair-pdf','rotate-pdf','sign-pdf','split-pdf','unlock-pdf','watermark-pdf',
+  'extract-images','flatten-pdf','image-to-pdf','jpeg-to-pdf','jpg-to-pdf','merge-pdf',
+  'organize-pdf','page-number','pdf-metadata','pdf-zip-extract','png-to-pdf','protect-pdf',
+  'repair-pdf','rotate-pdf','sign-pdf','split-pdf','unlock-pdf','watermark-pdf','webp-to-pdf',
 ].sort();
 const ids = JSON.parse(read('scripts/r13-public-tool-ids.json')).sort();
-check('public catalog remains exactly 20 PDF tools', JSON.stringify(ids) === JSON.stringify(expected));
+check('public catalog remains exactly 25 PDF-focused tools', JSON.stringify(ids) === JSON.stringify(expected));
 
 const policy = read('src/lib/tool-policy.ts');
 for (const id of expected) check(`tool policy includes ${id}`, policy.includes(`'${id}'`));
