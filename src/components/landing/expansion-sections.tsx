@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import {
@@ -47,7 +47,7 @@ const toneClasses = {
 } as const;
 
 const confidenceItems = [
-  "25 focused public PDF tools",
+  "26 focused public PDF tools",
   "No public login required",
   "Responsive desktop and mobile UI",
   "Clear file-processing information",
@@ -210,3 +210,4 @@ export default function ExpansionSections() {
     </>
   );
 }
+

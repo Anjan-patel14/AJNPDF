@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { ToolArtwork } from "@/components/ajn/tool-artwork";
 import { toolPath } from "@/lib/tool-routes";
 
@@ -36,12 +36,74 @@ const toneClasses = {
   },
 } as const;
 
+const editorFeatures = [
+  "Edit existing text",
+  "Match PDF font style",
+  "Add text, images & signatures",
+  "Undo, redo & live preview",
+] as const;
 export function QuickToolsScroller() {
   return (
     <section
       className="mx-auto w-full max-w-6xl px-4 md:px-8"
       aria-labelledby="ajn-quick-tools-title"
     >
+      <Link
+        href="/edit-pdf"
+        prefetch={false}
+        data-ajn-pdf-editor-feature-card="true"
+        aria-label="Open AJN PDF Editor"
+        className="group relative mb-5 block overflow-hidden rounded-[24px] border-2 border-blue-300 bg-[#eef5ff] p-5 shadow-[0_22px_58px_rgba(37,99,235,.18)] transition duration-200 hover:-translate-y-0.5 hover:border-blue-400 hover:bg-white hover:shadow-[0_26px_70px_rgba(37,99,235,.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600 sm:p-6"
+      >
+        <span className="absolute inset-y-0 left-0 w-1.5 bg-[#1a56db]" aria-hidden="true" />
+        <span className="absolute right-0 top-0 h-24 w-24 rounded-bl-[56px] bg-blue-100/80" aria-hidden="true" />
+
+        <div className="relative grid gap-5 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
+          <div className="flex min-w-0 gap-4 sm:gap-5">
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[18px] border border-blue-200 bg-white shadow-[0_10px_26px_rgba(37,99,235,.12)] sm:h-[74px] sm:w-[74px]">
+              <ToolArtwork
+                toolId="edit-pdf"
+                toolName="PDF Editor"
+                className="h-12 w-12 sm:h-14 sm:w-14"
+              />
+            </span>
+
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full bg-[#1a56db] px-3 py-1 text-[9px] font-black uppercase tracking-[.14em] text-white shadow-sm">
+                  New • PDF Editor
+                </span>
+                <span className="rounded-full border border-emerald-200 bg-white px-3 py-1 text-[9px] font-black uppercase tracking-[.12em] text-emerald-700">
+                  Browser only • No upload
+                </span>
+              </div>
+
+              <h2 className="mt-3 text-2xl font-black tracking-[-.04em] text-[#0e1b2c] sm:text-3xl">
+                Edit PDF Online
+              </h2>
+              <p className="mt-2 max-w-2xl text-xs font-semibold leading-5 text-[#506176] sm:text-sm sm:leading-6">
+                Change names, dates, numbers and text. Match the original PDF font style, add images or signatures, manage pages and preview changes before download.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative rounded-[18px] border border-blue-200 bg-white/95 p-4 shadow-sm">
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              {editorFeatures.map((feature) => (
+                <span key={feature} className="flex items-center gap-2 text-[10.5px] font-black text-[#334155] sm:text-[11px]">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#0e9f6e]" />
+                  {feature}
+                </span>
+              ))}
+            </div>
+
+            <span className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#1a56db] px-5 text-xs font-black text-white shadow-[0_10px_24px_rgba(26,86,219,.22)] transition group-hover:bg-[#123fa8]">
+              Open PDF Editor
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </span>
+          </div>
+        </div>
+      </Link>
       <div className="rounded-[20px] border border-[#e3e9f4] bg-white/95 p-4 shadow-[0_12px_36px_rgba(14,27,44,.06)] dark:border-white/10 dark:bg-[#111827]/95 dark:shadow-[0_18px_48px_rgba(0,0,0,.28)]">
         <div className="flex items-end justify-between gap-4">
           <div>
