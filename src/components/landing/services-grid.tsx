@@ -35,8 +35,8 @@ const GROUPS = [
   {
     id: "edit",
     title: "Edit & Sign PDF",
-    description: "Edit content and signatures.",
-    ids: ["add-text", "add-image-to-pdf", "watermark-pdf", "compare-pdf", "pdf-metadata", "extract-images", "sign-pdf", "pdf-zip-extract"],
+    description: "Edit text, signatures, content and page layout.",
+    ids: ["edit-pdf", "add-text", "add-image-to-pdf", "watermark-pdf", "compare-pdf", "pdf-metadata", "extract-images", "sign-pdf", "pdf-zip-extract"],
     board: "border-blue-100 bg-blue-50/35 dark:border-blue-400/15 dark:bg-blue-400/[.04]",
     bar: "bg-[#1a56db] dark:bg-[#3b82f6]",
   },
@@ -55,12 +55,16 @@ const ORGANIZE_IDS = new Set(["delete-pdf-pages", "organize-pdf", "crop-pdf", "p
 const SECURITY_IDS = new Set(["protect-pdf", "unlock-pdf", "repair-pdf"]);
 
 const INTENT_IDS: Record<string, string[]> = {
-  edit: ["add-text", "add-image-to-pdf", "watermark-pdf", "crop-pdf", "rotate-pdf", "page-number", "flatten-pdf", "sign-pdf", "pdf-metadata", "compare-pdf", "delete-pdf-pages", "extract-images"],
+  edit: ["edit-pdf", "add-text", "add-image-to-pdf", "watermark-pdf", "crop-pdf", "rotate-pdf", "page-number", "flatten-pdf", "sign-pdf", "pdf-metadata", "compare-pdf", "delete-pdf-pages", "extract-images"],
   organize: ["merge-pdf", "split-pdf", "organize-pdf", "delete-pdf-pages", "rotate-pdf", "crop-pdf", "page-number", "flatten-pdf", "pdf-zip-extract"],
   security: ["protect-pdf", "unlock-pdf", "repair-pdf"],
 };
 
 const SEARCH_EXPANSIONS: Record<string, string[]> = {
+  editor: ["edit", "text", "replace", "sign", "highlight"],
+  date: ["edit", "replace", "text"],
+  name: ["edit", "replace", "text"],
+  amount: ["edit", "replace", "text"],
   reduce: ["compress", "smaller", "optimize"],
   smaller: ["compress", "reduce"],
   secure: ["protect", "lock"],
@@ -195,6 +199,7 @@ function ToolCard({ tool, query, priority = false }: { tool: PublicTool; query: 
   const { tool: localizeTool } = useLanguage();
   const localized = localizeTool(tool.id, tool.name, tool.desc, tool.keywords);
   const tone = cardTone(tool.id);
+  const isEditor = tool.id === "edit-pdf";
 
   return (
     <Link
@@ -205,7 +210,13 @@ function ToolCard({ tool, query, priority = false }: { tool: PublicTool; query: 
       data-analytics-id={`tool-card-${tool.id}`}
       data-analytics-category="pdf"
     >
-      <article className={`ajn-premium-tool-card ${tone.card} flex h-full min-h-[158px] flex-col p-4 sm:p-5`}>
+      <article data-ajn-featured-editor={isEditor ? "true" : undefined} className={`ajn-premium-tool-card ${tone.card} flex h-full min-h-[158px] flex-col p-4 sm:p-5 ${isEditor ? "min-h-[202px] border-blue-300 bg-blue-50/80 shadow-[0_18px_48px_rgba(37,99,235,.16)] ring-1 ring-blue-300/70 dark:border-blue-400/25 dark:bg-blue-400/[.08] dark:ring-blue-400/20" : ""}`}>
+        {isEditor && (
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <span className="rounded-full bg-blue-600 px-2.5 py-1 text-[9px] font-black uppercase tracking-[.12em] text-white shadow-sm">New • Browser Editor</span>
+            <span className="text-[9px] font-black uppercase tracking-[.12em] text-emerald-700 dark:text-emerald-300">No file upload</span>
+          </div>
+        )}
         <div className="flex items-start justify-between gap-4">
           <div className={`flex h-[58px] w-[58px] items-center justify-center rounded-[14px] border p-1.5 ${tone.icon}`}>
             <ToolArtwork
@@ -228,6 +239,13 @@ function ToolCard({ tool, query, priority = false }: { tool: PublicTool; query: 
           <p className="mt-1.5 line-clamp-2 text-[11.5px] font-medium leading-[1.55] text-[#5b6b80] dark:text-[#8b96ab] sm:text-xs">
             <Highlight text={localized.desc} highlight={query} />
           </p>
+          {isEditor && (
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {["Smart text replace", "Font match", "Live preview"].map((label) => (
+                <span key={label} className="rounded-lg border border-blue-200 bg-white px-2 py-1 text-[9px] font-black text-blue-700 dark:border-blue-400/20 dark:bg-[#0c1220] dark:text-blue-300">{label}</span>
+              ))}
+            </div>
+          )}
         </div>
       </article>
     </Link>

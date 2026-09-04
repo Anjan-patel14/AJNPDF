@@ -42,6 +42,7 @@ const SERVER_ALIASES: Record<string, string> = {
 };
 
 const TOOL_COMPONENTS: Record<string, any> = {
+  'edit-pdf': dynamic(() => import('./PdfEditorLab'), { ssr: false }),
   // Core PDF suite
   'split-pdf': dynamic(() => import('./SplitPdf'), { ssr: false }),
   'compress-pdf': dynamic(() => import('./CompressPdf'), { ssr: false }),

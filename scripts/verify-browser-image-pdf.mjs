@@ -11,7 +11,7 @@ const processor = read('src/components/junction/ImagesToPdf.tsx');
 const navbar = read('src/components/landing/navbar.tsx');
 const ids = JSON.parse(read('scripts/r13-public-tool-ids.json'));
 
-check('public release contains 25 tools', ids.length === 25 && new Set(ids).size === 25);
+check('public release contains 26 tools', ids.length === 26 && new Set(ids).size === 26);
 for (const id of expectedBrowserImageIds) {
   check(`${id} is in the public release`, ids.includes(id));
   check(`${id} is public policy`, policy.includes(`'${id}'`));

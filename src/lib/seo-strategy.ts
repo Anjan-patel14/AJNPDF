@@ -22,14 +22,13 @@ const CATEGORY_TERMS = {
 
 const RECOGNITION_MARKERS = ['ocr', 'scanned', 'searchable', 'image-to-text', 'image-to-word', 'handwriting'];
 
-const PRIORITY_TITLES: Record<string, string> = {
+const PRIORITY_TITLES: Record<string, string> = {'edit-pdf': 'Edit PDF Online Free - Change Text & Sign PDF | AJN PDF',
   'merge-pdf': 'Merge PDF Online - Combine PDF Files | AJN PDF',
   'split-pdf': 'Split PDF Online - Extract PDF Pages | AJN PDF',
   'compress-pdf': 'Compress PDF Online - Reduce PDF Size | AJN PDF',
   'protect-pdf': 'Protect PDF Online - Add a PDF Password | AJN PDF',
   'unlock-pdf': 'Unlock PDF Online - Remove PDF Password | AJN PDF',
-  'organize-pdf': 'Organize PDF Online - Reorder PDF Pages | AJN PDF',
-  'add-text': 'Edit PDF Online - Add Text to PDF | AJN PDF',
+  'organize-pdf': 'Organize PDF Online - Reorder PDF Pages | AJN PDF','add-text': 'Add Text to PDF Online - Write on PDF | AJN PDF',
   'sign-pdf': 'Sign PDF Online - Add an Electronic Signature | AJN PDF',
   'repair-pdf': 'Repair PDF Online - Recover a Damaged PDF | AJN PDF',
   'rotate-pdf': 'Rotate PDF Online - Rotate PDF Pages | AJN PDF',
@@ -37,14 +36,13 @@ const PRIORITY_TITLES: Record<string, string> = {
   'watermark-pdf': 'Watermark PDF Online - Add Text Watermark | AJN PDF',
 };
 
-const PRIORITY_DESCRIPTIONS: Record<string, string> = {
+const PRIORITY_DESCRIPTIONS: Record<string, string> = {'edit-pdf': 'Edit PDF online in your browser with AJN PDF. Replace text, dates, names and numbers, match fonts, add images and signatures, highlight content, and manage pages locally.',
   'merge-pdf': 'Combine multiple PDF files in the order you choose, remove files before processing, and download one merged PDF.',
   'split-pdf': 'Split a PDF into smaller files, extract selected pages, or separate sections of a document with clear page controls.',
   'compress-pdf': 'Reduce PDF file size with practical compression controls. Already optimized PDFs may shrink only slightly.',
   'protect-pdf': 'Add password protection to an authorized PDF and download a protected copy.',
   'unlock-pdf': 'Remove PDF encryption when you know the valid password and are authorized to create an unlocked copy.',
-  'organize-pdf': 'Reorder, rotate, remove or duplicate PDF pages with a visual workspace, then download the updated document.',
-  'add-text': 'Add text directly to PDF pages, position it visually, and download a new copy without changing the original file.',
+  'organize-pdf': 'Reorder, rotate, remove or duplicate PDF pages with a visual workspace, then download the updated document.','add-text': 'Add new text directly to PDF pages, position it visually, and download a new copy without changing the original file.',
   'sign-pdf': 'Place a visual electronic signature on a PDF, position it on the page, and download a new signed copy.',
   'repair-pdf': 'Attempt safe recovery of a PDF with minor structural damage and download a separate repaired copy.',
   'rotate-pdf': 'Rotate all or selected PDF pages clockwise, counter-clockwise or 180 degrees and download a new copy.',

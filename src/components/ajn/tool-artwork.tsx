@@ -56,6 +56,7 @@ const toneClasses: Record<Tone, { shell: string; icon: string; badge: string; ar
 };
 
 const specialIcons: Record<string, SimpleIcon> = {
+  'edit-pdf': PenTool,
   'merge-pdf': Files,
   'split-pdf': Scissors,
   'compress-pdf': Shrink,

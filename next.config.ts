@@ -49,6 +49,7 @@ const retiredToolRedirects = retiredToolAliases.flatMap((source) => [
 ]);
 
 const publicToolIds = [
+  'edit-pdf',
   'add-image-to-pdf', 'add-text', 'compare-pdf', 'compress-pdf', 'crop-pdf',
   'delete-pdf-pages', 'extract-images', 'flatten-pdf', 'image-to-pdf', 'jpeg-to-pdf',
   'jpg-to-pdf', 'merge-pdf', 'organize-pdf', 'page-number', 'pdf-metadata',

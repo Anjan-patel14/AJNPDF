@@ -5,6 +5,7 @@
   "compress-pdf",
   "crop-pdf",
   "delete-pdf-pages",
+  "edit-pdf",
   "extract-images",
   "flatten-pdf",
   "image-to-pdf",

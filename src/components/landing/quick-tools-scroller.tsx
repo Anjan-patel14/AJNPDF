@@ -6,6 +6,7 @@ import { ToolArtwork } from "@/components/ajn/tool-artwork";
 import { toolPath } from "@/lib/tool-routes";
 
 const quickTools = [
+  { id: "edit-pdf", name: "Edit PDF", tone: "blue" },
   { id: "merge-pdf", name: "Merge PDF", tone: "blue" },
   { id: "compress-pdf", name: "Compress PDF", tone: "red" },
   { id: "split-pdf", name: "Split PDF", tone: "blue" },
@@ -64,12 +65,12 @@ export function QuickToolsScroller() {
             href="/pdf-tools"
             className="hidden min-h-9 items-center gap-1.5 rounded-lg px-2.5 text-[11px] font-black text-[#1a56db] transition hover:bg-[#e1effe] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:hover:bg-blue-400/10 sm:inline-flex"
           >
-            View all 20
+            View all 26
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-7">
           {quickTools.map((tool) => {
             const tone = toneClasses[tool.tone];
 

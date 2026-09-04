@@ -15,6 +15,7 @@ export interface ToolPolicy {
 // Production allowlist: AJN PDF remains PDF-focused and now includes five browser-only
 // image-to-PDF creation workflows. General image editing stays on AJN Buzz.
 export const PRODUCTION_PUBLIC_TOOL_IDS = new Set([
+  'edit-pdf',
   'add-image-to-pdf',
   'add-text',
   'compare-pdf',
@@ -47,6 +48,7 @@ const browserImageToPdfIds = new Set([
 ]);
 
 const stableBrowserIds = new Set([
+  'edit-pdf',
   'merge-pdf', 'split-pdf', 'rotate-pdf', 'delete-pdf-pages', 'organize-pdf',
   'crop-pdf', 'watermark-pdf', 'page-number', 'flatten-pdf', 'compare-pdf',
   'add-text', 'add-image-to-pdf', 'pdf-metadata', 'pdf-zip-extract', 'sign-pdf',
