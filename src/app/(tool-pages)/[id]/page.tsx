@@ -14,6 +14,7 @@ import { MainFooter } from '@/components/landing/main-footer';
 import { getToolSeoProfile } from '@/lib/seo-strategy';
 import { Navbar } from '@/components/landing/navbar';
 import { toolPath } from '@/lib/tool-routes';
+import { ToolSeoRelatedLinks } from '@/components/seo-related-tools';
 
 export const dynamicParams = false;
 
@@ -80,6 +81,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
       />
       <ToolWorkspaceClient id={id} />
       <ToolEditorialContent tool={tool} />
+      <ToolSeoRelatedLinks toolId={tool.id} />
       <div className="relative z-10 mx-auto max-w-5xl px-4 pb-12">
         <div className="border-t border-black/5 pt-10">
           <AdSenseUnit slot={ADSENSE_SLOTS.toolContent} responsive className="min-h-[120px] sm:min-h-[180px]" />

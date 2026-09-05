@@ -10,6 +10,10 @@ import { toolPath } from "@/lib/tool-routes";
 const commonToolIds = ["merge-pdf","compress-pdf","split-pdf","sign-pdf","protect-pdf","repair-pdf"] as const;
 const productLinks = [
   ["All PDF Tools","/pdf-tools"],
+  ["Trust Center","/trust"],
+  ["Changelog","/changelog"],
+  ["AJN Studio","/ajn-studio"],
+  ["Developer","/developer"],
   ["Status","/status"],
   ["About","/about"],
   ["Contact","/contact"],
@@ -42,14 +46,10 @@ export function MainFooter() {
           <div>
             <LogoAnimation className="h-11 w-[176px]" />
             <p className="mt-4 max-w-sm text-sm font-medium leading-6 text-[#475569] dark:text-[#b6c0d0]">
-              Free online PDF tools for everyday document work.
+              Browser-first PDF tools with clear processing and product limits.
             </p>
-            <a
-              href={`mailto:${AJN_BRAND.contactEmail}`}
-              className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-xl border border-[#e3e9f4] bg-[#f8fafc] px-4 text-xs font-black text-[#0e1b2c] transition hover:border-blue-200 hover:bg-[#e1effe] dark:border-white/10 dark:bg-white/5 dark:text-white"
-            >
-              <Mail className="h-4 w-4" />
-              Contact AJN PDF
+            <a href={`mailto:${AJN_BRAND.contactEmail}`} className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-xl border border-[#e3e9f4] bg-[#f8fafc] px-4 text-xs font-black text-[#0e1b2c] transition hover:border-blue-200 hover:bg-[#e1effe] dark:border-white/10 dark:bg-white/5 dark:text-white">
+              <Mail className="h-4 w-4" /> Contact AJN PDF
             </a>
           </div>
 
@@ -60,13 +60,8 @@ export function MainFooter() {
                 const [name, desc] = fallback[id];
                 const localized = tool(id, name, desc, []);
                 return (
-                  <Link
-                    key={id}
-                    href={toolPath(id)}
-                    className="flex items-center gap-2 text-xs font-bold text-[#475569] transition hover:text-[#0e1b2c] dark:text-[#b6c0d0] dark:hover:text-white"
-                  >
-                    <ArrowRight className="h-3 w-3 text-[#1a56db]" />
-                    {localized.name}
+                  <Link key={id} href={toolPath(id)} className="flex items-center gap-2 text-xs font-bold text-[#475569] transition hover:text-[#0e1b2c] dark:text-[#b6c0d0] dark:hover:text-white">
+                    <ArrowRight className="h-3 w-3 text-[#1a56db]" /> {localized.name}
                   </Link>
                 );
               })}
@@ -75,15 +70,9 @@ export function MainFooter() {
 
           <div>
             <h3 className="text-xs font-black tracking-[.12em] text-[#f59e0b]">AJN PDF</h3>
-            <nav className="mt-4 space-y-3">
+            <nav className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 lg:grid-cols-1">
               {productLinks.map(([label, href]) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="block text-xs font-bold text-[#475569] transition hover:text-[#0e1b2c] dark:text-[#b6c0d0] dark:hover:text-white"
-                >
-                  {label}
-                </Link>
+                <Link key={href} href={href} className="block text-xs font-bold text-[#475569] transition hover:text-[#0e1b2c] dark:text-[#b6c0d0] dark:hover:text-white">{label}</Link>
               ))}
             </nav>
           </div>
@@ -92,22 +81,11 @@ export function MainFooter() {
             <h3 className="text-xs font-black tracking-[.12em] text-[#0e9f6e] dark:text-[#10b981]">LEGAL & PRIVACY</h3>
             <nav className="mt-4 grid gap-3">
               {legalLinks.map(([label, href]) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="block text-xs font-bold text-[#475569] transition hover:text-[#0e1b2c] dark:text-[#b6c0d0] dark:hover:text-white"
-                >
-                  {label}
-                </Link>
+                <Link key={href} href={href} className="block text-xs font-bold text-[#475569] transition hover:text-[#0e1b2c] dark:text-[#b6c0d0] dark:hover:text-white">{label}</Link>
               ))}
             </nav>
-            <button
-              type="button"
-              onClick={openPrivacyChoices}
-              className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-xl border border-[#e3e9f4] bg-[#f8fafc] px-4 py-2.5 text-xs font-black text-[#0e1b2c] transition hover:border-emerald-200 hover:bg-[#def7ec] dark:border-white/10 dark:bg-white/5 dark:text-white"
-            >
-              <Cookie className="h-4 w-4" />
-              {t("cookie.privacy")}
+            <button type="button" onClick={openPrivacyChoices} className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-xl border border-[#e3e9f4] bg-[#f8fafc] px-4 py-2.5 text-xs font-black text-[#0e1b2c] transition hover:border-emerald-200 hover:bg-[#def7ec] dark:border-white/10 dark:bg-white/5 dark:text-white">
+              <Cookie className="h-4 w-4" /> {t("cookie.privacy")}
             </button>
           </div>
         </div>

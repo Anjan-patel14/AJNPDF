@@ -10,6 +10,9 @@ type CorePageDefinition = { path:string; changeFrequency:SitemapFrequency; prior
 const CORE_PAGE_DEFINITIONS: CorePageDefinition[] = [
   { path:"/", changeFrequency:"daily", priority:1 },
   { path:"/pdf-tools", changeFrequency:"weekly", priority:.95 },
+  { path:"/trust", changeFrequency:"monthly", priority:.8 },
+  { path:"/changelog", changeFrequency:"monthly", priority:.72 },
+  { path:"/status", changeFrequency:"daily", priority:.68 },
   { path:"/pricing", changeFrequency:"weekly", priority:.75 },
   { path:"/about", changeFrequency:"monthly", priority:.55 },
   { path:"/blog", changeFrequency:"weekly", priority:.65 },
@@ -23,12 +26,12 @@ const CORE_PAGE_DEFINITIONS: CorePageDefinition[] = [
   { path:"/blog/pdf-vs-docx", changeFrequency:"monthly", priority:.55 },
   { path:"/blog/why-pdf-compression-limited", changeFrequency:"monthly", priority:.55 },
   { path:"/discover/guides", changeFrequency:"weekly", priority:.55 },
-  { path:"/developer", changeFrequency:"monthly", priority:.45 },
-  { path:"/ajn-studio", changeFrequency:"monthly", priority:.4 },
+  { path:"/developer", changeFrequency:"monthly", priority:.55 },
+  { path:"/ajn-studio", changeFrequency:"monthly", priority:.55 },
   { path:"/faq", changeFrequency:"monthly", priority:.5 },
   { path:"/security", changeFrequency:"monthly", priority:.5 },
   { path:"/limits", changeFrequency:"monthly", priority:.5 },
-  { path:"/transparency", changeFrequency:"monthly", priority:.45 },
+  { path:"/transparency", changeFrequency:"monthly", priority:.5 },
   { path:"/contact", changeFrequency:"monthly", priority:.45 },
   { path:"/privacy", changeFrequency:"yearly", priority:.3 },
   { path:"/terms", changeFrequency:"yearly", priority:.3 },
@@ -43,12 +46,7 @@ const CORE_PAGE_DEFINITIONS: CorePageDefinition[] = [
 ];
 
 function coreEntry(definition: CorePageDefinition): MetadataRoute.Sitemap[number] {
-  return {
-    url:`${SITE_URL}${definition.path === "/" ? "/" : definition.path}`,
-    lastModified:getSitemapLastModified(definition.path),
-    changeFrequency:definition.changeFrequency,
-    priority:definition.priority,
-  };
+  return { url:`${SITE_URL}${definition.path === "/" ? "/" : definition.path}`, lastModified:getSitemapLastModified(definition.path), changeFrequency:definition.changeFrequency, priority:definition.priority };
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -57,12 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter(tool => !SEO_EXCLUDED_TOOL_IDS.has(tool.id))
     .map(tool => {
       const pathname = toolPath(tool.id);
-      return {
-        url:`${SITE_URL}${pathname}`,
-        lastModified:getSitemapLastModified(pathname),
-        changeFrequency:"monthly",
-        priority:tool.badge === "Popular" ? .9 : .72,
-      };
+      return { url:`${SITE_URL}${pathname}`, lastModified:getSitemapLastModified(pathname), changeFrequency:"monthly", priority:tool.badge === "Popular" ? .9 : .72 };
     });
   return [...corePages, ...toolPages];
 }
