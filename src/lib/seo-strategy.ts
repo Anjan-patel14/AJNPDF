@@ -36,8 +36,8 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
     description: 'Compare two PDF files in your browser with a side-by-side workflow designed to help review visible document differences without uploading the files.',
   },
   'compress-pdf': {
-    title: 'Compress PDF Online - Reduce PDF File Size | AJN PDF',
-    description: 'Reduce PDF file size in your browser with practical compression controls. Results depend on the document, and already optimized PDFs may shrink only slightly.',
+    title: 'Compress PDF Online Free - Reduce PDF File Size | AJN PDF',
+    description: 'Compress PDF files in your browser with AJN PDF. Reduce size for email or uploads with clear quality controls and no software installation.',
   },
   'crop-pdf': {
     title: 'Crop PDF Online - Trim PDF Page Margins | AJN PDF',
@@ -72,8 +72,8 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
     description: 'Convert JPG images to PDF in your browser, reorder or rotate images, choose page settings and download one PDF without uploading the source images.',
   },
   'merge-pdf': {
-    title: 'Merge PDF Online - Combine PDF Files | AJN PDF',
-    description: 'Combine multiple PDF files in your browser, arrange them in the order you want and download one merged PDF without uploading the source documents.',
+    title: 'Merge PDF Online Free - Combine PDF Files | AJN PDF',
+    description: 'Merge PDF files directly in your browser with AJN PDF. Reorder documents and combine them into one PDF without installing software or uploading source files.',
   },
   'organize-pdf': {
     title: 'Organize PDF Online - Reorder PDF Pages | AJN PDF',
@@ -112,8 +112,8 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
     description: 'Add and position a visual electronic signature on PDF pages in your browser, preview the result and download a new signed PDF copy.',
   },
   'split-pdf': {
-    title: 'Split PDF Online - Extract PDF Pages | AJN PDF',
-    description: 'Split a PDF in your browser, extract selected pages or create smaller documents, then download the results without uploading the source PDF.',
+    title: 'Split PDF Online Free - Extract PDF Pages | AJN PDF',
+    description: 'Split PDF files directly in your browser. Extract selected pages or create smaller PDFs without installing software or uploading the source document.',
   },
   'unlock-pdf': {
     title: 'Unlock PDF Online - Remove PDF Password | AJN PDF',
@@ -127,6 +127,13 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
     title: 'WebP to PDF Online - Convert WebP Images to PDF | AJN PDF',
     description: 'Convert WebP images to PDF in your browser, arrange image order, choose page settings and download one PDF without uploading the source images.',
   },
+};
+
+const PILLAR_SEARCH_TERMS: Record<string, string[]> = {
+  'edit-pdf': ['edit pdf without software', 'edit pdf on android', 'edit pdf on chromebook', 'change date in pdf online', 'change name in pdf'],
+  'merge-pdf': ['merge pdf on android', 'merge pdf on iphone', 'merge pdf on chromebook', 'merge pdf without software', 'combine pdf pages in order'],
+  'compress-pdf': ['compress pdf for email', 'compress pdf on android', 'reduce pdf size on iphone', 'compress pdf without software', 'compress pdf for job application'],
+  'split-pdf': ['split pdf on android', 'extract pages from pdf', 'split pdf for email', 'separate pdf pages without software', 'split large pdf into smaller files'],
 };
 
 function normalize(value: string): string {
@@ -169,6 +176,7 @@ export function getToolSeoProfile(tool: ServiceTool): ToolSeoProfile {
     `${normalizedName} without signup`,
     `${normalizedName} tool`,
     ...tool.keywords,
+    ...(PILLAR_SEARCH_TERMS[tool.id] ?? []),
     ...CATEGORY_TERMS[category],
     ...(isConversion ? [`${normalizedName} converter`] : []),
   ]).slice(0, 18);

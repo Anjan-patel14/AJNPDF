@@ -6,6 +6,7 @@ import { CheckCircle2, Search, ShieldCheck, Sparkles } from "lucide-react";
 import { Navbar } from "../components/landing/navbar";
 import Hero from "../components/landing/hero";
 import { QuickToolsScroller } from "../components/landing/quick-tools-scroller";
+import { SeoPillarLinks } from "../components/landing/seo-pillar-links";
 import { ServicesGrid } from "../components/landing/services-grid";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
@@ -105,6 +106,7 @@ export default function HomePage() {
         <Hero />
 
         <QuickToolsScroller />
+        <SeoPillarLinks />
 
         <section
           className="relative mx-auto max-w-7xl scroll-mt-[72px] px-4 pb-10 pt-6 md:px-8 md:pb-14 md:pt-8"

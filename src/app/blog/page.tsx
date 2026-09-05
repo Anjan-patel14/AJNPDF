@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, Clock, FileText, FileType2, ImageIcon, ShieldCheck, Shrink, Accessibility } from 'lucide-react';
 import { Navbar } from '@/components/landing/navbar';
 import { MainFooter } from '@/components/landing/main-footer';
+import { SEO_GROWTH_GUIDES } from '@/lib/seo-growth-guides';
 
 export const metadata: Metadata = {
   title: 'Practical PDF Guides | AJN PDF',
@@ -78,7 +79,48 @@ export default function BlogPage() {
             <p className="mt-6 text-base font-medium leading-8 text-muted-foreground md:text-lg">Useful guidance for PDF, conversion, compression, accessibility and everyday document work.</p>
           </div>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+          <section className="mt-14" aria-labelledby="long-tail-pdf-guides">
+            <div className="rounded-3xl border border-blue-100 bg-blue-50/55 p-6 md:p-8">
+              <span className="text-[10px] font-extrabold uppercase tracking-[.18em] text-blue-700">Task-specific guides</span>
+              <h2 id="long-tail-pdf-guides" className="mt-3 text-2xl font-black tracking-tight text-slate-950 md:text-3xl">
+                Device and workflow guides for Edit, Merge, Compress and Split PDF
+              </h2>
+              <p className="mt-3 max-w-3xl text-sm font-medium leading-7 text-slate-600">
+                Twenty focused guides answer common mobile, Chromebook, email, application and page-management questions, then link directly to the matching AJN PDF tool.
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {SEO_GROWTH_GUIDES.map((guide) => (
+                <Link key={guide.slug} href={`/blog/${guide.slug}`} className="group block" prefetch={false}>
+                  <article className="ajn-tool-card flex h-full flex-col p-6">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-blue-100 bg-blue-50 text-blue-700">
+                        <BookOpen className="h-5 w-5" />
+                      </span>
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">{guide.readTime}</span>
+                    </div>
+                    <div className="mt-5 flex-1">
+                      <span className="text-[10px] font-extrabold uppercase tracking-[.16em] text-blue-600">{guide.primaryKeyword}</span>
+                      <h3 className="mt-3 text-xl font-black leading-tight tracking-tight text-slate-950 transition group-hover:text-blue-700">{guide.title}</h3>
+                      <p className="mt-3 text-sm font-medium leading-6 text-muted-foreground">{guide.summary}</p>
+                    </div>
+                    <span className="mt-5 inline-flex items-center gap-2 border-t border-border pt-4 text-xs font-black text-blue-700">
+                      Read guide <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                    </span>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <div className="mt-16 border-t border-border pt-10">
+            <span className="text-[10px] font-extrabold uppercase tracking-[.18em] text-slate-500">Core reference guides</span>
+            <h2 className="mt-3 text-2xl font-black tracking-tight text-slate-950 md:text-3xl">Broader PDF guidance</h2>
+          </div>
+
+          <div className="mt-7 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {articles.map((article) => (
               <Link key={article.href} href={article.href} className="group block" prefetch={false}>
                 <article className="ajn-tool-card flex h-full flex-col p-6 md:p-7">

@@ -18,9 +18,27 @@ const GUIDE_MAP: Record<string, { href: string; title: string }[]> = {
 };
 
 const TOOL_GUIDES: Record<string, { href: string; title: string }[]> = {
+  'edit-pdf': [
+    { href: '/blog/edit-pdf-without-installing-software', title: 'Edit a PDF without installing software' },
+    { href: '/blog/change-date-in-pdf-online', title: 'Change a date in a PDF online' },
+    { href: '/blog/change-name-or-number-in-pdf', title: 'Change a name or number in a PDF' }
+  ],
+  'merge-pdf': [
+    { href: '/blog/merge-pdf-without-installing-software', title: 'Merge PDFs without installing software' },
+    { href: '/blog/merge-pdf-on-android', title: 'Merge PDF files on Android' },
+    { href: '/blog/combine-pdf-pages-in-correct-order', title: 'Combine PDFs in the correct order' }
+  ],
   'compress-pdf': [
+    { href: '/blog/compress-pdf-for-email', title: 'Compress a PDF for email' },
+    { href: '/blog/compress-pdf-on-android', title: 'Compress a PDF on Android' },
+    { href: '/blog/compress-pdf-for-job-application', title: 'Compress a PDF for a job application' },
     { href: '/blog/reduce-pdf-size-keep-quality', title: 'Reduce PDF size while keeping text readable' },
     { href: '/blog/why-pdf-compression-limited', title: 'Why some PDFs barely shrink' }
+  ],
+  'split-pdf': [
+    { href: '/blog/extract-pages-from-pdf', title: 'Extract selected pages from a PDF' },
+    { href: '/blog/split-pdf-on-android', title: 'Split a PDF on Android' },
+    { href: '/blog/split-large-pdf-into-smaller-files', title: 'Split a large PDF into smaller files' }
   ],
   'pdf-to-word': [
     { href: '/blog/pdf-vs-docx', title: 'PDF vs DOCX: when to use each format' },

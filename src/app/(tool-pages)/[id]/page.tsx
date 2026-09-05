@@ -15,6 +15,7 @@ import { getToolSeoProfile } from '@/lib/seo-strategy';
 import { Navbar } from '@/components/landing/navbar';
 import { toolPath } from '@/lib/tool-routes';
 import { ToolSeoRelatedLinks } from '@/components/seo-related-tools';
+import { SeoPillarSection } from '@/components/seo-pillar-section';
 
 export const dynamicParams = false;
 
@@ -81,6 +82,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
       />
       <ToolWorkspaceClient id={id} />
       <ToolEditorialContent tool={tool} />
+      <SeoPillarSection toolId={tool.id} />
       <ToolSeoRelatedLinks toolId={tool.id} />
       <div className="relative z-10 mx-auto max-w-5xl px-4 pb-12">
         <div className="border-t border-black/5 pt-10">
