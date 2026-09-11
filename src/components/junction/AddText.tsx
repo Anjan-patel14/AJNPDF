@@ -2,7 +2,7 @@
 
 import { RuntimeImage } from '@/components/ui/runtime-image';
 import React, { useState, useRef, useEffect } from "react";
-import * as pdfjsLib from 'pdfjs-dist';
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { Type, CheckCircle2, Download, Loader2, Activity, FileText, RefreshCcw, Zap, Settings2, Share2} from 'lucide-react';
 import { motion, AnimatePresence } from "framer-motion";

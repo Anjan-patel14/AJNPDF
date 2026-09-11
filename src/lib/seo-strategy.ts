@@ -49,7 +49,7 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
   },
   'edit-pdf': {
     title: 'Edit PDF Online Free - Change Text & Sign PDF | AJN PDF',
-    description: 'Edit PDF online in your browser with AJN PDF. Replace text, dates, names and numbers, match fonts, add images and signatures, highlight content, and manage pages locally.',
+    description: 'Edit PDF locally in your browser. Edit native text or word-level OCR text in scanned PDFs, remove or replace words, add text, edit images, securely redact and manage pages.',
   },
   'extract-images': {
     title: 'Extract Images from PDF Online - Save PDF Images | AJN PDF',

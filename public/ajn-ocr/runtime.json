@@ -1,0 +1,15 @@
+﻿{
+    "runtime":  "AJN PDF local OCR",
+    "version":  "5.7.0",
+    "tesseract":  "6.0.1",
+    "source":  "npm packages staged at install time",
+    "runtimeNetwork":  "same-origin only",
+    "languages":  [
+                      "eng",
+                      "hin",
+                      "tel",
+                      "tam",
+                      "kan",
+                      "mal"
+                  ]
+}

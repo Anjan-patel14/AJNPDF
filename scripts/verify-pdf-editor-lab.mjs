@@ -3,58 +3,83 @@ import path from "node:path";
 
 const root = process.cwd();
 const componentPath = path.join(root, "src/components/junction/PdfEditorLab.tsx");
-const pagePath = path.join(root, "src/app/pdf-editor-lab/page.tsx");
+const workspacePath = path.join(root, "src/components/junction/tool-workspace-client.tsx");
+const legacyPath = path.join(root, "src/app/pdf-editor-lab/page.tsx");
 let failed = false;
 const fail = (message) => { failed = true; console.error(`FAIL: ${message}`); };
 const pass = (message) => console.log(`PASS: ${message}`);
-
-if (!fs.existsSync(componentPath)) fail("PdfEditorLab.tsx is missing");
-if (!fs.existsSync(pagePath)) fail("pdf-editor-lab route is missing");
+const need = (source, needles, label) => {
+  for (const needle of needles) if (!source.includes(needle)) fail(`${label}: missing ${needle}`);
+};
+for (const file of [componentPath, workspacePath, legacyPath]) if (!fs.existsSync(file)) fail(`missing ${path.relative(root, file)}`);
 
 if (!failed) {
   const source = fs.readFileSync(componentPath, "utf8");
-  const page = fs.readFileSync(pagePath, "utf8");
-  const forbidden = [
-    ["fetch(", "network fetch"], ["XMLHttpRequest", "XHR"], ["axios", "axios"],
-    ["run.app", "Cloud Run URL"], ["firebase/storage", "Firebase Storage"],
-    ["uploadBytes(", "Firebase upload"], ["/api/pdf/editor", "editor API"],
-  ];
-  for (const [needle, label] of forbidden) if (source.includes(needle)) fail(`browser editor contains forbidden ${label}`);
-  const required = [
-    ["pdfjs-dist", "PDF.js rendering"], ["PDFDocument", "pdf-lib export"],
-    ["getTextContent", "existing-text detection"],
-    ["content.styles", "PDF font style analysis"],
-    ["loadedFontName", "PDF.js loaded font inspection"],
-    ["type FontDescriptor", "font descriptor compile-safe typing"],
-    ["const searchResults = useMemo", "typed PDF search results"],
-    ["horizontalScale", "original text width matching"],
-    ["sampleTextColor", "original text color sampling"],
-    ["rasterizeMatchedText", "visual matched-font export"],
-    ['renderMode: "visual-match"', "smart replacement visual match mode"], ["replaceTextHit", "smart text replacement"],
-    ['type: "whiteout"', "manual whiteout"], ['mode === "highlight"', "highlight tool"],
-    ['type: "image"', "image insertion"], ['type: "signature"', "signature insertion"],
-    ["setHistory", "undo history"], ["setFuture", "redo history"],
-    ["copyPages", "page duplicate/reorder export"], ["setRotation", "page rotation export"],
-    ["indexedDB", "local recovery"], ["getDocument({ data: bytes.slice() })", "result re-open validation"],
-  ];
-  for (const [needle, label] of required) if (!source.includes(needle)) fail(`missing ${label}`);
-  const textRendererLine = source.split("\n").find((line) => line.includes('item.type === "text" && <div style=')) || "";
-  const widthCount = (textRendererLine.match(/\bwidth:/g) || []).length;
-  if (widthCount > 1) fail("text preview style contains duplicate width properties");
-  if (!page.includes("index: false")) fail("local lab route must stay noindex");
+  const workspace = fs.readFileSync(workspacePath, "utf8");
+  const legacy = fs.readFileSync(legacyPath, "utf8");
+
+  const forbidden = ["cdn.jsdelivr.net", "TESSERACT_CDN", "run.app", "firebase/storage", "uploadBytes(", "/api/pdf/editor", "FormData("];
+  for (const needle of forbidden) if (source.includes(needle)) fail(`browser editor contains forbidden runtime dependency ${needle}`);
+
+  need(workspace, ["'edit-pdf': dynamic(() => import('./PdfEditorLab'), { ssr: false })"], "canonical edit-pdf client mapping");
+  need(legacy, ['redirect("/edit-pdf")'], "legacy lab redirect");
+  if (legacy.includes("PdfEditorLab")) fail("legacy /pdf-editor-lab must not host a second editor implementation");
+
+  need(source, [
+    'useState<"upload" | "editor">("upload")', 'if (workspaceMode === "upload")', 'setWorkspaceMode("editor")', 'setWorkspaceMode("upload")',
+    'data-ajn-edit-pdf-upload="true"', 'id="ajn-edit-pdf-native-file-input"', 'onChange={handlePdfInputChange}', 'data-ajn-editor-shell="true"',
+    'pdfjs-dist/legacy/build/pdf.mjs', 'initPdfWorker()', 'pdfjsLib.getDocument({', 'setPdfEngineReady(true)', 'setCanvasPreviewReady(true)',
+    'data-ajn-pdf-preview-canvas="true"', 'data-ajn-preview-loading="true"', 'data-ajn-preview-error="true"', 'Retry editable preview',
+  ], "same-page upload/preview contract");
+  if (source.includes('EDITOR_ROUTE = "/pdf-editor-lab"') || source.includes("saveEditorLaunchRecord") || source.includes("takeEditorLaunchRecord")) fail("obsolete redirect/session handoff remains in editor");
+
+  need(source, [
+    "getTextContent", "content.styles", "loadedFontName", "horizontalScale", "replaceTextHit", "bulkMakeEditable", "selectedIds",
+    "replaceAllMatches", "inlineEditingId", "fontFamily", "lineHeight", "setHistory", "setFuture", "copyPages", "setRotation",
+    "rasterizeMatchedText", "PDFDocument", "output.save", "Validating result", "check.numPages !== pages.length",
+  ], "digital edit/export contract");
+
+  need(source, [
+    "rememberTextEditStart", "updateTextValue", "finishTextEdit", "sourceHitById", "wrappedLineEstimate",
+    'updateObject(item.id, { text: value, width, height } as Partial<EditorObject>, false)',
+  ], "persistent word-edit contract");
+
+  need(source, [
+    "TESSERACT_LOCAL_SCRIPT", "OCR_RUNTIME_BASE", "workerPath:", "corePath:", "langPath:", "workerBlobURL: false", 'cacheMethod: "none"',
+    "runOcrForSources", "scanCurrentPage", "scanAllPages", "cancelOcr", "Stop OCR", "withOcrTimeout", "prepareOcrCanvas",
+    'renderPageSample(sourceIndex, 2.8)', "buildOcrContentCrop", "detectVisualTextRegions", "visualFallback", "parseTsvWords",
+    'Number(cols[ix.level]) !== 5', 'typeof data?.tsv === "string"', "verifyLocalOcrWasm", "WebAssembly.compile",
+    'type OcrGranularity = "word" | "line" | "table"', "Scan + Word editing", "Scan + Line editing", "Scan + Table editing",
+    "makeDetectedScanTextEditable", "Make scan text editable", "cleanOcrText",
+  ], "scan/OCR editing contract");
+
+  need(source, [
+    "detectTableGrid", "groupTableHitsByCell", "markTableHits", "mergeOcrHits", "TableCellRegion", "TableGridModel",
+    "rowLongestRun", "colLongestRun", "recognizedCellKeys", "unreadCellRegions", "Make table text editable",
+    'data-ajn-table-cell="true"', "data-table-row", "data-table-column", "showTableGuides",
+  ], "table editing contract");
+
+  need(source, [
+    "imageHitsFromOperators", "replaceImageHit", "isPageBackgroundImageHit", "sanitizeRestoredObjectsForPdf", "sourceHitId",
+    'item.type === "whiteout" && Boolean(item.sourceHitId)', '"redact"', "renderSecureRedactedPage", "PDFString.of", "addLinkAnnotation", 'type: "signature"',
+  ], "image/redaction/link contract");
+
+  if (source.includes("fileInputRef.current?.click()")) fail("PDF upload still depends on synthetic ref.click instead of native input activation");
+  if (source.includes("if (!file) {")) fail("legacy file-driven upload/editor render condition remains");
+  if (source.includes("item.locked") || source.includes("selectedObject.locked")) fail("obsolete lock state remains active");
+
   if (!failed) {
-    pass("browser-only processor has no upload/server dependency");
-    pass("smart detected-text replacement present");
-    pass("detected PDF font family/style/baseline/width analysis present");
-    pass("matched-font visual export path present");
-    pass("manual whiteout/highlight/shapes present");
-    pass("text formatting, images and signatures present");
-    pass("undo/redo/copy/paste keyboard workflow present");
-    pass("page management export pipeline present");
-    pass("IndexedDB local recovery present");
-    pass("PDF.js result validation present");
-    pass("local lab route is noindex");
-    console.log("\nAJN PDF EDITOR LAB CONTRACT: PASS");
+    pass("/edit-pdf uses one client-only editor and /pdf-editor-lab redirects to it");
+    pass("valid file selection commits the same-page editor before optional content analysis");
+    pass("PDF.js preview/worker and output re-open validation are present");
+    pass("digital text editing, history, page operations and export are present");
+    pass("scan word editing uses persistent draft state and one undo snapshot per typing session");
+    pass("OCR runtime is same-origin, cancellable and guarded by watchdogs");
+    pass("low-confidence OCR keeps manual replacement regions instead of inventing text");
+    pass("table mode detects continuous grid rules, removes them only for OCR, groups words into cells and keeps row/column metadata");
+    pass("table edits are constrained by detected cell geometry and table guides are available");
+    pass("existing images, signatures, links, whiteout and secure redaction remain present");
+    console.log("\nAJN PDF EDITOR SCAN + WORD + TABLE CONTRACT: PASS");
   }
 }
 if (failed) process.exit(1);

@@ -2,7 +2,7 @@
 
 import { RuntimeImage } from '@/components/ui/runtime-image';
 import React, { useState, useRef, useEffect } from "react";
-import * as pdfjsLib from 'pdfjs-dist';
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { PenTool, CheckCircle2, Download, Loader2, RefreshCcw, Zap, Upload, Eraser, Pen, Brush, Highlighter, Share2} from 'lucide-react';
 import { motion, AnimatePresence } from "framer-motion";
 import { SignatureDrawingEngine, embedSignature, SignMode } from "@/lib/pdf-sign";

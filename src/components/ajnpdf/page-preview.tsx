@@ -2,7 +2,7 @@
 
 import { RuntimeImage } from '@/components/ui/runtime-image';
 import React, { useEffect, useState } from "react";
-import * as pdfjs from "pdfjs-dist";
+import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, LayoutGrid, Layers, CheckCircle2 } from "lucide-react";
 import { cn } from "../../lib/utils";

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import * as pdfjsLib from "pdfjs-dist";
+import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import { PDFDocument } from "pdf-lib";
 import { RuntimeImage } from "@/components/ui/runtime-image";
 import { ToolWorkspace, Drop, Btn, Done, Err, F, G2, IS, Info, ToolFile, dl, fmtBytes, withProcessingActivity, updateToolProcessing } from "./_shared";

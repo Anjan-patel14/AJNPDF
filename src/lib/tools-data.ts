@@ -134,12 +134,12 @@ export const ALL_TOOLS: ServiceTool[] = [
     keywords: ["diff", "changes", "compare", "audit", "revision"]
   },
     {
-    id: 'edit-pdf', name: 'Edit PDF', desc: 'Edit text, dates, names, numbers, images, signatures and PDF pages directly in your browser.',
+    id: 'edit-pdf', name: 'Edit PDF', desc: 'Edit native PDF text and word-level text inside scanned/image PDFs. Remove, replace or add words, edit images, links, signatures and pages locally in your browser.',
     icon: FileEdit, tag: 'edit', cat: 'pdf', mode: 'PDF', badge: 'New', color: 'text-blue-700', perfIndex: 'Browser',
-    benefits: ['Smart existing-text replacement', 'Detected font family, size and baseline matching', 'Browser-only file processing', 'Undo, redo and local recovery', 'Validated PDF download'],
-    useCases: ['Change dates, names, numbers and amounts', 'Correct text in forms and documents', 'Add signatures, images and highlights', 'Cover and replace content when direct text matching is unavailable', 'Reorder, duplicate, delete and rotate pages'],
+    benefits: ['Smart existing-text replacement', 'Word-level scanned/image text editing', 'Remove, replace or add OCR words', 'Edit all detected text', 'Same-origin browser OCR', 'Detected font family, size and baseline matching', 'Existing image editing', 'Secure raster redaction', 'Browser-only PDF processing', 'Undo, redo and local recovery', 'Validated PDF download'],
+    useCases: ['Change dates, names, numbers and amounts', 'Correct native or scanned text in forms and documents', 'Find and replace text across a document', 'Move or replace existing images', 'Add signatures, links, images and highlights', 'Securely redact regions by rasterizing affected pages', 'Reorder, duplicate, delete and rotate pages'],
     instructions: ['Choose a PDF from your device', 'Click existing text or choose a manual editing tool', 'Edit and format the content in the live page preview', 'Review the result and download the edited PDF'],
-    keywords: ['edit pdf', 'pdf editor', 'edit pdf online', 'edit pdf online free', 'free pdf editor', 'best free pdf editor', 'change text in pdf', 'replace text in pdf', 'edit date in pdf', 'edit name in pdf', 'change amount in pdf', 'browser pdf editor', 'pdf editor without upload', 'add signature to pdf', 'add image to pdf', 'highlight pdf', 'edit pdf pages']
+    keywords: ['edit pdf', 'pdf editor', 'edit pdf online', 'edit pdf online free', 'free pdf editor', 'best free pdf editor', 'change text in pdf', 'replace text in pdf', 'edit all text in pdf', 'edit scanned pdf', 'ocr pdf editor', 'find replace pdf', 'edit date in pdf', 'edit name in pdf', 'change amount in pdf', 'browser pdf editor', 'pdf editor without upload', 'add signature to pdf', 'replace image in pdf', 'add link to pdf', 'secure redact pdf', 'highlight pdf', 'edit pdf pages']
   },
 {
     id: 'add-text', name: 'Add Text', desc: 'Place custom text on selected PDF pages.',

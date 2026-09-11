@@ -12,6 +12,9 @@ import { CloudImportActions, GoogleDriveExportAction } from "./CloudFileActions"
 import { PrivacyBadge } from "@/components/workspace/PrivacyBadge";
 import { RecoveryError } from "@/components/workspace/RecoveryError";
 
+import { safeOutputName } from "@/lib/file-validation";
+export { safeOutputName } from "@/lib/file-validation";
+
 export interface ToolFile { file: File; name: string; size: number; }
 
 export function fmtBytes(b: number) {
@@ -20,16 +23,11 @@ export function fmtBytes(b: number) {
   return `${(b / 1048576).toFixed(1)} MB`;
 }
 
-export function getFilesFromEvent(event: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>): FileList | null {
-  if ("dataTransfer" in event) return event.dataTransfer?.files ?? null;
-  return event.target.files;
-}
-
-export function safeOutputName(value: string | undefined, fallbackBase: string, extension: string) {
-  const ext = extension.startsWith(".") ? extension : `.${extension}`;
-  const raw = (value || fallbackBase).trim().replace(new RegExp(`${ext.replace('.', '\\.')}$`, "i"), "");
-  const clean = raw.replace(/[<>:"/\\|?*\u0000-\u001F]/g, "-").replace(/[. ]+$/g, "").slice(0, 120) || fallbackBase;
-  return `${clean}${ext}`;
+export function getFilesFromEvent(event: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>): File[] {
+  if ("dataTransfer" in event) return Array.from(event.dataTransfer?.files ?? []);
+  const files = Array.from(event.target.files ?? []);
+  event.target.value = "";
+  return files;
 }
 
 export function dl(blob: Blob, name: string) {
@@ -38,7 +36,8 @@ export function dl(blob: Blob, name: string) {
   const a = document.body.appendChild(document.createElement("a"));
   a.style.display = "none";
   a.href = u;
-  a.download = name;
+  const dot = name.lastIndexOf('.');
+  a.download = safeOutputName(name, 'document', dot > 0 ? name.slice(dot) : '.pdf');
   a.click();
   const toolId = toolIdFromPathname(window.location.pathname);
   sendAjnAnalytics({ event_name: "download", path: window.location.pathname, tool_id: toolId });
@@ -306,7 +305,14 @@ export function Pills<T extends string|number>({ opts, val, onChange }: { opts:{
 }
 
 export function F({ label, hint, children }: { label:string; hint?:string; children:ReactNode }) {
-  return <div className="flex flex-col gap-1.5"><div className="text-xs font-bold text-slate-700">{label}</div>{children}{hint && <p className="m-0 text-xs font-medium leading-5 text-slate-500">{hint}</p>}</div>;
+  const id = useId();
+  const controls = React.Children.map(children, (child) => {
+    if (React.isValidElement(child) && ['input', 'select', 'textarea'].includes(String(child.type))) {
+      return React.cloneElement(child as React.ReactElement<Record<string, unknown>>, { id, 'aria-label': label, 'aria-describedby': hint ? `${id}-hint` : undefined });
+    }
+    return child;
+  });
+  return <div className="flex min-w-0 flex-col gap-1.5"><label htmlFor={id} className="text-xs font-bold text-slate-700">{label}</label>{controls}{hint && <p id={`${id}-hint`} className="m-0 text-xs font-medium leading-5 text-slate-500">{hint}</p>}</div>;
 }
 
 export function Info({ children, bg="rgba(37,99,235,0.05)", col="var(--jn-text-secondary)" }: { children:ReactNode; bg?:string; col?:string }) {

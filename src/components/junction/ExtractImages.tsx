@@ -1,7 +1,7 @@
 "use client";
 
 import React,{useRef,useState} from "react";
-import * as pdfjsLib from "pdfjs-dist";
+import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import JSZip from "jszip";
 import {Download,FileText,Image as ImageIcon,RefreshCcw,ShieldCheck} from "lucide-react";
 import {RuntimeImage} from "@/components/ui/runtime-image";

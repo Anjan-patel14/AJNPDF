@@ -25,7 +25,7 @@ export async function pdfToBytes(doc: PDFDocument): Promise<Uint8Array> {
 }
 
 export function bytesToBlob(bytes: Uint8Array, mime = "application/pdf"): Blob {
-  return new Blob([bytes.buffer as ArrayBuffer], { type: mime });
+  return new Blob([bytes.slice().buffer as ArrayBuffer], { type: mime });
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -329,7 +329,7 @@ export async function pdfToImages(file: File, dpi: number, quality: number): Pro
   // Ensure correct ESM worker is used
   initPdfWorker();
 
-  const pdfjsLib = await import("pdfjs-dist");
+  const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
   const arrayBuffer = await file.arrayBuffer();
   // Fix: Ensure data is passed as Uint8Array for pdfjs v4 compatibility
   const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
@@ -357,7 +357,7 @@ export async function extractText(file: File): Promise<string> {
   // Ensure correct ESM worker is used
   initPdfWorker();
 
-  const pdfjsLib = await import("pdfjs-dist");
+  const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
   const buf = await file.arrayBuffer();
   // Fix: Ensure data is passed as Uint8Array for pdfjs v4 compatibility
   const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(buf) }).promise;
@@ -564,7 +564,7 @@ export async function pdfToImagesAdvanced(
   options: { dpi: number; quality: number; format: 'jpeg' | 'png'; pages?: number[]; prefix?: string }
 ): Promise<{ name: string; blob: Blob }[]> {
   initPdfWorker();
-  const pdfjsLib = await import('pdfjs-dist');
+  const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs');
   const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
   const selected = options.pages?.length ? options.pages : Array.from({ length: pdf.numPages }, (_, i) => i + 1);
   const results: { name: string; blob: Blob }[] = [];

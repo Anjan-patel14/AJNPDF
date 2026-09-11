@@ -17,14 +17,19 @@ check("runner pins cwd to project root", runner.includes("cwd: projectRoot"));
 check("runner still treats warnings as failures", runner.includes("'--max-warnings'") && runner.includes("'0'"));
 check("Next Core Web Vitals config remains enabled", config.includes("next/core-web-vitals"));
 check("Next TypeScript lint config remains enabled", config.includes("next/typescript"));
-check("editor documents local img preview exception", editor.startsWith("/* eslint-disable @next/next/no-img-element */"));
+check("editor documents required local img preview exception", editor.startsWith("/* eslint-disable @next/next/no-img-element */"));
+check("editor has no stale no-explicit-any disable", !editor.split("\n", 1)[0].includes("@typescript-eslint/no-explicit-any"));
+check("dead updateSelectedObjects helper is removed", !editor.includes("const updateSelectedObjects = useCallback"));
+check("activeSourceIndex is derived once for stable hit memoization", editor.includes("const activeSourceIndex = activePage?.sourceIndex;"));
+check("current page text hits are memoized for stable hook dependencies", /const currentTextHits = useMemo\([\s\S]*?\[activeSourceIndex, textHits\][\s\S]*?\);/.test(editor));
+check("current page image hits are memoized", /const currentImageHits = useMemo\([\s\S]*?\[activeSourceIndex, imageHits\][\s\S]*?\);/.test(editor));
 check("editor drawSpacedText is stable callback", editor.includes("const drawSpacedText = useCallback(async"));
-check("export callback includes drawSpacedText dependency", editor.includes("[drawSpacedText, file?.name, objects, pages]"));
+check("export callback includes drawSpacedText dependency", /\}, \[[^\]]*drawSpacedText[^\]]*file\?\.name[^\]]*objects[^\]]*pages[^\]]*\]\);/.test(editor));
 check("Ctrl+Z handler has no standalone ternary expression", !editor.includes("event.shiftKey ? redo() : undo()"));
 
 if (failures.length) {
-  console.error("\nAJN PDF ESLINT V3.3 CONTRACT: FAIL");
+  console.error("\nAJN PDF ESLINT V7.2 CONTRACT: FAIL");
   failures.forEach((item) => console.error(`- ${item}`));
   process.exit(1);
 }
-console.log("\nAJN PDF ESLINT V3.3 CONTRACT: PASS");
+console.log("\nAJN PDF ESLINT V7.2 CONTRACT: PASS");

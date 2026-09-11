@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import * as pdfjsLib from 'pdfjs-dist';
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { CheckCircle2, Download, Eraser, FileCheck2, PenTool, RefreshCcw, ShieldCheck, Upload } from 'lucide-react';
 import { RuntimeImage } from '@/components/ui/runtime-image';
 import { Button } from '../ui/button';

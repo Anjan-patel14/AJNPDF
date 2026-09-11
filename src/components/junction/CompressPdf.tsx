@@ -100,7 +100,7 @@ export default function CompressPdf() {
     try {
       const nextResult = await withProcessingActivity("Compress PDF", async () => {
         initPdfWorker();
-        const pdfjs = await import("pdfjs-dist");
+        const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
         const pdf = await pdfjs
           .getDocument({ data: new Uint8Array(await source.arrayBuffer()) })
           .promise;

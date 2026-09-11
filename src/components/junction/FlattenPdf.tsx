@@ -3,7 +3,7 @@
 import { RuntimeImage } from '@/components/ui/runtime-image';
 
 import React, { useState, useRef } from "react";
-import * as pdfjsLib from 'pdfjs-dist';
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { PDFDocument } from 'pdf-lib';
 import { Layers, CheckCircle2, Download, Loader2, Activity, FileText, RefreshCcw, Zap, Settings2, Edit3, Share2} from 'lucide-react';
 import { motion, AnimatePresence } from "framer-motion";
@@ -56,6 +56,7 @@ export default function FlattenPdf() {
       canvas.width = viewport.width;
       await page.render({ canvasContext: ctx, viewport: viewport }).promise;
       setPreview(canvas.toDataURL('image/jpeg', 0.8));
+      await pdf.destroy();
     } catch {
       toast({ title: "Analysis failed", variant: "destructive" });
       setPhase('upload');
@@ -75,19 +76,17 @@ export default function FlattenPdf() {
 
     try {
       const buffer = await file.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
+      const pdfDoc = await PDFDocument.load(buffer, { ignoreEncryption: false });
       const form = pdfDoc.getForm();
       
-      try {
-        form.flatten();
-      } catch {
-        // A PDF without supported AcroForm fields is still a valid input.
-      }
+      if (form.getFields().length) form.flatten();
 
       setStatus("Finalizing the flattened PDF...");
 
       const finalBytes = await pdfDoc.save({ useObjectStreams: false });
-      setResultBlob(new Blob([finalBytes.buffer as ArrayBuffer], { type: 'application/pdf' }));
+      const verified = await PDFDocument.load(finalBytes);
+      if (verified.getForm().getFields().length || verified.getPageCount() !== pdfDoc.getPageCount()) throw new Error("Form flattening validation failed.");
+      setResultBlob(new Blob([finalBytes.slice().buffer as ArrayBuffer], { type: 'application/pdf' }));
       setPhase('done');
       completeToolProcessing();
     } catch {

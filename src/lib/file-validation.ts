@@ -43,8 +43,11 @@ export async function validatePdfFile(file: File, maxSizeMb = 50): Promise<strin
   return null;
 }
 
-export function safeOutputName(value: string, fallback: string, extension: string): string {
-  const cleaned = value.trim().replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').replace(/\s+/g, ' ').slice(0, 120);
-  const base = cleaned || fallback;
-  return base.toLowerCase().endsWith(extension.toLowerCase()) ? base : `${base}${extension}`;
+export function safeOutputName(value: string | undefined, fallback: string, extension: string): string {
+  const ext = extension.startsWith('.') ? extension : `.${extension}`;
+  let base = (value || fallback).trim();
+  while (base.toLowerCase().endsWith(ext.toLowerCase())) base = base.slice(0, -ext.length);
+  base = base.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').replace(/\s+/g, ' ').replace(/[. ]+$/g, '').slice(0, 120) || fallback;
+  if (/^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/i.test(base)) base = `_${base}`;
+  return `${base}${ext}`;
 }

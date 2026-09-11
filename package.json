@@ -3,17 +3,17 @@
   "version": "3.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 9002",
+    "dev": "next dev -H 127.0.0.1 -p 9002",
     "predev": "node scripts/sync-pdfjs-worker.mjs",
     "prebuild": "node scripts/sync-pdfjs-worker.mjs && node scripts/generate-sitemap-lastmod.mjs && node scripts/verify-sitemap-indexing.mjs && node scripts/verify-capability-manifest.mjs",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H 127.0.0.1 -p 9002",
     "lint": "node scripts/run-eslint.mjs",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "node scripts/prepare-typecheck.mjs && next typegen && tsc --noEmit",
     "verify:seo-ads": "node scripts/verify-seo-ads.mjs",
     "verify:phase1": "node scripts/verify-phase1.mjs",
     "check": "npm run verify:dependency-policy && npm run verify:secrets && npm run verify:r18-production && npm run verify:r17-trust-seo && npm run verify:r20-seo && npm run verify:r21-product && npm run verify:r16-consistency && npm run verify:r24-public-tools && npm run verify:tool-ux && npm run verify:final-ui && npm run verify:mobile-first && npm run verify:i18n && npm run verify:accessibility && npm run verify:capabilities && npm run verify:backend-workflow && npm run verify:r20-conversion-accuracy && npm run verify:r19-release && npm run lint && npm run typecheck && npm run verify:r13-browser-pdf && npm run build && npm run verify:r13-runtime",
-    "preview": "next start -p 3000",
+    "preview": "next start -H 127.0.0.1 -p 9002",
     "verify:production": "node scripts/verify-production.mjs",
     "verify:trust-ui": "node scripts/verify-trust-ui.mjs",
     "verify:links": "node scripts/verify-links.mjs",
@@ -55,7 +55,9 @@
     "verify:r20-conversion-accuracy": "node scripts/verify-r20-conversion-accuracy.mjs",
     "verify:r21-product": "node scripts/verify-r21-product-ecosystem.mjs",
     "verify:r24-public-tools": "node scripts/verify-r24-public-tools.mjs",
-    "verify:r24-live-smoke": "node scripts/verify-r24-live-smoke.mjs"
+    "verify:r24-live-smoke": "node scripts/verify-r24-live-smoke.mjs",
+    "test:editor": "node tests/editor.browser.mjs",
+    "test:editor:production": "node tests/editor.browser.mjs --production"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
@@ -85,12 +87,12 @@
     "docx": "^9.1.0",
     "framer-motion": "^11.18.2",
     "heic2any": "^0.0.4",
-    "jspdf": "^2.5.2",
+    "jspdf": "4.2.1",
     "jszip": "^3.10.1",
     "lucide-react": "^0.475.0",
     "mammoth": "^1.12.0",
     "marked": "^15.0.7",
-    "next": "^15.5.15",
+    "next": "15.5.25",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "4.10.38",
     "react": "^19.2.5",
@@ -108,14 +110,23 @@
     "@types/react-dom": "^19.2.1",
     "@types/xml2js": "^0.4.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "15.1.0",
-    "postcss": "^8",
+    "eslint-config-next": "15.5.25",
+    "postcss": "8.5.23",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@playwright/test": "1.58.2"
   },
   "allowScripts": {
-    "sharp@0.34.5": true,
     "core-js": false,
-    "unrs-resolver@1.12.2": true
+    "unrs-resolver@1.12.2": true,
+    "sharp@0.35.3": true
+  },
+  "overrides": {
+    "sharp": "0.35.3",
+    "postcss": "$postcss",
+    "@xmldom/xmldom": "0.8.15"
+  },
+  "engines": {
+    "node": ">=22.12.0 <25"
   }
 }

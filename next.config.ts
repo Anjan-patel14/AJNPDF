@@ -13,9 +13,9 @@ const connectSources = [
   'https://pagead2.googlesyndication.com', 'https://*.googlesyndication.com', 'https://*.doubleclick.net'];
 const contentSecurityPolicy = [
   "default-src 'self'", "base-uri 'self'", "object-src 'none'", "frame-ancestors 'self'", "form-action 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://*.googlesyndication.com",
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${isProduction ? "" : "'unsafe-eval' "}https://www.gstatic.com https://apis.google.com https://accounts.google.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://*.googlesyndication.com`,
   "style-src 'self' 'unsafe-inline'", "img-src 'self' data: blob: https:", "font-src 'self' data:",
-  `connect-src ${connectSources.join(' ')}`, "frame-src 'self' https://*.firebaseapp.com https://accounts.google.com https://*.googlesyndication.com https://*.doubleclick.net",
+  `connect-src ${connectSources.join(' ')}`, "frame-src 'self' blob: https://*.firebaseapp.com https://accounts.google.com https://*.googlesyndication.com https://*.doubleclick.net",
   "worker-src 'self' blob:", "media-src 'self' blob:", isProduction ? 'upgrade-insecure-requests' : ''].filter(Boolean).join('; ');
 
 const imageToolIds = ['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image','meme-generator','photo-editor','upscale-image','remove-bg','blur-face'];
@@ -63,6 +63,7 @@ const publicToolLegacyRedirects = publicToolIds.map((id) => ({
 }));
 
 const nextConfig: NextConfig = {
+  distDir: process.env.AJN_NEXT_DIST_DIR || (isProduction ? '.next' : '.next-dev'),
   poweredByHeader: false, compress: true, outputFileTracingRoot: process.cwd(), output: 'standalone',
   webpack: (config) => { config.resolve.alias.canvas = false; return config; },
   turbopack: { resolveAlias: { canvas: './src/lib/mocks/empty.js' } },
