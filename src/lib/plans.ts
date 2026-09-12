@@ -14,7 +14,7 @@ export const AJN_PLANS: PlanDefinition[] = [
     name: "Free",
     summary: "Core PDF tools for everyday work.",
     features: [
-      "20 public PDF tools",
+      "26 public PDF tools",
       "No account required for core tools",
       "Standard tool limits",
       "Ads may appear",

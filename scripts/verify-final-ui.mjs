@@ -84,7 +84,7 @@ for (const id of [
   "merge-pdf",
   "compress-pdf",
   "split-pdf",
-  "add-text",
+  "edit-pdf",
   "sign-pdf",
 ]) {
   new RegExp(`id:\\s*["']${id}["']`).test(navbar)
@@ -92,7 +92,7 @@ for (const id of [
     : fail(`Header quick tool missing ${id}`);
 }
 
-for (const route of ["/pdf-tools", "/pricing", "/login", "/account"]) {
+for (const route of ["/pdf-tools", "/status"]) {
   navbar.includes(`href="${route}"`) || navbar.includes(`href='${route}'`)
     ? pass(`Header route present: ${route}`)
     : fail(`Header route missing: ${route}`);
@@ -182,9 +182,9 @@ const ids = [...publicBlock.matchAll(/["']([^"']+)["']/g)].map(
   (match) => match[1],
 );
 
-ids.length === 20 && new Set(ids).size === 20
-  ? pass("Exactly 20 public PDF tools")
-  : fail(`Expected exactly 20 public PDF tools; found ${ids.length}`);
+ids.length === 26 && new Set(ids).size === 26
+  ? pass("Exactly 26 public PDF tools")
+  : fail(`Expected exactly 26 public PDF tools; found ${ids.length}`);
 
 for (const prohibited of [
   /100%\s*(private|local|secure)/i,

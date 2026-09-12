@@ -23,7 +23,7 @@ const allowlist = policy.match(/PRODUCTION_PUBLIC_TOOL_IDS = new Set\(\[([\s\S]*
 const publicIds = [...allowlist.matchAll(/'([^']+)'/g)].map((match) => match[1]);
 const movedImageIds = ['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image'];
 
-check('focused production catalog contains exactly 20 unique PDF tools', publicIds.length === 20 && new Set(publicIds).size === 20);
+check('focused production catalog contains exactly 26 unique PDF tools', publicIds.length === 26 && new Set(publicIds).size === 26);
 check('standalone image utilities are not public AJN PDF routes', !movedImageIds.some((id) => publicIds.includes(id)));
 check('SEO recognition markers contain no empty marker', !/RECOGNITION_MARKERS\s*=\s*\[\s*['"]['"]/.test(seo));
 check('SEO title logic contains no always-true empty includes check', !/\.includes\(\s*['"]['"]\s*\)/.test(seo));
@@ -38,7 +38,17 @@ check('moved image routes redirect to AJN IMG handoff', next.includes('imageTool
 check('PDF tools metadata is PDF-only', pdfToolsLayout.includes('Free Online PDF Tools') && !/PDF & Image|image processing|file conversion/i.test(pdfToolsLayout));
 check('PDF tools directory remains server-renderable for crawlers', !pdfToolsPage.includes('useSearchParams') && pdfToolsPage.includes('Choose the right PDF task before you start.'));
 check('tool breadcrumbs use the canonical PDF directory', toolPage.includes("const categoryPath = '/pdf-tools';") && !toolPage.includes('/pdf-utilities'));
-check('AdSense is restricted to substantial publisher-content pages', publicIds.every((id) => adsLoader.includes(`'/${id}'`)) && adsLoader.includes("normalized === '/'") && !adsLoader.includes('EXCLUDED_PREFIXES') && !adsLoader.includes("'/pdf-tools'"));
+const adPaths = [...adsLoader.matchAll(/'\/([a-z0-9-]+)'/g)].map((match) => match[1]);
+const publicIdSet = new Set(publicIds);
+check(
+  'AdSense is restricted to valid substantial publisher-content pages',
+  adPaths.length >= 10 &&
+  adPaths.every((id) => publicIdSet.has(id)) &&
+  ['merge-pdf','compress-pdf','split-pdf','edit-pdf','sign-pdf'].every((id) => publicIdSet.has(id)) &&
+  adsLoader.includes("normalized === '/'") &&
+  !adsLoader.includes('EXCLUDED_PREFIXES') &&
+  !adsLoader.includes("'/pdf-tools'")
+);
 check('AdSense placements use responsive sizing without clipping', homepage.includes('slot={ADSENSE_SLOTS.homePrimary}') && homepage.includes('slot={ADSENSE_SLOTS.homeSecondary}') && homepage.includes('responsive') && toolPage.includes('slot={ADSENSE_SLOTS.toolContent} responsive') && adUnit.includes("'data-ad-format': 'auto'") && adUnit.includes("'data-full-width-responsive': 'true'") && !adUnit.includes('overflow-hidden flex'));
 check('legacy /tools pages cannot fall through to dead root routes', next.includes('publicToolLegacyRedirects') && next.includes("source: '/tools/:id'") && next.includes("destination: '/pdf-tools'"));
 

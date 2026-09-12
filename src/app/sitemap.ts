@@ -13,7 +13,6 @@ const CORE_PAGE_DEFINITIONS: CorePageDefinition[] = [
   { path:"/trust", changeFrequency:"monthly", priority:.8 },
   { path:"/changelog", changeFrequency:"monthly", priority:.72 },
   { path:"/status", changeFrequency:"daily", priority:.68 },
-  { path:"/pricing", changeFrequency:"weekly", priority:.75 },
   { path:"/about", changeFrequency:"monthly", priority:.55 },
   { path:"/blog", changeFrequency:"weekly", priority:.65 },
   { path:"/blog/best-free-pdf-editor", changeFrequency:"monthly", priority:.6 },

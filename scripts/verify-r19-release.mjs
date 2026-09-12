@@ -23,12 +23,12 @@ if (routeDup.length || canonicalDup.length) {
   process.exit(1);
 }
 
-if (routes.length !== 20) {
-  console.error(`FAIL: expected exactly 20 validated public PDF routes; got ${routes.length}.`);
+if (routes.length !== 26) {
+  console.error(`FAIL: expected exactly 26 validated public PDF routes; got ${routes.length}.`);
   process.exit(1);
 }
-if (canonical.length !== 20) {
-  console.error(`FAIL: expected exactly 20 canonical public PDF processors; got ${canonical.length}.`);
+if (canonical.length !== 26) {
+  console.error(`FAIL: expected exactly 26 canonical public PDF processors; got ${canonical.length}.`);
   process.exit(1);
 }
 if (aliases.length !== 0) {
@@ -47,7 +47,8 @@ if (data.publicRouteCount !== routes.length || data.canonicalProcessorCount !== 
 const required = [
   'merge-pdf','split-pdf','compress-pdf','rotate-pdf','delete-pdf-pages','organize-pdf','crop-pdf','watermark-pdf',
   'page-number','flatten-pdf','protect-pdf','unlock-pdf','repair-pdf','compare-pdf','add-text','add-image-to-pdf',
-  'pdf-metadata','extract-images','sign-pdf','pdf-zip-extract',
+  'pdf-metadata','extract-images','sign-pdf','pdf-zip-extract','edit-pdf',
+  'image-to-pdf','jpg-to-pdf','jpeg-to-pdf','png-to-pdf','webp-to-pdf',
 ];
 const movedImageIds = ['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image'];
 const actual = new Set(routes.map((item) => item.id));

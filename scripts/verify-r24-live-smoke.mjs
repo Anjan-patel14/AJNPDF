@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-const frontend = (process.env.AJN_LIVE_BASE_URL || 'https://ajnpdff.vercel.app').replace(/\/$/, '');
+const frontend = (process.env.AJN_LIVE_BASE_URL || 'https://www.ajnpdf.com').replace(/\/$/, '');
 const backend = (process.env.AJN_BACKEND_URL || 'https://ajn-pdf-api-580158856470.asia-south1.run.app').replace(/\/$/, '');
 const ids = JSON.parse(fs.readFileSync('scripts/r13-public-tool-ids.json', 'utf8'));
 const failures = [];
@@ -117,4 +117,4 @@ if (failures.length) {
   console.error(`AJN PDF R24 LIVE SMOKE: FAIL (${failures.length} issue(s))`);
   process.exit(1);
 }
-console.log(`AJN PDF R24 LIVE SMOKE: PASS (${ids.length}/20 public routes + backend + CORS)`);
+console.log(`AJN PDF R24 LIVE SMOKE: PASS (${ids.length}/${ids.length} public routes + backend + CORS)`);

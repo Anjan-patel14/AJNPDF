@@ -68,3 +68,15 @@ CLOUD_RUN_VERCEL_ENV.txt
 
 # Track placeholder-only environment documentation for clean CI/worktrees.
 !.env.example
+# local production gate outputs
+/test-results/
+/playwright-report/
+/reports/AJN_GATES_2_15_REPORT.json
+/reports/AJN_GATES_2_15_*.log
+
+
+# local Next.js development output
+/.next-dev/
+
+# generated runtime verification report
+/R13_BUILT_RUNTIME_REPORT.json

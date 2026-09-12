@@ -9,12 +9,12 @@ import { SITE_URL } from '@/lib/seo-config';
 const DOWNLOAD_PATH = '/downloads/AJN-PDF-CHROME-EXTENSION-1.0.0.zip';
 
 export const metadata: Metadata = {
-  title: 'AJN PDF Chrome Extension — Quick Image Tools & 100+ Workflows',
-  description: 'Use four local image quick actions and search 100+ AJN PDF workflows from Chrome without page or browsing-history access.',
+  title: 'AJN PDF Chrome Extension — Quick PDF Access & AJN PDF Tools',
+  description: 'Use quick actions and search the current AJN PDF public workflows from Chrome without page or browsing-history access.',
   alternates: { canonical: '/chrome-extension' },
   openGraph: {
     title: 'AJN PDF Chrome Extension',
-    description: 'Local image quick actions plus fast access to 100+ AJN PDF workflows.',
+    description: 'Quick actions plus fast access to the current AJN PDF public workflows.',
     url: '/chrome-extension',
     type: 'website',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'AJN PDF Chrome extension and file tools' }],

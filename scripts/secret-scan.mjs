@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const skipDirs = new Set(['node_modules','.next','.git','.venv','__pycache__']);
+const skipDirs = new Set(['node_modules','.next','.next-dev','.git','.venv','__pycache__']);
 const forbiddenNames = new Set(['.env.local','ajn_analytics.sqlite3','ajn_public_media.sqlite3','FULL_ACCEPTANCE_RESULTS.json','HTTP_ACCEPTANCE_RESULTS.json']);
 const allowRuntimeArtifacts = process.env.AJN_ALLOW_RUNTIME_ARTIFACTS === '1';
 const allowedTextExt = new Set(['.ts','.tsx','.js','.mjs','.cjs','.json','.py','.ps1','.md','.txt','.yml','.yaml','.css','.html','.toml','.ini','.gitignore']);

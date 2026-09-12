@@ -42,9 +42,9 @@ const editTitle = 'Edit PDF Online Free - Change Text & Sign PDF | AJN PDF';
 if (!strategy.includes(editTitle)) fail('Edit PDF priority title missing');
 else pass('Edit PDF priority metadata present');
 
-const editorContractDescription = 'Edit PDF online in your browser with AJN PDF. Replace text, dates, names and numbers';
-if (!strategy.includes(editorContractDescription)) fail('Edit PDF legacy public-editor meta description contract missing');
-else pass('Edit PDF legacy SEO contract compatibility present');
+const editorContractDescription = 'Edit PDF locally in your browser. Edit native text or word-level OCR text in scanned PDFs';
+if (!strategy.includes(editorContractDescription)) fail('Edit PDF current public-editor meta description contract missing');
+else pass('Edit PDF current SEO contract compatibility present');
 
 for (const id of ['protect-pdf','unlock-pdf','repair-pdf']) {
   const start = strategy.indexOf(`'${id}': {`);

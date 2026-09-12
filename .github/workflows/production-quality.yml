@@ -28,26 +28,10 @@ jobs:
         with:
           python-version: '3.12'
       - run: npm ci --no-audit --no-fund
-      - run: npm run verify:dependency-policy
-      - run: npm run verify:secrets
-      - run: npm run verify:r18-production
-      - run: npm run verify:r17-trust-seo
-      - run: node scripts/verify-r20-focused-seo.mjs
-      - run: node scripts/verify-r21-product-ecosystem.mjs
-      - run: npm run verify:r16-consistency
-      - run: npm run verify:r24-public-tools
-      - run: npm run verify:tool-ux
-      - run: npm run verify:final-ui
-      - run: npm run verify:mobile-first
-      - run: npm run verify:i18n
-      - run: npm run verify:accessibility
-      - run: npm run verify:capabilities
-      - run: npm run verify:backend-workflow
-      - run: node scripts/verify-r20-conversion-accuracy.mjs
-      - run: npm run verify:r19-release
+      - name: Run AJN PDF source gates 2-15
+        run: npm run verify:gates:source
       - run: npm run lint
       - run: npm run typecheck
-      - run: npm run verify:r13-browser-pdf
       - run: npm run build
       - run: npm run verify:r13-runtime
       - name: Compile current backend Python sources
@@ -74,18 +58,18 @@ jobs:
       - name: Build production backend image and run embedded public acceptance
         run: docker build --pull --progress=plain -t ajn-pdf-backend-ci ./backend
 
-  package-r21-source:
+  package-production-source:
     needs: [source-and-frontend-gates, backend-container-gate]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create clean R21 source ZIP
+      - name: Create clean production source ZIP
         run: |
-          zip -rq AJN-PDF-R21-PRODUCT-ECOSYSTEM.zip . \
+          zip -rq AJN-PDF-PRODUCTION-GATES-2-15.zip . \
             -x '.git/*' 'node_modules/*' '.next/*' 'mobile-android/.gradle/*' 'mobile-android/build/*' '*.log'
       - uses: actions/upload-artifact@v4
         with:
-          name: AJN-PDF-R21-source
-          path: AJN-PDF-R21-PRODUCT-ECOSYSTEM.zip
+          name: AJN-PDF-production-source
+          path: AJN-PDF-PRODUCTION-GATES-2-15.zip
           if-no-files-found: error
           retention-days: 14

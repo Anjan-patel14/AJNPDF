@@ -21,9 +21,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Check all 20 public routes, backend readiness, and CORS
+      - name: Check all 26 public routes, backend readiness, and CORS
         env:
-          AJN_LIVE_BASE_URL: https://ajnpdff.vercel.app
+          AJN_LIVE_BASE_URL: https://www.ajnpdf.com
           AJN_BACKEND_URL: https://ajn-pdf-api-580158856470.asia-south1.run.app
         run: node scripts/verify-r24-live-smoke.mjs
       - name: Verify exact backend capability parity

@@ -57,7 +57,10 @@
     "verify:r24-public-tools": "node scripts/verify-r24-public-tools.mjs",
     "verify:r24-live-smoke": "node scripts/verify-r24-live-smoke.mjs",
     "test:editor": "node tests/editor.browser.mjs",
-    "test:editor:production": "node tests/editor.browser.mjs --production"
+    "test:editor:production": "node tests/editor.browser.mjs --production",
+    "verify:gates:source": "node scripts/verify-gates-2-15.mjs",
+    "verify:gates:full": "node scripts/verify-gates-2-15.mjs --full",
+    "verify:gates:live": "node scripts/verify-gates-live.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

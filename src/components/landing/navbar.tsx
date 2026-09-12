@@ -102,7 +102,7 @@ export function Navbar() {
             >
               <ImageIcon className="h-4 w-4" />
               Image Tools
-              <span aria-hidden="true">â†—</span>
+              <span aria-hidden="true">↗</span>
             </a>
             <a
               href="https://ajn.buzz"
@@ -186,7 +186,7 @@ export function Navbar() {
                   className="flex min-h-11 items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50 px-3 text-sm font-black text-emerald-800"
                 >
                   <span className="inline-flex items-center gap-2"><ImageIcon className="h-4 w-4" /> AJN Buzz Image Tools</span>
-                  <span aria-hidden="true">â†—</span>
+                  <span aria-hidden="true">↗</span>
                 </a>
 
                 <div className="my-2 border-t border-[#e3e9f4] dark:border-white/10" />
@@ -203,7 +203,7 @@ export function Navbar() {
                     className="flex min-h-11 items-center justify-between rounded-xl px-3 text-sm font-extrabold text-[#5b6b80] transition hover:bg-slate-100 hover:text-[#0e1b2c] dark:text-[#8b96ab] dark:hover:bg-white/5 dark:hover:text-white"
                   >
                     {item.label}
-                    <span aria-hidden="true">â€º</span>
+                    <span aria-hidden="true">›</span>
                   </Link>
                 ))}
 

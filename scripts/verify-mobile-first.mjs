@@ -80,7 +80,7 @@ check(
 );
 
 check(
-  "all 20 PDF tools are grouped without progressive hiding",
+  "all 26 PDF tools are grouped without progressive hiding",
   ["Popular PDF Tools", "Organize PDF", "Edit & Sign PDF", "Protect & Repair"]
     .every((label) => grid.includes(label)) &&
     !grid.includes("INITIAL_VISIBLE_TOOLS") &&
@@ -97,21 +97,20 @@ check(
 check("phone cards expose keyboard focus styling", grid.includes("focus-visible:ring-2"));
 
 check(
-  "bottom navigation uses focused PDF/account destinations",
+  "bottom navigation uses focused PDF/status destinations",
   bottomNav.includes('href: "/"') &&
     bottomNav.includes('href: "/pdf-tools"') &&
-    bottomNav.includes('href: "/sign-pdf"') &&
-    bottomNav.includes('"/account"') &&
-    bottomNav.includes('"/login"') &&
+    bottomNav.includes('href: "/sign"') &&
+    bottomNav.includes('href: "/status"') &&
     !bottomNav.includes("/conversion-tools") &&
     !bottomNav.includes("/image-tools") &&
     !bottomNav.includes("/pdf-utilities"),
 );
 
 check(
-  "bottom navigation has three fixed destinations plus dynamic account/login",
-  (bottomNav.match(/\{ label:/g) || []).length === 4 &&
-    bottomNav.includes('auth.session ? "Account" : "Login"'),
+  "bottom navigation has four fixed destinations",
+  (bottomNav.match(/href:/g) || []).length === 4 &&
+    !bottomNav.includes('auth.session'),
 );
 
 check(
