@@ -42,6 +42,10 @@ check('AdSense public environment overrides are documented',
   env.includes('NEXT_PUBLIC_ADSENSE_CLIENT=') && env.includes('NEXT_PUBLIC_ADSENSE_SLOT_TOOL_CONTENT='));
 check('Sitemap remains registry/inventory driven',
   sitemap.includes('BUILD_PUBLIC_TOOLS') && sitemap.includes('toolPath(tool.id)'));
+check('Duplicate PDF utilities directory is retired to canonical PDF tools directory',
+  next.includes("{ source: '/pdf-utilities', destination: '/pdf-tools', permanent: true }") &&
+  !exists('src/app/pdf-utilities/page.tsx') &&
+  !sitemap.includes('path:"/pdf-utilities"'));
 check('Tool schema has no fabricated aggregate rating',
   toolPage.includes("'WebApplication'") && toolPage.includes("'BreadcrumbList'") && !toolPage.includes('aggregateRating'));
 check('Live frontend verifier exists', exists('scripts/verify-live-frontend-production.mjs'));

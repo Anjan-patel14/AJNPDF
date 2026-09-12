@@ -78,6 +78,7 @@ const nextConfig: NextConfig = {
       { source: '/forgot-password', destination: '/pdf-tools', permanent: true },
       { source: '/account/:path*', destination: '/pdf-tools', permanent: true },
       { source: '/pricing', destination: '/pdf-tools', permanent: true },
+      { source: '/pdf-utilities', destination: '/pdf-tools', permanent: true },
       { source: '/workspace/:path*', destination: '/pdf-tools', permanent: true },
       { source: '/ajn-studio/:path*', destination: '/pdf-tools', permanent: true },      { source: '/image-tools', destination: '/img', permanent: true },
       { source: '/:path*', has: [{ type: 'host', value: 'ajnpdf.com' }], destination: 'https://www.ajnpdf.com/:path*', permanent: true },
