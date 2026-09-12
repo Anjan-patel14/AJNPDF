@@ -24,7 +24,8 @@ export type AnalyticsEventName =
   | 'tool_retry'
   | 'upload_selected'
   | 'media_view'
-  | 'media_open';
+  | 'media_open'
+  | 'client_error';
 
 export type SiteEvent = {
   event_name: AnalyticsEventName;
@@ -41,6 +42,7 @@ export type SiteEvent = {
   viewport_bucket?: string;
   connection_type?: string;
   theme?: string;
+  error_kind?: string;
 };
 
 declare global {
@@ -124,6 +126,7 @@ function sanitizeEvent(event: SiteEvent): SiteEvent {
     viewport_bucket: clean(event.viewport_bucket, 20),
     connection_type: clean(event.connection_type, 20),
     theme: clean(event.theme, 12),
+    error_kind: clean(event.error_kind, 50),
   };
 }
 
@@ -147,6 +150,7 @@ export function sendAjnAnalytics(event: SiteEvent) {
       viewport_bucket: payload.viewport_bucket,
       connection_type: payload.connection_type,
       theme: payload.theme,
+      error_kind: payload.error_kind,
     });
   }
 
@@ -167,6 +171,13 @@ function analyticsId(target: HTMLElement): string | undefined {
   return undefined;
 }
 
+function classifyClientError(value: unknown): string {
+  if (value instanceof DOMException) return `DOMException:${value.name}`.slice(0, 50);
+  if (value instanceof Error) return (value.name || 'Error').slice(0, 50);
+  if (value === null) return 'null';
+  if (value === undefined) return 'undefined';
+  return typeof value;
+}
 export function SiteAnalytics() {
   const pathname = usePathname();
   const lastPath = useRef('');
@@ -213,6 +224,40 @@ export function SiteAnalytics() {
     return () => document.removeEventListener('click', onClick, { capture: true });
   }, []);
 
+  useEffect(() => {
+    const onError = (event: ErrorEvent) => {
+      if (!hasConsent()) return;
+      const path = window.location.pathname;
+      sendAjnAnalytics({
+        event_name: 'client_error',
+        path,
+        tool_id: currentToolId(path),
+        category: categoryFromPath(path),
+        element_id: 'ajn-client-error-monitor',
+        error_kind: classifyClientError(event.error),
+      });
+    };
+
+    const onUnhandled = (event: PromiseRejectionEvent) => {
+      if (!hasConsent()) return;
+      const path = window.location.pathname;
+      sendAjnAnalytics({
+        event_name: 'client_error',
+        path,
+        tool_id: currentToolId(path),
+        category: categoryFromPath(path),
+        element_id: 'ajn-unhandled-rejection-monitor',
+        error_kind: classifyClientError(event.reason),
+      });
+    };
+
+    window.addEventListener('error', onError);
+    window.addEventListener('unhandledrejection', onUnhandled);
+    return () => {
+      window.removeEventListener('error', onError);
+      window.removeEventListener('unhandledrejection', onUnhandled);
+    };
+  }, []);
   useReportWebVitals((metric) => {
     if (!hasConsent()) return;
     sendAjnAnalytics({

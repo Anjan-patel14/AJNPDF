@@ -12,7 +12,13 @@ const env = read('.env.example');
 
 check('Google Analytics component is mounted globally', layout.includes('<GoogleAnalytics />'));
 check('site analytics component is mounted globally', layout.includes('<SiteAnalytics />'));
-check('GA4 is environment-configured and consent gated', ga.includes('NEXT_PUBLIC_GA4_MEASUREMENT_ID') && ga.includes("ajn_cookie_consent") && ga.includes("accepted"));
+check(
+  'GA4 is environment-configured and consent gated',
+  ga.includes('NEXT_PUBLIC_GA4_MEASUREMENT_ID') &&
+  ga.includes('readAjnConsent') &&
+  ga.includes('installGoogleConsentDefault') &&
+  ga.includes("consent !== 'accepted'")
+);
 check('GA4 disables Google signals and ad personalization signals', ga.includes('allow_google_signals: false') && ga.includes('allow_ad_personalization_signals: false'));
 check('Core Web Vitals are measured after consent', site.includes('useReportWebVitals') && site.includes("event_name: 'web_vital'"));
 check('tool funnel events are represented', ['tool_open','tool_start','tool_complete','tool_error','download'].every((name) => site.includes(`'${name}'`)));

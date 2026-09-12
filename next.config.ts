@@ -4,6 +4,7 @@ import { configuredPdfBackendCandidates } from './src/lib/backend-service-url';
 const isProduction = process.env.NODE_ENV === 'production';
 const enableHsts = isProduction && process.env.AJN_ENABLE_HSTS !== 'false';
 const enableHstsPreload = enableHsts && process.env.AJN_HSTS_PRELOAD === 'true';
+const isIndexableDeployment = !process.env.VERCEL_ENV || process.env.VERCEL_ENV === 'production';
 const backendOrigins = [...new Set(configuredPdfBackendCandidates(isProduction).map((value) => new URL(value).origin))];
 
 const connectSources = [
@@ -98,6 +99,7 @@ const nextConfig: NextConfig = {
         { key: 'Permissions-Policy', value: 'camera=(self), microphone=(), geolocation=(), payment=(), usb=()' },
         { key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' }, { key: 'Cross-Origin-Resource-Policy', value: 'same-site' },
         { key: 'X-DNS-Prefetch-Control', value: 'on' },
+        ...(!isIndexableDeployment ? [{ key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' }] : []),
         ...(enableHsts ? [{ key: 'Strict-Transport-Security', value: `max-age=63072000; includeSubDomains${enableHstsPreload ? '; preload' : ''}` }] : [])] }];
   },
 };

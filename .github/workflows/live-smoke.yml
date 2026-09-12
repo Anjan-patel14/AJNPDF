@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  live-smoke:
+  frontend-live-smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -21,12 +21,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Check all 26 public routes, backend readiness, and CORS
+      - name: Verify live frontend, SEO, sitemap and AdSense ownership
+        env:
+          AJN_LIVE_BASE_URL: https://www.ajnpdf.com
+        run: node scripts/verify-live-frontend-production.mjs
+
+  backend-live-smoke:
+    if: ${{ vars.AJN_BACKEND_MONITOR_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify backend readiness, capabilities and CORS
         env:
           AJN_LIVE_BASE_URL: https://www.ajnpdf.com
           AJN_BACKEND_URL: https://ajn-pdf-api-580158856470.asia-south1.run.app
-        run: node scripts/verify-r24-live-smoke.mjs
-      - name: Verify exact backend capability parity
-        env:
-          AJN_BACKEND_URL: https://ajn-pdf-api-580158856470.asia-south1.run.app
-        run: node scripts/verify-live-backend-contract.mjs
+        run: |
+          node scripts/verify-r24-live-smoke.mjs
+          node scripts/verify-live-backend-contract.mjs

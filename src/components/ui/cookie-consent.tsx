@@ -7,8 +7,9 @@ import { Cookie, Settings2 } from 'lucide-react';
 import { Button } from './button';
 import { sendAjnAnalytics } from '../analytics/site-analytics';
 import { useLanguage } from '@/lib/i18n/language-context';
+import { AJN_CONSENT_KEY, updateGoogleConsent } from '@/lib/google-consent';
 
-const CONSENT_KEY = 'ajn_cookie_consent';
+const CONSENT_KEY = AJN_CONSENT_KEY;
 
 export function CookieConsent() {
   const { t } = useLanguage();
@@ -24,6 +25,7 @@ export function CookieConsent() {
 
   const save = (value: 'accepted' | 'declined') => {
     localStorage.setItem(CONSENT_KEY, value);
+    updateGoogleConsent(value);
     window.dispatchEvent(new Event('ajn-cookie-consent-changed'));
     if (value === 'accepted') {
       sendAjnAnalytics({ event_name: 'consent_update', path: window.location.pathname, element_id: 'optional-consent-accepted' });

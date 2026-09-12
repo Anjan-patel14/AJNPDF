@@ -101,6 +101,7 @@ const gates = [
     name: 'Analytics & Search Measurement',
     commands: [
       'node scripts/verify-current-analytics.mjs',
+      'node scripts/verify-seo-ads-production.mjs',
     ],
   },
   {
