@@ -25,6 +25,14 @@ const GROUPS = [
     bar: "bg-[#1a56db] dark:bg-[#3b82f6]",
   },
   {
+    id: "create-pdf-from-images",
+    title: "Create PDF from Images",
+    description: "Turn common image formats into PDF documents.",
+    ids: ["image-to-pdf", "jpg-to-pdf", "jpeg-to-pdf", "png-to-pdf", "webp-to-pdf"],
+    board: "border-violet-100 bg-violet-50/45 dark:border-violet-400/15 dark:bg-violet-400/[.045]",
+    bar: "bg-[#7c3aed] dark:bg-[#8b5cf6]",
+  },
+  {
     id: "organize",
     title: "Organize PDF",
     description: "Arrange and manage pages.",

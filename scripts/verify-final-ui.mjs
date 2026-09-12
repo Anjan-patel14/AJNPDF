@@ -63,6 +63,7 @@ for (const retired of ["image", "pdf", "conversion"]) {
 
 for (const label of [
   "Popular PDF Tools",
+  "Create PDF from Images",
   "Organize PDF",
   "Edit & Sign PDF",
   "Protect & Repair",
@@ -75,6 +76,18 @@ for (const label of [
 !grid.includes("Image Tools")
   ? pass("Image tool group is absent")
   : fail("Image tool group remains");
+
+for (const id of [
+  "image-to-pdf",
+  "jpg-to-pdf",
+  "jpeg-to-pdf",
+  "png-to-pdf",
+  "webp-to-pdf",
+]) {
+  grid.includes(`"${id}"`)
+    ? pass(`Image-to-PDF route is present in the primary PDF directory: ${id}`)
+    : fail(`Primary PDF directory is missing image-to-PDF route: ${id}`);
+}
 
 grid.includes("SEARCH_EXPANSIONS") && grid.includes("distanceAtMostTwo")
   ? pass("Search aliases and typo tolerance present")
