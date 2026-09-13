@@ -14,12 +14,13 @@ import { cn } from '@/lib/utils';
 import { scoreToolSearch } from '@/lib/tool-search';
 
 const POPULAR_IDS = ['merge-pdf','split-pdf','compress-pdf','organize-pdf','protect-pdf','sign-pdf'];
-const GROUP_ORDER = ['Popular','Organize PDF','Edit & Sign','Security & Recovery','More PDF Tools'] as const;
+const GROUP_ORDER = ['Popular','Create & Convert','Organize PDF','Edit & Sign','Security & Recovery','More PDF Tools'] as const;
 type GroupName = (typeof GROUP_ORDER)[number];
 
 function groupFor(tool: ServiceTool): GroupName {
   const id = tool.id;
   if (POPULAR_IDS.includes(id)) return 'Popular';
+  if (['scan-to-pdf','image-to-pdf','jpg-to-pdf','jpeg-to-pdf','png-to-pdf','webp-to-pdf'].includes(id)) return 'Create & Convert';
   if (['protect-pdf','unlock-pdf','repair-pdf'].includes(id)) return 'Security & Recovery';
   if (['merge-pdf','split-pdf','compress-pdf','rotate-pdf','delete-pdf-pages','organize-pdf','crop-pdf','page-number','flatten-pdf'].includes(id)) return 'Organize PDF';
   if (['watermark-pdf','add-text','add-image-to-pdf','compare-pdf','pdf-metadata','extract-images','sign-pdf'].includes(id)) return 'Edit & Sign';

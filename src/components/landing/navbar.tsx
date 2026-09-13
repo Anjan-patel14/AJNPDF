@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ImageIcon, Menu, Search, X } from "lucide-react";
+import { ImageIcon, Menu, ScanLine, Search, X } from "lucide-react";
 import { LogoAnimation } from "./logo-animation";
 import { Button } from "../ui/button";
 import { SearchModal } from "../search-modal";
@@ -27,6 +27,8 @@ export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const reduceMotion = useReducedMotion();
   const { t, tool: localizeTool } = useLanguage();
+  const scanToPdfEnabled = process.env.NEXT_PUBLIC_AJN_ENABLE_SCAN_TO_PDF === "true";
+  const scanTool = localizeTool("scan-to-pdf", "Scan to PDF", "", []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 18);
@@ -70,6 +72,18 @@ export function Navbar() {
             >
               PDF Tools
             </Link>
+
+            {scanToPdfEnabled && (
+              <Link
+                href={toolPath("scan-to-pdf")}
+                data-ajn-header-scan="true"
+                className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-blue-200 bg-blue-600 px-3 text-[11px] font-black text-white shadow-[0_7px_18px_rgba(37,99,235,.20)] transition hover:-translate-y-px hover:bg-blue-700"
+              >
+                <ScanLine className="h-4 w-4" />
+                <span>{scanTool.name}</span>
+                <span className="rounded-full bg-white/20 px-1.5 py-0.5 text-[7px] font-black uppercase tracking-[.08em]">New</span>
+              </Link>
+            )}
 
             {quickTools.map(({ id, fallback }) => {
               const localized = localizeTool(id, fallback, "", []);
@@ -162,6 +176,17 @@ export function Navbar() {
               className="overflow-hidden border-t border-[#e3e9f4] bg-white dark:border-white/10 dark:bg-[#0c1220] min-[1080px]:hidden"
             >
               <nav className="mx-auto grid max-h-[calc(100dvh-62px)] max-w-7xl gap-1.5 overflow-y-auto px-3 py-4 sm:px-4" aria-label={t("nav.mobile")}>
+                {scanToPdfEnabled && (
+                  <Link
+                    href={toolPath("scan-to-pdf")}
+                    data-ajn-mobile-menu-scan="true"
+                    onClick={() => setMobileOpen(false)}
+                    className="mb-1 flex min-h-12 items-center justify-between rounded-xl border border-blue-200 bg-blue-600 px-3 text-sm font-black text-white shadow-sm"
+                  >
+                    <span className="inline-flex items-center gap-2"><ScanLine className="h-4 w-4" /> {scanTool.name}</span>
+                    <span className="rounded-full bg-white/20 px-2 py-1 text-[8px] uppercase tracking-[.08em]">New</span>
+                  </Link>
+                )}
                 <div className="grid grid-cols-2 gap-2 min-[480px]:grid-cols-3">
                   {quickTools.map(({ id, fallback }) => {
                     const localized = localizeTool(id, fallback, "", []);

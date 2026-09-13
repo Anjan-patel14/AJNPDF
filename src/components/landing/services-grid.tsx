@@ -208,6 +208,7 @@ function ToolCard({ tool, query, priority = false }: { tool: PublicTool; query: 
   const localized = localizeTool(tool.id, tool.name, tool.desc, tool.keywords);
   const tone = cardTone(tool.id);
   const isEditor = tool.id === "edit-pdf";
+  const isScanner = tool.id === "scan-to-pdf";
 
   return (
     <Link
@@ -218,7 +219,13 @@ function ToolCard({ tool, query, priority = false }: { tool: PublicTool; query: 
       data-analytics-id={`tool-card-${tool.id}`}
       data-analytics-category="pdf"
     >
-      <article data-ajn-featured-editor={isEditor ? "true" : undefined} className={`ajn-premium-tool-card ${tone.card} flex h-full min-h-[158px] flex-col p-4 sm:p-5 ${isEditor ? "min-h-[202px] border-blue-300 bg-blue-50/80 shadow-[0_18px_48px_rgba(37,99,235,.16)] ring-1 ring-blue-300/70 dark:border-blue-400/25 dark:bg-blue-400/[.08] dark:ring-blue-400/20" : ""}`}>
+      <article data-ajn-featured-editor={isEditor ? "true" : undefined} data-ajn-featured-scanner={isScanner ? "true" : undefined} className={`ajn-premium-tool-card ${tone.card} flex h-full min-h-[158px] flex-col p-4 sm:p-5 ${isEditor ? "min-h-[202px] border-blue-300 bg-blue-50/80 shadow-[0_18px_48px_rgba(37,99,235,.16)] ring-1 ring-blue-300/70 dark:border-blue-400/25 dark:bg-blue-400/[.08] dark:ring-blue-400/20" : ""} ${isScanner ? "min-h-[202px] border-cyan-300 bg-cyan-50/80 shadow-[0_18px_48px_rgba(8,145,178,.14)] ring-1 ring-cyan-300/70" : ""}`}>
+        {isScanner && (
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <span className="rounded-full bg-blue-600 px-2.5 py-1 text-[9px] font-black uppercase tracking-[.12em] text-white shadow-sm">New • Document Scanner</span>
+            <span className="text-[9px] font-black uppercase tracking-[.12em] text-emerald-700">Browser only</span>
+          </div>
+        )}
         {isEditor && (
           <div className="mb-3 flex items-center justify-between gap-2">
             <span className="rounded-full bg-blue-600 px-2.5 py-1 text-[9px] font-black uppercase tracking-[.12em] text-white shadow-sm">New • Browser Editor</span>
@@ -247,6 +254,13 @@ function ToolCard({ tool, query, priority = false }: { tool: PublicTool; query: 
           <p className="mt-1.5 line-clamp-2 text-[11.5px] font-medium leading-[1.55] text-[#5b6b80] dark:text-[#8b96ab] sm:text-xs">
             <Highlight text={localized.desc} highlight={query} />
           </p>
+          {isScanner && (
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {["Camera", "Auto crop", "Searchable PDF"].map((label) => (
+                <span key={label} className="rounded-lg border border-cyan-200 bg-white px-2 py-1 text-[9px] font-black text-cyan-700">{label}</span>
+              ))}
+            </div>
+          )}
           {isEditor && (
             <div className="mt-4 flex flex-wrap gap-1.5">
               {["Smart text replace", "Font match", "Live preview"].map((label) => (
