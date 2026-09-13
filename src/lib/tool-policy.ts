@@ -43,6 +43,9 @@ export const PRODUCTION_PUBLIC_TOOL_IDS = new Set([
   'watermark-pdf',
 ]);
 
+export const SCAN_TO_PDF_ENABLED = process.env.NEXT_PUBLIC_AJN_ENABLE_SCAN_TO_PDF === 'true' || process.env.VERCEL_ENV === 'production';
+if (SCAN_TO_PDF_ENABLED) PRODUCTION_PUBLIC_TOOL_IDS.add('scan-to-pdf');
+
 const browserImageToPdfIds = new Set([
   'image-to-pdf', 'jpg-to-pdf', 'jpeg-to-pdf', 'png-to-pdf', 'webp-to-pdf',
 ]);
@@ -53,6 +56,7 @@ const stableBrowserIds = new Set([
   'crop-pdf', 'watermark-pdf', 'page-number', 'flatten-pdf', 'compare-pdf',
   'add-text', 'add-image-to-pdf', 'pdf-metadata', 'pdf-zip-extract', 'sign-pdf',
   ...browserImageToPdfIds,
+  'scan-to-pdf',
   // Source-only image processors retained for AJN IMG/Buzz migration.
   'image-reducer', 'image-resizer', 'crop-image', 'rotate-image', 'watermark-image',
   'flip-image', 'convert-image', 'meme-generator', 'photo-editor',
@@ -102,8 +106,8 @@ export function getToolPolicy(id: string): ToolPolicy {
   if (stableBrowserIds.has(id)) {
     return {
       maturity: 'stable', processingMode: 'browser',
-      maxFiles: browserImageToPdfIds.has(id) ? 30 : id === 'merge-pdf' ? MERGE_PDF_LIMITS.maxFiles : 1,
-      maxFileSizeMb: browserImageToPdfIds.has(id) ? 15 : id === 'merge-pdf' ? MERGE_PDF_LIMITS.maxFileSizeMb : 50,
+      maxFiles: id === 'scan-to-pdf' ? 30 : browserImageToPdfIds.has(id) ? 30 : id === 'merge-pdf' ? MERGE_PDF_LIMITS.maxFiles : 1,
+      maxFileSizeMb: id === 'scan-to-pdf' ? 18 : browserImageToPdfIds.has(id) ? 15 : id === 'merge-pdf' ? MERGE_PDF_LIMITS.maxFileSizeMb : 50,
       publicByDefault: true,
     };
   }

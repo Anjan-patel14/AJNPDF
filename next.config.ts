@@ -49,6 +49,7 @@ const retiredToolRedirects = retiredToolAliases.flatMap((source) => [
   { source: `/tools/${source}`, destination: source === 'psd-pdf' ? '/img' : '/pdf-tools', permanent: true },
 ]);
 
+const scanToPdfEnabled = process.env.NEXT_PUBLIC_AJN_ENABLE_SCAN_TO_PDF === 'true' || process.env.VERCEL_ENV === 'production';
 const publicToolIds = [
   'edit-pdf',
   'add-image-to-pdf', 'add-text', 'compare-pdf', 'compress-pdf', 'crop-pdf',
@@ -56,6 +57,7 @@ const publicToolIds = [
   'jpg-to-pdf', 'merge-pdf', 'organize-pdf', 'page-number', 'pdf-metadata',
   'pdf-zip-extract', 'png-to-pdf', 'protect-pdf', 'repair-pdf', 'rotate-pdf',
   'sign-pdf', 'split-pdf', 'unlock-pdf', 'watermark-pdf', 'webp-to-pdf',
+  ...(scanToPdfEnabled ? ['scan-to-pdf'] : []),
 ];
 const publicToolLegacyRedirects = publicToolIds.map((id) => ({
   source: `/tools/${id}`,
@@ -64,6 +66,7 @@ const publicToolLegacyRedirects = publicToolIds.map((id) => ({
 }));
 
 const nextConfig: NextConfig = {
+  env: { NEXT_PUBLIC_AJN_ENABLE_SCAN_TO_PDF: scanToPdfEnabled ? 'true' : 'false' },
   distDir: process.env.AJN_NEXT_DIST_DIR || (isProduction ? '.next' : '.next-dev'),
   poweredByHeader: false, compress: true, outputFileTracingRoot: process.cwd(), output: 'standalone',
   webpack: (config) => { config.resolve.alias.canvas = false; return config; },
@@ -93,6 +96,7 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
+      { source: '/ajn-scan/opencv-4.10.0/:path*', headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }] },
       { source: '/admin/:path*', headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0' }, { key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
       { source: '/(.*)', headers: [
         { key: 'Content-Security-Policy', value: contentSecurityPolicy }, { key: 'X-Content-Type-Options', value: 'nosniff' },

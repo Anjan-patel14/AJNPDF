@@ -107,6 +107,10 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
     title: 'Rotate PDF Online - Rotate PDF Pages | AJN PDF',
     description: 'Rotate all or selected PDF pages in your browser, preview the page orientation and download a new PDF without uploading the source document.',
   },
+  'scan-to-pdf': {
+    title: 'Scan to PDF Online - Create Searchable PDFs | AJN PDF',
+    description: 'Scan document photos into corrected, enhanced and optionally searchable PDFs in your browser with local OCR and no document upload.',
+  },
   'sign-pdf': {
     title: 'Sign PDF Online - Add an Electronic Signature | AJN PDF',
     description: 'Add and position a visual electronic signature on PDF pages in your browser, preview the result and download a new signed PDF copy.',

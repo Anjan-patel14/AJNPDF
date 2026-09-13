@@ -84,9 +84,11 @@ for (const id of ['psd-pdf','upscale-image','remove-bg','blur-face','smart-read'
   requireText(toolPolicy, `'${id}'`, `${id} remains explicitly hidden until a proven processor exists`);
 }
 
-if (fs.existsSync('src/components/junction/DocumentScanner.tsx')) fail('Retired scanner source must be physically deleted');
-else pass('Retired scanner source is physically deleted');
-forbidText(junctionIndex, 'DocumentScanner', 'Retired scanner component is not exported');
+if (fs.existsSync('src/components/junction/DocumentScanner.tsx')) fail('Legacy DocumentScanner source must remain deleted');
+else pass('Legacy DocumentScanner source remains deleted');
+if (fs.existsSync('src/components/junction/ScanToPdf.tsx')) pass('New feature-gated Scan to PDF source exists');
+else fail('New feature-gated Scan to PDF source is missing');
+forbidText(junctionIndex, 'DocumentScanner', 'Legacy scanner component is not exported');
 
 if (process.exitCode) {
   console.error('AJN PDF R20 CONVERSION ACCURACY: FAIL');

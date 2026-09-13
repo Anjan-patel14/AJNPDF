@@ -60,6 +60,8 @@ const TOOL_COMPONENTS: Record<string, any> = {
   'add-text': dynamic(() => import('./AddText'), { ssr: false }),
   'add-image-to-pdf': dynamic(() => import('./AddImageToPdf'), { ssr: false }),
 
+  'scan-to-pdf': dynamic(() => import('./ScanToPdf'), { ssr: false }),
+
   // Browser-only image -> PDF conversions. These routes never require Cloud Run.
   'image-to-pdf': dynamic(() => import('./ImagesToPdf'), { ssr: false }),
   'jpg-to-pdf': dynamic(() => import('./ImagesToPdf'), { ssr: false }),

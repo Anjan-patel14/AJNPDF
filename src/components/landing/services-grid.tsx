@@ -28,7 +28,7 @@ const GROUPS = [
     id: "create-pdf-from-images",
     title: "Create PDF from Images",
     description: "Turn common image formats into PDF documents.",
-    ids: ["image-to-pdf", "jpg-to-pdf", "jpeg-to-pdf", "png-to-pdf", "webp-to-pdf"],
+    ids: ["scan-to-pdf", "image-to-pdf", "jpg-to-pdf", "jpeg-to-pdf", "png-to-pdf", "webp-to-pdf"],
     board: "border-violet-100 bg-violet-50/45 dark:border-violet-400/15 dark:bg-violet-400/[.045]",
     bar: "bg-[#7c3aed] dark:bg-[#8b5cf6]",
   },
