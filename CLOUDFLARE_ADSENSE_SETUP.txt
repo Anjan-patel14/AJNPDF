@@ -1,0 +1,76 @@
+AJN PDF :: CLOUDFLARE SETUP FOR GOOGLE SEARCH + ADSENSE
+Updated: 17 September 2026
+
+Goal:
+- Keep normal Cloudflare protection.
+- Do not challenge verified Google crawlers.
+- Keep homepage, sitemap.xml, robots.txt and ads.txt publicly crawlable.
+
+DO THIS IN CLOUDFLARE:
+
+1. Open Cloudflare Dashboard -> ajnpdf.com.
+
+2. Security -> Settings -> filter/search for "Bot traffic".
+
+3. If you see BOT FIGHT MODE and it is ON:
+   - Turn Bot Fight Mode OFF temporarily for the AdSense review period.
+   - Cloudflare Free-plan Bot Fight Mode cannot be bypassed by a normal WAF Skip rule.
+   - You can turn it back on after approval if testing confirms Google crawlers remain reachable.
+
+4. If you have SUPER BOT FIGHT MODE:
+   - Verified bots: ALLOW
+   - Definitely automated: BLOCK or your preferred protection
+   - Likely automated: MANAGED CHALLENGE
+   - Do not challenge verified bots.
+
+5. Security -> WAF -> Custom rules.
+   Review every Block / Managed Challenge rule.
+   If a rule can match the whole site, either:
+   A) change its expression to exclude verified bots:
+      (...your existing condition...) and not cf.client.bot
+   OR
+   B) create a FIRST rule:
+      Name: Allow verified search and ads crawlers
+      Expression: (cf.client.bot)
+      Action: Skip
+      Skip: All remaining custom rules
+      If available also skip Super Bot Fight Mode / Managed Rules that are causing the challenge.
+   Place this rule ABOVE challenge/block rules.
+
+6. Security -> Settings:
+   - Make sure "Under Attack Mode" is OFF for normal operation.
+   - Do not use a site-wide JavaScript/Managed Challenge while requesting AdSense review.
+
+7. Security -> Analytics / Events:
+   Filter for:
+   - Host = www.ajnpdf.com
+   - Actions = Block / Managed Challenge / JS Challenge
+   Check whether verified Google traffic is being challenged.
+   Legitimate Googlebot / Mediapartners-Google / Google-Display-Ads-Bot should not be blocked.
+
+8. Confirm these URLs open without a browser challenge:
+   https://www.ajnpdf.com/
+   https://www.ajnpdf.com/sitemap.xml
+   https://www.ajnpdf.com/robots.txt
+   https://www.ajnpdf.com/ads.txt
+   https://www.ajnpdf.com/privacy
+   https://www.ajnpdf.com/terms
+   https://www.ajnpdf.com/disclaimer
+   https://www.ajnpdf.com/contact
+
+9. Google Search Console:
+   - Sitemap should remain Success.
+   - Inspect homepage and your main tool pages and use Test Live URL.
+   - Request indexing for the homepage, /pdf-tools, /edit-pdf, /merge-pdf,
+     /compress-pdf and /split-pdf after this deployment.
+
+10. AdSense:
+   - Do not request review until Cloudflare verified-bot access is confirmed.
+   - ads.txt must remain:
+     google.com, pub-4495802176396975, DIRECT, f08c47fec0942fa0
+
+IMPORTANT:
+A generic automated request receiving a Cloudflare challenge does not by itself prove
+verified Googlebot is blocked. Cloudflare verifies known bots using network identity,
+not only User-Agent. Use Cloudflare Security Events + Search Console live testing to
+confirm the real crawler path.

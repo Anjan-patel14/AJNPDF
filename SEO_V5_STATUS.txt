@@ -1,0 +1,31 @@
+AJN PDF SEO V5 STATUS
+=====================
+
+Implemented in this package:
+- 34-tool focused PDF catalog retained.
+- Stale homepage "View all 26" copy removed.
+- Contact page: unique SEO metadata + support/privacy/security/copyright channels.
+- Privacy Policy: unique metadata, updated effective date, clearer browser/server,
+  analytics, AdSense consent, retention and privacy-request language.
+- Terms of Use: unique metadata, updated effective date, broken wording repaired.
+- Disclaimer: unique metadata, updated effective date, broken wording repaired.
+- Footer: Blog + Privacy + Terms + Disclaimer + Acceptable Use + Copyright/DMCA links.
+- Blog hub: stronger worldwide English SEO metadata.
+- Blog hub: editorial-quality statement; avoids copied/spun/keyword-only content.
+- Blog sitemap cadence set to daily for the requested publishing workflow.
+- New regression verifier: scripts/verify-adsense-trust-seo.mjs.
+- Production runner includes the new AdSense/trust SEO gate.
+- robots.ts already explicitly allows Mediapartners-Google and Google-Display-Ads-Bot.
+- ads.txt publisher declaration remains correct.
+
+Validation completed in this environment:
+PASS verify-adsense-trust-seo.mjs
+PASS verify-r20-focused-seo.mjs
+PASS verify-r21-product-ecosystem.mjs
+PASS verify-seo-ads.mjs
+PASS verify-sitemap-indexing.mjs
+
+The Windows deployment script performs npm ci, typecheck and production build again
+against the exact GitHub worktree before pushing main.
+
+Cloudflare remains an account-level action. Follow CLOUDFLARE_ADSENSE_SETUP.txt.

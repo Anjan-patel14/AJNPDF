@@ -3,21 +3,31 @@ import { SITE_URL } from '@/lib/seo-config';
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: [
-        '/api/',
-        '/dashboard/',
-        '/admin/',
-        '/login',
-        '/view/',
-        '/junction',
-        '/tmp/',
-        '/private/',
-        '/pdf-editor-lab',
-      ],
-    },
+    rules: [
+      {
+        userAgent: 'Mediapartners-Google',
+        allow: '/',
+      },
+      {
+        userAgent: 'Google-Display-Ads-Bot',
+        allow: '/',
+      },
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: [
+          '/api/',
+          '/dashboard/',
+          '/admin/',
+          '/login',
+          '/view/',
+          '/junction',
+          '/tmp/',
+          '/private/',
+          '/pdf-editor-lab',
+        ],
+      },
+    ],
     sitemap: [`${SITE_URL}/sitemap.xml`, `${SITE_URL}/image-sitemap.xml`],
     host: SITE_URL,
   };

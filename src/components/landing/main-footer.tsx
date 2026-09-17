@@ -11,6 +11,7 @@ const commonToolIds = ["merge-pdf","compress-pdf","split-pdf","sign-pdf","protec
 const productLinks = [
   ["All PDF Tools","/pdf-tools"],
   ["Trust Center","/trust"],
+  ["PDF Guides","/blog"],
   ["Changelog","/changelog"],
   ["AJN Studio","/ajn-studio"],
   ["Developer","/developer"],
@@ -20,9 +21,12 @@ const productLinks = [
 ] as const;
 const legalLinks = [
   ["Privacy Policy","/privacy"],
-  ["Terms","/terms"],
+  ["Terms of Use","/terms"],
+  ["Disclaimer","/disclaimer"],
+  ["Acceptable Use","/acceptable-use"],
   ["Cookie Policy","/cookies"],
   ["File Processing Policy","/file-processing-policy"],
+  ["Copyright & DMCA","/copyright"],
   ["Data Deletion","/data-deletion"],
 ] as const;
 

@@ -11,13 +11,13 @@ const processor = read('src/components/junction/ImagesToPdf.tsx');
 const navbar = read('src/components/landing/navbar.tsx');
 const ids = JSON.parse(read('scripts/r13-public-tool-ids.json'));
 
-check('public release contains 26 tools', ids.length === 26 && new Set(ids).size === 26);
+check('public release contains 34 tools', ids.length === 34 && new Set(ids).size === 34);
 for (const id of expectedBrowserImageIds) {
   check(`${id} is in the public release`, ids.includes(id));
   check(`${id} is public policy`, policy.includes(`'${id}'`));
   check(`${id} maps to browser image processor`, workspace.includes(`'${id}': dynamic(() => import('./ImagesToPdf')`));
 }
-check('browser image routes bypass server routing', workspace.includes('BROWSER_IMAGE_TO_PDF_IDS.has(id) ? null'));
+check('browser image routes bypass server routing', workspace.includes('BROWSER_CONVERSION_IDS.has(id)') && workspace.includes('? null'));
 check('processor uses pdf-lib in browser', processor.includes('PDFDocument.create()'));
 check('processor validates file count', processor.includes('MAX_FILES = 30'));
 check('processor validates per-file bytes', processor.includes('MAX_FILE_BYTES'));

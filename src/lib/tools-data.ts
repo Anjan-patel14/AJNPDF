@@ -1,4 +1,4 @@
-import { Layout, Shrink, FileText, Scissors, Maximize, Presentation, FileSpreadsheet, LayoutGrid, Trash2, RotateCw, Crop, ImageIcon, ScanLine, Stamp, Code2, FileDigit, FileArchive, FileEdit, Sparkles, ShieldCheck, Wrench, Diff, Layers, FileCode, Wand2, Maximize2, Smartphone, ArchiveRestore, Repeat, TabletSmartphone, Smile, FileJson, Brain, Type, PenTool, FolderOpen, Tag, RefreshCcw, Captions } from 'lucide-react';
+import { Layout, Shrink, FileText, Scissors, Maximize, Presentation, FileSpreadsheet, LayoutGrid, Trash2, RotateCw, Crop, ImageIcon, Stamp, Code2, FileDigit, FileArchive, FileEdit, Sparkles, ShieldCheck, Wrench, Diff, Layers, FileCode, Wand2, Maximize2, Smartphone, ArchiveRestore, Repeat, TabletSmartphone, Smile, FileJson, Brain, Type, PenTool, FolderOpen, Tag, RefreshCcw, Captions } from 'lucide-react';
 import { isToolPublic } from './tool-policy';
 import { CONVERSION_TOOLS } from './conversion-tools';
 
@@ -164,15 +164,6 @@ export const ALL_TOOLS: ServiceTool[] = [
     useCases: ["Publishing"],
     instructions: ["Upload PDF", "Edit fields", "Save"],
     keywords: ["meta", "tags", "author", "title", "subject", "properties", "edit metadata"]
-  },
-
-  {
-    id: 'scan-to-pdf', name: 'Scan to PDF', desc: 'Scan document photos into corrected, enhanced and optionally searchable PDFs directly in your browser.',
-    icon: ScanLine, tag: 'create', cat: 'pdf', mode: 'PDF', badge: 'New', color: 'text-blue-700', perfIndex: 'Browser',
-    benefits: ['Automatic document edge detection', 'Manual corner correction', 'Local searchable OCR', 'Multi-page scanning'],
-    useCases: ['Scanning forms and notes', 'Digitizing printed documents', 'Creating searchable scan archives'],
-    instructions: ['Capture or upload document photos', 'Review document corners and enhancement', 'Optionally run local OCR', 'Create and download PDF'],
-    keywords: ['scan to pdf', 'document scanner', 'scan document online', 'searchable pdf', 'camera to pdf', 'ocr scan']
   },
 
   // --- 2. OFFICE CONVERSION ---

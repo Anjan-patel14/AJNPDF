@@ -7,46 +7,27 @@ import { toolPath } from "@/lib/tool-routes";
 type SitemapFrequency = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
 type CorePageDefinition = { path:string; changeFrequency:SitemapFrequency; priority:number };
 
+// Only canonical, useful landing pages belong in the sitemap. Redirected, thin,
+// account, status and internal utility routes are intentionally excluded.
 const CORE_PAGE_DEFINITIONS: CorePageDefinition[] = [
   { path:"/", changeFrequency:"daily", priority:1 },
   { path:"/pdf-tools", changeFrequency:"weekly", priority:.95 },
   { path:"/trust", changeFrequency:"monthly", priority:.8 },
-  { path:"/changelog", changeFrequency:"monthly", priority:.72 },
-  { path:"/status", changeFrequency:"daily", priority:.68 },
   { path:"/about", changeFrequency:"monthly", priority:.55 },
-  { path:"/blog", changeFrequency:"weekly", priority:.65 },
-  { path:"/blog/best-free-pdf-editor", changeFrequency:"monthly", priority:.6 },
+  { path:"/blog", changeFrequency:"daily", priority:.72 },
+
+  { path:"/blog/best-free-pdf-editor", changeFrequency:"monthly", priority:.68 },
   { path:"/blog/browser-native-architecture", changeFrequency:"monthly", priority:.5 },
   { path:"/blog/document-security-aes256", changeFrequency:"monthly", priority:.6 },
-  { path:"/blog/how-to-merge-pdfs-online-safely", changeFrequency:"monthly", priority:.6 },
-  { path:"/blog/image-to-pdf-jpg-vs-png", changeFrequency:"monthly", priority:.5 },
-  { path:"/blog/reduce-pdf-size-keep-quality", changeFrequency:"monthly", priority:.6 },
+  { path:"/blog/how-to-merge-pdfs-online-safely", changeFrequency:"monthly", priority:.7 },
+  { path:"/blog/image-to-pdf-jpg-vs-png", changeFrequency:"monthly", priority:.58 },
+  { path:"/blog/reduce-pdf-size-keep-quality", changeFrequency:"monthly", priority:.7 },
   { path:"/blog/pdf-accessibility-basics", changeFrequency:"monthly", priority:.5 },
   { path:"/blog/pdf-vs-docx", changeFrequency:"monthly", priority:.55 },
   { path:"/blog/why-pdf-compression-limited", changeFrequency:"monthly", priority:.55 },
-  { path:"/blog/merge-pdf-on-android", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/merge-pdf-on-iphone", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/merge-pdf-on-chromebook", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/merge-pdf-without-installing-software", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/combine-pdf-pages-in-correct-order", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/compress-pdf-for-email", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/compress-pdf-on-android", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/reduce-pdf-size-on-iphone", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/reduce-pdf-size-without-installing-software", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/compress-pdf-for-job-application", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/edit-pdf-without-installing-software", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/edit-pdf-on-android", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/edit-pdf-on-chromebook", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/change-date-in-pdf-online", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/change-name-or-number-in-pdf", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/split-pdf-on-android", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/extract-pages-from-pdf", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/split-pdf-for-email", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/separate-pdf-pages-without-software", changeFrequency:"monthly", priority:.64 },
-  { path:"/blog/split-large-pdf-into-smaller-files", changeFrequency:"monthly", priority:.64 },
-  { path:"/discover/guides", changeFrequency:"weekly", priority:.55 },
-  { path:"/developer", changeFrequency:"monthly", priority:.55 },
-  { path:"/ajn-studio", changeFrequency:"monthly", priority:.55 },
+  { path:"/blog/extract-pages-from-pdf", changeFrequency:"monthly", priority:.66 },
+
+  { path:"/developer", changeFrequency:"monthly", priority:.5 },
   { path:"/faq", changeFrequency:"monthly", priority:.5 },
   { path:"/security", changeFrequency:"monthly", priority:.5 },
   { path:"/limits", changeFrequency:"monthly", priority:.5 },
@@ -65,7 +46,12 @@ const CORE_PAGE_DEFINITIONS: CorePageDefinition[] = [
 ];
 
 function coreEntry(definition: CorePageDefinition): MetadataRoute.Sitemap[number] {
-  return { url:`${SITE_URL}${definition.path === "/" ? "/" : definition.path}`, lastModified:getSitemapLastModified(definition.path), changeFrequency:definition.changeFrequency, priority:definition.priority };
+  return {
+    url:`${SITE_URL}${definition.path === "/" ? "/" : definition.path}`,
+    lastModified:getSitemapLastModified(definition.path),
+    changeFrequency:definition.changeFrequency,
+    priority:definition.priority,
+  };
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -74,7 +60,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter(tool => !SEO_EXCLUDED_TOOL_IDS.has(tool.id))
     .map(tool => {
       const pathname = toolPath(tool.id);
-      return { url:`${SITE_URL}${pathname}`, lastModified:getSitemapLastModified(pathname), changeFrequency:"monthly", priority:tool.badge === "Popular" ? .9 : .72 };
+      return {
+        url:`${SITE_URL}${pathname}`,
+        lastModified:getSitemapLastModified(pathname),
+        changeFrequency:"monthly",
+        priority:tool.badge === "Popular" ? .9 : .72,
+      };
     });
+
   return [...corePages, ...toolPages];
 }

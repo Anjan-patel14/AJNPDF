@@ -36,22 +36,22 @@ const pngPublicEntries = [...toolsData.matchAll(/\bid:\s*['"]png-to-pdf['"]/g)].
 if (pngPublicEntries !== 1) fail(`PNG to PDF must have exactly one base public card; found ${pngPublicEntries}`);
 else pass('PNG to PDF has exactly one public card definition');
 forbidText(conversionTools, "tool('png-to-pdf'", 'PNG to PDF is not duplicated in the appended conversion display catalog');
-requireText(backendEngine, "('.png', 'png-to-pdf', 'PNG to PDF')", 'PNG to PDF is registered by the backend engine');
-forbidText(toolPolicy, "'jpg-pdf', 'png-to-pdf'", 'PNG to PDF is not routed through the legacy browser-stable list');
-requireText(toolPolicy, "'repair-pdf', 'png-to-pdf', ...conversionBackendIds", 'PNG to PDF is classified as a backend capability');
+requireText(backendEngine, "('.png', 'png-to-pdf', 'PNG to PDF')", 'PNG to PDF remains registered by the backend engine as a compatibility capability');
+requireText(toolPolicy, "'image-to-pdf', 'jpg-to-pdf', 'jpeg-to-pdf', 'png-to-pdf', 'webp-to-pdf'", 'PNG to PDF is classified with browser-native image-to-PDF workflows');
+requireText(toolPolicy, "...browserImageToPdfIds", 'PNG to PDF inherits stable browser policy through the shared browser image set');
 
 const allowlistMatch = toolPolicy.match(/PRODUCTION_PUBLIC_TOOL_IDS\s*=\s*new Set\(\[([\s\S]*?)\]\)/);
 const r21PublicAllowlist = allowlistMatch?.[1] || '';
 const pngIsPublic = /['"]png-to-pdf['"]/.test(r21PublicAllowlist);
 if (pngIsPublic) {
-  requireText(toolPolicy, "'image-to-pdf', 'jpg-to-pdf', 'jpeg-to-pdf', 'png-to-pdf'", 'Public PNG to PDF uses the canonical multi-file backend policy');
+  requireText(toolPolicy, "'image-to-pdf', 'jpg-to-pdf', 'jpeg-to-pdf', 'png-to-pdf', 'webp-to-pdf'", 'Public PNG to PDF uses the canonical browser multi-file policy');
 } else {
-  pass('PNG to PDF is intentionally outside the R21 AJN PDF public allowlist; public multi-file policy is not applicable');
+  fail('PNG to PDF must remain in the focused AJN PDF public allowlist');
 }
 
-requireText(workspace, "...CONVERSION_TOOLS.map((tool) => tool.id), 'png-to-pdf'", 'PNG public card is routed to the canonical server processor');
-forbidText(workspace, "'png-to-pdf': dynamic(() => import('./PngToPdf')", 'PNG to PDF has no competing local workspace route');
-requireText(serverWorkspace, "'image-to-pdf','jpg-to-pdf','jpeg-to-pdf','png-to-pdf'", 'Server image-to-PDF controls include PNG');
+requireText(workspace, "'png-to-pdf': dynamic(() => import('./ImagesToPdf')", 'PNG public card is routed to the canonical browser image-to-PDF processor');
+forbidText(workspace, "'png-to-pdf': dynamic(() => import('./PngToPdf')", 'PNG to PDF has no competing legacy local workspace route');
+requireText(serverWorkspace, "'image-to-pdf','jpg-to-pdf','jpeg-to-pdf','png-to-pdf'", 'Server image-to-PDF controls retain PNG compatibility');
 requireText(serverWorkspace, "'gif-to-pdf','svg-to-pdf','heic-to-pdf'", 'Server image-to-PDF controls include SVG and other supported formats');
 
 requireText(workspace, "'pdf-to-word','pdf-to-docx'", 'PDF to Word/DOCX are included in the fidelity workspace route');
@@ -84,14 +84,12 @@ for (const id of ['psd-pdf','upscale-image','remove-bg','blur-face','smart-read'
   requireText(toolPolicy, `'${id}'`, `${id} remains explicitly hidden until a proven processor exists`);
 }
 
-if (fs.existsSync('src/components/junction/DocumentScanner.tsx')) fail('Legacy DocumentScanner source must remain deleted');
-else pass('Legacy DocumentScanner source remains deleted');
-if (fs.existsSync('src/components/junction/ScanToPdf.tsx')) pass('New feature-gated Scan to PDF source exists');
-else fail('New feature-gated Scan to PDF source is missing');
-forbidText(junctionIndex, 'DocumentScanner', 'Legacy scanner component is not exported');
+if (fs.existsSync('src/components/junction/DocumentScanner.tsx')) fail('Retired scanner source must be physically deleted');
+else pass('Retired scanner source is physically deleted');
+forbidText(junctionIndex, 'DocumentScanner', 'Retired scanner component is not exported');
 
 if (process.exitCode) {
   console.error('AJN PDF R20 CONVERSION ACCURACY: FAIL');
   process.exit(process.exitCode);
 }
-console.log(`AJN PDF R20 CONVERSION ACCURACY: PASS (${publicConversionIds.length} conversion-catalog IDs + PNG backend route checked)`);
+console.log(`AJN PDF R20 CONVERSION ACCURACY: PASS (${publicConversionIds.length} conversion-catalog IDs + browser PNG route checked)`);

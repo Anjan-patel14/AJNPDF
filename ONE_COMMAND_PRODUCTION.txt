@@ -1,0 +1,26 @@
+AJN PDF 34-TOOL PRODUCTION RELEASE
+
+1) Extract this ZIP.
+2) Open PowerShell inside the extracted folder.
+3) Run exactly:
+
+powershell -ExecutionPolicy Bypass -File .\RUN_AJN_PDF_PRODUCTION.ps1
+
+What the command does:
+- validates Node.js
+- installs exact dependencies only when node_modules is missing
+- verifies 34 public PDF tools and direct landing-page visibility
+- verifies SEO / AdSense source rules / sitemap
+- runs TypeScript check + production Next.js build
+- asks you to link the EXISTING Vercel AJN PDF project only if .vercel/project.json is missing
+- deploys to Vercel production
+- verifies homepage, /pdf-tools, /scanner, robots.txt, sitemap.xml, ads.txt and backend /ready
+- BLOCKS the AdSense-review verdict if the live site is not the 34-tool release
+
+Optional exhaustive frontend validation before deployment:
+
+powershell -ExecutionPolicy Bypass -File .\RUN_AJN_PDF_PRODUCTION.ps1 -FullCheck
+
+Build/check only without deploying:
+
+powershell -ExecutionPolicy Bypass -File .\RUN_AJN_PDF_PRODUCTION.ps1 -SkipDeploy

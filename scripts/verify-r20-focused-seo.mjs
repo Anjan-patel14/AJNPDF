@@ -18,37 +18,34 @@ const pdfToolsPage = read('src/app/pdf-tools/page.tsx');
 const toolPage = read('src/app/(tool-pages)/[id]/page.tsx');
 const adsLoader = read('src/components/adsense-script-loader.tsx');
 const adUnit = read('src/components/adsense-unit.tsx');
+const scannerPage = read('src/app/scanner/page.tsx');
 
 const allowlist = policy.match(/PRODUCTION_PUBLIC_TOOL_IDS = new Set\(\[([\s\S]*?)\]\);/)?.[1] || '';
 const publicIds = [...allowlist.matchAll(/'([^']+)'/g)].map((match) => match[1]);
 const movedImageIds = ['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image'];
+const adsBody = adsLoader.match(/AD_ELIGIBLE_TOOL_PATHS = new Set\(\[([\s\S]*?)\]\);/)?.[1] || '';
+const adEligibleIds = [...adsBody.matchAll(/'\/([^']+)'/g)].map((match) => match[1]);
+const requiredAdContentIds = ['merge-pdf','compress-pdf','split-pdf','sign-pdf','protect-pdf','repair-pdf'];
+const browserExpansionIds = ['heic-to-pdf','pdf-to-jpg','pdf-to-png','txt-to-pdf','html-to-pdf','markdown-to-pdf','json-to-pdf','xml-to-pdf'];
 
-check('focused production catalog contains exactly 26 unique PDF tools', publicIds.length === 26 && new Set(publicIds).size === 26);
+check('focused production catalog contains exactly 34 unique PDF tools', publicIds.length === 34 && new Set(publicIds).size === 34);
+check('browser-only conversion expansion is public', browserExpansionIds.every((id) => publicIds.includes(id)));
 check('standalone image utilities are not public AJN PDF routes', !movedImageIds.some((id) => publicIds.includes(id)));
 check('SEO recognition markers contain no empty marker', !/RECOGNITION_MARKERS\s*=\s*\[\s*['"]['"]/.test(seo));
 check('SEO title logic contains no always-true empty includes check', !/\.includes\(\s*['"]['"]\s*\)/.test(seo));
 check('global metadata contains no stale tool-count marketing', !/(27\s+focused|90\+|100\+|107\s+tools)/i.test(layout));
-check('global schema describes the PDF-only product', layout.includes('Merge PDF') && layout.includes('Protect PDF') && layout.includes('Repair PDF') && !layout.includes("'Image tools'"));
+check('global schema describes the focused PDF product', ['Edit PDF','Merge PDF','Split PDF','Compress PDF','Organize PDF','Sign PDF','Image to PDF'].every((label) => layout.includes(label)) && !layout.includes('Image Tools'));
 check('simple hero uses Free Online PDF Tools positioning', hero.includes('Free Online') && hero.includes('PDF Tools') && !/27\s+focused|No account required|Workspace preview|Report\.pdf/i.test(hero));
 check('retired conversion and image directories are absent from sitemap', !sitemap.includes("path: '/conversion-tools'") && !sitemap.includes("path: '/image-tools'"));
-check('homepage exposes no conversion or image category filter', !homepage.includes("id: 'conversion'") && !homepage.includes("id: 'image'"));
+check('homepage exposes no legacy conversion or image directory filter', !homepage.includes("id: 'image'") && !homepage.includes('/conversion-tools'));
 check('desktop navigation exposes no old image directory or converter menu', !navbar.includes('/image-tools') && !navbar.includes('/conversion-tools') && !navbar.includes('ConvertMenu'));
 check('All Tools search suggestions stay PDF-only', !/Word to PDF|PDF to Word|scan text|image to text|crop or image|Image Tools/i.test(allTools));
 check('moved image routes redirect to AJN IMG handoff', next.includes('imageToolRedirects') && next.includes("destination: '/img'"));
 check('PDF tools metadata is PDF-only', pdfToolsLayout.includes('Free Online PDF Tools') && !/PDF & Image|image processing|file conversion/i.test(pdfToolsLayout));
 check('PDF tools directory remains server-renderable for crawlers', !pdfToolsPage.includes('useSearchParams') && pdfToolsPage.includes('Choose the right PDF task before you start.'));
 check('tool breadcrumbs use the canonical PDF directory', toolPage.includes("const categoryPath = '/pdf-tools';") && !toolPage.includes('/pdf-utilities'));
-const adPaths = [...adsLoader.matchAll(/'\/([a-z0-9-]+)'/g)].map((match) => match[1]);
-const publicIdSet = new Set(publicIds);
-check(
-  'AdSense is restricted to valid substantial publisher-content pages',
-  adPaths.length >= 10 &&
-  adPaths.every((id) => publicIdSet.has(id)) &&
-  ['merge-pdf','compress-pdf','split-pdf','edit-pdf','sign-pdf'].every((id) => publicIdSet.has(id)) &&
-  adsLoader.includes("normalized === '/'") &&
-  !adsLoader.includes('EXCLUDED_PREFIXES') &&
-  !adsLoader.includes("'/pdf-tools'")
-);
+check('AdSense stays limited to current substantial public content pages', adEligibleIds.length > 0 && adEligibleIds.every((id) => publicIds.includes(id)) && requiredAdContentIds.every((id) => adEligibleIds.includes(id)) && adsLoader.includes("normalized === '/'") && !adsLoader.includes('EXCLUDED_PREFIXES') && !adsLoader.includes("'/pdf-tools'"));
+check('scanner utility is noindex during review', scannerPage.includes('index: false') && !adsLoader.includes("'/scanner'"));
 check('AdSense placements use responsive sizing without clipping', homepage.includes('slot={ADSENSE_SLOTS.homePrimary}') && homepage.includes('slot={ADSENSE_SLOTS.homeSecondary}') && homepage.includes('responsive') && toolPage.includes('slot={ADSENSE_SLOTS.toolContent} responsive') && adUnit.includes("'data-ad-format': 'auto'") && adUnit.includes("'data-full-width-responsive': 'true'") && !adUnit.includes('overflow-hidden flex'));
 check('legacy /tools pages cannot fall through to dead root routes', next.includes('publicToolLegacyRedirects') && next.includes("source: '/tools/:id'") && next.includes("destination: '/pdf-tools'"));
 

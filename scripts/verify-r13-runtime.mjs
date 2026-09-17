@@ -63,14 +63,24 @@ async function mapLimit(items, limit, worker) {
   await Promise.all(runners);
 }
 
-// R21 is PDF-only. Historical conversion aliases now retire to the PDF directory,
-// while the former PSD/image route hands off to the separate AJN IMG product.
+// Historical aliases for newly public browser converters redirect to their canonical tool.
+// Truly retired conversions still retire to the PDF directory; PSD hands off to AJN IMG.
 const retiredPdfAliases = [
-  'word-pdf','pdf-word','excel-pdf','pdf-excel','ppt-pdf','jpg-pdf','pdf-jpg','heic-pdf',
-  'html-pdf','xml-pdf','json-pdf','txt-pdf','smart-read','pdf-ppt',
+  'word-pdf','pdf-word','excel-pdf','pdf-excel','ppt-pdf','jpg-pdf','smart-read','pdf-ppt',
 ];
+const canonicalAliases = {
+  '/pdf-jpg': '/pdf-to-jpg',
+  '/heic-pdf': '/heic-to-pdf',
+  '/html-pdf': '/html-to-pdf',
+  '/xml-pdf': '/xml-to-pdf',
+  '/json-pdf': '/json-to-pdf',
+  '/txt-pdf': '/txt-to-pdf',
+};
 const r21HistoricalRedirects = Object.fromEntries([
   ...retiredPdfAliases.flatMap((slug) => [[`/${slug}`, '/pdf-tools'], [`/tools/${slug}`, '/pdf-tools']]),
+  ...Object.entries(canonicalAliases).flatMap(([source, target]) => [[source, target], [`/tools${source}`, target]]),
+  ['/scan-to-pdf', '/scanner'],
+  ['/tools/scan-to-pdf', '/scanner'],
   ['/psd-pdf', '/img'],
   ['/tools/psd-pdf', '/img'],
 ]);
@@ -94,15 +104,10 @@ try {
     || home.text.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']ajn-release["']/i)
   )?.[1] || '';
 
-  if (!expectedRelease) {
-    fail('source metadata is missing the AJN release marker');
-  } else if (!homepageRelease) {
-    fail(`homepage is missing the AJN ${expectedRelease} release marker`);
-  } else if (homepageRelease !== expectedRelease) {
-    fail(`homepage release marker mismatch: expected ${expectedRelease}, got ${homepageRelease}`);
-  } else {
-    pass(`homepage carries the AJN PDF ${expectedRelease} release marker`);
-  }
+  if (!expectedRelease) fail('source metadata is missing the AJN release marker');
+  else if (!homepageRelease) fail(`homepage is missing the AJN ${expectedRelease} release marker`);
+  else if (homepageRelease !== expectedRelease) fail(`homepage release marker mismatch: expected ${expectedRelease}, got ${homepageRelease}`);
+  else pass(`homepage carries the AJN PDF ${expectedRelease} release marker`);
 
   const rootResults = [];
   await mapLimit(ids, 10, async (id) => {
@@ -140,12 +145,10 @@ try {
     const result = await request(source);
     const location = locationPath(result);
     if (![301, 308].includes(result.response.status) || location !== target) {
-      fail(`${source}: expected R21 permanent redirect to ${target}, got ${result.response.status} ${location || '(missing)'}`);
+      fail(`${source}: expected permanent redirect to ${target}, got ${result.response.status} ${location || '(missing)'}`);
     }
   }
-  if (failures.length === redirectFailuresBefore) {
-    pass('historical conversion aliases retire directly to /pdf-tools and PSD hands off directly to /img');
-  }
+  if (failures.length === redirectFailuresBefore) pass('historical aliases resolve directly to the current canonical product routes');
 
   const toolsDir = await request('/tools');
   if (![301, 308].includes(toolsDir.response.status) || locationPath(toolsDir) !== '/pdf-tools') fail(`/tools directory redirect is incorrect: ${toolsDir.response.status} ${locationPath(toolsDir)}`);
@@ -169,14 +172,7 @@ try {
   }
   if (!failures.some((item) => trustPaths.some((pathname) => item.startsWith(`${pathname} `)))) pass('built public trust pages contain none of the audited stale universal claims');
 
-  const report = {
-    generatedAt: new Date().toISOString(),
-    origin,
-    canonicalTools: rootResults,
-    legacyTools: legacyResults,
-    historicalRedirects: r21HistoricalRedirects,
-    failures,
-  };
+  const report = { generatedAt: new Date().toISOString(), origin, canonicalTools: rootResults, legacyTools: legacyResults, historicalRedirects: r21HistoricalRedirects, failures };
   const builtReportPath = process.env.AJN_R13_BUILT_REPORT || path.join(root, 'R13_BUILT_RUNTIME_REPORT.json');
   fs.mkdirSync(path.dirname(builtReportPath), { recursive: true });
   fs.writeFileSync(builtReportPath, `${JSON.stringify(report, null, 2)}\n`);
@@ -185,7 +181,7 @@ try {
     for (const failure of failures) console.error(`FAIL: ${failure}`);
     throw new Error(`R13 built runtime verification failed with ${failures.length} issue(s).`);
   }
-  console.log(`AJN PDF R13 BUILT RUNTIME VERIFICATION: PASS (${ids.length} root pages + ${ids.length} legacy redirects + R21 historical redirects).`);
+  console.log(`AJN PDF R13 BUILT RUNTIME VERIFICATION: PASS (${ids.length} root pages + ${ids.length} legacy redirects + historical redirects).`);
   console.log('Real Chrome/Edge rendering, field Core Web Vitals, CMP/AdSense behavior and public Vercel deployment remain live-environment gates.');
 } catch (error) {
   console.error(`FAIL: ${error instanceof Error ? error.message : String(error)}`);

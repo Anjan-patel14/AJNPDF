@@ -1,0 +1,38 @@
+AJN PDF PRODUCTION 34-TOOL STATUS
+Generated: 17 September 2026
+
+PUBLIC SEO TOOL ROUTES: 34
+VISIBLE SCANNER UTILITY: Scan to PDF (/scanner)
+LANDING PAGE: every public tool is rendered directly; no progressive More Tools hiding.
+
+Browser-native conversion additions:
+- HEIC to PDF
+- PDF to JPG
+- PDF to PNG
+- TXT to PDF
+- HTML to PDF
+- Markdown to PDF
+- JSON to PDF
+- XML to PDF
+
+Existing browser image-to-PDF tools:
+- Image to PDF
+- JPG to PDF
+- JPEG to PDF
+- PNG to PDF
+- WebP to PDF
+
+AdSense source posture:
+- ads.txt publisher declaration present
+- ownership metadata present
+- production/consent/free-plan gated loader
+- scanner is noindex and excluded from AdSense eligibility during review
+- legal/internal/thin pages excluded from normal ad eligibility
+- public tool ads remain after useful content and outside upload/process/download controls
+
+Full GitHub production CI for this exact source artifact: PASS
+Workflow run: 35212027217
+Source head: b7d7445a7637ac8c1f8e203d5b56877d375c0e25
+Merged release commit: 3bc0af107a0ba5d2419c6f24c5a48d51c0934ac0
+
+AdSense review should be requested only after RUN_AJN_PDF_PRODUCTION.ps1 reports live production PASS and the account-side certified CMP is published where required.

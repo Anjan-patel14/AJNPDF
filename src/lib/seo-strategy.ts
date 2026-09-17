@@ -107,10 +107,6 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
     title: 'Rotate PDF Online - Rotate PDF Pages | AJN PDF',
     description: 'Rotate all or selected PDF pages in your browser, preview the page orientation and download a new PDF without uploading the source document.',
   },
-  'scan-to-pdf': {
-    title: 'Scan to PDF Online - Create Searchable PDFs | AJN PDF',
-    description: 'Scan document photos into corrected, enhanced and optionally searchable PDFs in your browser with local OCR and no document upload.',
-  },
   'sign-pdf': {
     title: 'Sign PDF Online - Add an Electronic Signature | AJN PDF',
     description: 'Add and position a visual electronic signature on PDF pages in your browser, preview the result and download a new signed PDF copy.',
@@ -130,6 +126,38 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
   'webp-to-pdf': {
     title: 'WebP to PDF Online - Convert WebP Images to PDF | AJN PDF',
     description: 'Convert WebP images to PDF in your browser, arrange image order, choose page settings and download one PDF without uploading the source images.',
+  },
+  'heic-to-pdf': {
+    title: 'HEIC to PDF Online - Convert iPhone Photos to PDF | AJN PDF',
+    description: 'Convert HEIC and HEIF photos to PDF in your browser. Useful for iPhone images, receipts and scanned documents; review orientation and image quality before download.',
+  },
+  'pdf-to-jpg': {
+    title: 'PDF to JPG Online - Convert PDF Pages to Images | AJN PDF',
+    description: 'Convert PDF pages to JPG images in your browser for previews, sharing and image-based workflows. Choose the pages you need and review image quality before download.',
+  },
+  'pdf-to-png': {
+    title: 'PDF to PNG Online - Export PDF Pages as PNG | AJN PDF',
+    description: 'Export PDF pages as PNG images in your browser for text-heavy pages, graphics and high-clarity previews. Select pages and verify the rendered images before sharing.',
+  },
+  'txt-to-pdf': {
+    title: 'TXT to PDF Online - Convert Text File to PDF | AJN PDF',
+    description: 'Convert plain TXT files to a clean PDF in your browser. Preserve readable text, create a portable document and review page breaks before downloading the result.',
+  },
+  'html-to-pdf': {
+    title: 'HTML to PDF Online - Convert HTML Content to PDF | AJN PDF',
+    description: 'Convert supported HTML content to PDF in your browser. Best for simple documents and snippets; external scripts, complex CSS and remote assets may not render exactly.',
+  },
+  'markdown-to-pdf': {
+    title: 'Markdown to PDF Online - Convert MD to PDF | AJN PDF',
+    description: 'Convert Markdown text to a readable PDF in your browser. Useful for notes, README files and documentation; preview headings, lists and code blocks before download.',
+  },
+  'json-to-pdf': {
+    title: 'JSON to PDF Online - Convert JSON Data to PDF | AJN PDF',
+    description: 'Convert JSON data to a readable PDF in your browser with structured formatting for keys and values. Validate the JSON first and review long or nested content before sharing.',
+  },
+  'xml-to-pdf': {
+    title: 'XML to PDF Online - Convert XML Data to PDF | AJN PDF',
+    description: 'Convert XML data to a readable PDF in your browser for review, printing or sharing. Well-formed XML works best; inspect nested content and page breaks in the downloaded result.',
   },
 };
 

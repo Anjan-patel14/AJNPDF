@@ -23,7 +23,6 @@ export default function ProtectPdf() {
 
   const run = async () => {
     const latestHealth = await checkPdfBackendHealth();
-    if (latestHealth.status !== "online") { setError(latestHealth.message); return; }
     const latestLimits = resolveBackendLimits(latestHealth);
     const effectiveMaxMb = Math.min(latestLimits.maxFileSizeMb, latestLimits.maxTotalSizeMb);
     const validation = validateFiles(files.map(item => item.file), { extensions: [".pdf"], minFiles: 1, maxFiles: 1, maxSizeMb: effectiveMaxMb });

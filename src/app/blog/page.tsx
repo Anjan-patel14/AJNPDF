@@ -6,9 +6,15 @@ import { MainFooter } from '@/components/landing/main-footer';
 import { SEO_GROWTH_GUIDES } from '@/lib/seo-growth-guides';
 
 export const metadata: Metadata = {
-  title: 'Practical PDF Guides | AJN PDF',
-  description: 'Practical AJN PDF guides for PDF workflows, document conversion, compression, accessibility and file security.',
+  title: 'PDF Guides - Edit, Merge, Compress, Split & Convert',
+  description: 'Practical, original AJN PDF guides for editing, merging, compressing, splitting, converting, securing and checking PDF files across phones and computers.',
   alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'Practical PDF Guides | AJN PDF',
+    description: 'Original guides for common PDF workflows, troubleshooting, security, accessibility and file handling.',
+    url: '/blog',
+    type: 'website',
+  },
 };
 
 const articles = [
@@ -76,9 +82,21 @@ export default function BlogPage() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-2 text-[11px] font-extrabold text-blue-700"><BookOpen className="h-4 w-4" /> AJN PDF guides</span>
             <h1 className="mt-7 text-balance text-[clamp(2.5rem,7vw,4.8rem)] font-black leading-[1.02] tracking-[-.045em]">Practical guides for better document workflows</h1>
-            <p className="mt-6 text-base font-medium leading-8 text-muted-foreground md:text-lg">Useful guidance for PDF, conversion, compression, accessibility and everyday document work.</p>
+            <p className="mt-6 text-base font-medium leading-8 text-muted-foreground md:text-lg">Original, task-focused guidance for editing, merging, compression, conversion, accessibility, security and everyday PDF work.</p>
           </div>
 
+          <section className="mx-auto mt-10 max-w-4xl rounded-3xl border border-emerald-100 bg-emerald-50/60 p-6 md:p-8" aria-labelledby="ajn-editorial-standard">
+            <span className="text-[10px] font-extrabold uppercase tracking-[.18em] text-emerald-700">AJN PDF editorial standard</span>
+            <h2 id="ajn-editorial-standard" className="mt-3 text-2xl font-black tracking-tight text-slate-950">Useful guidance, not filler content</h2>
+            <p className="mt-3 text-sm font-medium leading-7 text-slate-600">
+              Each guide is written around a real PDF task, links to the matching workflow, explains practical limitations, and is revised when AJN PDF behaviour or supported processing changes. We avoid publishing copied, spun or keyword-only articles.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3 text-xs font-black text-emerald-800">
+              <Link href="/developer" className="rounded-xl border border-emerald-200 bg-white px-4 py-2 hover:bg-emerald-100">About the developer</Link>
+              <Link href="/transparency" className="rounded-xl border border-emerald-200 bg-white px-4 py-2 hover:bg-emerald-100">Transparency</Link>
+              <Link href="/contact" className="rounded-xl border border-emerald-200 bg-white px-4 py-2 hover:bg-emerald-100">Suggest a guide</Link>
+            </div>
+          </section>
 
           <section className="mt-14" aria-labelledby="long-tail-pdf-guides">
             <div className="rounded-3xl border border-blue-100 bg-blue-50/55 p-6 md:p-8">
@@ -87,7 +105,7 @@ export default function BlogPage() {
                 Device and workflow guides for Edit, Merge, Compress and Split PDF
               </h2>
               <p className="mt-3 max-w-3xl text-sm font-medium leading-7 text-slate-600">
-                Twenty focused guides answer common mobile, Chromebook, email, application and page-management questions, then link directly to the matching AJN PDF tool.
+                Focused guides answer common mobile, Chromebook, email, application and page-management questions, then link directly to the matching AJN PDF tool.
               </p>
             </div>
 

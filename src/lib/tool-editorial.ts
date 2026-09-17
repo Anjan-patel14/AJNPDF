@@ -41,6 +41,54 @@ function conversionEditorial(tool: ServiceTool, processing: string, limitation: 
 }
 
 const CUSTOM: Record<string, Partial<ToolEditorial>> = {
+  'heic-to-pdf': {
+    overview: 'HEIC to PDF turns HEIC or HEIF photos—commonly created by iPhone and iPad cameras—into a PDF that is easier to print, upload, archive or send to systems that do not accept HEIC files.',
+    details: 'AJN PDF decodes supported HEIC/HEIF images in the browser, places each selected image on a PDF page and creates a separate PDF download. The source photos are not overwritten. Orientation metadata and very large phone photos should be checked in the preview before download.',
+    tips: ['Rotate photos to the intended reading direction before export.', 'Use a standard page size when the PDF will be printed.', 'Check small text in photographed receipts or documents after conversion.'],
+    limitations: ['HEIC decoding depends on browser support and the bundled HEIF decoder.', 'Very large photos can use significant browser memory and may take longer to process.'],
+  },
+  'pdf-to-jpg': {
+    overview: 'PDF to JPG renders selected PDF pages as JPG images for previews, social sharing, thumbnails, slide decks and websites that accept images but not PDF files.',
+    details: 'Each selected page is rendered in the browser and exported as a JPG image. JPG is usually a good choice for photo-heavy pages because it can produce smaller files, but compression can soften small text and line art.',
+    tips: ['Use JPG for photographic or mixed-content pages.', 'Check small text at 100% zoom before sharing.', 'Convert only the pages you need to keep download size manageable.'],
+    limitations: ['The JPG output is an image and no longer contains selectable PDF text, links, forms or annotations.', 'JPG compression can introduce visible artifacts around text and sharp graphics.'],
+  },
+  'pdf-to-png': {
+    overview: 'PDF to PNG renders selected PDF pages as PNG images. PNG is useful for diagrams, screenshots, text-heavy pages and graphics where sharp edges are more important than the smallest file size.',
+    details: 'AJN PDF renders the chosen pages in the browser and creates PNG images without replacing the source PDF. PNG is lossless for the rendered pixels, so it often preserves crisp text and graphics better than JPG at the cost of larger files.',
+    tips: ['Use PNG for text, charts, diagrams and UI screenshots.', 'Export only required pages to avoid unnecessarily large downloads.', 'Review transparent or unusual page backgrounds after rendering.'],
+    limitations: ['Rendered PNG files do not contain selectable PDF text, links, forms or document structure.', 'High-resolution pages can create large image files and use more browser memory.'],
+  },
+  'txt-to-pdf': {
+    overview: 'TXT to PDF converts plain-text files into a portable PDF for sharing, printing or archiving notes, logs, simple reports and text exports.',
+    details: 'The browser reads the text content, applies a readable page layout and creates a separate PDF. Plain TXT files do not contain rich formatting, so fonts, headings and page structure are generated from the conversion settings rather than preserved from the source.',
+    tips: ['Use UTF-8 text when possible so characters display correctly.', 'Review long lines and page breaks before sharing the PDF.', 'Keep the original TXT file when the text will need further editing.'],
+    limitations: ['Plain text does not contain original fonts, images or rich document styling to preserve.', 'Very long unbroken lines or unusual encodings may require cleanup before conversion.'],
+  },
+  'html-to-pdf': {
+    overview: 'HTML to PDF converts supported HTML content into a PDF for documentation, simple web snippets, invoices, reports and printable records.',
+    details: 'The browser processes the supplied HTML and creates a separate PDF representation. This workflow is intended for straightforward HTML content; complex sites that depend on remote scripts, authentication, advanced CSS, animations or browser-only runtime behavior may not reproduce exactly.',
+    tips: ['Use self-contained HTML when possible.', 'Check page breaks, tables and images in the result.', 'Remove interactive controls that do not make sense in a printed document.'],
+    limitations: ['External scripts, advanced CSS and remote assets are not guaranteed to render exactly.', 'Interactive website behavior is converted into static PDF content and cannot remain interactive in the same way.'],
+  },
+  'markdown-to-pdf': {
+    overview: 'Markdown to PDF converts Markdown documents into a readable PDF for notes, README files, technical documentation, project handoffs and printable references.',
+    details: 'AJN PDF parses common Markdown structure such as headings, paragraphs, lists, links and code blocks, then creates a separate PDF. The conversion focuses on readable document output rather than reproducing the styling of a specific Markdown application.',
+    tips: ['Preview code blocks and long links for wrapping.', 'Use clear heading levels for a better document hierarchy.', 'Keep the original Markdown file for future edits.'],
+    limitations: ['Application-specific Markdown extensions may not be supported.', 'Complex embedded HTML, plugins and custom themes may not appear exactly as they do in a dedicated Markdown editor.'],
+  },
+  'json-to-pdf': {
+    overview: 'JSON to PDF turns structured JSON data into a readable PDF for review, handoff, printing and lightweight reporting.',
+    details: 'The browser validates and formats the JSON before creating the PDF. Nested objects and arrays are presented as readable structured content rather than as an interactive data explorer, so large datasets should be reviewed for pagination and line wrapping.',
+    tips: ['Validate the JSON before conversion.', 'Pretty-format deeply nested data for easier review.', 'For very large datasets, consider exporting only the relevant subset.'],
+    limitations: ['The PDF is a static representation and does not preserve JSON interactivity or query behavior.', 'Very large or deeply nested JSON can produce long PDFs and dense page layouts.'],
+  },
+  'xml-to-pdf': {
+    overview: 'XML to PDF converts well-formed XML into a readable PDF for review, printing, archiving and sharing structured data with people who do not need the raw XML file.',
+    details: 'AJN PDF parses the XML structure in the browser and creates a static PDF representation. Elements and text are preserved as readable structured content, but the output is not intended to reproduce a separate XSLT-driven application or interactive XML viewer.',
+    tips: ['Validate that the XML is well formed before conversion.', 'Review deeply nested elements and long values for wrapping.', 'Keep the original XML when machine-readable data will be needed later.'],
+    limitations: ['XSLT, external schemas and application-specific rendering are not guaranteed to be reproduced.', 'The PDF is a static representation and cannot replace the original machine-readable XML data.'],
+  },
   'edit-pdf': {
     overview: 'Edit PDF is AJN PDF’s full browser editing workspace for practical document corrections. Use it to change dates, names, numbers and amounts, replace visible text, add new text, insert images or signatures, highlight content, and manage pages without sending the PDF to a file-processing server.',
     details: 'Smart Replace reads the PDF text layer with PDF.js, captures the selected text position, size, baseline, width and available font information, then creates a replacement at the same location. When a PDF uses scanned content, unusual glyphs or a font that cannot be reproduced cleanly, AJN PDF can reconstruct detected text into editable objects, and scanned pages can use browser OCR; Manual Whiteout plus Add Text remains available for difficult layouts. AJN PDF keeps edit operations in the browser and creates a new downloadable PDF with pdf-lib; the source file is not overwritten.',

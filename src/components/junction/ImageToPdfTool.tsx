@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { ArrowDown, ArrowUp, Trash2 } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { ArrowDown, ArrowUp, Camera, Trash2 } from "lucide-react";
 import { ToolWorkspace, Drop, Btn, Done, Err, F, G2, IS, Pills, Range, ToolFile, dl, fmtBytes, Info, withProcessingActivity } from "./_shared";
 import { imagesToPdfWithOptions, type ImageFit, type ImagePageSize } from "./_pdfUtils";
 import { safeOutputName, validateFiles } from "@/lib/file-validation";
@@ -26,6 +26,17 @@ export default function ImageToPdfTool({ title, description, accept, extensions,
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Blob | null>(null);
   const [error, setError] = useState("");
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+
+  const addCameraImages = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const captured = Array.from(event.target.files ?? [])
+      .filter(file => file.size > 0)
+      .map(file => ({ file, name: file.name || `scan-${Date.now()}.jpg`, size: file.size }));
+    event.target.value = "";
+    if (!captured.length) return;
+    setFiles(current => [...current, ...captured].slice(0, 30));
+    setError("");
+  };
 
   const move = (index: number, direction: -1 | 1) => {
     const next = [...files];
@@ -51,6 +62,29 @@ export default function ImageToPdfTool({ title, description, accept, extensions,
         <Done msg="PDF created successfully" onDownload={() => dl(result, safeOutputName(outputName, "images", ".pdf"))} shareFile={{ blob: result, name: safeOutputName(outputName, "images", ".pdf") }} onReset={() => { setResult(null); setFiles([]); setError(""); }} />
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <div id="scan" className="rounded-2xl border border-blue-100 bg-blue-50/70 p-3 sm:p-4">
+            <input
+              ref={cameraInputRef}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              multiple
+              onChange={addCameraImages}
+              className="hidden"
+              aria-hidden="true"
+              tabIndex={-1}
+            />
+            <button
+              type="button"
+              onClick={() => cameraInputRef.current?.click()}
+              className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 text-sm font-black text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
+            >
+              <Camera className="h-5 w-5" />
+              Scan with camera
+            </button>
+            <p className="mt-2 text-center text-[11px] font-semibold leading-5 text-slate-600">On supported phones this opens the rear camera. The captured image stays in the browser and can be added directly to the PDF.</p>
+          </div>
+
           <Drop files={files} onChange={setFiles} accept={accept} multiple label="Select images" sub="Up to 30 images · 25 MB each" />
           {files.length > 1 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>

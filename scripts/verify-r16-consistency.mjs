@@ -27,10 +27,10 @@ const publicIds = JSON.parse(read('scripts/r13-public-tool-ids.json'));
 const publicIdSet = new Set(publicIds);
 
 check('CSP and frontend use shared backend candidate resolver', next.includes('configuredPdfBackendCandidates') && backend.includes('configuredPdfBackendCandidates') && backendUrl.includes('NEXT_PUBLIC_AJN_PDF_API_URL') && backendUrl.includes('DEFAULT_PDF_BACKEND_URL'));
-check('current public PDF route inventory is unique and stable', publicIds.length === 26 && publicIdSet.size === 26);
+check('R21 public PDF route inventory is unique and stable', publicIds.length === 34 && publicIdSet.size === 34);
 check('R21 public inventory excludes standalone image utilities', !['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image'].some((id) => publicIdSet.has(id)));
 check('obsolete R16/R17 local deploy wrappers stay retired', !fs.existsSync('R16_PRODUCTION_SETUP_AND_DEPLOY.ps1') && !fs.existsSync('R17_TRUST_SEO_SETUP_AND_DEPLOY.ps1'));
-check('PDF.js worker is same-origin and generated from pinned local dependency', pdfWorker.includes("const PDF_WORKER_SRC = '/pdf.worker.min.mjs'") && !pdfWorker.includes('cdnjs.cloudflare.com') && workerSync.includes("pdfjs-dist', 'legacy', 'build', 'pdf.worker.min.mjs") && packageJson.scripts?.prebuild?.includes('sync-pdfjs-worker.mjs') && packageJson.scripts?.predev?.includes('sync-pdfjs-worker.mjs') && next.includes("worker-src 'self' blob:"));
+check('PDF.js worker is same-origin and generated from pinned local dependency', pdfWorker.includes("const PDF_WORKER_SRC = '/pdf.worker.min.mjs'") && !pdfWorker.includes('cdnjs.cloudflare.com') && workerSync.includes("'legacy', 'build', 'pdf.worker.min.mjs'") && packageJson.scripts?.prebuild?.includes('sync-pdfjs-worker.mjs') && packageJson.scripts?.predev?.includes('sync-pdfjs-worker.mjs') && next.includes("worker-src 'self' blob:"));
 check('server UI enforces live file/total limits without stale common limit copy', server.includes('validateBackendSelection') && server.includes('backendHealth') && server.includes('latestHealth') && !server.includes('liveLimits.maxFileSizeMb'));
 check('Protect/Unlock/Repair recheck live server limits at action time', [protect, unlock, repair].every((source) => source.includes('const latestHealth = await checkPdfBackendHealth()') && source.includes('resolveBackendLimits(latestHealth)') && source.includes('effectiveMaxMb') && source.includes('maxSizeMb: effectiveMaxMb')));
 

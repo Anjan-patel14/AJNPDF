@@ -7,7 +7,7 @@ const failures = [];
 const check = (label, ok) => ok ? console.log(`PASS: ${label}`) : failures.push(label);
 
 const ids = JSON.parse(read("scripts/r13-public-tool-ids.json"));
-check("public catalog has exactly 26 unique tools", ids.length === 26 && new Set(ids).size === 26);
+check("public catalog has exactly 34 unique tools", ids.length === 34 && new Set(ids).size === 34);
 check("Edit PDF is public", ids.includes("edit-pdf"));
 
 const tools = read("src/lib/tools-data.ts");
@@ -27,14 +27,13 @@ const workspace = read("src/components/junction/tool-workspace-client.tsx");
 check("Edit PDF maps to browser editor", /['"]edit-pdf['"]\s*:\s*dynamic\(\(\)\s*=>\s*import\(['"]\.\/PdfEditorLab['"]\)/.test(workspace));
 
 const grid = read("src/components/landing/services-grid.tsx");
-check("Edit PDF is in Edit & Sign group", /id\s*:\s*["']edit["'][\s\S]{0,1400}ids\s*:\s*\[[^\]]*["']edit-pdf["']/.test(grid));
-check("Edit PDF participates in edit intent", /const\s+INTENT_IDS[\s\S]*edit\s*:\s*\[[^\]]*["']edit-pdf["']/.test(grid));
-check("Edit PDF card is visually featured", grid.includes("data-ajn-featured-editor") && grid.includes("New • Browser Editor"));
-check("featured card states local handling", grid.includes("No file upload"));
-
+check("Edit PDF is in Edit & Sign group", /const\s+EDIT_IDS[\s\S]*["']edit-pdf["']/.test(grid));
+check("Edit PDF participates in edit category matching", grid.includes('if (category === "edit") return EDIT_IDS.has(tool.id)'));
+check("public tool grid renders the live catalog directly", grid.includes("BUILD_PUBLIC_TOOLS") && grid.includes("Nothing is hidden behind a More tools menu"));
 const quick = read("src/components/landing/quick-tools-scroller.tsx");
+check("featured editor states local handling", quick.includes("Browser only • No upload"));
 check("Edit PDF is in quick access", /id\s*:\s*["']edit-pdf["'][^\n]*name\s*:\s*["']Edit PDF["']/.test(quick));
-check("quick access count shows 26", quick.includes("View all 26"));
+check("quick access links to the full PDF directory without a stale hard-coded count", quick.includes("View all PDF tools") && !quick.includes("View all 26"));
 
 const artwork = read("src/components/ajn/tool-artwork.tsx");
 check("Edit PDF has vector artwork", /['"]edit-pdf['"]\s*:\s*PenTool/.test(artwork));
@@ -65,13 +64,13 @@ check("full editable text conversion remains present", editor.includes("bulkMake
 check("OCR remains browser-side and same-origin", editor.includes("TESSERACT_LOCAL_SCRIPT") && editor.includes("OCR_RUNTIME_BASE") && editor.includes("runOcrForSources") && !editor.includes("cdn.jsdelivr.net"));
 check("OCR worker/core/lang paths are local", editor.includes("workerPath:") && editor.includes("corePath:") && editor.includes("langPath:") && editor.includes("workerBlobURL: false"));
 check("secure raster redaction remains present", editor.includes("renderSecureRedactedPage"));
-check("browser output validation remains present", editor.includes("getDocument({ data: bytes.slice() })"));
+check("browser output validation remains present", editor.includes("data: bytes.slice()") && editor.includes("reopens it with PDF.js for validation"));
 
 const browserImageVerifier = read("scripts/verify-browser-image-pdf.mjs");
-check("browser-image verifier count updated to 26", browserImageVerifier.includes("ids.length === 26") && browserImageVerifier.includes("new Set(ids).size === 26"));
+check("browser-image verifier count updated to 34", browserImageVerifier.includes("ids.length === 34") && browserImageVerifier.includes("new Set(ids).size === 34"));
 
 const labPage = read("src/app/pdf-editor-lab/page.tsx");
-check("test alias remains noindex", labPage.includes("index: false"));
+check("legacy editor alias redirects to canonical Edit PDF", labPage.includes('redirect("/edit-pdf")'));
 
 if (failures.length) {
   console.error("\nAJN PDF PUBLIC EDITOR V4 CONTRACT: FAIL");

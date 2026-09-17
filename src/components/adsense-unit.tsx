@@ -36,7 +36,6 @@ export function AdSenseUnit({
   const adRef = useRef<HTMLModElement | null>(null);
   const initialized = useRef(false);
   const [allowed, setAllowed] = useState(false);
-  const [nearViewport, setNearViewport] = useState(false);
   const [adStatus, setAdStatus] = useState<'pending' | 'filled' | 'unfilled'>('pending');
 
   useEffect(() => {
@@ -55,30 +54,7 @@ export function AdSenseUnit({
   }, [auth.plan]);
 
   useEffect(() => {
-    const node = adRef.current;
-    if (!allowed || !slot || !node) return;
-
-    if (typeof IntersectionObserver === 'undefined') {
-      setNearViewport(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setNearViewport(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '600px 0px' },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [allowed, slot]);
-
-  useEffect(() => {
-    if (!allowed || !slot || !nearViewport) return;
+    if (!allowed || !slot) return;
 
     const requestAd = () => {
       if (initialized.current || !adRef.current || !window.adsbygoogle) return;
@@ -93,7 +69,7 @@ export function AdSenseUnit({
     requestAd();
     window.addEventListener(READY_EVENT, requestAd);
     return () => window.removeEventListener(READY_EVENT, requestAd);
-  }, [allowed, slot, nearViewport]);
+  }, [allowed, slot]);
 
   useEffect(() => {
     const node = adRef.current;

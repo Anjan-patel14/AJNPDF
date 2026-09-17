@@ -53,7 +53,7 @@ export default function ChangelogPage() {
           <ul className="mt-7 space-y-4 text-sm font-medium leading-7 text-muted-foreground">
             <li><strong className="text-foreground">PDF Editor:</strong> promoted the browser editor as a primary AJN PDF workflow for visible text changes, images, signatures, page work and live preview.</li>
             <li><strong className="text-foreground">Font matching:</strong> improved best-effort visual font-family and text-width matching while keeping exact-font limitations explicit.</li>
-            <li><strong className="text-foreground">Public catalog:</strong> aligned public navigation and SEO around 26 PDF tools.</li>
+            <li><strong className="text-foreground">Public catalog:</strong> expanded public navigation and SEO around the current 34-tool PDF catalog.</li>
             <li><strong className="text-foreground">Image-to-PDF:</strong> kept JPG, JPEG, PNG and WebP conversion workflows browser-local with ordering, rotation and page controls.</li>
             <li><strong className="text-foreground">Trust and SEO:</strong> added clearer entity relationships, processing disclosures, internal links, Trust Center and public changelog coverage.</li>
           </ul>

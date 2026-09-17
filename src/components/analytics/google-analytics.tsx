@@ -1,12 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import {
-  installGoogleConsentDefault,
-  readAjnConsent,
-  updateGoogleConsent,
-} from '@/lib/google-consent';
 
+const CONSENT_KEY = 'ajn_cookie_consent';
 const SCRIPT_ID = 'ajn-ga4-script';
 
 function allowedHost(hostname: string): boolean {
@@ -18,20 +14,16 @@ export function GoogleAnalytics() {
   useEffect(() => {
     const measurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID?.trim();
     if (!measurementId || !/^G-[A-Z0-9]+$/i.test(measurementId)) return;
-    if (!allowedHost(window.location.hostname)) return;
 
-    installGoogleConsentDefault();
-
-    const sync = () => {
-      const consent = readAjnConsent();
-      updateGoogleConsent(consent);
-
-      // Privacy-first mode: do not load GA4 until optional analytics consent exists.
-      if (consent !== 'accepted') return;
+    const load = () => {
+      const accepted = localStorage.getItem(CONSENT_KEY) === 'accepted';
+      if (!accepted || !allowedHost(window.location.hostname)) return;
       if (document.getElementById(SCRIPT_ID)) return;
 
-      window.gtag?.('js', new Date());
-      window.gtag?.('config', measurementId, {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag(...args: unknown[]) { window.dataLayer?.push(args); };
+      window.gtag('js', new Date());
+      window.gtag('config', measurementId, {
         anonymize_ip: true,
         send_page_view: false,
         allow_google_signals: false,
@@ -45,14 +37,17 @@ export function GoogleAnalytics() {
       document.head.appendChild(script);
     };
 
-    sync();
-    window.addEventListener('ajn-cookie-consent-changed', sync);
-    window.addEventListener('storage', sync);
-    return () => {
-      window.removeEventListener('ajn-cookie-consent-changed', sync);
-      window.removeEventListener('storage', sync);
-    };
+    load();
+    window.addEventListener('ajn-cookie-consent-changed', load);
+    return () => window.removeEventListener('ajn-cookie-consent-changed', load);
   }, []);
 
   return null;
+}
+
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
 }

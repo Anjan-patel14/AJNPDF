@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
@@ -127,7 +127,7 @@ export function QuickToolsScroller() {
             href="/pdf-tools"
             className="hidden min-h-9 items-center gap-1.5 rounded-lg px-2.5 text-[11px] font-black text-[#1a56db] transition hover:bg-[#e1effe] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:hover:bg-blue-400/10 sm:inline-flex"
           >
-            View all 26
+            View all PDF tools
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
         </div>

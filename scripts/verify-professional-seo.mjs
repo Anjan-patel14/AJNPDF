@@ -8,7 +8,10 @@ const fail = (msg) => { console.error(`FAIL: ${msg}`); process.exitCode = 1; };
 const pass = (msg) => console.log(`PASS: ${msg}`);
 
 const publicToolIds = [
-  'add-image-to-pdf','add-text','compare-pdf','compress-pdf','crop-pdf','delete-pdf-pages','edit-pdf','extract-images','flatten-pdf','image-to-pdf','jpeg-to-pdf','jpg-to-pdf','merge-pdf','organize-pdf','page-number','pdf-metadata','pdf-zip-extract','png-to-pdf','protect-pdf','repair-pdf','rotate-pdf','sign-pdf','split-pdf','unlock-pdf','watermark-pdf','webp-to-pdf',
+  'add-image-to-pdf','add-text','compare-pdf','compress-pdf','crop-pdf','delete-pdf-pages','edit-pdf','extract-images',
+  'flatten-pdf','heic-to-pdf','html-to-pdf','image-to-pdf','jpeg-to-pdf','jpg-to-pdf','json-to-pdf','markdown-to-pdf',
+  'merge-pdf','organize-pdf','page-number','pdf-metadata','pdf-to-jpg','pdf-to-png','pdf-zip-extract','png-to-pdf',
+  'protect-pdf','repair-pdf','rotate-pdf','sign-pdf','split-pdf','txt-to-pdf','unlock-pdf','watermark-pdf','webp-to-pdf','xml-to-pdf',
 ];
 
 const requiredFiles = [
@@ -36,15 +39,15 @@ for (const id of publicToolIds) {
   const marker = `'${id}': {`;
   if (!strategy.includes(marker)) fail(`missing explicit SEO override for ${id}`);
 }
-if (!process.exitCode) pass('all 26 public tools have explicit SEO overrides');
+if (!process.exitCode) pass('all 34 public tools have explicit SEO overrides');
 
 const editTitle = 'Edit PDF Online Free - Change Text & Sign PDF | AJN PDF';
 if (!strategy.includes(editTitle)) fail('Edit PDF priority title missing');
 else pass('Edit PDF priority metadata present');
 
 const editorContractDescription = 'Edit PDF locally in your browser. Edit native text or word-level OCR text in scanned PDFs';
-if (!strategy.includes(editorContractDescription)) fail('Edit PDF current public-editor meta description contract missing');
-else pass('Edit PDF current SEO contract compatibility present');
+if (!strategy.includes(editorContractDescription)) fail('Edit PDF legacy public-editor meta description contract missing');
+else pass('Edit PDF legacy SEO contract compatibility present');
 
 for (const id of ['protect-pdf','unlock-pdf','repair-pdf']) {
   const start = strategy.indexOf(`'${id}': {`);
@@ -55,8 +58,8 @@ for (const id of ['protect-pdf','unlock-pdf','repair-pdf']) {
 if (!process.exitCode) pass('server-assisted security tools are distinguished');
 
 const trust = read('src/app/trust/page.tsx');
-if (!trust.includes('23 browser-local public workflows')) fail('Trust Center must state 23 browser-local workflows');
-if (!trust.includes('3 server-assisted public workflows')) fail('Trust Center must state 3 server-assisted workflows');
+if (!trust.includes('browserLocalTools.length')) fail('Trust Center browser-local count must derive from the live catalog');
+if (!trust.includes('serverAssistedTools.length')) fail('Trust Center server-assisted count must derive from the live catalog');
 if (!trust.toLowerCase().includes('not secure redaction')) fail('Whiteout/redaction limitation missing');
 if (!trust.toLowerCase().includes('best effort')) fail('font-matching limitation missing');
 if (!process.exitCode) pass('Trust Center processing and editor limitations present');
@@ -71,7 +74,7 @@ if (layout.includes('GOOGLE_VERIFICATION_CODE') || layout.includes('BING_VERIFIC
 if (!process.exitCode) pass('canonical host and env-only verification setup present');
 
 const sitemap = read('src/app/sitemap.ts');
-for (const route of ['/trust','/changelog','/ajn-studio','/developer','/status']) {
+for (const route of ['/trust','/about','/blog','/developer','/faq','/security','/contact','/privacy','/terms']) {
   if (!sitemap.includes(`path:"${route}"`)) fail(`sitemap missing ${route}`);
 }
 const robots = read('src/app/robots.ts');

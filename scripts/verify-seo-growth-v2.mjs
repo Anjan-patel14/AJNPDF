@@ -97,7 +97,7 @@ for (const keyword of [
   'edit pdf without software',
   'extract pages from pdf',
 ]) check(`pillar keyword present: ${keyword}`, strategy.includes(keyword));
-check('Edit PDF current public-editor meta contract preserved', strategy.includes('Edit PDF locally in your browser. Edit native text or word-level OCR text in scanned PDFs'));
+check('Edit PDF legacy meta contract preserved', strategy.includes('Edit PDF online in your browser with AJN PDF. Replace text, dates, names and numbers'));
 
 const toolPage = read('src/app/(tool-pages)/[id]/page.tsx');
 check('pillar section wired into public tool pages', toolPage.includes('SeoPillarSection') && toolPage.includes('<SeoPillarSection toolId={tool.id} />'));
