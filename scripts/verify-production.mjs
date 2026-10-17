@@ -36,8 +36,17 @@ if (!backend.includes('X-Request-ID') || !backend.includes('request_complete')) 
 const nextConfig = fs.readFileSync('next.config.ts', 'utf8');
 if (!nextConfig.includes("value: 'ajnpdf.com'") || !nextConfig.includes("destination: 'https://www.ajnpdf.com/:path*'")) throw new Error('Canonical bare-domain to www redirect is missing.');
 const adsLoader = fs.readFileSync('src/components/adsense-script-loader.tsx', 'utf8');
+const allowlistStart = adsLoader.indexOf('const AD_ELIGIBLE_TOOL_PATHS = new Set([');
+const allowlistEnd = adsLoader.indexOf(']);', allowlistStart);
+if (allowlistStart < 0 || allowlistEnd < 0) throw new Error('AdSense allowlist is missing or malformed.');
+const adAllowlist = adsLoader.slice(allowlistStart, allowlistEnd);
+if (!adsLoader.includes("return normalized === '/' || AD_ELIGIBLE_TOOL_PATHS.has(normalized);")) {
+  throw new Error('AdSense allowlist eligibility guard is missing.');
+}
 for (const route of ['/privacy', '/terms', '/security', '/status', '/transparency']) {
-  if (!adsLoader.includes(`'${route}'`)) throw new Error(`AdSense legal/trust exclusion is missing: ${route}`);
+  if (adAllowlist.includes(`'${route}'`) || adAllowlist.includes(`"${route}"`)) {
+    throw new Error(`Restricted route must not be allowlisted for AdSense: ${route}`);
+  }
 }
 
 const privacy = fs.readFileSync('src/app/privacy/page.tsx', 'utf8');
