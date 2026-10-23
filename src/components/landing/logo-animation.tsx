@@ -14,7 +14,7 @@ export function LogoAnimation({ className, showGlow = false }: { className?: str
     >
       {showGlow ? <span aria-hidden="true" className="absolute -inset-2 rounded-full bg-blue-500/10 blur-xl" /> : null}
       <Image
-        src="/ajn-pdf-mark.svg"
+        src="/ajn-pdf-logo.png"
         alt=""
         aria-hidden="true"
         width={128}
