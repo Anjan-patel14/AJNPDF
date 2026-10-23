@@ -20,7 +20,7 @@ export function LogoAnimation({ className, showGlow = false }: { className?: str
         width={128}
         height={128}
         priority
-        className="relative h-full w-full object-contain"
+        className="relative h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
       />
     </span>
   );
