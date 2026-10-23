@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">AJN PDF multicolor arrow mark</title>
+  <defs>
+    <linearGradient id="a" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#123bff"/><stop offset=".35" stop-color="#00d8ff"/><stop offset=".58" stop-color="#ec00ff"/><stop offset=".78" stop-color="#ff3030"/><stop offset="1" stop-color="#ffd600"/></linearGradient>
+    <linearGradient id="b" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#0929bb"/><stop offset=".48" stop-color="#ff00a8"/><stop offset=".75" stop-color="#ff4b00"/><stop offset="1" stop-color="#fff000"/></linearGradient>
+  </defs>
+  <path d="M12 111 49 20 65 4 91 66 79 88 62 47 34 111Z" fill="url(#a)"/>
+  <path d="M14 111 108 48 104 32 124 14 118 43 109 66 101 54 29 111Z" fill="url(#b)"/>
+  <path d="M12 111 34 111 63 99 102 111 12 111Z" fill="url(#a)"/>
+  <path d="M21 105 95 56" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.2" opacity=".95"/>
+  <path d="M50 21 36 68" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5" opacity=".85"/>
+</svg>
