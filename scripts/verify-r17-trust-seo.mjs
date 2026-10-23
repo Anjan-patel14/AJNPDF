@@ -83,7 +83,7 @@ check(
 check(
   'official contact email centralized in brand source',
   brand.includes(
-    "contactEmail: 'anjandev325@gmail.com'"
+    "contactEmail: 'ajnpdf1@gmail.com'"
   ) &&
   !brand.includes(
     "contactEmail: 'anjanpatel325@gmail.com'"
@@ -151,10 +151,9 @@ check(
     'merge-pdf',
     'split-pdf',
     'compress-pdf',
-    'pdf-to-word',
-    'word-to-pdf',
-    'protect-pdf',
-    'repair-pdf',
+    'txt-to-pdf',
+    'prompt-to-pdf',
+    'html-to-pdf',
     'image-resizer',
     'image-reducer'].every(
     (id) => guides.includes(`'${id}'`)

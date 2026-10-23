@@ -8,10 +8,38 @@ const fail = (msg) => { console.error(`FAIL: ${msg}`); process.exitCode = 1; };
 const pass = (msg) => console.log(`PASS: ${msg}`);
 
 const publicToolIds = [
-  'add-image-to-pdf','add-text','compare-pdf','compress-pdf','crop-pdf','delete-pdf-pages','edit-pdf','extract-images',
-  'flatten-pdf','heic-to-pdf','html-to-pdf','image-to-pdf','jpeg-to-pdf','jpg-to-pdf','json-to-pdf','markdown-to-pdf',
-  'merge-pdf','organize-pdf','page-number','pdf-metadata','pdf-to-jpg','pdf-to-png','pdf-zip-extract','png-to-pdf',
-  'protect-pdf','repair-pdf','rotate-pdf','sign-pdf','split-pdf','txt-to-pdf','unlock-pdf','watermark-pdf','webp-to-pdf','xml-to-pdf',
+  "add-image-to-pdf",
+  "add-text",
+  "compare-pdf",
+  "compress-pdf",
+  "crop-pdf",
+  "delete-pdf-pages",
+  "edit-pdf",
+  "extract-images",
+  "flatten-pdf",
+  "heic-to-pdf",
+  "html-to-pdf",
+  "image-to-pdf",
+  "jpeg-to-pdf",
+  "jpg-to-pdf",
+  "json-to-pdf",
+  "markdown-to-pdf",
+  "merge-pdf",
+  "organize-pdf",
+  "page-number",
+  "pdf-metadata",
+  "pdf-to-jpg",
+  "pdf-to-png",
+  "pdf-zip-extract",
+  "png-to-pdf",
+  "prompt-to-pdf",
+  "rotate-pdf",
+  "sign-pdf",
+  "split-pdf",
+  "txt-to-pdf",
+  "watermark-pdf",
+  "webp-to-pdf",
+  "xml-to-pdf"
 ];
 
 const requiredFiles = [
@@ -39,7 +67,7 @@ for (const id of publicToolIds) {
   const marker = `'${id}': {`;
   if (!strategy.includes(marker)) fail(`missing explicit SEO override for ${id}`);
 }
-if (!process.exitCode) pass('all 34 public tools have explicit SEO overrides');
+if (!process.exitCode) pass('all 32 public tools have explicit SEO overrides');
 
 const editTitle = 'Edit PDF Online Free - Change Text & Sign PDF | AJN PDF';
 if (!strategy.includes(editTitle)) fail('Edit PDF priority title missing');
@@ -49,13 +77,8 @@ const editorContractDescription = 'Edit PDF locally in your browser. Edit native
 if (!strategy.includes(editorContractDescription)) fail('Edit PDF legacy public-editor meta description contract missing');
 else pass('Edit PDF legacy SEO contract compatibility present');
 
-for (const id of ['protect-pdf','unlock-pdf','repair-pdf']) {
-  const start = strategy.indexOf(`'${id}': {`);
-  const end = strategy.indexOf('\n  },', start);
-  const block = strategy.slice(start, end > start ? end : start + 700).toLowerCase();
-  if (!block.includes('server-assisted')) fail(`${id} must be described as server-assisted`);
-}
-if (!process.exitCode) pass('server-assisted security tools are distinguished');
+if (publicToolIds.some((id) => ['protect-pdf','unlock-pdf','repair-pdf'].includes(id))) fail('Retired server-security tools must not be public');
+else pass('Retired server-security tools are excluded from the public catalog');
 
 const trust = read('src/app/trust/page.tsx');
 if (!trust.includes('browserLocalTools.length')) fail('Trust Center browser-local count must derive from the live catalog');

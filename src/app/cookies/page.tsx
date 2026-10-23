@@ -5,7 +5,8 @@ export default function CookiesPage() {
     <LegalPageShell
       eyebrow="Privacy choices"
       title="Cookie Policy"
-      summary="AJN PDF uses limited browser storage for essential preferences and may enable anonymous analytics or advertising only after the applicable optional consent choice."
+      effectiveDate="October 15, 2026"
+      summary="This policy explains how AJN PDF may use browser storage, cookies, analytics and advertising technologies, and how visitors can manage optional choices. Actual technologies depend on the services enabled for the current deployment."
       sections={[
         {
           title: 'Essential storage',
@@ -18,6 +19,13 @@ export default function CookiesPage() {
           paragraphs: [
             'After optional consent, AJN PDF may collect privacy-minimized page, tool-funnel and Core Web Vitals events. These events do not include uploaded file contents, filenames or passwords.',
             'Google Analytics may be enabled only when a valid GA4 measurement ID is configured. Google AdSense may use cookies or similar identifiers on eligible pages where permitted. AJN PDF separates ad units from document controls.'],
+        },
+        {
+          title: 'Third-party cookies and advertising',
+          paragraphs: [
+            'When advertising or analytics providers are enabled, those providers may set or read cookies or use similar technologies subject to the visitor’s location, consent status, browser settings and the provider’s own policies.',
+            'Rejecting optional technologies may reduce measurement or personalized advertising but should not be used to block essential PDF tool functionality. The exact effect depends on the current configuration and browser.',
+          ],
         },
         {
           title: 'Managing choices',

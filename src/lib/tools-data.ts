@@ -1,4 +1,4 @@
-import { Layout, Shrink, FileText, Scissors, Maximize, Presentation, FileSpreadsheet, LayoutGrid, Trash2, RotateCw, Crop, ImageIcon, Stamp, Code2, FileDigit, FileArchive, FileEdit, Sparkles, ShieldCheck, Wrench, Diff, Layers, FileCode, Wand2, Maximize2, Smartphone, ArchiveRestore, Repeat, TabletSmartphone, Smile, FileJson, Brain, Type, PenTool, FolderOpen, Tag, RefreshCcw, Captions } from 'lucide-react';
+import { Layout, Shrink, FileText, Scissors, Maximize, Presentation, FileSpreadsheet, LayoutGrid, Trash2, RotateCw, Crop, ImageIcon, Stamp, Code2, FileDigit, FileArchive, FileEdit, Sparkles, Diff, Layers, FileCode, Wand2, Maximize2, Smartphone, ArchiveRestore, Repeat, TabletSmartphone, Smile, FileJson, Brain, Type, PenTool, FolderOpen, Tag, RefreshCcw, Captions } from 'lucide-react';
 import { isToolPublic } from './tool-policy';
 import { CONVERSION_TOOLS } from './conversion-tools';
 
@@ -101,29 +101,14 @@ export const ALL_TOOLS: ServiceTool[] = [
     instructions: ["Upload PDF", "Flatten supported form fields", "Download"],
     keywords: ["static", "layer", "forms", "merge layers", "lock"]
   },
+
   {
-    id: 'protect-pdf', name: 'Protect PDF', desc: 'Apply AES-256 password encryption with configurable permissions.',
-    icon: ShieldCheck, tag: 'security', cat: 'pdf', mode: 'PDF', color: 'text-blue-600', perfIndex: 'Encrypted',
-    benefits: ['AES-256 encryption', 'Permission controls'],
-    useCases: ['Protecting confidential files'],
-    instructions: ['Upload PDF', 'Set password and permissions', 'Download protected PDF'],
-    keywords: ['password protect pdf', 'encrypt pdf', 'aes 256', 'secure pdf']
-  },
-  {
-    id: 'unlock-pdf', name: 'Unlock PDF', desc: 'Remove PDF encryption using the current valid password.',
-    icon: ArchiveRestore, tag: 'security', cat: 'pdf', mode: 'PDF', color: 'text-emerald-600', perfIndex: 'Authorized',
-    benefits: ['Valid-password decryption', 'No password guessing'],
-    useCases: ['Removing a password from an authorized document'],
-    instructions: ['Upload encrypted PDF', 'Enter the current password', 'Confirm authorization and download'],
-    keywords: ['unlock pdf', 'remove pdf password', 'decrypt pdf', 'authorized pdf']
-  },
-  {
-    id: 'repair-pdf', name: 'Repair PDF', desc: 'Attempt safe recovery of PDFs with minor structural damage.',
-    icon: Wrench, tag: 'utility', cat: 'pdf', mode: 'PDF', color: 'text-red-600', perfIndex: 'Recover',
-    benefits: ["Fix broken links", "Correct file errors"],
-    useCases: ["Damaged files"],
-    instructions: ["Upload broken PDF", "Analyze", "Recover"],
-    keywords: ["fix", "corrupted", "broken", "recover", "damaged", "restore"]
+    id: 'prompt-to-pdf', name: 'Prompt to PDF', desc: 'Turn a prompt, instructions, notes or generated text into a clean, downloadable PDF directly in your browser.',
+    icon: FileText, tag: 'create', cat: 'pdf', mode: 'PDF', badge: 'New', color: 'text-violet-600', perfIndex: 'Browser',
+    benefits: ['Create a document from pasted prompt text', 'Choose title and page size', 'Preview content before download', 'Files stay on your device'],
+    useCases: ['AI prompts and reusable instructions', 'Study notes and checklists', 'Project briefs and simple documents'],
+    instructions: ['Paste or write your prompt text', 'Add a document title and choose page size', 'Preview and create the PDF', 'Download the generated file'],
+    keywords: ['prompt to pdf', 'create pdf from prompt', 'text to pdf', 'ai prompt pdf', 'notes to pdf', 'make pdf from text']
   },
   {
     id: 'compare-pdf', name: 'Compare PDF', desc: 'Compare two PDF versions side by side and review text-item differences.',

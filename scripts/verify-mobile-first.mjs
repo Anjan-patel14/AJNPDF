@@ -15,8 +15,8 @@ const fail = (message) => { failed = true; console.error(`FAIL: ${message}`); };
 const check = (label, condition) => condition ? pass(label) : fail(label);
 
 check("single responsive hero is present before the tool directory", home.includes("<Hero />") && home.indexOf("<Hero />") < home.indexOf('id="public-tools"') && !home.includes("MobileHomeHero"));
-check("quick-access row exposes real PDF tool routes below the simple hero", home.includes("<QuickToolsScroller />") && home.indexOf("<Hero />") < home.indexOf("<QuickToolsScroller />") && home.indexOf("<QuickToolsScroller />") < home.indexOf('id="public-tools"') && quick.includes("toolPath(tool.id)") && ["merge-pdf", "compress-pdf", "split-pdf", "sign-pdf", "protect-pdf", "organize-pdf"].every((id) => quick.includes(`id: "${id}"`) || quick.includes(`id: '${id}'`)));
-check("hero presents the approved focused PDF-only value proposition", hero.includes("Free Online PDF Tools") && hero.includes("Merge, compress, split, organize, edit, sign and protect PDF files") && hero.includes("all in one simple workspace."));
+check("quick-access row exposes real PDF tool routes below the simple hero", home.includes("<QuickToolsScroller />") && home.indexOf("<Hero />") < home.indexOf("<QuickToolsScroller />") && home.indexOf("<QuickToolsScroller />") < home.indexOf('id="public-tools"') && quick.includes("toolPath(tool.id)") && ["merge-pdf", "compress-pdf", "split-pdf", "sign-pdf", "prompt-to-pdf", "organize-pdf"].every((id) => quick.includes(`id: "${id}"`) || quick.includes(`id: '${id}'`)));
+check("hero presents the approved focused PDF-only value proposition", hero.includes("Free Online PDF Tools") && hero.includes("Merge, compress, split, organize, edit, sign and create PDF files") && hero.includes("all in one simple workspace."));
 check("unused standalone mobile hero does not expose retired directories", !mobileHero.includes("/conversion-tools") && !mobileHero.includes("/image-tools"));
 check("homepage contains one primary search id", (home.match(/id="home-tool-search"/g) || []).length === 1 && !home.includes("mobile-home-tool-search"));
 check("mobile search and category controls are horizontally usable", home.includes("ajn-scrollbar-hide flex gap-2 overflow-x-auto") && home.includes('aria-label="Filter PDF tools"'));
@@ -26,7 +26,7 @@ const categoryIds = [...home.matchAll(/id:\s*["']([^"']+)["']/g)].map((match) =>
 check("focused filters include All, Edit, Organize and Security only", ["all", "edit", "organize", "security"].every((id) => categoryIds.includes(id)) && ["image", "pdf", "conversion"].every((id) => !categoryIds.includes(id)));
 check("phone tool grid uses one full-width card per row before responsive breakpoints", grid.includes("grid grid-cols-1") && grid.includes("sm:grid-cols-2") && grid.includes("lg:grid-cols-3") && grid.includes("xl:grid-cols-4"));
 check("phone cards remain readable and touch-friendly", grid.includes("min-h-[154px]") && grid.includes("h-10 w-10") && grid.includes("line-clamp-2"));
-check("all 34 public PDF tools render directly without progressive hiding", grid.includes("filteredTools.map((tool) => <ToolCard") && grid.includes("BUILD_PUBLIC_TOOLS.length") && !grid.includes("INITIAL_VISIBLE_TOOLS") && !grid.includes("showMore"));
+check("all 32 public PDF tools render directly without progressive hiding", grid.includes("filteredTools.map((tool) => <ToolCard") && grid.includes("BUILD_PUBLIC_TOOLS.length") && !grid.includes("INITIAL_VISIBLE_TOOLS") && !grid.includes("showMore"));
 check("search includes normalized names descriptions aliases and keywords", grid.includes("normalize(") && grid.includes("...localized.aliases") && grid.includes("...tool.keywords") && grid.includes("haystack.includes"));
 check("phone cards expose keyboard focus styling", grid.includes("focus-visible:ring-2"));
 

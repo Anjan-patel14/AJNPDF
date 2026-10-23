@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: '/trust',
     title: 'AJN PDF Trust Center - File Processing, Privacy & Security',
-    description: 'Clear information about AJN PDF browser processing, server-assisted workflows, editor limitations and public trust policies.',
+    description: 'Clear information about AJN PDF browser-based processing, tool limitations and public trust policies.',
   },
 };
 
@@ -51,16 +51,16 @@ export default function TrustPage() {
             Clear file handling. Clear product limits.
           </h1>
           <p className="mt-6 text-base font-medium leading-8 text-muted-foreground md:text-lg">
-            AJN PDF publishes a focused set of PDF workflows. The Trust Center derives the browser-local and server-assisted lists from the same production catalog used by the live tool directory, so processing disclosures stay aligned when tools are added or removed.
+            AJN PDF publishes a focused set of PDF workflows. The Trust Center uses the same public catalog as the tool directory. Current public workflows are selected for browser-based processing, and server-dependent tools are not listed as available public tools.
           </p>
         </section>
 
         <section className="mt-12 grid gap-5 lg:grid-cols-2">
           <article className="ajn-theme-surface rounded-3xl p-7 md:p-8">
             <p className="text-xs font-black uppercase tracking-[.12em] text-blue-600">{browserLocalTools.length} browser-local public workflows</p>
-            <h2 className="mt-4 text-2xl font-black text-foreground">Files stay in the browser processing path</h2>
+            <h2 className="mt-4 text-2xl font-black text-foreground">Browser-based processing</h2>
             <p className="mt-4 text-sm font-medium leading-7 text-muted-foreground">
-              These public workflows are designed to perform their main PDF processing on the user&apos;s device. They do not need the document sent to AJN PDF&apos;s processing backend for the core operation.
+              These public workflows are designed to perform their core file operation on the user&apos;s device. Browser extensions, connected apps, analytics choices and device settings remain separate considerations.
             </p>
             <ul className="mt-6 grid gap-2 text-sm font-bold text-foreground sm:grid-cols-2">
               {browserLocalTools.map((name) => <li key={name} className="rounded-xl bg-slate-50 px-3 py-2">{name}</li>)}
@@ -69,9 +69,9 @@ export default function TrustPage() {
 
           <article className="ajn-theme-surface rounded-3xl p-7 md:p-8">
             <p className="text-xs font-black uppercase tracking-[.12em] text-amber-600">{serverAssistedTools.length} server-assisted public workflows</p>
-            <h2 className="mt-4 text-2xl font-black text-foreground">Backend service required</h2>
+            <h2 className="mt-4 text-2xl font-black text-foreground">Server-dependent tools are not offered publicly</h2>
             <p className="mt-4 text-sm font-medium leading-7 text-muted-foreground">
-              Protect PDF, Unlock PDF and Repair PDF use AJN PDF&apos;s server-assisted processing path. Availability can change, so users should check the live Status page before relying on these workflows.
+              The public catalog currently has no server-assisted PDF workflows. Some legacy server code remains in the source package, but the public tool directory does not expose those tools.
             </p>
             <ul className="mt-6 grid gap-2 text-sm font-bold text-foreground">
               {serverAssistedTools.map((name) => <li key={name} className="rounded-xl bg-amber-50 px-3 py-2">{name}</li>)}

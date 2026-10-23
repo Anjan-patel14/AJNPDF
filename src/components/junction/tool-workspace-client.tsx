@@ -25,6 +25,10 @@ const BROWSER_CONVERSION_IDS = new Set([
   'markdown-to-pdf',
   'json-to-pdf',
   'xml-to-pdf',
+  'pdf-to-txt',
+  'pdf-to-markdown',
+  'pdf-to-json',
+  'pdf-to-html',
 ]);
 
 const SERVER_CONVERSION_IDS = new Set(CONVERSION_TOOLS.map((tool) => tool.id));
@@ -49,6 +53,7 @@ const SERVER_ALIASES: Record<string, string> = {
 
 const TOOL_COMPONENTS: Record<string, any> = {
   'edit-pdf': dynamic(() => import('./PdfEditorLab'), { ssr: false }),
+  'prompt-to-pdf': dynamic(() => import('./PromptToPdf'), { ssr: false }),
   'split-pdf': dynamic(() => import('./SplitPdf'), { ssr: false }),
   'compress-pdf': dynamic(() => import('./CompressPdf'), { ssr: false }),
   'rotate-pdf': dynamic(() => import('./RotatePdf'), { ssr: false }),
@@ -58,9 +63,6 @@ const TOOL_COMPONENTS: Record<string, any> = {
   'watermark-pdf': dynamic(() => import('./WatermarkPdf'), { ssr: false }),
   'page-number': dynamic(() => import('./AddNumbers'), { ssr: false }),
   'flatten-pdf': dynamic(() => import('./FlattenPdf'), { ssr: false }),
-  'protect-pdf': dynamic(() => import('./ProtectPdf'), { ssr: false }),
-  'unlock-pdf': dynamic(() => import('./UnlockPdf'), { ssr: false }),
-  'repair-pdf': dynamic(() => import('./RepairPdf'), { ssr: false }),
   'compare-pdf': dynamic(() => import('./ComparePdf'), { ssr: false }),
   'add-text': dynamic(() => import('./AddText'), { ssr: false }),
   'add-image-to-pdf': dynamic(() => import('./AddImageToPdf'), { ssr: false }),
@@ -74,6 +76,10 @@ const TOOL_COMPONENTS: Record<string, any> = {
   'heic-to-pdf': dynamic(() => import('./HeicToPdf'), { ssr: false }),
   'pdf-to-jpg': dynamic(() => import('./PdfToJpg'), { ssr: false }),
   'pdf-to-png': dynamic(() => import('./PdfToJpg'), { ssr: false }),
+  'pdf-to-txt': dynamic(() => import('./PdfTextExport'), { ssr: false }),
+  'pdf-to-markdown': dynamic(() => import('./PdfTextExport'), { ssr: false }),
+  'pdf-to-json': dynamic(() => import('./PdfTextExport'), { ssr: false }),
+  'pdf-to-html': dynamic(() => import('./PdfTextExport'), { ssr: false }),
 
   // Browser-only text/markup conversions.
   'txt-to-pdf': dynamic(() => import('./TxtToPdf'), { ssr: false }),
@@ -134,7 +140,7 @@ export function ToolWorkspaceClient({ id }: ToolWorkspaceClientProps) {
 
   return (
     <Suspense fallback={<PlatformLoader message="Preparing tool workspace..." />}>
-      <div className="h-full flex flex-col"><ToolComponent /></div>
+      <div className="h-full flex flex-col">{['pdf-to-txt','pdf-to-markdown','pdf-to-json','pdf-to-html'].includes(id) ? <ToolComponent toolId={id} /> : <ToolComponent />}</div>
     </Suspense>
   );
 }

@@ -29,7 +29,7 @@ const movedImageIds = ['image-reducer','image-resizer','crop-image','rotate-imag
 const imageToPdfIds = ['image-to-pdf','jpg-to-pdf','jpeg-to-pdf','png-to-pdf','webp-to-pdf'];
 const browserConversionIds = ['heic-to-pdf','pdf-to-jpg','pdf-to-png','txt-to-pdf','html-to-pdf','markdown-to-pdf','json-to-pdf','xml-to-pdf'];
 
-check('focused release exposes exactly 34 unique PDF tools', ids.length === 34 && new Set(ids).size === 34);
+check('focused release exposes exactly 36 unique PDF tools', ids.length === 36 && new Set(ids).size === 36);
 check('general image editing stays outside AJN PDF', movedImageIds.every((id) => !ids.includes(id)) && next.includes('imageToolRedirects') && next.includes("destination: '/img'"));
 check('image-to-PDF creation workflows remain in the PDF catalog', imageToPdfIds.every((id) => ids.includes(id)));
 check('browser-only conversion expansion remains in the PDF catalog', browserConversionIds.every((id) => ids.includes(id)));

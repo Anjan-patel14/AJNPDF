@@ -68,3 +68,12 @@ CLOUD_RUN_VERCEL_ENV.txt
 
 # Track placeholder-only environment documentation for clean CI/worktrees.
 !.env.example
+
+# Local development and generated backups
+.next-dev/
+dist/
+*.log
+*.bak
+*.bak_*
+*.before-*
+*.bom-fix-backup

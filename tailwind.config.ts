@@ -1,21 +1,21 @@
 import type { Config } from 'tailwindcss';
+import tailwindcssAnimate from 'tailwindcss-animate';
 
-export default {
+const config: Config = {
   darkMode: ['class'],
   content: [
-    './src/app/**/*.{ts,tsx,mdx}',
-    './src/components/**/*.{ts,tsx,mdx}',
-    './src/lib/**/*.{ts,tsx,mdx}'],
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/lib/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: { '2xl': '1400px' },
+    },
     extend: {
-      fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
-        display: ['var(--font-syne)', 'sans-serif'],
-        mono: ['var(--font-jetbrains-mono)', 'monospace'],
-      },
-      backgroundImage: {
-        'brand-gradient': 'linear-gradient(to right, #1e3a8a, #000080)',
-      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -57,20 +57,22 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
-        'shimmer-sweep': {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(100%)' },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
-        shimmer: 'shimmer 2s infinite linear',
-        'shimmer-sweep': 'shimmer-sweep 2s infinite linear',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
-} satisfies Config;
+  plugins: [tailwindcssAnimate],
+};
+
+export default config;

@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default function FileProcessingPolicyPage() {
   return (
     <LegalPageShell
+      effectiveDate="October 15, 2026"
       eyebrow="File processing"
       title="File Processing Policy"
       summary={PROCESSING_DISCLOSURE.summary}

@@ -16,6 +16,7 @@ export interface ToolPolicy {
 // General image editing stays outside the AJN PDF public catalog.
 export const PRODUCTION_PUBLIC_TOOL_IDS = new Set([
   'edit-pdf',
+  'prompt-to-pdf',
   'add-image-to-pdf',
   'add-text',
   'compare-pdf',
@@ -36,18 +37,18 @@ export const PRODUCTION_PUBLIC_TOOL_IDS = new Set([
   'markdown-to-pdf',
   'json-to-pdf',
   'xml-to-pdf',
+  'pdf-to-txt',
+  'pdf-to-markdown',
+  'pdf-to-json',
+  'pdf-to-html',
   'flatten-pdf',
   'merge-pdf',
   'organize-pdf',
   'page-number',
-  'pdf-metadata',
   'pdf-zip-extract',
-  'protect-pdf',
-  'repair-pdf',
   'rotate-pdf',
   'sign-pdf',
   'split-pdf',
-  'unlock-pdf',
   'watermark-pdf',
 ]);
 
@@ -57,15 +58,16 @@ const browserImageToPdfIds = new Set([
 
 const browserConversionIds = new Set([
   ...browserImageToPdfIds,
-  'pdf-to-jpg', 'pdf-to-png',
+  'pdf-to-jpg', 'pdf-to-png', 'pdf-to-txt', 'pdf-to-markdown', 'pdf-to-json', 'pdf-to-html',
   'txt-to-pdf', 'html-to-pdf', 'markdown-to-pdf', 'json-to-pdf', 'xml-to-pdf',
 ]);
 
 const stableBrowserIds = new Set([
   'edit-pdf',
+  'prompt-to-pdf',
   'merge-pdf', 'split-pdf', 'rotate-pdf', 'delete-pdf-pages', 'organize-pdf',
   'crop-pdf', 'watermark-pdf', 'page-number', 'flatten-pdf', 'compare-pdf',
-  'add-text', 'add-image-to-pdf', 'pdf-metadata', 'pdf-zip-extract', 'sign-pdf',
+  'add-text', 'add-image-to-pdf', 'pdf-zip-extract', 'sign-pdf',
   ...browserConversionIds,
   // Source-only image processors retained for AJN IMG/Buzz migration.
   'image-reducer', 'image-resizer', 'crop-image', 'rotate-image', 'watermark-image',
@@ -91,7 +93,7 @@ const legacyAliasIds = new Set([
   'pdf-jpg', 'heic-pdf', 'html-pdf', 'xml-pdf', 'json-pdf', 'txt-pdf']);
 
 const conversionBackendIds = new Set(CONVERSION_TOOLS.map((tool) => tool.id));
-const backendIds = new Set(['protect-pdf', 'unlock-pdf', 'repair-pdf', ...conversionBackendIds]);
+const backendIds = new Set(['protect-pdf', 'unlock-pdf', 'repair-pdf', ...conversionBackendIds]); // Backend-only IDs are intentionally excluded from the public allowlist.
 
 const hiddenIds = new Set([
   'pdf-ppt', 'pdf-a', 'pdf-ua', 'smart-read', 'psd-pdf',

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from 'next/image';
 import { cn } from '../../lib/utils';
 
 export function LogoAnimation({ className, showGlow = false }: { className?: string; showGlow?: boolean }) {
@@ -11,15 +10,8 @@ export function LogoAnimation({ className, showGlow = false }: { className?: str
       data-ajn-logo="visible"
     >
       {showGlow && <span className="absolute -inset-4 rounded-2xl bg-blue-500/8 blur-2xl" />}
-      <span className="relative h-full aspect-square shrink-0">
-        <Image
-          src="/brand/ajn-logo-transparent.png"
-          alt="AJN PDF"
-          fill
-          sizes="48px"
-          className="object-contain drop-shadow-[0_5px_10px_rgba(37,99,235,.16)]"
-          priority
-        />
+      <span className="relative flex h-full aspect-square shrink-0 items-center justify-center rounded-xl bg-blue-600 text-sm font-black tracking-tight text-white shadow-sm" aria-hidden="true">
+        AJN
       </span>
       <span className="relative whitespace-nowrap text-[clamp(1.02rem,2vw,1.34rem)] font-black tracking-[-.04em] text-slate-950">
         AJN <span className="text-blue-600">PDF</span>

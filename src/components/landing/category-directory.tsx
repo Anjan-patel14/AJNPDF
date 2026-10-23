@@ -8,16 +8,16 @@ import { BUILD_PUBLIC_TOOLS } from '@/lib/build-public-tools';
 import { toolPath } from '@/lib/tool-routes';
 
 const icons = { conversion: RefreshCcw, image: FileImage, pdf: FileText };
-const titles = { conversion: 'Document and file conversion tools', image: 'Image tools and image conversions', pdf: 'PDF editing, security and utility tools' };
+const titles = { conversion: 'Browser-based conversion tools', image: 'Image tools and image conversions', pdf: 'PDF editing and utility tools' };
 const descriptions = {
-  conversion: 'Convert PDFs, office files, images, eBooks, email files and structured data with focused workflows and clear output choices.',
+  conversion: 'Convert supported images, plain text, HTML, Markdown, JSON and XML using browser-based workflows.',
   image: 'Convert images to PDF, export PDF pages as images, scan document photos and prepare image files for sharing.',
-  pdf: 'Merge, split, organize, edit, sign, protect, unlock, repair and optimize PDF documents from one consistent workspace.',
+  pdf: 'Merge, split, organize, edit, sign and optimize PDF documents from one consistent browser workspace.',
 };
 const intentContent = {
-  conversion:{outcomes:['Convert PDFs to editable document formats','Create PDFs from documents and structured data','Run  on scans and document photos'],workflows:[{href:'/pdf-to-docx',label:'PDF to Word'},{href:'/docx-to-pdf',label:'Word to PDF'},{href:'/pdf-to-xlsx',label:'PDF to Excel'}]},
+  conversion:{outcomes:['Create PDFs from text and markup','Convert PDF pages to image files','Keep supported conversion steps in the browser'],workflows:[{href:'/txt-to-pdf',label:'Text to PDF'},{href:'/html-to-pdf',label:'HTML to PDF'},{href:'/markdown-to-pdf',label:'Markdown to PDF'},{href:'/prompt-to-pdf',label:'Prompt to PDF'}]},
   image:{outcomes:['Combine images into a PDF','Export PDF pages into image files','Prepare scans, receipts and searchable documents'],workflows:[{href:'/jpg-to-pdf',label:'JPG to PDF'},{href:'/png-to-pdf',label:'PNG to PDF'},{href:'/pdf-to-png',label:'PDF to PNG'}]},
-  pdf:{outcomes:['Combine, split and organize pages','Protect, unlock and repair authorized files','Compress, crop, rotate and prepare documents'],workflows:[{href:'/merge-pdf',label:'Merge PDF'},{href:'/split-pdf',label:'Split PDF'},{href:'/compress-pdf',label:'Compress PDF'},{href:'/protect-pdf',label:'Protect PDF'}]},
+  pdf:{outcomes:['Combine, split and organize pages','Create documents from prompts and text','Compress, crop, rotate and prepare documents'],workflows:[{href:'/merge-pdf',label:'Merge PDF'},{href:'/split-pdf',label:'Split PDF'},{href:'/compress-pdf',label:'Compress PDF'},{href:'/prompt-to-pdf',label:'Prompt to PDF'}]},
 } as const;
 
 export function CategoryDirectory({ category }: { category: PublicToolCategory }) {

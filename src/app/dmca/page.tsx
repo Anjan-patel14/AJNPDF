@@ -1,8 +1,11 @@
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'DMCA and Copyright Takedown Policy', description: 'How to submit a copyright notice or counter-notice concerning publicly hosted AJN PDF material, including the information needed for review.', alternates: { canonical: '/dmca' } };
 import { LegalPageShell } from '@/components/legal/legal-page-shell';
 
 export default function DmcaPage() {
   return (
     <LegalPageShell
+      effectiveDate="October 15, 2026"
       eyebrow="Copyright requests"
       title="DMCA and Takedown"
       summary="AJN PDF reviews complete copyright notices concerning publicly hosted AJN PDF content. The service does not intentionally retain files processed through the public tools."

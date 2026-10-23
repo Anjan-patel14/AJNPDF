@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 const read=(p)=>fs.readFileSync(p,'utf8'); const setup=`${read('SETUP_FULL_PRODUCTION.ps1')}\n${read('R16_PRODUCTION_SETUP_AND_DEPLOY.ps1')}`; const pass=(n,c)=>{if(!c)throw new Error(`FAIL: ${n}`);console.log(`PASS: ${n}`)};
 const all=fs.readdirSync('src',{recursive:true}).filter((p)=>/\.(ts|tsx|md)$/.test(p)).map((p)=>read(`src/${p}`)).join('\n');
-pass('Confirmed developer email', all.includes('anjandev325@gmail.com'));
+pass('Confirmed developer email', all.includes('ajnpdf1@gmail.com'));
 pass('Old developer email removed', !all.includes('anjanpatel325@gmail.com') && !all.includes('ajnpdf1@gmail.com'));
 pass('Confirmed Instagram', all.includes('instagram.com/anjan__patel'));
 pass('Confirmed YouTube', all.includes('youtube.com/@anjan-patel-324'));

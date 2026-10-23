@@ -15,10 +15,10 @@ if (publicIds.length !== new Set(publicIds).size) {
   pass(`${publicIds.length} unique public tool IDs`);
 }
 
-if (publicIds.length !== 34) {
-  fail(`Expected 34 current public tools, found ${publicIds.length}.`);
+if (publicIds.length !== 36) {
+  fail(`Expected 32 current public tools, found ${publicIds.length}.`);
 } else {
-  pass('Current 34-tool public inventory confirmed');
+  pass('Current 36-tool public inventory confirmed');
 }
 
 /*

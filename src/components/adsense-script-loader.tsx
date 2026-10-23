@@ -22,12 +22,10 @@ const AD_ELIGIBLE_TOOL_PATHS = new Set([
   '/page-number',
   '/pdf-metadata',
   '/pdf-zip-extract',
-  '/protect-pdf',
-  '/repair-pdf',
   '/rotate-pdf',
   '/sign-pdf',
+  '/prompt-to-pdf',
   '/split-pdf',
-  '/unlock-pdf',
   '/watermark-pdf',
 ]);
 

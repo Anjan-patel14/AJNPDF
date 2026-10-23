@@ -11,7 +11,7 @@ const quickTools = [
   { id: "compress-pdf", name: "Compress PDF", tone: "red" },
   { id: "split-pdf", name: "Split PDF", tone: "blue" },
   { id: "sign-pdf", name: "Sign PDF", tone: "blue" },
-  { id: "protect-pdf", name: "Protect PDF", tone: "green" },
+  { id: "prompt-to-pdf", name: "Prompt to PDF", tone: "blue" },
   { id: "organize-pdf", name: "Organize PDF", tone: "blue" },
 ] as const;
 

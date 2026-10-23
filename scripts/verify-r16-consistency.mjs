@@ -10,9 +10,6 @@ const backendUrl = read('src/lib/backend-service-url.ts');
 const policy = read('src/lib/tool-policy.ts');
 const limits = read('src/lib/tool-limit-constants.ts');
 const server = read('src/components/junction/ServerConversionTool.tsx');
-const protect = read('src/components/junction/ProtectPdf.tsx');
-const unlock = read('src/components/junction/UnlockPdf.tsx');
-const repair = read('src/components/junction/RepairPdf.tsx');
 const merge = read('src/components/junction/MergePdf.tsx');
 const mergeEngine = read('src/lib/merge-pdf-browser.ts');
 const workspace = read('src/components/junction/tool-workspace-client.tsx');
@@ -27,12 +24,12 @@ const publicIds = JSON.parse(read('scripts/r13-public-tool-ids.json'));
 const publicIdSet = new Set(publicIds);
 
 check('CSP and frontend use shared backend candidate resolver', next.includes('configuredPdfBackendCandidates') && backend.includes('configuredPdfBackendCandidates') && backendUrl.includes('NEXT_PUBLIC_AJN_PDF_API_URL') && backendUrl.includes('DEFAULT_PDF_BACKEND_URL'));
-check('R21 public PDF route inventory is unique and stable', publicIds.length === 34 && publicIdSet.size === 34);
+check('R21 public PDF route inventory is unique and stable', publicIds.length === 36 && publicIdSet.size === 36);
 check('R21 public inventory excludes standalone image utilities', !['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image'].some((id) => publicIdSet.has(id)));
 check('obsolete R16/R17 local deploy wrappers stay retired', !fs.existsSync('R16_PRODUCTION_SETUP_AND_DEPLOY.ps1') && !fs.existsSync('R17_TRUST_SEO_SETUP_AND_DEPLOY.ps1'));
 check('PDF.js worker is same-origin and generated from pinned local dependency', pdfWorker.includes("const PDF_WORKER_SRC = '/pdf.worker.min.mjs'") && !pdfWorker.includes('cdnjs.cloudflare.com') && workerSync.includes("'legacy', 'build', 'pdf.worker.min.mjs'") && packageJson.scripts?.prebuild?.includes('sync-pdfjs-worker.mjs') && packageJson.scripts?.predev?.includes('sync-pdfjs-worker.mjs') && next.includes("worker-src 'self' blob:"));
 check('server UI enforces live file/total limits without stale common limit copy', server.includes('validateBackendSelection') && server.includes('backendHealth') && server.includes('latestHealth') && !server.includes('liveLimits.maxFileSizeMb'));
-check('Protect/Unlock/Repair recheck live server limits at action time', [protect, unlock, repair].every((source) => source.includes('const latestHealth = await checkPdfBackendHealth()') && source.includes('resolveBackendLimits(latestHealth)') && source.includes('effectiveMaxMb') && source.includes('maxSizeMb: effectiveMaxMb')));
+check('Protect/Unlock/Repair are excluded from the public tool inventory', !['protect-pdf','unlock-pdf','repair-pdf'].some((id) => publicIdSet.has(id)));
 
 const cap = JSON.parse(read('src/generated/backend-capabilities.json'));
 check('capability snapshot matches current production backend contract', cap.toolCount === 68 && cap.availableCount === 68 && cap.unavailableCount === 0);
@@ -41,7 +38,7 @@ check('browser audit captures exception descriptions and stacks', audit.includes
 check('Merge has no outer next/dynamic boundary', workspace.includes("import MergePdf from './MergePdf'") && !/['\"]merge-pdf['\"]\s*:\s*dynamic/.test(workspace));
 check('Merge UI and acceptance share merge-pdf-browser helper', merge.includes('mergePdfFiles') && mergeEngine.includes("await import('pdf-lib')") && read('scripts/verify-r13-browser-pdf-acceptance.mjs').includes('merge-pdf-browser.ts'));
 check('Merge limits have one source of truth', merge.includes('MERGE_PDF_LIMITS') && policy.includes('MERGE_PDF_LIMITS') && limits.includes('maxFiles: 30') && limits.includes('maxFileSizeMb: 50') && limits.includes('maxTotalSizeMb: 150'));
-check('Merge source has no mojibake', !/[Ã¢Ã‚][â‚¬Â¦Â·]/.test(merge) && !merge.includes('Ã¢â‚¬Â¦') && !merge.includes('Ã‚Â·'));
+check('Merge source has no mojibake', !/[ÃƒÂ¢Ãƒâ€š][Ã¢â€šÂ¬Ã‚Â¦Ã‚Â·]/.test(merge) && !merge.includes('ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦') && !merge.includes('Ãƒâ€šÃ‚Â·'));
 check('R21 redirects moved image and retired tool routes centrally', next.includes('imageToolRedirects') && next.includes('retiredToolRedirects') && next.includes("destination: '/img'") && next.includes("destination: '/pdf-tools'"));
 check('browser audit includes all canonical public route IDs', audit.includes('r13-public-tool-ids.json') && audit.includes('allToolRoutes'));
 const convertBody = engine.slice(engine.indexOf('def convert('));

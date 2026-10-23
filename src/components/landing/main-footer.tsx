@@ -7,7 +7,7 @@ import { AJN_BRAND } from "@/lib/brand";
 import { useLanguage } from "@/lib/i18n/language-context";
 import { toolPath } from "@/lib/tool-routes";
 
-const commonToolIds = ["merge-pdf","compress-pdf","split-pdf","sign-pdf","protect-pdf","repair-pdf"] as const;
+const commonToolIds = ["merge-pdf","compress-pdf","split-pdf","sign-pdf","prompt-to-pdf"] as const;
 const productLinks = [
   ["All PDF Tools","/pdf-tools"],
   ["Trust Center","/trust"],
@@ -35,8 +35,7 @@ const fallback: Record<string,[string,string]> = {
   "compress-pdf":["Compress PDF","Compress toward a target size."],
   "split-pdf":["Split PDF","Extract PDF pages."],
   "sign-pdf":["Sign PDF","Add a signature to a PDF."],
-  "protect-pdf":["Protect PDF","Add password protection."],
-  "repair-pdf":["Repair PDF","Try to recover a damaged PDF."],
+  "prompt-to-pdf":["Prompt to PDF","Turn prompt text, notes, or instructions into a downloadable PDF."],
 };
 
 export function MainFooter() {

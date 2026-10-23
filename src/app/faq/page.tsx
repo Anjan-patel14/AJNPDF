@@ -41,11 +41,8 @@ const groups = [
     items: [
       {
         q: 'Can AJN PDF guess or recover a forgotten PDF password?',
-        a: 'No. Unlock PDF requires the current valid password and confirmation that you own the file or have permission to remove its protection.',
       },
       {
-        q: 'What encryption does Protect PDF use?',
-        a: 'Protect PDF uses pikepdf encryption revision 6 with AES enabled. Permission settings are applied through the native PDF engine.',
       },
       {
         q: 'Does AJN PDF claim external security certification?',

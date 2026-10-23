@@ -13,7 +13,9 @@ type GrowthGuidePageProps = {
 };
 
 export function generateStaticParams() {
-  return SEO_GROWTH_GUIDES.map((guide) => ({ slug: guide.slug }));
+  return (Array.isArray(SEO_GROWTH_GUIDES) ? SEO_GROWTH_GUIDES : [])
+    .filter((guide) => guide && typeof guide.slug === 'string' && guide.slug.length > 0)
+    .map((guide) => ({ slug: guide.slug }));
 }
 
 export async function generateMetadata({ params }: GrowthGuidePageProps): Promise<Metadata> {
@@ -38,7 +40,8 @@ export default async function GrowthGuidePage({ params }: GrowthGuidePageProps) 
   const guide = getSeoGrowthGuide(slug);
   if (!guide) notFound();
 
-  const relatedTools = guide.related.flatMap((id) => {
+  const relatedIds = Array.isArray(guide.related) ? guide.related : [];
+  const relatedTools = relatedIds.flatMap((id) => {
     const tool = BUILD_PUBLIC_TOOLS.find((candidate) => candidate.id === id);
     return tool
       ? [{
@@ -56,8 +59,8 @@ export default async function GrowthGuidePage({ params }: GrowthGuidePageProps) 
       title={guide.title}
       summary={guide.summary}
       readTime={guide.readTime}
-      sections={guide.sections}
-      checklist={guide.checklist}
+      sections={Array.isArray(guide.sections) ? guide.sections : []}
+      checklist={Array.isArray(guide.checklist) ? guide.checklist : []}
       relatedTools={relatedTools}
       datePublished="2026-09-05"
       dateModified="2026-09-05"

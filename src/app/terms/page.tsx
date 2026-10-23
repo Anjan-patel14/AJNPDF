@@ -12,7 +12,7 @@ export default function TermsPage() {
     <LegalPageShell
       eyebrow="Legal"
       title="Terms of Use"
-      effectiveDate="September 17, 2026"
+      effectiveDate="October 15, 2026"
       summary="These terms govern use of AJN PDF’s public web tools. By using the service, you agree to use only files you own or are authorised to process and to accept the technical limitations described on each tool page."
       sections={[
         {

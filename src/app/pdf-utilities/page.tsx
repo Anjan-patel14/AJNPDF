@@ -5,9 +5,9 @@ import { SITE_URL } from '@/lib/seo-config';
 
 export const metadata: Metadata = {
   title: 'Free Online PDF Editor, Security & Utility Tools',
-  description: 'Merge, split, compress, organize, crop, rotate, protect, unlock and repair PDFs with practical controls and clearly stated limitations.',
+  description: 'Merge, split, compress, organize, crop, rotate and create PDFs with practical controls and clearly stated limitations.',
   alternates: { canonical: '/pdf-utilities' },
-  keywords: ['PDF tools online', 'PDF editor online', 'merge PDF', 'compress PDF', 'protect PDF'],
+  keywords: ['PDF tools online', 'PDF editor online', 'merge PDF', 'compress PDF', 'create PDF'],
   openGraph: { title: 'Free Online PDF Editor & Utility Tools | AJN PDF', description: 'PDF editing, organization, security and recovery workflows.', url: '/pdf-utilities', images: ['/og-image.jpg'] },
 };
 

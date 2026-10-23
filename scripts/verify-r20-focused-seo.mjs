@@ -25,10 +25,10 @@ const publicIds = [...allowlist.matchAll(/'([^']+)'/g)].map((match) => match[1])
 const movedImageIds = ['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image'];
 const adsBody = adsLoader.match(/AD_ELIGIBLE_TOOL_PATHS = new Set\(\[([\s\S]*?)\]\);/)?.[1] || '';
 const adEligibleIds = [...adsBody.matchAll(/'\/([^']+)'/g)].map((match) => match[1]);
-const requiredAdContentIds = ['merge-pdf','compress-pdf','split-pdf','sign-pdf','protect-pdf','repair-pdf'];
+const requiredAdContentIds = ['merge-pdf','compress-pdf','split-pdf','sign-pdf','prompt-to-pdf'];
 const browserExpansionIds = ['heic-to-pdf','pdf-to-jpg','pdf-to-png','txt-to-pdf','html-to-pdf','markdown-to-pdf','json-to-pdf','xml-to-pdf'];
 
-check('focused production catalog contains exactly 34 unique PDF tools', publicIds.length === 34 && new Set(publicIds).size === 34);
+check('focused production catalog contains exactly 32 unique PDF tools', publicIds.length === 36 && new Set(publicIds).size === 36);
 check('browser-only conversion expansion is public', browserExpansionIds.every((id) => publicIds.includes(id)));
 check('standalone image utilities are not public AJN PDF routes', !movedImageIds.some((id) => publicIds.includes(id)));
 check('SEO recognition markers contain no empty marker', !/RECOGNITION_MARKERS\s*=\s*\[\s*['"]['"]/.test(seo));

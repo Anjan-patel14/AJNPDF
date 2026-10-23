@@ -47,6 +47,7 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
     title: 'Delete PDF Pages Online - Remove Pages from PDF | AJN PDF',
     description: 'Remove selected PDF pages in your browser, review the page selection and download a new PDF without uploading the source document.',
   },
+  'prompt-to-pdf': { title: 'Prompt to PDF', description: 'Create a PDF from a prompt, instructions, notes, or text in your browser.' },
   'edit-pdf': {
     title: 'Edit PDF Online Free - Change Text & Sign PDF | AJN PDF',
     description: 'Edit PDF locally in your browser. Edit native text or word-level OCR text in scanned PDFs, remove or replace words, add text, edit images, securely redact and manage pages.',
@@ -95,14 +96,6 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
     title: 'PNG to PDF Online - Convert PNG Images to PDF | AJN PDF',
     description: 'Convert PNG images to PDF in your browser, preserve supported transparency, arrange pages and download one PDF without uploading the source images.',
   },
-  'protect-pdf': {
-    title: 'Protect PDF Online - Add Password to PDF | AJN PDF',
-    description: 'Add password protection to an authorized PDF with AJN PDF’s server-assisted security processor. Check the live Status page for service availability.',
-  },
-  'repair-pdf': {
-    title: 'Repair PDF Online - Recover a Damaged PDF | AJN PDF',
-    description: 'Attempt recovery of a PDF with AJN PDF’s server-assisted repair processor. Results depend on the file, and current availability is shown on Status.',
-  },
   'rotate-pdf': {
     title: 'Rotate PDF Online - Rotate PDF Pages | AJN PDF',
     description: 'Rotate all or selected PDF pages in your browser, preview the page orientation and download a new PDF without uploading the source document.',
@@ -114,10 +107,6 @@ export const PUBLIC_TOOL_SEO_OVERRIDES: Record<string, ToolSeoOverride> = {
   'split-pdf': {
     title: 'Split PDF Online Free - Extract PDF Pages | AJN PDF',
     description: 'Split PDF files directly in your browser. Extract selected pages or create smaller PDFs without installing software or uploading the source document.',
-  },
-  'unlock-pdf': {
-    title: 'Unlock PDF Online - Remove PDF Password | AJN PDF',
-    description: 'Unlock a PDF only when you know the valid password and are authorized to do so. This server-assisted workflow depends on live service availability.',
   },
   'watermark-pdf': {
     title: 'Watermark PDF Online - Add Text Watermark | AJN PDF',

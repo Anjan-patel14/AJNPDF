@@ -25,7 +25,7 @@ export function LegalPageShell({
   eyebrow,
   title,
   summary,
-  effectiveDate = 'August 5, 2026',
+  effectiveDate = 'October 15, 2026',
   sections,
   contactLabel = 'Questions about this policy',
 }: LegalPageShellProps) {
@@ -55,7 +55,7 @@ export function LegalPageShell({
             {summary}
           </p>
           <p className="mt-6 text-[10px] font-black uppercase tracking-[0.22em] text-slate-400">
-            Effective {effectiveDate} · AJN PDF
+            Last updated {effectiveDate} · AJN PDF
           </p>
         </section>
 
@@ -94,7 +94,7 @@ export function LegalPageShell({
             <div>
               <p className="text-[10px] font-black uppercase tracking-[0.25em] text-primary">{contactLabel}</p>
               <h2 className="mt-2 text-2xl font-black">Contact AJN PDF</h2>
-              <p className="mt-2 text-sm text-slate-300">Policy, privacy, copyright and security requests are reviewed through our official contact email.</p>
+              <p className="mt-2 text-sm text-slate-300">For policy, privacy, copyright and security requests, contact our official email. Please do not send passwords or confidential source documents.</p>
             </div>
             <a href={`mailto:${AJN_BRAND.contactEmail}`} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-xs font-black uppercase tracking-widest hover:opacity-90 transition-opacity">
               <Mail className="w-4 h-4" /> {AJN_BRAND.contactEmail}

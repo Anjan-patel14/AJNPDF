@@ -95,7 +95,7 @@ function PDFToolsContent() {
               Free online PDF tools for everyday document work.
             </h1>
             <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-[#5b6b80] dark:text-[#8b96ab]">
-              Merge, split, compress, organize, edit, sign, protect, unlock and repair PDFs with clear workflow and file-handling details.
+              Merge, split, compress, organize, edit, sign and create PDFs with clear workflow and browser-based file handling.
             </p>
 
             <div className="mt-5 grid gap-3 lg:grid-cols-[1fr_auto] lg:items-center">
@@ -182,7 +182,7 @@ function PDFToolsContent() {
               <article className="rounded-2xl border border-amber-100 bg-amber-50/55 p-5">
                 <h3 className="text-base font-black text-[#0e1b2c]">Protect, unlock and repair responsibly.</h3>
                 <p className="mt-2 text-sm font-medium leading-6 text-[#5b6b80]">
-                  Protect PDF applies password-based security to a document. Unlock PDF requires the current valid password and should only be used when you own the file or have permission to remove protection. Repair PDF attempts recovery of damaged PDF structure but cannot guarantee that every corrupted object or missing page can be restored.
+                  Browser-based workflows are designed to process supported files on your device. Results depend on file structure, browser memory, and the capabilities listed for each tool.
                 </p>
               </article>
             </div>

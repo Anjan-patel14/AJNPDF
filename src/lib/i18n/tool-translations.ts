@@ -4,6 +4,7 @@ type LocalizedTool = { name: string; desc: string; aliases?: string[] };
 type ToolLocaleMap = Record<string, LocalizedTool>;
 
 const hi: ToolLocaleMap = {
+  'prompt-to-pdf': { name: 'प्रॉम्प्ट से PDF', desc: 'प्रॉम्प्ट, निर्देश या नोट्स को ब्राउज़र में PDF में बदलें।' },
   'merge-pdf': { name: 'PDF जोड़ें', desc: 'कई PDF फ़ाइलों को अपनी पसंद के क्रम में एक फ़ाइल में जोड़ें।' },
   'split-pdf': { name: 'PDF बाँटें', desc: 'PDF से ज़रूरी पेज निकालें या उसे छोटे भागों में बाँटें।' },
   'compress-pdf': { name: 'PDF छोटा करें', desc: 'क्वालिटी चुनकर PDF फ़ाइल का आकार कम करें।' },
@@ -14,9 +15,6 @@ const hi: ToolLocaleMap = {
   'watermark-pdf': { name: 'PDF वॉटरमार्क', desc: 'PDF पर टेक्स्ट वॉटरमार्क लगाएँ।' },
   'page-number': { name: 'पेज नंबर', desc: 'PDF में आसानी से पेज नंबर जोड़ें।' },
   'flatten-pdf': { name: 'PDF फ्लैटन करें', desc: 'फॉर्म और परतों को स्थायी PDF सामग्री में बदलें।' },
-  'protect-pdf': { name: 'PDF सुरक्षित करें', desc: 'PDF में पासवर्ड और अनुमतियाँ जोड़ें।' },
-  'unlock-pdf': { name: 'PDF अनलॉक करें', desc: 'सही पासवर्ड से अधिकृत PDF लॉक हटाएँ।' },
-  'repair-pdf': { name: 'PDF ठीक करें', desc: 'हल्की संरचनात्मक खराबी वाली PDF को ठीक करने की कोशिश करें।' },
   'compare-pdf': { name: 'PDF तुलना', desc: 'दो PDF संस्करणों के बदलाव देखें।' },
   'add-text': { name: 'टेक्स्ट जोड़ें', desc: 'PDF पेज पर टेक्स्ट जोड़ें और उसकी जगह बदलें।' },
   'add-image-to-pdf': { name: 'इमेज जोड़ें', desc: 'PDF पेज पर लोगो या फोटो जोड़ें।' },
@@ -61,6 +59,7 @@ const hi: ToolLocaleMap = {
 };
 
 const te: ToolLocaleMap = {
+  'prompt-to-pdf': { name: 'ప్రాంప్ట్ నుంచి PDF', desc: 'ప్రాంప్ట్, సూచనలు లేదా నోట్స్‌ను బ్రౌజర్‌లో PDFగా మార్చండి.' },
   'merge-pdf': { name: 'PDF కలపండి', desc: 'చాలా PDF ఫైళ్లను మీరు కోరిన క్రమంలో ఒక ఫైల్‌గా కలపండి.' },
   'split-pdf': { name: 'PDF విడగొట్టండి', desc: 'PDF నుంచి కావాల్సిన పేజీలు తీసుకోండి లేదా చిన్న భాగాలుగా విడగొట్టండి.' },
   'compress-pdf': { name: 'PDF చిన్నదిగా చేయండి', desc: 'క్వాలిటీ ఎంచుకుని PDF ఫైల్ పరిమాణం తగ్గించండి.' },
@@ -71,9 +70,6 @@ const te: ToolLocaleMap = {
   'watermark-pdf': { name: 'PDF వాటర్‌మార్క్', desc: 'PDFపై టెక్స్ట్ వాటర్‌మార్క్ జోడించండి.' },
   'page-number': { name: 'పేజీ నంబర్లు', desc: 'PDFలో పేజీ నంబర్లు సులభంగా జోడించండి.' },
   'flatten-pdf': { name: 'PDF ఫ్లాటెన్ చేయండి', desc: 'ఫార్మ్‌లు మరియు లేయర్‌లను స్థిరమైన PDF కంటెంట్‌గా మార్చండి.' },
-  'protect-pdf': { name: 'PDF రక్షించండి', desc: 'PDFకు పాస్‌వర్డ్ మరియు అనుమతులు జోడించండి.' },
-  'unlock-pdf': { name: 'PDF అన్‌లాక్ చేయండి', desc: 'సరైన పాస్‌వర్డ్‌తో అనుమతి ఉన్న PDF లాక్ తీసేయండి.' },
-  'repair-pdf': { name: 'PDF రిపేర్ చేయండి', desc: 'చిన్న నిర్మాణ సమస్యలున్న PDFను సరిచేయడానికి ప్రయత్నించండి.' },
   'compare-pdf': { name: 'PDF పోల్చండి', desc: 'రెండు PDF వెర్షన్‌ల మధ్య తేడాలు చూడండి.' },
   'add-text': { name: 'టెక్స్ట్ జోడించండి', desc: 'PDF పేజీలో టెక్స్ట్ జోడించి స్థానం మార్చండి.' },
   'add-image-to-pdf': { name: 'ఇమేజ్ జోడించండి', desc: 'PDF పేజీలో లోగో లేదా ఫోటో జోడించండి.' },
@@ -118,6 +114,7 @@ const te: ToolLocaleMap = {
 };
 
 const ta: ToolLocaleMap = {
+  'prompt-to-pdf': { name: 'Prompt இலிருந்து PDF', desc: 'Prompt, வழிமுறைகள் அல்லது குறிப்புகளை உலாவியிலேயே PDF ஆக மாற்றவும்.' },
   'merge-pdf': { name: 'PDF இணைக்க', desc: 'பல PDF கோப்புகளை நீங்கள் விரும்பும் வரிசையில் ஒன்றாக இணைக்கவும்.' },
   'split-pdf': { name: 'PDF பிரிக்க', desc: 'PDF இலிருந்து தேவையான பக்கங்களை எடுக்கவும் அல்லது பகுதிகளாக பிரிக்கவும்.' },
   'compress-pdf': { name: 'PDF அளவு குறைக்க', desc: 'தரத்தை தேர்வு செய்து PDF கோப்பு அளவை குறைக்கவும்.' },
@@ -128,9 +125,6 @@ const ta: ToolLocaleMap = {
   'watermark-pdf': { name: 'PDF வாட்டர்மார்க்', desc: 'PDF மீது உரை வாட்டர்மார்க் சேர்க்கவும்.' },
   'page-number': { name: 'பக்க எண்கள்', desc: 'PDF இல் பக்க எண்களை எளிதாக சேர்க்கவும்.' },
   'flatten-pdf': { name: 'PDF Flatten', desc: 'படிவங்கள் மற்றும் அடுக்குகளை நிலையான PDF உள்ளடக்கமாக மாற்றவும்.' },
-  'protect-pdf': { name: 'PDF பாதுகாக்க', desc: 'PDF க்கு கடவுச்சொல் மற்றும் அனுமதிகளை சேர்க்கவும்.' },
-  'unlock-pdf': { name: 'PDF Unlock', desc: 'சரியான கடவுச்சொல்லுடன் அனுமதியுள்ள PDF பூட்டை நீக்கவும்.' },
-  'repair-pdf': { name: 'PDF சரிசெய்ய', desc: 'சிறிய கட்டமைப்பு பிழைகள் உள்ள PDF ஐ சரிசெய்ய முயற்சிக்கவும்.' },
   'compare-pdf': { name: 'PDF ஒப்பிட', desc: 'இரண்டு PDF பதிப்புகளின் வேறுபாடுகளை பார்க்கவும்.' },
   'add-text': { name: 'உரை சேர்க்க', desc: 'PDF பக்கத்தில் உரை சேர்த்து இடத்தை மாற்றவும்.' },
   'add-image-to-pdf': { name: 'படம் சேர்க்க', desc: 'PDF பக்கத்தில் லோகோ அல்லது புகைப்படம் சேர்க்கவும்.' },
@@ -175,6 +169,7 @@ const ta: ToolLocaleMap = {
 };
 
 const kn: ToolLocaleMap = {
+  'prompt-to-pdf': { name: 'ಪ್ರಾಂಪ್ಟ್‌ನಿಂದ PDF', desc: 'ಪ್ರಾಂಪ್ಟ್, ಸೂಚನೆಗಳು ಅಥವಾ ಟಿಪ್ಪಣಿಗಳನ್ನು ಬ್ರೌಸರ್‌ನಲ್ಲೇ PDF ಆಗಿ ಮಾಡಿ.' },
   'merge-pdf': { name: 'PDF ಸೇರಿಸಿ', desc: 'ಹಲವು PDF ಫೈಲ್‌ಗಳನ್ನು ನೀವು ಬಯಸಿದ ಕ್ರಮದಲ್ಲಿ ಒಂದಾಗಿ ಸೇರಿಸಿ.' },
   'split-pdf': { name: 'PDF ವಿಭಜಿಸಿ', desc: 'PDF ನಿಂದ ಬೇಕಾದ ಪುಟಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ ಅಥವಾ ಸಣ್ಣ ಭಾಗಗಳಾಗಿ ವಿಭಜಿಸಿ.' },
   'compress-pdf': { name: 'PDF ಗಾತ್ರ ಕಡಿಮೆ ಮಾಡಿ', desc: 'ಗುಣಮಟ್ಟ ಆಯ್ಕೆ ಮಾಡಿ PDF ಫೈಲ್ ಗಾತ್ರ ಕಡಿಮೆ ಮಾಡಿ.' },
@@ -185,9 +180,6 @@ const kn: ToolLocaleMap = {
   'watermark-pdf': { name: 'PDF ವಾಟರ್‌ಮಾರ್ಕ್', desc: 'PDF ಮೇಲೆ ಪಠ್ಯ ವಾಟರ್‌ಮಾರ್ಕ್ ಸೇರಿಸಿ.' },
   'page-number': { name: 'ಪುಟ ಸಂಖ್ಯೆ', desc: 'PDF ನಲ್ಲಿ ಪುಟ ಸಂಖ್ಯೆಗಳನ್ನು ಸುಲಭವಾಗಿ ಸೇರಿಸಿ.' },
   'flatten-pdf': { name: 'PDF Flatten', desc: 'ಫಾರ್ಮ್ ಮತ್ತು ಲೇಯರ್‌ಗಳನ್ನು ಸ್ಥಿರ PDF ವಿಷಯವಾಗಿ ಮಾಡಿ.' },
-  'protect-pdf': { name: 'PDF ರಕ್ಷಿಸಿ', desc: 'PDF ಗೆ ಪಾಸ್‌ವರ್ಡ್ ಮತ್ತು ಅನುಮತಿಗಳನ್ನು ಸೇರಿಸಿ.' },
-  'unlock-pdf': { name: 'PDF Unlock', desc: 'ಸರಿಯಾದ ಪಾಸ್‌ವರ್ಡ್‌ನಿಂದ ಅನುಮತಿದ PDF ಲಾಕ್ ತೆಗೆದುಹಾಕಿ.' },
-  'repair-pdf': { name: 'PDF ಸರಿಪಡಿಸಿ', desc: 'ಸಣ್ಣ ರಚನಾ ಸಮಸ್ಯೆಗಳಿರುವ PDF ಸರಿಪಡಿಸಲು ಪ್ರಯತ್ನಿಸಿ.' },
   'compare-pdf': { name: 'PDF ಹೋಲಿಸಿ', desc: 'ಎರಡು PDF ಆವೃತ್ತಿಗಳ ವ್ಯತ್ಯಾಸ ನೋಡಿ.' },
   'add-text': { name: 'ಪಠ್ಯ ಸೇರಿಸಿ', desc: 'PDF ಪುಟದಲ್ಲಿ ಪಠ್ಯ ಸೇರಿಸಿ ಮತ್ತು ಅದರ ಸ್ಥಳ ಬದಲಿಸಿ.' },
   'add-image-to-pdf': { name: 'ಇಮೇಜ್ ಸೇರಿಸಿ', desc: 'PDF ಪುಟದಲ್ಲಿ ಲೋಗೋ ಅಥವಾ ಫೋಟೋ ಸೇರಿಸಿ.' },

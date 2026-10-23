@@ -44,7 +44,7 @@ if (!adsLoader.includes("return normalized === '/' || AD_ELIGIBLE_TOOL_PATHS.has
   throw new Error('AdSense allowlist eligibility guard is missing.');
 }
 for (const route of ['/privacy', '/terms', '/security', '/status', '/transparency']) {
-  if (adAllowlist.includes(`'${route}'`) || adAllowlist.includes(`"${route}"`)) {
+  if (adAllowlist.includes(`'${route}'`) || adAllowlist.includes(`\"${route}\"`)) {
     throw new Error(`Restricted route must not be allowlisted for AdSense: ${route}`);
   }
 }

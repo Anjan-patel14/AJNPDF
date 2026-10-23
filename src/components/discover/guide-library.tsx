@@ -12,9 +12,9 @@ const clusters = [
   },
   {
     icon: FileOutput,
-    title: 'Document conversion',
-    description: 'Move between PDF and editable office formats with clear expectations about layout and fidelity.',
-    ids: ['pdf-to-word', 'word-to-pdf', 'pdf-to-excel', 'excel-to-pdf', 'doc-to-pdf', 'pdf-to-powerpoint'],
+    title: 'Browser-based document creation',
+    description: 'Create readable PDFs from prompts, plain text, HTML, Markdown and structured text data.',
+    ids: ['prompt-to-pdf', 'txt-to-pdf', 'html-to-pdf', 'markdown-to-pdf', 'json-to-pdf', 'xml-to-pdf'],
   },
   {
     icon: ImageIcon,
@@ -24,9 +24,9 @@ const clusters = [
   },
   {
     icon: ShieldCheck,
-    title: 'Security and recovery',
-    description: 'Understand authorization, passwords, repair limits and the difference between visible signatures and cryptographic signing.',
-    ids: ['protect-pdf', 'unlock-pdf', 'repair-pdf', 'sign-pdf'],
+    title: 'Sign and review documents',
+    description: 'Learn how to add a visible signature, review output files and keep an original copy of important documents.',
+    ids: ['sign-pdf', 'edit-pdf', 'compare-pdf'],
   }] as const;
 
 const trustGuides = [

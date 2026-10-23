@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 const PDF_TOOLS_DESCRIPTION =
-  'Browse focused PDF tools to merge, split, compress, organize, edit, sign, protect, unlock and repair PDF files online.';
+  'Browse focused PDF tools to merge, split, compress, organize, edit, sign and create PDF files in your browser.';
 
 export const metadata: Metadata = {
   title: 'Free Online PDF Tools - Merge, Split, Compress & Sign',

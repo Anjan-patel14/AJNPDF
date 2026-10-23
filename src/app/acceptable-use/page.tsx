@@ -1,8 +1,11 @@
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Acceptable Use Policy', description: 'Rules for lawful, authorised and responsible use of AJN PDF tools and online processing workflows.', alternates: { canonical: '/acceptable-use' } };
 import { LegalPageShell } from '@/components/legal/legal-page-shell';
 
 export default function AcceptableUsePage() {
   return (
     <LegalPageShell
+      effectiveDate="October 15, 2026"
       eyebrow="Usage policy"
       title="Acceptable Use Policy"
       summary="This policy defines the lawful and authorised uses of AJN PDF and its online file workflows."

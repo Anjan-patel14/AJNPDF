@@ -15,7 +15,7 @@ const CONVERSION_IDS = new Set(CONVERSION_TOOLS.map((tool) => tool.id));
 
 function conversionEditorial(tool: ServiceTool, processing: string, limitation: string): ToolEditorial {
   const [sourceLabel, outputLabel] = tool.name.includes(' to ') ? tool.name.split(' to ', 2) : ['source file', 'result'];
-  const isRecognition = /|Scanned|Image to Text|Image to Word|Handwriting/i.test(tool.name);
+  const isRecognition = /Scanned|Image to Text|Image to Word|Handwriting/i.test(tool.name);
   const isImage = tool.cat === 'img' || /JPG|JPEG|PNG|WEBP|TIFF|BMP|GIF|SVG|HEIC|AVIF|Image/i.test(tool.name);
   const isOffice = /Word|DOCX?|Excel|XLSX?|PowerPoint|PPTX?|ODT|RTF/i.test(tool.name);
   const overview = `${tool.name} converts ${sourceLabel.toLowerCase()} content into ${outputLabel.toLowerCase()} through a guided AJN PDF workflow. It is intended for users who need a clear download, format validation and an honest explanation of what may change during conversion.`;
@@ -176,24 +176,6 @@ const CUSTOM: Record<string, Partial<ToolEditorial>> = {
     details: 'You can position and resize the visual signature before exporting a new PDF. The operation adds visible page content; it does not create a certificate-backed cryptographic signature or a PAdES validation record.',
     tips: ['Confirm the recipient accepts visual electronic signatures.', 'Place the signature without covering important text.', 'Keep an unsigned original copy.'],
     limitations: ['This is not certificate-based digital signing.', 'The tool does not verify signer identity or create a trusted timestamp.'],
-  },
-  'protect-pdf': {
-    overview: 'Protect PDF applies password encryption to a document with secure online processing. It is intended for files you are authorised to secure before sharing or storage.',
-    details: 'The selected file is uploaded only for this request, protected with the chosen password and permissions, returned to your browser, and temporary request files are scheduled for cleanup. Passwords are not stored or written to application logs.',
-    tips: ['Use a long, unique password and share it through a separate channel.', 'Test the protected file in another PDF viewer.', 'Keep an unencrypted backup in a secure location.'],
-    limitations: ['Encryption cannot prevent an authorised recipient from photographing or reproducing visible content.', 'This tool requires online availability.'],
-  },
-  'unlock-pdf': {
-    overview: 'Unlock PDF removes encryption only when the current valid password is supplied and the user confirms ownership or authorisation. AJN PDF does not guess, brute-force, or bypass unknown passwords.',
-    details: 'AJN PDF securely validates the supplied password, prepares an unprotected copy for download, and schedules temporary request data for cleanup. The original encrypted PDF remains unchanged.',
-    tips: ['Use this tool only for documents you own or are authorised to modify.', 'Confirm the downloaded file opens without a password.', 'Store sensitive unlocked copies securely.'],
-    limitations: ['The current valid password is required.', 'This tool requires online availability.'],
-  },
-  'repair-pdf': {
-    overview: 'Repair PDF attempts to recover documents with minor structural problems such as damaged cross-reference information or incomplete internal indexing.',
-    details: 'AJN PDF securely analyzes the file, rebuilds a clean output when possible, and returns a separate repaired copy. The original file is never overwritten.',
-    tips: ['Try opening the result in more than one PDF viewer.', 'Compare the recovered page count with the original.', 'Keep the damaged source in case another recovery method is needed.'],
-    limitations: ['Severely truncated, encrypted, or overwritten data may be impossible to recover.', 'Successful opening does not guarantee every embedded object was restored.'],
   },
 };
 

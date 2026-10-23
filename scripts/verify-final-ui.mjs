@@ -23,7 +23,7 @@ const next = read("next.config.ts");
 const pkg = JSON.parse(read("package.json"));
 
 hero.includes("Free Online PDF Tools") ? pass("Focused hero heading is exact") : fail("Focused hero heading is missing or changed");
-const heroDescriptionOk = hero.includes("Merge, compress, split, organize, edit, sign and protect PDF files") && hero.includes("all in one simple workspace.");
+const heroDescriptionOk = hero.includes("Merge, compress, split, organize, edit, sign and create PDF files") && hero.includes("all in one simple workspace.");
 heroDescriptionOk ? pass("Hero description is correct") : fail("Hero description is missing or changed");
 
 for (const forbidden of ["Choose a PDF tool","Start with Merge PDF","Workspace preview","Report.pdf","Proposal.pdf","Statement.pdf"]) {
@@ -71,7 +71,7 @@ css.includes(".ajn-tool-card") || css.includes(".ajn-premium-tool-card") ? pass(
 
 const publicBlock = policy.match(/PRODUCTION_PUBLIC_TOOL_IDS\s*=\s*new Set\(\[([\s\S]*?)\]\)/)?.[1] || "";
 const ids = [...publicBlock.matchAll(/["']([^"']+)["']/g)].map((match) => match[1]);
-ids.length === 34 && new Set(ids).size === 34 ? pass("Exactly 34 focused public PDF tools") : fail(`Expected exactly 34 public PDF tools; found ${ids.length}`);
+ids.length === 36 && new Set(ids).size === 36 ? pass("Exactly 36 focused public PDF tools") : fail(`Expected exactly 36 public PDF tools; found ${ids.length}`);
 
 for (const prohibited of [/100%\s*(private|local|secure)/i,/trusted by (millions|thousands)/i,/99\.9%\s*uptime/i,/free forever/i,/no limits/i,/90\+\s*tools/i,/100\+\s*tools/i,/107\s+tools/i]) {
   prohibited.test([home, hero, grid, navbar, menu, footer].join("\n")) ? fail(`Unsupported claim ${prohibited}`) : pass(`Avoids ${prohibited}`);

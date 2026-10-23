@@ -9,7 +9,7 @@ export default function Hero() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-3xl text-sm font-medium leading-6 text-[#5b6b80] dark:text-[#8b96ab] sm:text-[15px]">
-          Merge, compress, split, organize, edit, sign and protect PDF files — all in one simple workspace.
+          Merge, compress, split, organize, edit, sign and create PDF files — all in one simple workspace.
         </p>
       </div>
     </section>

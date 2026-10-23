@@ -1,9 +1,12 @@
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Copyright Policy', description: 'Understand user document rights, AJN PDF materials and how to submit a copyright complaint.', alternates: { canonical: '/copyright' } };
 import { LegalPageShell } from '@/components/legal/legal-page-shell';
 import { AJN_BRAND } from '@/lib/brand';
 
 export default function CopyrightPage() {
   return (
     <LegalPageShell
+      effectiveDate="October 15, 2026"
       eyebrow="Copyright"
       title="Copyright Policy"
       summary="Users retain their rights in documents they process. AJN PDF does not receive ownership of uploaded content."

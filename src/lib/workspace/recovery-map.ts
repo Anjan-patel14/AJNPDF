@@ -14,8 +14,8 @@ export type RecoveryDefinition = {
 };
 
 export const RECOVERY_MAP: Record<RecoveryType, RecoveryDefinition> = {
-  damaged: { title: "We couldn't read this PDF.", actionLabel: "Try Repair PDF", actionHref: "/repair-pdf" },
-  encrypted: { title: "This PDF is password-protected.", actionLabel: "Use Unlock PDF", actionHref: "/unlock-pdf" },
+  damaged: { title: "We couldn't read this PDF.", actionLabel: "Choose another PDF" },
+  encrypted: { title: "This PDF is password-protected.", actionLabel: "Use an unencrypted copy you are authorized to edit" },
   "wrong-type": { title: "That's not a supported PDF.", actionLabel: "Select a PDF again" },
   "too-large": { title: "This file exceeds the current limit.", actionLabel: "Try Compress PDF", actionHref: "/compress-pdf" },
   service: { title: "The processing service is temporarily unavailable." },

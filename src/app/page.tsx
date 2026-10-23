@@ -106,7 +106,6 @@ export default function HomePage() {
         <Hero />
 
         <QuickToolsScroller />
-        <SeoPillarLinks />
 
         <section
           className="relative mx-auto max-w-7xl scroll-mt-[72px] px-4 pb-10 pt-6 md:px-8 md:pb-14 md:pt-8"
@@ -205,6 +204,8 @@ export default function HomePage() {
             })}
           </div>
         </section>
+
+        <SeoPillarLinks />
 
         <AdSenseUnit
           slot={ADSENSE_SLOTS.homePrimary}

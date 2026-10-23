@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Layout, Scissors, Trash2, LayoutGrid, ImageIcon, FileText, FileSpreadsheet, Code2, Presentation, FileDigit, Stamp, PenTool, Wrench, Layers, FileEdit } from 'lucide-react';
+import { ChevronDown, Layout, Scissors, Trash2, LayoutGrid, ImageIcon, FileText, FileSpreadsheet, Code2, Presentation, FileDigit, Stamp, PenTool, Layers, FileEdit } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '../../lib/utils';
 import { BUILD_PUBLIC_TOOL_IDS, BUILD_PUBLIC_TOOLS } from '@/lib/build-public-tools';
@@ -26,10 +26,10 @@ const pdfCategories = [
   {
     title: "CONVERT TO",
     tools: [
-      { name: "WORD to PDF", href: "/word-to-pdf", icon: FileText, color: "text-blue-600" },
-      { name: "EXCEL to PDF", href: "/excel-to-pdf", icon: FileSpreadsheet, color: "text-emerald-700" },
+      { name: "TXT to PDF", href: "/txt-to-pdf", icon: FileText, color: "text-blue-600" },
       { name: "JPG to PDF", href: "/jpg-to-pdf", icon: ImageIcon, color: "text-amber-500" },
-      { name: "HTML to PDF", href: "/html-to-pdf", icon: Code2, color: "text-indigo-600" }]
+      { name: "HTML to PDF", href: "/html-to-pdf", icon: Code2, color: "text-indigo-600" },
+      { name: "Prompt to PDF", href: "/prompt-to-pdf", icon: FileText, color: "text-violet-500" }]
   },
   {
     title: "CONVERT FROM",
@@ -50,7 +50,7 @@ const pdfCategories = [
   {
     title: "INTELLIGENCE",
     tools: [
-      { name: "Repair PDF", href: "/repair-pdf", icon: Wrench, color: "text-red-500" }]
+      { name: "Prompt to PDF", href: "/prompt-to-pdf", icon: FileText, color: "text-violet-500" }]
   }
 ];
 

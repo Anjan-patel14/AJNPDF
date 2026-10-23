@@ -8,15 +8,45 @@ const failures = [];
 const check = (label, ok) => ok ? console.log(`PASS: ${label}`) : failures.push(label);
 
 const expected = [
-  'edit-pdf',
-  'add-image-to-pdf','add-text','compare-pdf','compress-pdf','crop-pdf','delete-pdf-pages',
-  'extract-images','flatten-pdf','heic-to-pdf','html-to-pdf','image-to-pdf','jpeg-to-pdf','jpg-to-pdf','json-to-pdf',
-  'markdown-to-pdf','merge-pdf','organize-pdf','page-number','pdf-metadata','pdf-to-jpg','pdf-to-png','pdf-zip-extract',
-  'png-to-pdf','protect-pdf','repair-pdf','rotate-pdf','sign-pdf','split-pdf','txt-to-pdf','unlock-pdf',
-  'watermark-pdf','webp-to-pdf','xml-to-pdf',
+  "add-image-to-pdf",
+  "add-text",
+  "compare-pdf",
+  "compress-pdf",
+  "crop-pdf",
+  "delete-pdf-pages",
+  "edit-pdf",
+  "extract-images",
+  "flatten-pdf",
+  "heic-to-pdf",
+  "html-to-pdf",
+  "image-to-pdf",
+  "jpeg-to-pdf",
+  "jpg-to-pdf",
+  "json-to-pdf",
+  "markdown-to-pdf",
+  "merge-pdf",
+  "organize-pdf",
+  "page-number",
+  "pdf-metadata",
+  "pdf-to-jpg",
+  "pdf-to-png",
+  "pdf-to-txt",
+  "pdf-to-markdown",
+  "pdf-to-json",
+  "pdf-to-html",
+  "pdf-zip-extract",
+  "png-to-pdf",
+  "prompt-to-pdf",
+  "rotate-pdf",
+  "sign-pdf",
+  "split-pdf",
+  "txt-to-pdf",
+  "watermark-pdf",
+  "webp-to-pdf",
+  "xml-to-pdf"
 ].sort();
 const ids = JSON.parse(read('scripts/r13-public-tool-ids.json')).sort();
-check('public catalog remains exactly 34 PDF-focused tools', JSON.stringify(ids) === JSON.stringify(expected));
+check('public catalog remains exactly 36 browser-first PDF tools', JSON.stringify(ids) === JSON.stringify(expected));
 
 const policy = read('src/lib/tool-policy.ts');
 for (const id of expected) check(`tool policy includes ${id}`, policy.includes(`'${id}'`));
@@ -63,13 +93,7 @@ check('backend acceptance verifies Vercel preflight', read('backend/public_backe
 
 const backendEngine = read('backend/app/conversion_engine.py');
 check('backend manifest no longer has an empty security-capability extension', !backendEngine.includes('tools.extend([])'));
-for (const id of ['protect-pdf','unlock-pdf','repair-pdf']) {
-  check(`backend /api/tools source advertises ${id}`, backendEngine.includes(`'id': '${id}'`));
-}
-const backendAcceptance = read('backend/public_backend_acceptance_test.py');
-check('backend container acceptance requires all three security manifest records',
-  backendAcceptance.includes("security_id in ('protect-pdf', 'unlock-pdf', 'repair-pdf')")
-  && backendAcceptance.includes("processingMode') == 'temporary-server'"));
+check('retired server-security tools are not part of the public catalog', !ids.some(id => ['protect-pdf','unlock-pdf','repair-pdf'].includes(id)));
 
 const utils = read('src/components/junction/_pdfUtils.ts');
 check('metadata fields can be cleared', utils.includes('doc.setTitle(title || "")') && utils.includes('doc.setKeywords(keywords.trim() ?'));

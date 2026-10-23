@@ -34,6 +34,11 @@ type Props = {
 };
 
 export function GuideArticle({ slug, eyebrow, title, summary, readTime, sections, checklist = [], relatedTools, datePublished = '2026-08-06', dateModified = '2026-08-13' }: Props) {
+  // Keep static generation resilient to incomplete editorial records. A malformed guide
+  // should render the available content instead of crashing every production build.
+  const safeSections = Array.isArray(sections) ? sections.filter((section) => section && typeof section.title === 'string') : [];
+  const safeChecklist = Array.isArray(checklist) ? checklist.filter((item): item is string => typeof item === 'string' && item.trim().length > 0) : [];
+  const safeRelatedTools = Array.isArray(relatedTools) ? relatedTools.filter((tool) => tool && typeof tool.href === 'string' && typeof tool.title === 'string') : [];
   const canonical = `${SITE_URL}/blog/${slug}`;
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -79,18 +84,18 @@ export function GuideArticle({ slug, eyebrow, title, summary, readTime, sections
           </header>
 
           <div className="mt-14 space-y-6">
-            {sections.map((section, index) => (
+            {safeSections.map((section, index) => (
               <section key={section.title} className="ajn-theme-surface rounded-[1.75rem] p-6 md:p-9">
                 <div className="flex items-start gap-4">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-sm font-black text-white">{index + 1}</span>
                   <div className="min-w-0">
                     <h2 className="text-2xl font-black tracking-[-.03em] text-foreground md:text-3xl">{section.title}</h2>
                     <div className="mt-5 space-y-4">
-                      {section.paragraphs.map((paragraph) => <p key={paragraph} className="text-sm font-medium leading-7 text-muted-foreground md:text-base">{paragraph}</p>)}
+                      {(Array.isArray(section.paragraphs) ? section.paragraphs : []).filter((paragraph): paragraph is string => typeof paragraph === 'string').map((paragraph) => <p key={paragraph} className="text-sm font-medium leading-7 text-muted-foreground md:text-base">{paragraph}</p>)}
                     </div>
                     {section.bullets && section.bullets.length > 0 && (
                       <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                        {section.bullets.map((item) => <li key={item} className="flex items-start gap-3 rounded-xl border border-border bg-muted/35 p-4 text-sm font-semibold leading-6 text-foreground"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />{item}</li>)}
+                        {(Array.isArray(section.bullets) ? section.bullets : []).filter((item): item is string => typeof item === 'string').map((item) => <li key={item} className="flex items-start gap-3 rounded-xl border border-border bg-muted/35 p-4 text-sm font-semibold leading-6 text-foreground"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />{item}</li>)}
                       </ul>
                     )}
                     {section.note && <div className="mt-6 flex items-start gap-3 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm font-semibold leading-6 text-blue-950"><Info className="mt-0.5 h-4 w-4 shrink-0" />{section.note}</div>}
@@ -100,11 +105,11 @@ export function GuideArticle({ slug, eyebrow, title, summary, readTime, sections
             ))}
           </div>
 
-          {checklist.length > 0 && (
+          {safeChecklist.length > 0 && (
             <section className="mt-8 rounded-[1.75rem] bg-slate-950 p-7 text-white md:p-10">
               <div className="flex items-center gap-3"><ShieldCheck className="h-6 w-6 text-emerald-300" /><h2 className="text-2xl font-black md:text-3xl">Practical checklist</h2></div>
               <ul className="mt-6 grid gap-3 md:grid-cols-2">
-                {checklist.map((item) => <li key={item} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4 text-sm font-semibold leading-6 text-slate-200"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-300" />{item}</li>)}
+                {safeChecklist.map((item) => <li key={item} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4 text-sm font-semibold leading-6 text-slate-200"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-300" />{item}</li>)}
               </ul>
             </section>
           )}
@@ -119,7 +124,7 @@ export function GuideArticle({ slug, eyebrow, title, summary, readTime, sections
               <Link href="/pdf-tools" className="text-sm font-black text-blue-600 hover:underline">View all tools</Link>
             </div>
             <div className="mt-7 grid gap-4 md:grid-cols-3">
-              {relatedTools.map((tool) => (
+              {safeRelatedTools.map((tool) => (
                 <Link key={tool.href} href={tool.href} className="ajn-tool-card group block p-6">
                   <h3 className="text-lg font-black text-foreground">{tool.title}</h3>
                   <p className="mt-3 text-sm font-medium leading-6 text-muted-foreground">{tool.description}</p>

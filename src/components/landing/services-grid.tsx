@@ -21,7 +21,7 @@ const EDIT_IDS = new Set([
 const ORGANIZE_IDS = new Set([
   "merge-pdf", "split-pdf", "organize-pdf", "delete-pdf-pages", "rotate-pdf", "crop-pdf", "page-number", "flatten-pdf", "pdf-zip-extract",
 ]);
-const SECURITY_IDS = new Set(["protect-pdf", "unlock-pdf", "repair-pdf"]);
+const SECURITY_IDS = new Set<string>([]);
 
 function normalize(value: string) {
   return value.toLocaleLowerCase().normalize("NFKD").replace(/[^\p{L}\p{N}]+/gu, " ").trim();

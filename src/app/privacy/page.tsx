@@ -12,7 +12,7 @@ export default function PrivacyPage() {
     <LegalPageShell
       eyebrow="Privacy"
       title="Privacy Policy"
-      effectiveDate="September 17, 2026"
+      effectiveDate="October 15, 2026"
       summary="This policy explains how AJN PDF handles files during on-device and online workflows, how advertising consent works, and what information is not intentionally retained."
       sections={[
         {
@@ -33,7 +33,6 @@ export default function PrivacyPage() {
         {
           title: 'Passwords and document content',
           paragraphs: [
-            'Passwords submitted to Protect PDF or Unlock PDF are used only for the active request. The application must not intentionally include passwords in analytics, public logs or user-facing error messages.',
             'Do not use confidential material until you understand the file-handling details shown for the selected workflow.',
           ],
         },
@@ -51,6 +50,21 @@ export default function PrivacyPage() {
             'On-device working files are cleared when the page state is reset, refreshed or closed, subject to normal browser behaviour.',
             'Temporary online-request files are scheduled for deletion after the result is returned, and abandoned temporary work areas are cleaned automatically.',
             'You may request deletion of correspondence or other personal information you have directly provided to AJN PDF by using the official contact page.',
+          ],
+        },
+        {
+          title: 'Third-party services and international processing',
+          paragraphs: [
+            'The website may rely on hosting, content delivery, security, analytics and advertising providers. When these providers are enabled, they may process technical information needed to deliver or measure the service under their own terms and privacy notices.',
+            'Depending on provider infrastructure and settings, technical data may be processed in countries other than the country where you are located. Third-party processing and retention are governed by the relevant provider configuration and applicable law.',
+          ],
+        },
+        {
+          title: 'Your choices and requests',
+          bullets: [
+            'Use the website consent controls where available to reject optional analytics or advertising. You can also manage cookies and site data through your browser.',
+            'You may contact AJN PDF to ask about personal information you have directly supplied, request correction or deletion where applicable, or raise a privacy concern.',
+            'For security, do not include passwords, identity documents or full confidential files in a privacy request unless specifically necessary and a secure method has been agreed.',
           ],
         },
         {

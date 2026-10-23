@@ -47,7 +47,7 @@ export const CONTENT_BRIEFS: ContentBrief[] = [
     title: 'PDF passwords, encryption and permissions explained',
     primaryKeyword: 'PDF password encryption permissions',
     supportingQuestions: ['What is the difference between user and owner passwords?', 'Can printing and copying be restricted?'],
-    relatedTools: ['protect-pdf', 'unlock-pdf'],
+    relatedTools: ['prompt-to-pdf', 'txt-to-pdf'],
     status: 'published',
   },
   {

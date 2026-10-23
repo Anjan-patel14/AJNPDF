@@ -7,7 +7,7 @@ const failures = [];
 const check = (label, ok) => ok ? console.log(`PASS: ${label}`) : failures.push(label);
 
 const ids = JSON.parse(read("scripts/r13-public-tool-ids.json"));
-check("public catalog has exactly 34 unique tools", ids.length === 34 && new Set(ids).size === 34);
+check("public catalog has exactly 32 unique tools", ids.length === 32 && new Set(ids).size === 32);
 check("Edit PDF is public", ids.includes("edit-pdf"));
 
 const tools = read("src/lib/tools-data.ts");
@@ -67,7 +67,7 @@ check("secure raster redaction remains present", editor.includes("renderSecureRe
 check("browser output validation remains present", editor.includes("data: bytes.slice()") && editor.includes("reopens it with PDF.js for validation"));
 
 const browserImageVerifier = read("scripts/verify-browser-image-pdf.mjs");
-check("browser-image verifier count updated to 34", browserImageVerifier.includes("ids.length === 34") && browserImageVerifier.includes("new Set(ids).size === 34"));
+check("browser-image verifier count updated to 32", browserImageVerifier.includes("ids.length === 32") && browserImageVerifier.includes("new Set(ids).size === 32"));
 
 const labPage = read("src/app/pdf-editor-lab/page.tsx");
 check("legacy editor alias redirects to canonical Edit PDF", labPage.includes('redirect("/edit-pdf")'));

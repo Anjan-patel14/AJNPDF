@@ -28,7 +28,7 @@ const sharpLock = String(lock.packages?.['node_modules/sharp']?.version || '');
 const unrsLock = String(lock.packages?.['node_modules/unrs-resolver']?.version || '');
 const allow = pkg.allowScripts ?? {};
 
-check('AJN PDF package version is 3.1.0', pkg.version === '3.1.0');
+check('AJN PDF package version matches 3.2.0', pkg.version === '3.2.0');
 check('Next.js dependency uses an explicit semver range/version', /^\^?~?\d+\.\d+\.\d+/.test(nextSpec) && !/[xX*]|latest/.test(nextSpec));
 check('Lockfile resolves a concrete Next.js version compatible with package intent', numeric(nextLock) && allows(nextSpec, nextLock));
 check('eslint-config-next uses an explicit semver version', /^\^?~?\d+\.\d+\.\d+/.test(eslintSpec) && !/[xX*]|latest/.test(eslintSpec));

@@ -23,12 +23,12 @@ if (routeDup.length || canonicalDup.length) {
   process.exit(1);
 }
 
-if (routes.length !== 34) {
-  console.error(`FAIL: expected exactly 34 validated public PDF routes; got ${routes.length}.`);
+if (routes.length !== 32) {
+  console.error(`FAIL: expected exactly 32 validated public PDF routes; got ${routes.length}.`);
   process.exit(1);
 }
-if (canonical.length !== 34) {
-  console.error(`FAIL: expected exactly 34 canonical public PDF processors; got ${canonical.length}.`);
+if (canonical.length !== 32) {
+  console.error(`FAIL: expected exactly 32 canonical public PDF processors; got ${canonical.length}.`);
   process.exit(1);
 }
 if (aliases.length !== 0) {
@@ -45,10 +45,38 @@ if (data.publicRouteCount !== routes.length || data.canonicalProcessorCount !== 
 }
 
 const required = [
-  'edit-pdf','merge-pdf','split-pdf','compress-pdf','rotate-pdf','delete-pdf-pages','organize-pdf','crop-pdf','watermark-pdf',
-  'page-number','flatten-pdf','protect-pdf','unlock-pdf','repair-pdf','compare-pdf','add-text','add-image-to-pdf',
-  'pdf-metadata','extract-images','sign-pdf','pdf-zip-extract','image-to-pdf','jpeg-to-pdf','jpg-to-pdf','png-to-pdf','webp-to-pdf',
-  'heic-to-pdf','pdf-to-jpg','pdf-to-png','txt-to-pdf','html-to-pdf','markdown-to-pdf','json-to-pdf','xml-to-pdf',
+  "add-image-to-pdf",
+  "add-text",
+  "compare-pdf",
+  "compress-pdf",
+  "crop-pdf",
+  "delete-pdf-pages",
+  "edit-pdf",
+  "extract-images",
+  "flatten-pdf",
+  "heic-to-pdf",
+  "html-to-pdf",
+  "image-to-pdf",
+  "jpeg-to-pdf",
+  "jpg-to-pdf",
+  "json-to-pdf",
+  "markdown-to-pdf",
+  "merge-pdf",
+  "organize-pdf",
+  "page-number",
+  "pdf-metadata",
+  "pdf-to-jpg",
+  "pdf-to-png",
+  "pdf-zip-extract",
+  "png-to-pdf",
+  "prompt-to-pdf",
+  "rotate-pdf",
+  "sign-pdf",
+  "split-pdf",
+  "txt-to-pdf",
+  "watermark-pdf",
+  "webp-to-pdf",
+  "xml-to-pdf"
 ];
 const movedImageIds = ['image-reducer','image-resizer','crop-image','rotate-image','watermark-image','flip-image','convert-image'];
 const actual = new Set(routes.map((item) => item.id));

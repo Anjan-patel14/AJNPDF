@@ -12,7 +12,7 @@ export default function DisclaimerPage() {
     <LegalPageShell
       eyebrow="Important notice"
       title="Disclaimer"
-      effectiveDate="September 17, 2026"
+      effectiveDate="October 15, 2026"
       summary="AJN PDF provides technical document utilities, not legal, financial, medical, accessibility-certification or records-management advice."
       sections={[
         {
