@@ -54,7 +54,7 @@ function ToolCard({ tool }: { tool: PublicTool }) {
       data-analytics-category="pdf"
       className="group block h-full rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
     >
-      <article className="flex h-full min-h-[154px] flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_6px_20px_rgba(15,23,42,.045)] transition duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_12px_28px_rgba(15,23,42,.08)] sm:p-5">
+      <article className="flex h-full min-h-[154px] flex-col rounded-2xl border border-slate-200/80 bg-white/80 p-4 shadow-[0_8px_24px_rgba(15,23,42,.055)] backdrop-blur-lg transition duration-300 ease-out hover:-translate-y-1 hover:border-blue-300/80 hover:shadow-[0_18px_38px_rgba(15,23,42,.11)] dark:border-white/10 dark:bg-slate-900/55 sm:p-5">
         <div className="flex items-start justify-between gap-3">
           <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-blue-600">
             <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={2} />
@@ -65,10 +65,10 @@ function ToolCard({ tool }: { tool: PublicTool }) {
         </div>
         <div className="mt-4 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-[15px] font-black leading-5 tracking-[-.02em] text-slate-950 sm:text-base">{localized.name}</h3>
+            <h3 className="text-[15px] font-extrabold leading-5 tracking-[-.025em] text-slate-950 dark:text-slate-50 sm:text-base">{localized.name}</h3>
             {browserConversion && <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-emerald-700">Browser</span>}
           </div>
-          <p className="mt-1.5 line-clamp-2 text-xs font-medium leading-5 text-slate-600">{localized.desc}</p>
+          <p className="mt-1.5 line-clamp-2 text-xs font-medium leading-5 text-slate-600 dark:text-slate-300">{localized.desc}</p>
         </div>
       </article>
     </Link>
@@ -120,7 +120,7 @@ export function ServicesGrid({ query, category }: ServicesGridProps) {
     <div id="ajn-public-tool-grid">
       <div className="mb-4 flex items-end justify-between gap-4">
         <div>
-          <h2 className="text-xl font-black tracking-[-.025em] text-slate-950 sm:text-2xl">PDF tools</h2>
+          <h2 className="text-xl font-black tracking-[-.035em] text-slate-950 dark:text-slate-50 sm:text-2xl">PDF tools</h2>
           <p className="mt-1 text-xs font-semibold text-slate-500">Every public tool is shown directly. Nothing is hidden behind a More tools menu.</p>
         </div>
         <span className="shrink-0 rounded-full border border-slate-200 bg-white px-3 py-1 text-[10px] font-black text-slate-600">{BUILD_PUBLIC_TOOLS.length} public tools</span>
@@ -129,6 +129,19 @@ export function ServicesGrid({ query, category }: ServicesGridProps) {
         {showScanner && <ScannerCard />}
         {filteredTools.map((tool) => <ToolCard key={tool.id} tool={tool} />)}
       </div>
+      {category === "all" && !normalized && (
+        <section className="mt-10" aria-labelledby="ajn-tool-visuals-title">
+          <div className="mb-4 max-w-2xl">
+            <h2 id="ajn-tool-visuals-title" className="text-xl font-black tracking-[-.035em] text-slate-950 dark:text-slate-50 sm:text-2xl">A clearer way to work with PDFs</h2>
+            <p className="mt-2 text-sm font-medium leading-6 text-slate-600 dark:text-slate-300">Quick visual guides to editing, organizing and converting your documents.</p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            <a href={toolPath("edit-pdf")} className="group overflow-hidden rounded-2xl border border-slate-200/80 bg-white/75 shadow-lg backdrop-blur-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/55"><img src="/images/pdf-edit-preview.svg" alt="PDF editing interface illustration" width="720" height="540" loading="lazy" className="aspect-[16/9] w-full object-cover" /><div className="p-4"><h3 className="font-extrabold text-slate-950 dark:text-white">Edit PDF</h3><p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">Start with tools for changing and annotating a document.</p></div></a>
+            <a href={toolPath("merge-pdf")} className="group overflow-hidden rounded-2xl border border-slate-200/80 bg-white/75 shadow-lg backdrop-blur-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/55"><img src="/images/pdf-organize-preview.svg" alt="PDF document organization illustration" width="360" height="210" loading="lazy" className="aspect-[16/9] w-full object-cover" /><div className="p-4"><h3 className="font-extrabold text-slate-950 dark:text-white">Organize PDFs</h3><p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">Bring pages and files into the order you need.</p></div></a>
+            <a href={toolPath("image-to-pdf")} className="group overflow-hidden rounded-2xl border border-slate-200/80 bg-white/75 shadow-lg backdrop-blur-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/55"><img src="/images/pdf-convert-preview.svg" alt="PDF conversion illustration" width="360" height="210" loading="lazy" className="aspect-[16/9] w-full object-cover" /><div className="p-4"><h3 className="font-extrabold text-slate-950 dark:text-white">Convert files</h3><p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">A visual guide to converting content into PDF workflows.</p></div></a>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
