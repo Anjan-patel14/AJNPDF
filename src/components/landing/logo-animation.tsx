@@ -1,21 +1,27 @@
 "use client";
 
-import { cn } from '../../lib/utils';
+import Image from "next/image";
+import { cn } from "../../lib/utils";
 
+/** Shared mark-only brand component used by the existing application header. */
 export function LogoAnimation({ className, showGlow = false }: { className?: string; showGlow?: boolean }) {
   return (
-    <div
-      className={cn('relative flex select-none items-center gap-2 opacity-100', className)}
+    <span
+      className={cn("relative inline-flex shrink-0 items-center justify-center", className)}
+      role="img"
       aria-label="AJN PDF"
-      data-ajn-logo="visible"
+      data-ajn-logo="mark-only"
     >
-      {showGlow && <span className="absolute -inset-4 rounded-2xl bg-blue-500/8 blur-2xl" />}
-      <span className="relative flex h-full aspect-square shrink-0 items-center justify-center rounded-xl bg-blue-600 text-sm font-black tracking-tight text-white shadow-sm" aria-hidden="true">
-        AJN
-      </span>
-      <span className="relative whitespace-nowrap text-[clamp(1.02rem,2vw,1.34rem)] font-black tracking-[-.04em] text-slate-950">
-        AJN <span className="text-blue-600">PDF</span>
-      </span>
-    </div>
+      {showGlow ? <span aria-hidden="true" className="absolute -inset-2 rounded-full bg-blue-500/10 blur-xl" /> : null}
+      <Image
+        src="/ajn-pdf-mark.svg"
+        alt=""
+        aria-hidden="true"
+        width={128}
+        height={128}
+        priority
+        className="relative h-full w-full object-contain"
+      />
+    </span>
   );
 }
