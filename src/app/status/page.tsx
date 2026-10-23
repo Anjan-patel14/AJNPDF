@@ -3,19 +3,17 @@
 import Link from 'next/link';
 import { Activity, ArrowRight, CheckCircle2, Globe2, ShieldCheck } from 'lucide-react';
 import { BackendStatus } from '@/components/junction/backend-status';
-import { Navbar } from '@/components/landing/navbar';
 import { MainFooter } from '@/components/landing/main-footer';
 
 const cards = [
   { icon: Globe2, title: 'Website', body: 'Core pages, navigation and public tool routes are checked separately from advanced online workflows.' },
   { icon: ShieldCheck, title: 'On-device tools', body: 'Compatible browser workflows remain available even when an advanced online workflow is temporarily unavailable.' },
-  { icon: CheckCircle2, title: 'Online tools', body: 'Advanced conversion,  and PDF security workflows check live availability before a task begins.' }];
+  { icon: CheckCircle2, title: 'Online tools', body: 'Advanced conversion and PDF security workflows check live availability before a task begins.' }];
 
 export default function StatusPage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-      <Navbar />
-      <main className="relative pt-24 md:pt-28">
+      <main className="relative">
         <section className="mx-auto max-w-6xl px-4 pb-20 pt-10 sm:px-5 md:px-8 md:pt-16">
           <span className="sr-only" data-ajn-release="3.1.0-r14.1">AJN PDF 3.1.0 R14.1</span>
           <div className="mx-auto max-w-3xl text-center">
@@ -26,7 +24,7 @@ export default function StatusPage() {
 
           <div className="mt-10 grid gap-4 md:mt-12 md:grid-cols-3 md:gap-5">
             {cards.map((card) => (
-              <section key={card.title} className="ajn-tool-card p-6 md:p-7">
+              <section key={card.title} className="ajn-tool-card p-6 md:p-7 transition duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-blue-700"><card.icon className="h-5 w-5" /></div>
                 <h2 className="mt-5 text-xl font-black tracking-tight">{card.title}</h2>
                 <p className="mt-3 text-sm font-medium leading-7 text-muted-foreground">{card.body}</p>
