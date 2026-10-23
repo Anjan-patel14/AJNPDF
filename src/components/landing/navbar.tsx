@@ -84,12 +84,6 @@ export function Navbar() {
               );
             })}
 
-            <Link
-              href="/status"
-              className="inline-flex h-10 items-center rounded-xl px-2.5 text-[11px] font-extrabold text-[#5b6b80] transition hover:bg-slate-100 hover:text-[#0e1b2c] dark:text-[#8b96ab] dark:hover:bg-white/5 dark:hover:text-white"
-            >
-              Status
-            </Link>
           </nav>
 
           <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-1.5">
