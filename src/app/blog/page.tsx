@@ -71,7 +71,7 @@ const articles = [
     title: 'How to evaluate a free PDF editor',
     desc: 'Compare real output, processing labels, limits and download quality rather than relying on unsupported claims.',
     tag: 'Guide', readTime: '5 min', icon: BookOpen,
-  ,
+  },
   {
     href: '/blog/prepare-pdf-for-email-and-portal-upload',
     title: 'Prepare a PDF for email or portal upload',
@@ -89,7 +89,8 @@ const articles = [
     title: 'Share a large PDF when attachment limits get in the way',
     desc: 'Compare compression, splitting and recipient-approved delivery methods, then validate the copy.',
     tag: 'Sharing', readTime: '6 min', icon: ShieldCheck,
-  }}];
+  },
+];
 
 export default function BlogPage() {
   return (
