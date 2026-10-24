@@ -71,7 +71,25 @@ const articles = [
     title: 'How to evaluate a free PDF editor',
     desc: 'Compare real output, processing labels, limits and download quality rather than relying on unsupported claims.',
     tag: 'Guide', readTime: '5 min', icon: BookOpen,
-  }];
+  ,
+  {
+    href: '/blog/prepare-pdf-for-email-and-portal-upload',
+    title: 'Prepare a PDF for email or portal upload',
+    desc: 'Check destination limits, reduce size only when needed, and inspect the final document before sending.',
+    tag: 'Sharing', readTime: '6 min', icon: FileText,
+  },
+  {
+    href: '/blog/check-a-merged-pdf-before-sharing',
+    title: 'Check a merged PDF before sharing it',
+    desc: 'Review order, page boundaries, orientation and sensitive information in a combined document.',
+    tag: 'Workflow', readTime: '5 min', icon: BookOpen,
+  },
+  {
+    href: '/blog/share-a-large-pdf-without-losing-track',
+    title: 'Share a large PDF when attachment limits get in the way',
+    desc: 'Compare compression, splitting and recipient-approved delivery methods, then validate the copy.',
+    tag: 'Sharing', readTime: '6 min', icon: ShieldCheck,
+  }}];
 
 export default function BlogPage() {
   return (
