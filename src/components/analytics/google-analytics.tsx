@@ -17,8 +17,19 @@ export function GoogleAnalytics() {
 
     const load = () => {
       const accepted = localStorage.getItem(CONSENT_KEY) === 'accepted';
-      if (!accepted || !allowedHost(window.location.hostname)) return;
-      if (document.getElementById(SCRIPT_ID)) return;
+      const existing = document.getElementById(SCRIPT_ID);
+
+      // Consent can change after analytics has loaded. Remove the loader and stop
+      // issuing further events when the visitor withdraws optional consent.
+      if (!accepted || !allowedHost(window.location.hostname)) {
+        existing?.remove();
+        if (!accepted) {
+          window.gtag = undefined;
+          window.dataLayer = [];
+        }
+        return;
+      }
+      if (existing) return;
 
       window.dataLayer = window.dataLayer || [];
       window.gtag = function gtag(...args: unknown[]) { window.dataLayer?.push(args); };
