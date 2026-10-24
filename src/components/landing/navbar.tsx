@@ -83,7 +83,6 @@ export function Navbar() {
                 </Link>
               );
             })}
-
           </nav>
 
           <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-1.5">
@@ -187,7 +186,6 @@ export function Navbar() {
 
                 {[
                   { label: "All PDF Tools", href: "/pdf-tools" },
-                  { label: "Service Status", href: "/status" },
                   { label: "Security", href: "/security" },
                 ].map((item) => (
                   <Link
