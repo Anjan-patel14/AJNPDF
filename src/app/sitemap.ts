@@ -26,6 +26,9 @@ const CORE_PAGE_DEFINITIONS: CorePageDefinition[] = [
   { path:"/blog/pdf-vs-docx", changeFrequency:"monthly", priority:.55 },
   { path:"/blog/why-pdf-compression-limited", changeFrequency:"monthly", priority:.55 },
   { path:"/blog/extract-pages-from-pdf", changeFrequency:"monthly", priority:.66 },
+  { path:"/blog/prepare-pdf-for-email-and-portal-upload", changeFrequency:"monthly", priority:.62 },
+  { path:"/blog/check-a-merged-pdf-before-sharing", changeFrequency:"monthly", priority:.62 },
+  { path:"/blog/share-a-large-pdf-without-losing-track", changeFrequency:"monthly", priority:.62 },
 
   { path:"/developer", changeFrequency:"monthly", priority:.5 },
   { path:"/faq", changeFrequency:"monthly", priority:.5 },
