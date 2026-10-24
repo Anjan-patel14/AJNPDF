@@ -1363,6 +1363,115 @@ export const SEO_GROWTH_GUIDES: SeoGrowthGuide[] = [
       "Use consistent filenames",
       "Verify no pages are missing or duplicated"
     ]
+  },
+  {
+    "slug": "prepare-pdf-for-email-and-portal-upload",
+    "pillar": "compress-pdf",
+    "eyebrow": "PDF workflow guide",
+    "title": "Prepare a PDF for email or portal upload",
+    "metaTitle": "Prepare a PDF for Email and Portal Uploads | AJN PDF",
+    "summary": "A practical checklist for reducing a PDF when needed, checking the result, and keeping a readable copy for email or application portals.",
+    "readTime": "6 minute guide",
+    "primaryKeyword": "prepare pdf for upload",
+    "related": ["compress-pdf", "split-pdf", "merge-pdf"],
+    "sections": [
+      {
+        "title": "Check the receiving system's rules first",
+        "paragraphs": [
+          "Find the exact maximum file size and accepted file type on the email service or portal. Do not assume that a target size used by another service will work here.",
+          "Check whether the portal accepts one PDF or several attachments, and whether it imposes page-count or filename rules."
+        ],
+        "bullets": ["Confirm the maximum file size", "Check allowed formats", "Review page and filename rules"]
+      },
+      {
+        "title": "Reduce size only when necessary",
+        "paragraphs": [
+          "If the PDF exceeds the limit, try Compress PDF and choose a practical target. Image-heavy scans may shrink more than documents that already contain optimized images or compressed streams.",
+          "If compression does not reduce the file enough, consider whether the recipient accepts separate sections. Split the document only when doing so preserves the intended meaning and the portal permits multiple files."
+        ]
+      },
+      {
+        "title": "Inspect the output before sending",
+        "paragraphs": [
+          "Open the processed file and inspect small text, tables, signatures, page orientation and the first and last pages. Compare important details with the source document.",
+          "Keep the original until the recipient has accepted the output. Do not use compression as a substitute for removing confidential information."
+        ],
+        "bullets": ["Check text readability", "Verify every page", "Keep the original copy", "Use redaction tools for sensitive content"]
+      }
+    ],
+    "checklist": ["Read the destination's upload rules", "Compress only if needed", "Inspect readability and page order", "Retain the original until accepted"]
+  },
+  {
+    "slug": "check-a-merged-pdf-before-sharing",
+    "pillar": "merge-pdf",
+    "eyebrow": "PDF workflow guide",
+    "title": "Check a merged PDF before sharing it",
+    "metaTitle": "Checklist: Review a Merged PDF Before Sharing",
+    "summary": "Use a short review process to catch page-order, orientation, form and signature problems before distributing a combined PDF.",
+    "readTime": "5 minute guide",
+    "primaryKeyword": "check merged pdf",
+    "related": ["merge-pdf", "organize-pdf", "compress-pdf"],
+    "sections": [
+      {
+        "title": "Plan the order before merging",
+        "paragraphs": [
+          "Make a simple list of the source files in the order a reader should encounter them. Put a cover page or contents page first when the bundle needs one, and keep related forms together.",
+          "If filenames are similar, open each source and confirm its contents rather than relying on its name alone."
+        ]
+      },
+      {
+        "title": "Merge and inspect the combined document",
+        "paragraphs": [
+          "Open Merge PDF, add the intended files, arrange them, and run the merge. Before sharing, check the beginning and end of each source section in the combined output.",
+          "Look for rotated pages, unexpected blank pages, missing appendices, forms with clipped fields and pages whose dimensions differ from the rest."
+        ],
+        "bullets": ["Confirm section boundaries", "Check orientation", "Look for missing or duplicated pages", "Verify page count"]
+      },
+      {
+        "title": "Check what the document reveals",
+        "paragraphs": [
+          "A merged file can still contain personal details, comments, attachments or other information within its pages. Review the document before sending it to someone outside the intended audience.",
+          "Merging does not itself redact confidential information or prove that a digital signature remains valid after changes. Validate signatures with an appropriate PDF viewer when that matters."
+        ]
+      }
+    ],
+    "checklist": ["Plan source order", "Review each section boundary", "Check page orientation and completeness", "Inspect sensitive content before sharing"]
+  },
+  {
+    "slug": "share-a-large-pdf-without-losing-track",
+    "pillar": "split-pdf",
+    "eyebrow": "Document sharing guide",
+    "title": "Share a large PDF when attachment limits get in the way",
+    "metaTitle": "How to Share a Large PDF | AJN PDF",
+    "summary": "Compare compression, splitting and recipient-approved file sharing, then verify the copy you send.",
+    "readTime": "6 minute guide",
+    "primaryKeyword": "share a large pdf",
+    "related": ["compress-pdf", "split-pdf", "merge-pdf"],
+    "sections": [
+      {
+        "title": "Choose a method that fits the recipient",
+        "paragraphs": [
+          "First check the recipient's permitted delivery methods and file-size limits. A cloud link may be appropriate only when the recipient allows it and the access settings match the document's sensitivity.",
+          "If attachments are required, try compression before splitting. If splitting is allowed, divide the file at logical boundaries so the recipient can identify each part."
+        ]
+      },
+      {
+        "title": "Prepare smaller files carefully",
+        "paragraphs": [
+          "Use Compress PDF to attempt a smaller output and inspect the readability afterward. If the file remains too large, use Split PDF to create sections with clear sequence numbers and descriptive filenames.",
+          "Avoid splitting through a form, table or chapter when those pages need to be read together. Confirm that the output parts cover the intended source pages without gaps or overlap."
+        ],
+        "bullets": ["Try compression first", "Split at meaningful boundaries", "Use consistent filenames", "Check all output parts"]
+      },
+      {
+        "title": "Protect the shared copy",
+        "paragraphs": [
+          "Before sending, check the file for personal information and confirm that the intended recipient can access it. Do not assume a share link is private merely because it is difficult to guess.",
+          "Keep a copy of the final output and use the recipient's approved channel for sensitive documents."
+        ]
+      }
+    ],
+    "checklist": ["Confirm accepted delivery methods", "Compress or split only when useful", "Check completeness and readability", "Verify recipient access and sensitive content"]
   }
 ];
 
