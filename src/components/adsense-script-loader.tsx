@@ -20,7 +20,6 @@ const AD_ELIGIBLE_TOOL_PATHS = new Set([
   '/merge-pdf',
   '/organize-pdf',
   '/page-number',
-  '/pdf-metadata',
   '/pdf-zip-extract',
   '/rotate-pdf',
   '/sign-pdf',
