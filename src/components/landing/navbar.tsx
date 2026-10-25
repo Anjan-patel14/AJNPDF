@@ -60,7 +60,7 @@ export function Navbar() {
             className="mr-2 flex shrink-0 items-center rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
             aria-label="AJN PDF home"
           >
-            <LogoAnimation className="h-9 w-[126px] sm:w-[132px] md:h-10 md:w-[144px]" />
+            <LogoAnimation className="h-9 w-9 sm:h-10 sm:w-10 md:h-10 md:w-10" />
           </Link>
 
           <nav className="hidden min-w-0 flex-1 items-center gap-0.5 min-[1080px]:flex" aria-label={t("nav.primary")}>
